@@ -51,7 +51,7 @@ namespace test_system
         public void fun_ET3916_send_bytes_command()
         {
             device_ET3916_bytes_command_write = false;
-            if (device_ET3916_connected)
+            if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
             {
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Write(device_ET3916_dataArraySend, 0, device_ET3916_bytes_to_send);
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].DiscardInBuffer();
@@ -134,7 +134,7 @@ namespace test_system
         public void fun_ET3916_read_command_model_number()
         {
             device_ET3916_read_model_number = false;
-            if (device_ET3916_connected)
+            if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
             {
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 10);
                 strGeneralString = ((Char)(read_buffer[4])).ToString() + ((Char)(read_buffer[5])).ToString() + ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
@@ -194,7 +194,7 @@ namespace test_system
         public void fun_ET3916_read_command_all_temperature()
         {
             device_ET3916_read_all_temperature = false;
-            if (device_ET3916_connected)
+            if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
             {
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 37);
                 //strGeneralString = (read_buffer[4]).ToString()+"  " + (read_buffer[5]).ToString() +"   " + (read_buffer[6]).ToString() + "   " + (read_buffer[7]).ToString() + "   " + ((Char)(read_buffer[8])).ToString() + "   " + (read_buffer[9]).ToString();

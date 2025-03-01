@@ -97,7 +97,7 @@ namespace test_system
                     String s_PortName = Registry.GetValue(s_RegPath, "PortName", "").ToString();
                     //-----------------------------------------------------------------------------------------------------------------------
                     fun_search_device(COMport_SELECT_SUPPLY_KA3305A, 115200, strCOMport_supply_name_KA3305A, strCOMport_supply_serial_KA3305A, strCOMport_supply_VID_KA3305A, strCOMport_supply_PID_KA3305A, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_SUPPLY_HCS_330, 115200, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_SELECT_SUPPLY_HCS_330, 9600, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);
                     fun_search_device(COMport_SELECT_SUPPLY_RD6006, 115200, strCOMport_supply_name_RD6006, strCOMport_supply_serial_RD6006, strCOMport_supply_VID_RD6006, strCOMport_supply_PID_RD6006, s_DeviceID, s_PortName);
                     fun_search_device(COMport_SELECT_SUPPLY_RD6024, 115200, strCOMport_supply_name_RD6024, strCOMport_supply_serial_RD6024, strCOMport_supply_VID_RD6024, strCOMport_supply_PID_RD6024, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
@@ -196,6 +196,11 @@ namespace test_system
                     else if (textBoxCounter == 8) textBoxIdent_08.Text = strShowString;
                     else if (textBoxCounter == 9) textBoxIdent_09.Text = strShowString;
                     else if (textBoxCounter == 10) textBoxIdent_10.Text = strShowString;
+                    else if (textBoxCounter == 11) textBoxIdent_11.Text = strShowString;
+                    else if (textBoxCounter == 12) textBoxIdent_12.Text = strShowString;
+                    else if (textBoxCounter == 13) textBoxIdent_13.Text = strShowString;
+                    else if (textBoxCounter == 14) textBoxIdent_14.Text = strShowString;
+                    else if (textBoxCounter == 15) textBoxIdent_15.Text = strShowString;
 
 
                     /*

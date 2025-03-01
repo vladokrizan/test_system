@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.IO.Ports;
@@ -19,12 +20,15 @@ namespace test_system
     {
 
 
+        byte[] dataArray = new byte[1024];  
+
         ini_file ini_file = new ini_file();
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
+        power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
 
         connected_devices connected_devices = new connected_devices();
-   complete_system complete_System = new complete_system(); 
+        complete_system complete_System = new complete_system();
 
         #region "Defined COM ports "
         /// <summary>
@@ -95,6 +99,7 @@ namespace test_system
 
         private int fun_select_COMport_open(byte select_port)
         {
+            COMport_connected[select_port] = false;
             if (COMport_name[select_port] != null)
             {
                 if (COMport_name[select_port].Length > 0)
@@ -106,6 +111,7 @@ namespace test_system
                         COMportSerial[select_port].PortName = COMport_name[select_port];
                         COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
                         COMportSerial[select_port].Open();
+                        COMport_connected[select_port] = true;
 
                         return 0;
                         //device_MPM1010B_connected = true;
@@ -117,7 +123,7 @@ namespace test_system
                         //device_MPM1010B_connected = false; 
                     }
                 }
-                {  return -2; }
+                { return -2; }
             }
             else { return -1; }
 
@@ -129,16 +135,36 @@ namespace test_system
 
             try
             {
-                device_MPM1010B_connected = false;
-                device_ET3916_connected = false;
-                device_MPM1010B_connected = false;
-                device_MPM1010B_connected = false;
-                device_MPM1010B_connected = false;
-                device_MPM1010B_connected = false;
-                if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) device_MPM1010B_connected = true;
-                if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) device_ET3916_connected = true;
+                //device_MPM1010B_connected = false;
+                //device_ET3916_connected = false;
+                //device_MPM1010B_connected = false;
+                //device_MPM1010B_connected = false;
+                //device_MPM1010B_connected = false;
+                //device_MPM1010B_connected = false;
+                //fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B);
+                //fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916);
+                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1041) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1241) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_330) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) { }
 
                 /*
+                  
+                 
+                        public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
+        public const byte COMport_SELECT_MULTIMETER_XDM1041 = 2;
+        public const byte COMport_SELECT_MULTIMETER_XDM1241 = 3;
+        public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
+        public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
+        public const byte COMport_SELECT_SUPPLY_RD6006 = 6;
+        public const byte COMport_SELECT_SUPPLY_HCS_330 = 7;
+        public const byte COMport_SELECT_LOAD_KEL103 = 8;
+        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 9;
+        public const byte COMport_SELECT_AC_METER_MPM_1010B = 10;
+
+                  
+                  
                 if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B] != null)
                 {
                     if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
@@ -188,6 +214,9 @@ namespace test_system
         private void timer1_Tick(object sender, EventArgs e)
         {
 
+
+            label10.Text = " XDM 1041 " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
+
             labGlobalString.Text = strGeneralString;
 
             //-------------------------------------------------------------------------------------------------------------------
@@ -198,7 +227,7 @@ namespace test_system
                 label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
                 label3.Text = strGeneralString;
             }
-            if (device_MPM1010B_read_all_write && device_MPM1010B_connected) ac_meter_MPM_1010B.fun_read_all_MPM_1010B_write();
+            if (device_MPM1010B_read_all_write && COMport_connected[COMport_SELECT_AC_METER_MPM_1010B]) ac_meter_MPM_1010B.fun_read_all_MPM_1010B_write();
             //-------------------------------------------------------------------------------------------------------------------
             //-- East Tester ET3916-8   8 x Temperature 
             if (device_ET3916_bytes_command_write) { temperature_ET3916.fun_ET3916_send_bytes_command(); }
@@ -219,7 +248,7 @@ namespace test_system
                 public static bool device_ET3916_read_model_number = false;
                 public static bool device_ET3916_read_serial_number = false;
             */
-            label5.Text = device_MPM1010B_connected.ToString();
+            label5.Text = COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString();
         }
 
         #endregion
@@ -232,7 +261,12 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-            device_MPM1010B_read_all_write = true;
+            dataArray = Encoding.ASCII.GetBytes("GMArX\r");
+            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString();
+            label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString();
+            label2.Text = dataArray.Length.ToString();
+
+            //device_MPM1010B_read_all_write = true;
             //ac_meter_MPM_1010B.fun_read_all_MPM_1010B();
             // label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
             // label3.Text = strGeneralString;
@@ -267,13 +301,53 @@ namespace test_system
 
         private void button7_Click(object sender, EventArgs e)
         {
-           // temperature_ET3916.fun_ET3916_read_command_all_temperature();
+            // temperature_ET3916.fun_ET3916_read_command_all_temperature();
             label8.Text = device_ET3916_temperature[1].ToString("0.00") + "   " + device_ET3916_temperature[2].ToString("0.00");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             complete_System.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            label9.Text = " MANSON";
+
+            try
+            {
+
+                power_supply_hcs_3300.fun_HCS_330_identifaction();
+                label9.Text = strGeneralString;
+
+                //COMportSerial[COMport_SELECT_SUPPLY_HCS_330].WriteLine("GMAX");
+                //label9.Text = COMportSerial[COMport_SELECT_SUPPLY_HCS_330].ReadLine();
+                //COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].WriteLine("*IDN?");
+                //label9.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].ReadLine();
+                //COMportSerial[COMport_SELECT_MULTIMETER_XDM1241].WriteLine("*IDN?");
+                //label11.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM1241].ReadLine();
+            }
+            catch { }
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            power_supply_hcs_3300.fun_HCS_330_off();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            power_supply_hcs_3300.fun_HCS_330_on();
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            power_supply_hcs_3300.fun_HCS_330_get_measure();
+            label9.Text = strGeneralString;
+            textBox1.Text = strGeneralString;
+
         }
 
 

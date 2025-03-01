@@ -19,7 +19,7 @@ namespace test_system
         #region "Device  variable in konstante"
 
         #region "East Tester   --- TEMPERATURE METER ET3916-8 "
-        public static bool device_ET3916_connected = false;
+        //public static bool device_ET3916_connected = false;
 
         public static byte device_ET3916_bytes_to_send = 0;
 
@@ -36,7 +36,7 @@ namespace test_system
         #endregion
 
         #region "AC METER MAXRIX MPM-1010B"
-        public static bool device_MPM1010B_connected = false;
+        //public static bool device_MPM1010B_connected = false;
 
 
 
@@ -67,6 +67,9 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         //-- COMport variable
         //-----------------------------------------------------------------------------------------------------------------------
+
+        public static bool[] COMport_connected = new bool[COMport_SELECT_MAXnumber];
+
         //----------------------------------------------------------------------------------------
         // --- COM port - COMXX
         public static string[] COMport_name = new string[COMport_SELECT_MAXnumber];
@@ -84,8 +87,6 @@ namespace test_system
         public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
         public const byte COMport_SELECT_MULTIMETER_XDM1041 = 2;
         public const byte COMport_SELECT_MULTIMETER_XDM1241 = 3;
-
-
         public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
         public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
         public const byte COMport_SELECT_SUPPLY_RD6006 = 6;

@@ -26,14 +26,14 @@ namespace test_system
             {
                 if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
                 {
-                    dataTable_conneced_device.Rows.Add("MATRIX  AC METER MPM-101B ", device_MPM1010B_connected.ToString());
+                    dataTable_conneced_device.Rows.Add("MATRIX  AC METER MPM-101B ", COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString());
                 }
             }
             if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916] != null)
             {
                 if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916].Length > 0)
                 {
-                    dataTable_conneced_device.Rows.Add("East Tester Temperature meter ET3916-8 ", device_ET3916_connected.ToString());
+                    dataTable_conneced_device.Rows.Add("East Tester Temperature meter ET3916-8 ", COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString());
                 }
             }
 
