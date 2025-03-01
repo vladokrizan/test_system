@@ -70,6 +70,7 @@
       <DependentUpon>mainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="mainWindow_global_variable\Program.cs" />
+    <Compile Include="devices\power_suply\power_supply_hcs_3300.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="temperature_ET3916.cs" />
     <Compile Include="tools\test_system_identification.cs">
@@ -112,7 +113,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="devices\load\" />
+    <Folder Include="devices\multimeter\" />
+    <Folder Include="devices\temperature_meter\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="dev_history.txt" />
   </ItemGroup>

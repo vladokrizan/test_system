@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,12 +45,19 @@ namespace test_system
         static SerialPort COM_PORT_12 = new SerialPort();
         static SerialPort COM_PORT_13 = new SerialPort();
         static SerialPort COM_PORT_14 = new SerialPort();
+        static SerialPort COM_PORT_15 = new SerialPort();
+        static SerialPort COM_PORT_16 = new SerialPort();
+        static SerialPort COM_PORT_17 = new SerialPort();
+        static SerialPort COM_PORT_18 = new SerialPort();
+        static SerialPort COM_PORT_19 = new SerialPort();
+        static SerialPort COM_PORT_20 = new SerialPort();
 
         public static System.IO.Ports.SerialPort[] COMportSerial =
         {
             COM_PORT_00, COM_PORT_01, COM_PORT_02, COM_PORT_03, COM_PORT_04,
             COM_PORT_05, COM_PORT_06, COM_PORT_07, COM_PORT_08, COM_PORT_09,
-            COM_PORT_10, COM_PORT_11, COM_PORT_12, COM_PORT_13, COM_PORT_14
+            COM_PORT_10, COM_PORT_11, COM_PORT_12, COM_PORT_13, COM_PORT_14,
+            COM_PORT_15, COM_PORT_16, COM_PORT_17, COM_PORT_18, COM_PORT_19, COM_PORT_20
         };
         #endregion
 
@@ -84,13 +92,53 @@ namespace test_system
         }
 
 
+
+        private int fun_select_COMport_open(byte select_port)
+        {
+            if (COMport_name[select_port] != null)
+            {
+                if (COMport_name[select_port].Length > 0)
+                {
+                    try
+                    {
+                        //-----------------------------------------------------------------------------
+                        //-- COM port in baudrate iz ini datoteke 
+                        COMportSerial[select_port].PortName = COMport_name[select_port];
+                        COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
+                        COMportSerial[select_port].Open();
+
+                        return 0;
+                        //device_MPM1010B_connected = true;
+
+                    }
+                    catch
+                    {
+                        return -3;
+                        //device_MPM1010B_connected = false; 
+                    }
+                }
+                {  return -2; }
+            }
+            else { return -1; }
+
+        }
+
+
         private void fun_mainWindow_load_init_COMports()
         {
 
             try
             {
+                device_MPM1010B_connected = false;
+                device_ET3916_connected = false;
+                device_MPM1010B_connected = false;
+                device_MPM1010B_connected = false;
+                device_MPM1010B_connected = false;
+                device_MPM1010B_connected = false;
+                if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) device_MPM1010B_connected = true;
+                if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) device_ET3916_connected = true;
 
-
+                /*
                 if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B] != null)
                 {
                     if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
@@ -108,6 +156,7 @@ namespace test_system
                         catch { device_MPM1010B_connected = false; }
                     }
                 }
+                
                 if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916] != null)
                 {
                     if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916].Length > 0)
@@ -125,7 +174,7 @@ namespace test_system
                         catch { device_ET3916_connected = false; }
                     }
                 }
-
+                */
             }
             catch { }
 

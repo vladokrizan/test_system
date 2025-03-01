@@ -53,8 +53,17 @@ namespace test_system
             {
                 var MyIni = new ini_file(file_name_device_ident);
                 //---------------------------------------------------------------------------------------------------------------
-                //---------------------------------------------------------------------------------------------------------------
-                MyIni.Write("COMport_name_SUPPLY_KA3305A", COMport_name[COMport_SELECT_SUPPLY_KA3305A], "Device COMport");
+
+
+                MyIni.Write("COMport_name_MULTIMETER_XDM3051", COMport_name[COMport_SELECT_MULTIMETER_XDM3051], "Device COMport");
+                MyIni.Write("COMport_baudrate_MULTIMETER_XDM3051", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM3051].ToString(), "Device COMport");
+                MyIni.Write("COMport_name_MULTIMETER_XDM1041", COMport_name[COMport_SELECT_MULTIMETER_XDM1041], "Device COMport");
+                MyIni.Write("COMport_baudrate_MULTIMETER_XDM1041", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041].ToString(), "Device COMport");
+                MyIni.Write("COMport_name_MULTIMETER_XDM1241", COMport_name[COMport_SELECT_MULTIMETER_XDM1241], "Device COMport");
+                MyIni.Write("COMport_baudrate_MULTIMETER_XDM1241", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1241].ToString(), "Device COMport");
+
+        //---------------------------------------------------------------------------------------------------------------
+        MyIni.Write("COMport_name_SUPPLY_KA3305A", COMport_name[COMport_SELECT_SUPPLY_KA3305A], "Device COMport");
                 MyIni.Write("COMport_baudrate_SUPPLY_KA3305A", COMport_baudRate[COMport_SELECT_SUPPLY_KA3305A].ToString(), "Device COMport");
                 //---------------------------------------------------------------------------------------------------------------
                 MyIni.Write("COMport_name_SUPPLY_RD6024", COMport_name[COMport_SELECT_SUPPLY_RD6024], "Device COMport");
@@ -92,6 +101,9 @@ namespace test_system
                 string iniFileExist = basePath + "\\com_port_ident.ini";
                 if (!File.Exists(iniFileExist))
                 {
+                    COMport_name[COMport_SELECT_MULTIMETER_XDM3051] = "";
+                    COMport_name[COMport_SELECT_MULTIMETER_XDM1041] = "";
+                    COMport_name[COMport_SELECT_MULTIMETER_XDM1241] = "";
                     COMport_name[COMport_SELECT_SUPPLY_KA3305A] = "";
                     COMport_name[COMport_SELECT_SUPPLY_RD6024] = "";
                     COMport_name[COMport_SELECT_SUPPLY_RD6006] = "";
@@ -102,6 +114,14 @@ namespace test_system
                     MessageBox.Show(iniFileExist + "  file doesnt' exist. Make default file ");
                     write_device_COMport_identification();
                 }
+                //---------------------------------------------------------------------------------------------------------------
+                COMport_name[COMport_SELECT_MULTIMETER_XDM3051] = ini.Read("COMport_name_MULTIMETER_XDM3051", "Device COMport");
+                COMport_baudRate[COMport_SELECT_MULTIMETER_XDM3051] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM3051", "Device COMport"));
+                COMport_name[COMport_SELECT_MULTIMETER_XDM1041] = ini.Read("COMport_name_MULTIMETER_XDM1041", "Device COMport");
+                COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM1041", "Device COMport"));
+                COMport_name[COMport_SELECT_MULTIMETER_XDM1241] = ini.Read("COMport_name_MULTIMETER_XDM1241", "Device COMport");
+                COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1241] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM1241", "Device COMport"));
+                //---------------------------------------------------------------------------------------------------------------
                 COMport_name[COMport_SELECT_SUPPLY_KA3305A] = ini.Read("COMport_name_SUPPLY_KA3305A", "Device COMport");
                 COMport_baudRate[COMport_SELECT_SUPPLY_KA3305A] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_KA3305A", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------

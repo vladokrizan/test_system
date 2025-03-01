@@ -81,13 +81,40 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         //-- izbira posameznih instrumentov 
         public const byte COMport_SELECT_MAXnumber = 20;
-        public const byte COMport_SELECT_SUPPLY_KA3305A = 1;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 2;
-        public const byte COMport_SELECT_SUPPLY_RD6006 = 3;
-        public const byte COMport_SELECT_SUPPLY_HCS_330 = 4;
-        public const byte COMport_SELECT_LOAD_KEL103 = 5;
-        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 6;
-        public const byte COMport_SELECT_AC_METER_MPM_1010B = 7;
+        public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
+        public const byte COMport_SELECT_MULTIMETER_XDM1041 = 2;
+        public const byte COMport_SELECT_MULTIMETER_XDM1241 = 3;
+
+
+        public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
+        public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
+        public const byte COMport_SELECT_SUPPLY_RD6006 = 6;
+        public const byte COMport_SELECT_SUPPLY_HCS_330 = 7;
+        public const byte COMport_SELECT_LOAD_KEL103 = 8;
+        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 9;
+        public const byte COMport_SELECT_AC_METER_MPM_1010B = 10;
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- DC multimetrer  
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const string strCOMport_multimeter_name_XDM3051 = "OWON XDM 3051";
+        public const string strCOMport_multimeter_VID_XDM3051 = "0403";
+        public const string strCOMport_multimeter_PID_XDM3051 = "6015";
+        public const string strCOMport_multimeter_serial_XDM3051 = "D30F6JOX";
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041";
+        public const string strCOMport_multimeter_VID_XDM1041 = "1A86";
+        public const string strCOMport_multimeter_PID_XDM1041 = "7523";
+       public const string strCOMport_multimeter_serial_XDM1041 = "7&334BB3D1&0&2";
+        //public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D";
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const string strCOMport_multimeter_name_XDM1241 = "OWON XDM 1241";
+        public const string strCOMport_multimeter_VID_XDM1241 = "1A86";
+        public const string strCOMport_multimeter_PID_XDM1241 = "7523";
+        public const string strCOMport_multimeter_serial_XDM1241 = "7&334BB3D1&0&4";
+
+
+
         //-----------------------------------------------------------------------------------------------------------------------
         //-- POWER SUPPLY 
         //-----------------------------------------------------------------------------------------------------------------------
