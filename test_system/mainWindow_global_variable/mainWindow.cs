@@ -20,15 +20,20 @@ namespace test_system
     {
 
 
-        byte[] dataArray = new byte[1024];  
+        byte[] dataArray = new byte[1024];
 
         ini_file ini_file = new ini_file();
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
+        modbus_functions modbus_functions = new modbus_functions(); 
+
 
         connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
+        all_devices all_devices = new all_devices();
+
+        write_log_files write_log_files = new write_log_files();
 
         #region "Defined COM ports "
         /// <summary>
@@ -77,21 +82,13 @@ namespace test_system
 
         private void mainWindow_Load(object sender, EventArgs e)
         {
+
+            strLogFiles_COMports = System.Environment.CurrentDirectory + "\\" + "COMports_selected.csv";
+            strLogFiles_Devices_ident = System.Environment.CurrentDirectory + "\\" + "Devices_idents.csv";
             //------------------------------------------------------------------------------------
             ini_file.read_device_COMport_identification();
             //------------------------------------------------------------------------------------
-
             fun_mainWindow_load_init_COMports();
-
-
-            connected_devices.Show();
-
-
-            label1.Text = COMport_name[COMport_SELECT_AC_METER_MPM_1010B] + "    " + COMport_baudRate[COMport_SELECT_AC_METER_MPM_1010B].ToString();
-
-
-            //MyIni.Write("COMport_name_LOAD_KEL103", COMport_name[COMport_SELECT_LOAD_KEL103], "Device COMport");
-            //MyIni.Write("COMport_baudrate_LOAD_KEL103", COMport_baudRate[COMport_SELECT_LOAD_KEL103].ToString(), "Device COMport");
 
         }
 
@@ -112,100 +109,126 @@ namespace test_system
                         COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
                         COMportSerial[select_port].Open();
                         COMport_connected[select_port] = true;
-
                         return 0;
-                        //device_MPM1010B_connected = true;
-
                     }
-                    catch
-                    {
-                        return -3;
-                        //device_MPM1010B_connected = false; 
-                    }
+                    catch { return -3; }
                 }
-                { return -2; }
+                else { return -2; }
             }
             else { return -1; }
-
         }
 
 
         private void fun_mainWindow_load_init_COMports()
         {
-
             try
             {
-                //device_MPM1010B_connected = false;
-                //device_ET3916_connected = false;
-                //device_MPM1010B_connected = false;
-                //device_MPM1010B_connected = false;
-                //device_MPM1010B_connected = false;
-                //device_MPM1010B_connected = false;
-                //fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B);
-                //fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916);
+
                 if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1041) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1241) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM3051) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_KA3305A) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_330) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_LOAD_KEL103) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_RD6006) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_RD6024) == 0) { }
 
-                /*
-                  
-                 
-                        public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
-        public const byte COMport_SELECT_MULTIMETER_XDM1041 = 2;
-        public const byte COMport_SELECT_MULTIMETER_XDM1241 = 3;
-        public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
-        public const byte COMport_SELECT_SUPPLY_RD6006 = 6;
-        public const byte COMport_SELECT_SUPPLY_HCS_330 = 7;
-        public const byte COMport_SELECT_LOAD_KEL103 = 8;
-        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 9;
-        public const byte COMport_SELECT_AC_METER_MPM_1010B = 10;
 
-                  
-                  
-                if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B] != null)
-                {
-                    if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
-                    {
-                        try
-                        {
-                            //-----------------------------------------------------------------------------
-                            //-- COM port in baudrate iz ini datoteke 
-                            COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].PortName = COMport_name[COMport_SELECT_AC_METER_MPM_1010B];
-                            COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].BaudRate = (int)COMport_baudRate[COMport_SELECT_AC_METER_MPM_1010B];
-                            COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].Open();
-                            device_MPM1010B_connected = true;
+                COM_PORT_05.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_05_DataReceived);
+                COM_PORT_01.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_01_DataReceived);
 
-                        }
-                        catch { device_MPM1010B_connected = false; }
-                    }
-                }
-                
-                if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916] != null)
-                {
-                    if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916].Length > 0)
-                    {
-                        try
-                        {
-                            //-----------------------------------------------------------------------------
-                            //-- COM port in baudrate iz ini datoteke 
-                            COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].PortName = COMport_name[COMport_SELECT_TEMPERATURE_ET3916];
-                            COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].BaudRate = (int)COMport_baudRate[COMport_SELECT_TEMPERATURE_ET3916];
-                            COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Open();
-                            device_ET3916_connected = true;
 
-                        }
-                        catch { device_ET3916_connected = false; }
-                    }
-                }
-                */
+
+                string show_connected = "";
+                show_connected = "XDM1041: " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
+                show_connected = show_connected + "  XDM3051:" + COMport_connected[COMport_SELECT_MULTIMETER_XDM3051].ToString();
+                show_connected = show_connected + "  HCS_330:" + COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString();
+                show_connected = show_connected + "  MPM_1010B:" + COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString();
+                show_connected = show_connected + "  ET3916:" + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString();
+                show_connected = show_connected + "  KA3305A:" + COMport_connected[COMport_SELECT_SUPPLY_KA3305A].ToString();
+                show_connected = show_connected + "  KEL103:" + COMport_connected[COMport_SELECT_LOAD_KEL103].ToString();
+                show_connected = show_connected + "  RD6006:" + COMport_connected[COMport_SELECT_SUPPLY_RD6006].ToString();
+                show_connected = show_connected + "  RD6024:" + COMport_connected[COMport_SELECT_SUPPLY_RD6024].ToString();
+                label12.Text = show_connected;
             }
             catch { }
-
         }
 
+
+        #region "COM port 00
+        //=============================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //=============================================================================================================
+        private  void COM_PORT_05_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //byte selectCOMporLocal = 0;
+            byte receiveByteLocal;
+            // byte loc_loop;
+
+            try
+            {
+                receiveByteLocal = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
+
+
+                label3.Text = "Receive";
+
+
+                if (receiveByteLocal > 0)
+                {
+                    //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
+                    COMportSerial[COMport_SELECT_SUPPLY_RD6006].Read(receiveByte_RD6006, 0, receiveByteLocal);
+
+                    //COMport_SELECT_SUPPLY_RD6006
+
+     
+                    //-----------------------------------------------------------------------------
+                    //for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[COMport_SELECT_SUPPLY_RD6006, loc_loop] = receiveByte_local[loc_loop]; }
+                    //-----------------------------------------------------------------------------
+                    //funCOMports_receive_parse_received_byte(selectCOMporLocal);
+                }
+            }
+            catch { }
+        }
+
+        //public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
+        //public const byte COMport_SELECT_SUPPLY_RD6006 = 6;
+       // public static byte[] receiveByte_RD6006 = new byte[100];
+       // public static byte[] receiveByte_RD6024 = new byte[100];
+
+
+        #endregion
+        #region "COM port 01"
+        //=============================================================================================================
+        //=============================================================================================================
+        private void COM_PORT_01_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //byte selectCOMporLocal = 1;
+            byte receiveByteLocal;
+            //byte[] receiveByte_local = new byte[100];
+            //byte loc_loop;
+            try
+            {
+                receiveByteLocal = (byte)mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].BytesToRead;
+                if (receiveByteLocal > 0)
+                {
+                    //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_RD6024, 0, receiveByteLocal);
+                    //-----------------------------------------------------------------------------
+                    ///for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[selectCOMporLocal, loc_loop] = receiveByte_local[loc_loop]; }
+                    //-----------------------------------------------------------------------------
+                    //funCOMports_receive_parse_received_byte(selectCOMporLocal);
+                    //COMports.fun_COMport_received_string(selectCOMporLocal);
+                }
+            }
+            catch { }
+        }
+
+        #endregion
 
 
 
@@ -214,11 +237,9 @@ namespace test_system
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-
-            label10.Text = " XDM 1041 " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
-
+            label10.Text = COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString() + "   " + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString() + "   " + device_ET3916_serial_number;
+            //label10.Text = " XDM 1041 " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
             labGlobalString.Text = strGeneralString;
-
             //-------------------------------------------------------------------------------------------------------------------
             //-- MATRIX AC Meter MPM1010B
             if (device_MPM1010B_read_all_read)
@@ -233,22 +254,16 @@ namespace test_system
             if (device_ET3916_bytes_command_write) { temperature_ET3916.fun_ET3916_send_bytes_command(); }
             else
             {
+                if (device_ET3916_read_serial_number) temperature_ET3916.fun_ET3916_read_command_serial_number();
                 if (device_ET3916_read_model_number) temperature_ET3916.fun_ET3916_read_command_model_number();
                 if (device_ET3916_read_all_temperature)
                 {
                     temperature_ET3916.fun_ET3916_read_command_all_temperature();
-
                     label8.Text = device_ET3916_temperature[1].ToString("0.00") + "   " + device_ET3916_temperature[2].ToString("0.00");
                 }
             }
 
-            /*
-             * 
-                public static bool device_ET3916_3bytes_command_write = false;
-                public static bool device_ET3916_read_model_number = false;
-                public static bool device_ET3916_read_serial_number = false;
-            */
-            label5.Text = COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString();
+            //label5.Text = COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString();
         }
 
         #endregion
@@ -261,11 +276,22 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-            dataArray = Encoding.ASCII.GetBytes("GMArX\r");
-            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString();
-            label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString();
-            label2.Text = dataArray.Length.ToString();
+            // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
 
+            //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
+            //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
+
+            COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
+
+
+
+            //mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
+            //textBox1.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+            //dataArray = Encoding.ASCII.GetBytes("GMArX\r");
+            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString();
+            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString();
+            //label2.Text = dataArray.Length.ToString();
             //device_MPM1010B_read_all_write = true;
             //ac_meter_MPM_1010B.fun_read_all_MPM_1010B();
             // label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
@@ -277,32 +303,22 @@ namespace test_system
 
         private void button3_Click(object sender, EventArgs e)
         {
-            temperature_ET3916.fun_ET3916_read_model_nuber();
-            label3.Text = strGeneralString;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            temperature_ET3916.fun_ET3916_read_model_nuber();
-            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    ";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            temperature_ET3916.fun_ET3916_read_serial_number();
-            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    ";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            temperature_ET3916.fun_ET3916_read_all_temperature();
-            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    " + device_ET3916_dataArraySend[6].ToString("x") + "    ";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            // temperature_ET3916.fun_ET3916_read_command_all_temperature();
-            label8.Text = device_ET3916_temperature[1].ToString("0.00") + "   " + device_ET3916_temperature[2].ToString("0.00");
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -310,60 +326,11 @@ namespace test_system
             complete_System.Show();
         }
 
-        private void button9_Click(object sender, EventArgs e)
+
+        private void button13_Click(object sender, EventArgs e)
         {
-            label9.Text = " MANSON";
-
-            try
-            {
-
-                power_supply_hcs_3300.fun_HCS_330_identifaction();
-                label9.Text = strGeneralString;
-
-                //COMportSerial[COMport_SELECT_SUPPLY_HCS_330].WriteLine("GMAX");
-                //label9.Text = COMportSerial[COMport_SELECT_SUPPLY_HCS_330].ReadLine();
-                //COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].WriteLine("*IDN?");
-                //label9.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].ReadLine();
-                //COMportSerial[COMport_SELECT_MULTIMETER_XDM1241].WriteLine("*IDN?");
-                //label11.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM1241].ReadLine();
-            }
-            catch { }
-
+            all_devices.Show();
         }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            power_supply_hcs_3300.fun_HCS_330_off();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            power_supply_hcs_3300.fun_HCS_330_on();
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            power_supply_hcs_3300.fun_HCS_330_get_measure();
-            label9.Text = strGeneralString;
-            textBox1.Text = strGeneralString;
-
-        }
-
-
-
-
-        /*
-        
-        Example
-                To read the product model number, send:
-                    FE 00 01 20 71 88
-                The result returned is "ET3916" :
-                    FE 00 0E 20 45 54 33 39 31 36 00 00 00 00 00 00 00 28 E5
-
-    */
-
-
 
 
 

@@ -163,8 +163,48 @@ namespace test_system
             device_ET3916_bytes_command_write = true;
             device_ET3916_read_serial_number = true;
         }
+       //=======================================================================================================================
+        //=======================================================================================================================
+        public void fun_ET3916_read_command_serial_number()
+        {
+            if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
+            {
+                try
+                {
+                    device_ET3916_read_serial_number = false;
+                    mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 19);
+                    device_ET3916_serial_number = ((Char)(read_buffer[4])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number  +((Char)(read_buffer[5])).ToString(); //+ ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[6])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[7])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[8])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[9])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[10])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[11])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[12])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[13])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[14])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[14])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[15])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[16])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[17])).ToString();
+
+                    COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]= device_ET3916_serial_number;
+
+                }
+                catch
+                {
+                    fun_ET3916_read_serial_number();
+                }
+                // device_ET3916_serial_number = "Serial number";
+            }
 
 
+
+        }
+
+
+        //
 
         //=======================================================================================================================
         //=======================================================================================================================
@@ -241,7 +281,47 @@ namespace test_system
 
 
 
-    /*
+
+
+
+
+
+
+               private void button3_Click(object sender, EventArgs e)
+        {
+            temperature_ET3916.fun_ET3916_read_model_nuber();
+            label3.Text = strGeneralString;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            temperature_ET3916.fun_ET3916_read_model_nuber();
+            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    ";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            temperature_ET3916.fun_ET3916_read_serial_number();
+            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    ";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            temperature_ET3916.fun_ET3916_read_all_temperature();
+            label7.Text = device_ET3916_dataArraySend[0].ToString("x") + "    " + device_ET3916_dataArraySend[1].ToString("x") + "    " + device_ET3916_dataArraySend[2].ToString("x") + "    " + device_ET3916_dataArraySend[3].ToString("x") + "    " + device_ET3916_dataArraySend[4].ToString("x") + "    " + device_ET3916_dataArraySend[5].ToString("x") + "    " + device_ET3916_dataArraySend[6].ToString("x") + "    ";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // temperature_ET3916.fun_ET3916_read_command_all_temperature();
+            label8.Text = device_ET3916_temperature[1].ToString("0.00") + "   " + device_ET3916_temperature[2].ToString("0.00");
+        }
+
+
+
+
+
+    
      *
     Frame composition: Frame header + message length + message + check
     The packet consists of frame header, packet length, packet and check.

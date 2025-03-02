@@ -47,6 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="devices\load\dc_load_KEL103.cs" />
+    <Compile Include="devices\multimeter\multimeter_XDM1041.cs" />
+    <Compile Include="devices\multimeter\multimeter_XDM2041.cs" />
+    <Compile Include="devices\multimeter\multimeter_XDM3051.cs" />
+    <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />
+    <Compile Include="functions.cs" />
+    <Compile Include="modbus_functions.cs" />
+    <Compile Include="power_supply_RD6006.cs" />
+    <Compile Include="tools\all_devices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tools\all_devices.Designer.cs">
+      <DependentUpon>all_devices.cs</DependentUpon>
+    </Compile>
     <Compile Include="complete_system.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,7 +73,7 @@
     <Compile Include="connected_devices.Designer.cs">
       <DependentUpon>connected_devices.cs</DependentUpon>
     </Compile>
-    <Compile Include="devices\AC_meter\ac_meter_MPM_1010B.cs" />
+    <Compile Include="devices\multimeter\ac_meter_MPM_1010B.cs" />
     <Compile Include="app_version_history.cs" />
     <Compile Include="mainWindow_global_variable\global_variable.cs" />
     <Compile Include="mainWindow_global_variable\ini_file.cs" />
@@ -72,13 +86,17 @@
     <Compile Include="mainWindow_global_variable\Program.cs" />
     <Compile Include="devices\power_suply\power_supply_hcs_3300.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="temperature_ET3916.cs" />
+    <Compile Include="devices\multimeter\temperature_ET3916.cs" />
     <Compile Include="tools\test_system_identification.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="tools\test_system_identification.Designer.cs">
       <DependentUpon>test_system_identification.cs</DependentUpon>
     </Compile>
+    <Compile Include="write_log_files.cs" />
+    <EmbeddedResource Include="tools\all_devices.resx">
+      <DependentUpon>all_devices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="complete_system.resx">
       <DependentUpon>complete_system.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,11 +131,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="devices\load\" />
-    <Folder Include="devices\multimeter\" />
-    <Folder Include="devices\temperature_meter\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="dev_history.txt" />
   </ItemGroup>

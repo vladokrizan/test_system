@@ -9,6 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static test_system.global_variable;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace test_system
 {
@@ -30,7 +31,7 @@ namespace test_system
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
             Thread.Sleep(20);
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
-            strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
+            COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
             //device_ET3916_read_all_temperature = true;
         }
 
@@ -51,6 +52,8 @@ namespace test_system
         }
 
 
+
+
         //--  GETD[CR] Return value:   <voltage><current><status>[CR] OK[CR]
         //--      Get PS Display values of Voltage, Current and   Status of CC/CV
         //--            <voltage>=????  <current>=????  <status>=0/1 (0=CV, 1=CC)
@@ -59,7 +62,6 @@ namespace test_system
         //--    000300040 OK
         public void fun_HCS_330_get_measure()
         {
-
             dataArray = Encoding.ASCII.GetBytes("GETD\r");
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
@@ -67,9 +69,39 @@ namespace test_system
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 12);
             strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();  
             //device_ET3916_read_all_temperature = true;
-
-
         }
+
+
+        //--    GETS[CR] Return value:   <voltage><current>[CR] OK[CR]
+        //--              Get PS preset Voltage & Current value<voltage>=???   <current>=???
+        //--    GETS[CR]
+        //--    Return value:   150180[CR] OK[CR]
+        //--          Meaning:    The Voltage value set at 15V and Current value set at 18A
+        public void fun_HCS_330_get_limit()
+        {
+        }
+
+
+        //--    VOLT<voltage>[CR] Return value:   OK[CR]
+        //--          Preset Voltage value<voltage>=010<???<Max-Volt* Max-Volt value refer to product specification
+        //--    VOLT127[CR]             Set Voltage value as 12.7V
+        //--      Return value:   OK[CR] Meaning:    
+        public void fun_HCS_330_set_voltage()
+        {
+        }
+
+
+        //--     CURR<current>[CR]      Preset Current value<current>=000<???<Max-Curr* Max-Curr value refer to product specification
+        //--     Return value:   OK[CR] 
+        //--    CURR120[CR]         Set Current value as 12.0A
+        //--    Return value:   OK[CR] Meaning:    
+
+        public void fun_HCS_330_set_current()
+        {
+        }
+
+
+
 
 
 
@@ -85,12 +117,6 @@ namespace test_system
 /*
 
 
-VOLT<voltage>[CR]   Return value:   OK[CR]  Preset Voltage value    <voltage>=010<???<Max-Volt  *Max-Volt value refer to product specification
-VOLT127[CR] Return value:   OK[CR]  Meaning:    Set Voltage value as 12.7V
-CURR<current>[CR]   Return value:   OK[CR]  Preset Current value    <current>=000<???<Max-Curr  *Max-Curr value refer to product specification
-CURR120[CR] Return value:   OK[CR]  Meaning:    Set Current value as 12.0A
-GETS[CR]    Return value:   <voltage><current>[CR]  OK[CR]  Get PS preset Voltage & Current value   <voltage>=???   <current>=???
-GETS[CR]    Return value:   150180[CR]  OK[CR]  Meaning:    The Voltage value set at 15V    and Current value set at 18A
 PROM<voltage0><current0>    <voltage1><current1>    <voltage2><current2>[CR]    Return value:   OK[CR]
     Save Voltage and Current value into 3 PS memory locations   <voltageX>=???  <currentX>=???  (X is memory location number start from 0 to 2)
 
