@@ -41,6 +41,12 @@
             this.txtBox_ET3916_1 = new System.Windows.Forms.TextBox();
             this.btnET3916_ident = new System.Windows.Forms.Button();
             this.tabPowerSupply = new System.Windows.Forms.TabPage();
+            this.groupBox_powerSupply_RD6006 = new System.Windows.Forms.GroupBox();
+            this.btnPowerSupply_RD6006_OFF = new System.Windows.Forms.Button();
+            this.btnPowerSupply_RD6006_ON = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox_powerSupply_KA3305P = new System.Windows.Forms.GroupBox();
             this.btnPowerSupply_KA3305P_ident1 = new System.Windows.Forms.Button();
             this.txtBosPowerSupply_KA3305P_ident = new System.Windows.Forms.TextBox();
@@ -55,23 +61,26 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.groupBox_powerSupply_RD6006 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnPowerSupply_RD6006_ON = new System.Windows.Forms.Button();
-            this.btnPowerSupply_RD6006_OFF = new System.Windows.Forms.Button();
+            this.btnPowerSupply_RD6006_measure = new System.Windows.Forms.Button();
+            this.labRD6006_set_volt = new System.Windows.Forms.Label();
+            this.labRD6006_set_curr = new System.Windows.Forms.Label();
+            this.labRD6006_inp_volt = new System.Windows.Forms.Label();
+            this.labRD6006_out_volt = new System.Windows.Forms.Label();
+            this.labRD6006_out_curr = new System.Windows.Forms.Label();
+            this.labRD6006_out_power = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_multimeter_XDM1041.SuspendLayout();
             this.groupBox_multimeter_XDM_3051.SuspendLayout();
             this.groupBox_multimeter_ET3916.SuspendLayout();
             this.tabPowerSupply.SuspendLayout();
+            this.groupBox_powerSupply_RD6006.SuspendLayout();
             this.groupBox_powerSupply_KA3305P.SuspendLayout();
             this.groupBox_powerSupply_hcs_330.SuspendLayout();
             this.tabLoad.SuspendLayout();
             this.groupBox_load_KEL103.SuspendLayout();
-            this.groupBox_powerSupply_RD6006.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -196,6 +205,73 @@
             this.tabPowerSupply.Text = "Power Supply";
             this.tabPowerSupply.UseVisualStyleBackColor = true;
             // 
+            // groupBox_powerSupply_RD6006
+            // 
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_inp_volt);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_out_power);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_out_curr);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_out_volt);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_set_curr);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.labRD6006_set_volt);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_measure);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_OFF);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_ON);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.button2);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.textBox1);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.label3);
+            this.groupBox_powerSupply_RD6006.Location = new System.Drawing.Point(321, 34);
+            this.groupBox_powerSupply_RD6006.Name = "groupBox_powerSupply_RD6006";
+            this.groupBox_powerSupply_RD6006.Size = new System.Drawing.Size(235, 515);
+            this.groupBox_powerSupply_RD6006.TabIndex = 0;
+            this.groupBox_powerSupply_RD6006.TabStop = false;
+            this.groupBox_powerSupply_RD6006.Text = "RD 6006";
+            // 
+            // btnPowerSupply_RD6006_OFF
+            // 
+            this.btnPowerSupply_RD6006_OFF.Location = new System.Drawing.Point(112, 135);
+            this.btnPowerSupply_RD6006_OFF.Name = "btnPowerSupply_RD6006_OFF";
+            this.btnPowerSupply_RD6006_OFF.Size = new System.Drawing.Size(100, 30);
+            this.btnPowerSupply_RD6006_OFF.TabIndex = 5;
+            this.btnPowerSupply_RD6006_OFF.Text = "OFF";
+            this.btnPowerSupply_RD6006_OFF.UseVisualStyleBackColor = true;
+            this.btnPowerSupply_RD6006_OFF.Click += new System.EventHandler(this.btnPowerSupply_RD6006_OFF_Click);
+            // 
+            // btnPowerSupply_RD6006_ON
+            // 
+            this.btnPowerSupply_RD6006_ON.Location = new System.Drawing.Point(6, 135);
+            this.btnPowerSupply_RD6006_ON.Name = "btnPowerSupply_RD6006_ON";
+            this.btnPowerSupply_RD6006_ON.Size = new System.Drawing.Size(100, 30);
+            this.btnPowerSupply_RD6006_ON.TabIndex = 4;
+            this.btnPowerSupply_RD6006_ON.Text = "ON";
+            this.btnPowerSupply_RD6006_ON.UseVisualStyleBackColor = true;
+            this.btnPowerSupply_RD6006_ON.Click += new System.EventHandler(this.btnPowerSupply_RD6006_ON_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 67);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(170, 30);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnPowerSupply_KA3305P_ident1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 103);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(217, 26);
+            this.textBox1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "0-60V     0 - 6 A";
+            // 
             // groupBox_powerSupply_KA3305P
             // 
             this.groupBox_powerSupply_KA3305P.Controls.Add(this.btnPowerSupply_KA3305P_ident1);
@@ -274,6 +350,8 @@
             // 
             // tabLoad
             // 
+            this.tabLoad.Controls.Add(this.button3);
+            this.tabLoad.Controls.Add(this.listBox1);
             this.tabLoad.Controls.Add(this.button1);
             this.tabLoad.Controls.Add(this.groupBox_load_KEL103);
             this.tabLoad.Location = new System.Drawing.Point(4, 29);
@@ -285,7 +363,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(687, 48);
+            this.button1.Location = new System.Drawing.Point(776, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(324, 37);
             this.button1.TabIndex = 2;
@@ -326,65 +404,94 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // groupBox_powerSupply_RD6006
+            // btnPowerSupply_RD6006_measure
             // 
-            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_OFF);
-            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_ON);
-            this.groupBox_powerSupply_RD6006.Controls.Add(this.button2);
-            this.groupBox_powerSupply_RD6006.Controls.Add(this.textBox1);
-            this.groupBox_powerSupply_RD6006.Controls.Add(this.label3);
-            this.groupBox_powerSupply_RD6006.Location = new System.Drawing.Point(321, 34);
-            this.groupBox_powerSupply_RD6006.Name = "groupBox_powerSupply_RD6006";
-            this.groupBox_powerSupply_RD6006.Size = new System.Drawing.Size(235, 515);
-            this.groupBox_powerSupply_RD6006.TabIndex = 0;
-            this.groupBox_powerSupply_RD6006.TabStop = false;
-            this.groupBox_powerSupply_RD6006.Text = "RD 6006";
+            this.btnPowerSupply_RD6006_measure.Location = new System.Drawing.Point(6, 171);
+            this.btnPowerSupply_RD6006_measure.Name = "btnPowerSupply_RD6006_measure";
+            this.btnPowerSupply_RD6006_measure.Size = new System.Drawing.Size(170, 30);
+            this.btnPowerSupply_RD6006_measure.TabIndex = 6;
+            this.btnPowerSupply_RD6006_measure.Text = "Measure";
+            this.btnPowerSupply_RD6006_measure.UseVisualStyleBackColor = true;
+            this.btnPowerSupply_RD6006_measure.Click += new System.EventHandler(this.btnPowerSupply_RD6006_measure_Click);
             // 
-            // button2
+            // labRD6006_set_volt
             // 
-            this.button2.Location = new System.Drawing.Point(6, 67);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 30);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnPowerSupply_KA3305P_ident1_Click);
+            this.labRD6006_set_volt.AutoSize = true;
+            this.labRD6006_set_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_set_volt.Location = new System.Drawing.Point(6, 229);
+            this.labRD6006_set_volt.Name = "labRD6006_set_volt";
+            this.labRD6006_set_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_set_volt.TabIndex = 7;
+            this.labRD6006_set_volt.Text = "label4";
             // 
-            // textBox1
+            // labRD6006_set_curr
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 103);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 26);
-            this.textBox1.TabIndex = 2;
+            this.labRD6006_set_curr.AutoSize = true;
+            this.labRD6006_set_curr.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_set_curr.Location = new System.Drawing.Point(6, 248);
+            this.labRD6006_set_curr.Name = "labRD6006_set_curr";
+            this.labRD6006_set_curr.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_set_curr.TabIndex = 8;
+            this.labRD6006_set_curr.Text = "label4";
             // 
-            // label3
+            // labRD6006_inp_volt
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "0-60V     0 - 6 A";
+            this.labRD6006_inp_volt.AutoSize = true;
+            this.labRD6006_inp_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_inp_volt.Location = new System.Drawing.Point(6, 210);
+            this.labRD6006_inp_volt.Name = "labRD6006_inp_volt";
+            this.labRD6006_inp_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_inp_volt.TabIndex = 9;
+            this.labRD6006_inp_volt.Text = "label5";
             // 
-            // btnPowerSupply_RD6006_ON
+            // labRD6006_out_volt
             // 
-            this.btnPowerSupply_RD6006_ON.Location = new System.Drawing.Point(7, 163);
-            this.btnPowerSupply_RD6006_ON.Name = "btnPowerSupply_RD6006_ON";
-            this.btnPowerSupply_RD6006_ON.Size = new System.Drawing.Size(100, 30);
-            this.btnPowerSupply_RD6006_ON.TabIndex = 4;
-            this.btnPowerSupply_RD6006_ON.Text = "ON";
-            this.btnPowerSupply_RD6006_ON.UseVisualStyleBackColor = true;
-            this.btnPowerSupply_RD6006_ON.Click += new System.EventHandler(this.btnPowerSupply_RD6006_ON_Click);
+            this.labRD6006_out_volt.AutoSize = true;
+            this.labRD6006_out_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_out_volt.Location = new System.Drawing.Point(6, 273);
+            this.labRD6006_out_volt.Name = "labRD6006_out_volt";
+            this.labRD6006_out_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_out_volt.TabIndex = 7;
+            this.labRD6006_out_volt.Text = "label4";
             // 
-            // btnPowerSupply_RD6006_OFF
+            // labRD6006_out_curr
             // 
-            this.btnPowerSupply_RD6006_OFF.Location = new System.Drawing.Point(128, 163);
-            this.btnPowerSupply_RD6006_OFF.Name = "btnPowerSupply_RD6006_OFF";
-            this.btnPowerSupply_RD6006_OFF.Size = new System.Drawing.Size(100, 30);
-            this.btnPowerSupply_RD6006_OFF.TabIndex = 5;
-            this.btnPowerSupply_RD6006_OFF.Text = "OFF";
-            this.btnPowerSupply_RD6006_OFF.UseVisualStyleBackColor = true;
-            this.btnPowerSupply_RD6006_OFF.Click += new System.EventHandler(this.btnPowerSupply_RD6006_OFF_Click);
+            this.labRD6006_out_curr.AutoSize = true;
+            this.labRD6006_out_curr.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_out_curr.Location = new System.Drawing.Point(6, 292);
+            this.labRD6006_out_curr.Name = "labRD6006_out_curr";
+            this.labRD6006_out_curr.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_out_curr.TabIndex = 8;
+            this.labRD6006_out_curr.Text = "label4";
+            // 
+            // labRD6006_out_power
+            // 
+            this.labRD6006_out_power.AutoSize = true;
+            this.labRD6006_out_power.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6006_out_power.Location = new System.Drawing.Point(6, 322);
+            this.labRD6006_out_power.Name = "labRD6006_out_power";
+            this.labRD6006_out_power.Size = new System.Drawing.Size(63, 19);
+            this.labRD6006_out_power.TabIndex = 8;
+            this.labRD6006_out_power.Text = "label4";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(308, 89);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(802, 404);
+            this.listBox1.TabIndex = 3;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(320, 43);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(407, 40);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Show ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // all_devices
             // 
@@ -406,6 +513,8 @@
             this.groupBox_multimeter_ET3916.ResumeLayout(false);
             this.groupBox_multimeter_ET3916.PerformLayout();
             this.tabPowerSupply.ResumeLayout(false);
+            this.groupBox_powerSupply_RD6006.ResumeLayout(false);
+            this.groupBox_powerSupply_RD6006.PerformLayout();
             this.groupBox_powerSupply_KA3305P.ResumeLayout(false);
             this.groupBox_powerSupply_KA3305P.PerformLayout();
             this.groupBox_powerSupply_hcs_330.ResumeLayout(false);
@@ -413,8 +522,6 @@
             this.tabLoad.ResumeLayout(false);
             this.groupBox_load_KEL103.ResumeLayout(false);
             this.groupBox_load_KEL103.PerformLayout();
-            this.groupBox_powerSupply_RD6006.ResumeLayout(false);
-            this.groupBox_powerSupply_RD6006.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -453,5 +560,14 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnPowerSupply_RD6006_measure;
+        private System.Windows.Forms.Label labRD6006_set_volt;
+        private System.Windows.Forms.Label labRD6006_inp_volt;
+        private System.Windows.Forms.Label labRD6006_set_curr;
+        private System.Windows.Forms.Label labRD6006_out_curr;
+        private System.Windows.Forms.Label labRD6006_out_volt;
+        private System.Windows.Forms.Label labRD6006_out_power;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

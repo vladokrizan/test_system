@@ -28,7 +28,7 @@ namespace test_system
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
         modbus_functions modbus_functions = new modbus_functions();
-
+        power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();    
 
         connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
@@ -85,7 +85,7 @@ namespace test_system
         {
 
             strLogFiles_COMports = System.Environment.CurrentDirectory + "\\" + "COMports_selected.csv";
-            strLogFiles_Devices_ident = System.Environment.CurrentDirectory + "\\" + "Devices_idents.csv";
+            strLogFiles_Devices_ident = System.Environment.CurrentDirectory + "\\" + "Devices_idents.txt";
             //------------------------------------------------------------------------------------
             ini_file.read_device_COMport_identification();
             //------------------------------------------------------------------------------------
@@ -167,25 +167,21 @@ namespace test_system
         //=============================================================================================================
         private void COM_PORT_05_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //byte selectCOMporLocal = 0;
-            byte receiveByteLocal;
-            // byte loc_loop;
-
+             byte receiveByteLocal;
+       
             try
             {
-                receiveByteLocal = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
-
-
-                label3.Text = "Receive";
-
-
+               receiveByteLocal = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
+       
                 if (receiveByteLocal > 0)
                 {
-                    //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
+                    bCOMport_recLen[COMport_SELECT_SUPPLY_RD6006] = receiveByteLocal;
                     COMportSerial[COMport_SELECT_SUPPLY_RD6006].Read(receiveByte_RD6006, 0, receiveByteLocal);
 
-                    //COMport_SELECT_SUPPLY_RD6006
+                    power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006(COMport_SELECT_SUPPLY_RD6006);
 
+
+                    //  strGeneralString = receiveByteLocal.ToString() +"    "+ receiveByte_RD6006[0].ToString()+"   "+ receiveByte_RD6006[1].ToString() + "   " + receiveByte_RD6006[2].ToString() + "   " + receiveByte_RD6006[3].ToString() + "   " + receiveByte_RD6006[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
 
                     //-----------------------------------------------------------------------------
                     //for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[COMport_SELECT_SUPPLY_RD6006, loc_loop] = receiveByte_local[loc_loop]; }
@@ -211,6 +207,10 @@ namespace test_system
             //byte selectCOMporLocal = 1;
             byte receiveByteLocal;
             //byte[] receiveByte_local = new byte[100];
+
+            label3.Text = "Receive";
+
+
             //byte loc_loop;
             try
             {
@@ -237,6 +237,10 @@ namespace test_system
         #region "mainWindow Timer 1  "
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+
+            label13.Text = strGeneralString;
+
 
             label10.Text = COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString() + "   " + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString() + "   " + device_ET3916_serial_number;
             //label10.Text = " XDM 1041 " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
@@ -278,15 +282,11 @@ namespace test_system
         private void button2_Click(object sender, EventArgs e)
         {
 
-            // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
+           // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
             //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
             //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
-
             //COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
             //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
-
-
-
             //mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
             //textBox1.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
             //dataArray = Encoding.ASCII.GetBytes("GMArX\r");

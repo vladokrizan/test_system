@@ -54,6 +54,28 @@ namespace test_system
                 }
             }
 
+
+
+            if (device_RD6006_show_all_measure )
+            {
+                device_RD6006_show_all_measure=false;
+
+                labRD6006_set_volt.Text = "Set Voltage      " + rd6006_setVoltage.ToString("0.00") + " V";
+                labRD6006_set_curr.Text = "Set Current      " + rd6006_setCurrent.ToString("0.00") + " A";
+                labRD6006_inp_volt.Text = "Input Voltage    " + rd6006_InputVoltage.ToString("0.00") + " V";
+
+                labRD6006_out_volt.Text =  "Output Voltage   " + rd6006_OutputVoltag.ToString("0.00") + " V";
+                labRD6006_out_curr.Text =  "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
+                labRD6006_out_power.Text = "Output Power     " + rd6006_OutputPower.ToString("0.00") + " W";
+
+     
+
+
+
+            }
+
+
+
         }
 
         #endregion
@@ -128,6 +150,15 @@ namespace test_system
             power_supply_RD6006.funRD6006_off();
             //modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
         }
+
+
+        private void btnPowerSupply_RD6006_measure_Click(object sender, EventArgs e)
+        {
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
+
+        }
+
 
 
         #endregion
@@ -236,6 +267,31 @@ namespace test_system
         {
             write_log_files.funWriteLogFile_Devices_idents();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+
+            // COMport_device_ident[selectSerialNumber]
+            if (COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051]);
+            if (COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041]);
+            if (COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041]);
+            if (COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A]);
+
+            if (COMport_device_ident[COMport_SELECT_SUPPLY_RD6006] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_RD6006]);
+            if (COMport_device_ident[COMport_SELECT_SUPPLY_RD6024] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_RD6024]);
+
+            if (COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330]);
+            if (COMport_device_ident[COMport_SELECT_LOAD_KEL103] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_LOAD_KEL103]);
+            if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]);
+            if (COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B]);
+
+        }
+
+     
+
+
+
 
     }
 }

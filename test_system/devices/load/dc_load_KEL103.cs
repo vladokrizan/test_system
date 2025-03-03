@@ -10,16 +10,17 @@ namespace test_system
 {
     internal class dc_load_KEL103
     {
+        functions functions = new functions();
 
 
         //--    KORAD-KEL103 V3.30 SN:00022116
         public void fun_KEL103_identifaction()
         {
             mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine("*IDN?");
-            COMport_device_ident[COMport_SELECT_LOAD_KEL103] = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+            COMport_device_ident[COMport_SELECT_LOAD_KEL103] = functions.fun_ascii_only(ident_readRaw);
+            //COMport_device_ident[COMport_SELECT_LOAD_KEL103] = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
         }
-
-
 
     }
 }

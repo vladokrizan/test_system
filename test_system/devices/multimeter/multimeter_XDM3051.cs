@@ -14,11 +14,18 @@ namespace test_system
 {
     internal class multimeter_XDM3051
     {
+        functions functions = new functions();
 
+
+        //--    OWON,XDM3051,2303195,V3.7.2,2
         public void fun_XDM3051_identifaction()
         {
             mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
-            COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+            COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = functions.fun_ascii_only(ident_readRaw);
+
+
+            //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
             //  COMport_device_idnet[COMport_SELECT_MULTIMETER_XDM3051] = new string[COMport_SELECT_MAXnumber];
             //dataArray = Encoding.ASCII.GetBytes("GMAX\r");
             //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
@@ -34,7 +41,7 @@ namespace test_system
         {
 
             mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("MEAS?");
-            string measureValue  = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+            string measureValue = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
 
 
 

@@ -22,6 +22,9 @@ namespace test_system
     internal class temperature_ET3916
     {
 
+        functions functions = new functions();
+
+
         byte[] read_buffer = new byte[100];
 
 
@@ -163,7 +166,8 @@ namespace test_system
             device_ET3916_bytes_command_write = true;
             device_ET3916_read_serial_number = true;
         }
-       //=======================================================================================================================
+        //=======================================================================================================================
+        //--    065124120022
         //=======================================================================================================================
         public void fun_ET3916_read_command_serial_number()
         {
@@ -174,7 +178,7 @@ namespace test_system
                     device_ET3916_read_serial_number = false;
                     mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 19);
                     device_ET3916_serial_number = ((Char)(read_buffer[4])).ToString();
-                    device_ET3916_serial_number = device_ET3916_serial_number  +((Char)(read_buffer[5])).ToString(); //+ ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
+                    device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[5])).ToString(); //+ ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[6])).ToString();
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[7])).ToString();
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[8])).ToString();
@@ -189,7 +193,9 @@ namespace test_system
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[16])).ToString();
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[17])).ToString();
 
-                    COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]= device_ET3916_serial_number;
+                    COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] = functions.fun_ascii_only(device_ET3916_serial_number);
+
+                    //COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]= device_ET3916_serial_number;
 
                 }
                 catch
@@ -247,7 +253,7 @@ namespace test_system
                 device_ET3916_temperature[6] = System.BitConverter.ToSingle(read_buffer, 25);
                 device_ET3916_temperature[7] = System.BitConverter.ToSingle(read_buffer, 29);
                 device_ET3916_temperature[8] = System.BitConverter.ToSingle(read_buffer, 33);
-       
+
 
             }
 

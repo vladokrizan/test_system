@@ -13,7 +13,7 @@ namespace test_system
     {
 
         //-----------------------------------------------------------------------------------------
-        public static bool blnMODBUS_KP184 = false;
+        //public static bool blnMODBUS_KP184 = false;
 
 
         //-----------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ namespace test_system
                 mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
             }
 
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
+           // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
 
 
             /*
@@ -250,11 +250,8 @@ namespace test_system
             ModRTU_send_CRC(sendByte_local, 6, selectCOMport).ToString("X");
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
- 
-            
-            
-            
-            
+        
+         
             
             
             //           COMports.fun_COMport_send_message_byte_to_string(selectCOMport);

@@ -18,34 +18,52 @@ namespace test_system
 
         #region "Device  variable in konstante"
 
+        public static byte intModbusRTUreceiveCRC_numberBytes;
+        public static UInt16 intModbusRTUreceiveCRC_calculate;
+        public static UInt16 intModbusRTUreceiveCRC_receive;
+
+
         #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
-       // public static string device_HCS_3300_ident = "";
+        // public static string device_HCS_3300_ident = "";
 
 
 
         #endregion
+        #region "POWER SUPPLY ---- RD6006   "
+        public static bool device_RD6006_show_all_measure = false;
+
+
+        public static double rd6006_setVoltage;
+        public static double rd6006_setCurrent;
+        public static double rd6006_OutputVoltag;
+        public static double rd6006_OutputCurrent;
+        public static double rd6006_OutputPower;
+        public static double rd6006_InputVoltage;
+
+        #endregion
+
         #region "East Tester   --- TEMPERATURE METER ET3916-8 "
- 
+
         public static byte device_ET3916_bytes_to_send = 0;
 
-        public static bool device_ET3916_bytes_command_write= false;
+        public static bool device_ET3916_bytes_command_write = false;
         public static bool device_ET3916_read_model_number = false;
         public static bool device_ET3916_read_all_temperature = false;
 
-        public static byte [] device_ET3916_dataArraySend = new byte[10];
+        public static byte[] device_ET3916_dataArraySend = new byte[10];
         public static string device_ET3916_model_number = "";
         public static double[] device_ET3916_temperature = new double[10];
 
 
         public static bool device_ET3916_read_serial_number = false;
         public static string device_ET3916_serial_number = "";
-        public static bool device_ET3916_serial_number_show =false;
+        public static bool device_ET3916_serial_number_show = false;
 
 
 
 
         #endregion
-                #region "AC METER MAXRIX MPM-1010B"
+        #region "AC METER MAXRIX MPM-1010B"
         //public static bool device_MPM1010B_connected = false;
 
 
@@ -100,7 +118,7 @@ namespace test_system
 
         //----------------------------------------------------------------------------------------
         // --- COMport - ident string 
-        public static string[] COMport_device_ident= new string[COMport_SELECT_MAXnumber];
+        public static string[] COMport_device_ident = new string[COMport_SELECT_MAXnumber];
 
 
 
@@ -133,7 +151,7 @@ namespace test_system
         public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041";
         public const string strCOMport_multimeter_VID_XDM1041 = "1A86";
         public const string strCOMport_multimeter_PID_XDM1041 = "7523";
-       public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D1";
+        public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D1";
         //public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D";
         //-----------------------------------------------------------------------------------------------------------------------
         //public const string strCOMport_multimeter_name_XDM1241 = "OWON XDM 1241";
@@ -219,7 +237,7 @@ namespace test_system
         public static byte[] bCOMport_sendLen = new byte[COMport_SELECT_MAXnumber];
         public static byte[] bCOMport_recLen = new byte[COMport_SELECT_MAXnumber];
         public static byte[,] COMport_sendByte = new byte[COMport_SELECT_MAXnumber, 100];
-        public static byte[,] COMport_recByte = new byte[COMport_SELECT_MAXnumber, 100];
+      //  public static byte[,] COMport_recByte = new byte[COMport_SELECT_MAXnumber, 100];
 
 
 
