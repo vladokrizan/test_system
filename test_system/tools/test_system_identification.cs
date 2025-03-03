@@ -81,18 +81,11 @@ namespace test_system
                     }
                 }
             }
-
         }
-
-
-
-
 
 
         private void funSelect_COMport_modules()
         {
-
-
             COMport_name[COMport_SELECT_MULTIMETER_XDM3051] = "";
             COMport_name[COMport_SELECT_MULTIMETER_XDM1041] = "";
            // COMport_name[COMport_SELECT_MULTIMETER_XDM1241] = "";
@@ -118,9 +111,7 @@ namespace test_system
 
                   // fun_search_device(COMport_SELECT_SUPPLY_HCS_330, 9600, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);
                    // fun_search_device(COMport_SELECT_TEMPERATURE_ET3916, 115200, strCOMport_name_ET6916, strCOMport_serial_ET6916, strCOMport_VID_ET6916, strCOMport_PID_ET6916, s_DeviceID, s_PortName);
-           
-
-                    
+                               
                     //-----------------------------------------------------------------------------------------------------------------------
                     fun_search_device(COMport_SELECT_SUPPLY_KA3305A, 115200, strCOMport_supply_name_KA3305A, strCOMport_supply_serial_KA3305A, strCOMport_supply_VID_KA3305A, strCOMport_supply_PID_KA3305A, s_DeviceID, s_PortName);
                     fun_search_device(COMport_SELECT_SUPPLY_HCS_330, 9600, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);

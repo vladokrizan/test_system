@@ -1,0 +1,20 @@
+﻿
+
+
+
+
+Instrument ident strings 
+
+
+    MULTIMETER      OWON    XDM1041     55.000 counts                           OWON,XDM1041,23120418,V4.1.0,3  
+
+    POWER SUPPLY    KORAD   KA3305P     2 x 0-30V 0-5A                          KORAD KA3305P V7.0 SN:30057214
+
+    DC LOAD        KORAD   KEL103       0-120V 0-30A    300W                    KORAD-KEL103 V3.30 SN:00022116
+
+   
+
+
+
+
+

@@ -52,29 +52,29 @@
     <Compile Include="devices\multimeter\multimeter_XDM2041.cs" />
     <Compile Include="devices\multimeter\multimeter_XDM3051.cs" />
     <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />
-    <Compile Include="functions.cs" />
-    <Compile Include="modbus_functions.cs" />
-    <Compile Include="power_supply_RD6006.cs" />
+    <Compile Include="functions\functions.cs" />
+    <Compile Include="functions\modbus_functions.cs" />
+    <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="tools\all_devices.Designer.cs">
       <DependentUpon>all_devices.cs</DependentUpon>
     </Compile>
-    <Compile Include="complete_system.cs">
+    <Compile Include="tools\complete_system.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="complete_system.Designer.cs">
+    <Compile Include="tools\complete_system.Designer.cs">
       <DependentUpon>complete_system.cs</DependentUpon>
     </Compile>
-    <Compile Include="connected_devices.cs">
+    <Compile Include="tools\connected_devices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="connected_devices.Designer.cs">
+    <Compile Include="tools\connected_devices.Designer.cs">
       <DependentUpon>connected_devices.cs</DependentUpon>
     </Compile>
     <Compile Include="devices\multimeter\ac_meter_MPM_1010B.cs" />
-    <Compile Include="app_version_history.cs" />
+    <Compile Include="functions\app_version_history.cs" />
     <Compile Include="mainWindow_global_variable\global_variable.cs" />
     <Compile Include="mainWindow_global_variable\ini_file.cs" />
     <Compile Include="mainWindow_global_variable\mainWindow.cs">
@@ -93,14 +93,14 @@
     <Compile Include="tools\test_system_identification.Designer.cs">
       <DependentUpon>test_system_identification.cs</DependentUpon>
     </Compile>
-    <Compile Include="write_log_files.cs" />
+    <Compile Include="functions\write_log_files.cs" />
     <EmbeddedResource Include="tools\all_devices.resx">
       <DependentUpon>all_devices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="complete_system.resx">
+    <EmbeddedResource Include="tools\complete_system.resx">
       <DependentUpon>complete_system.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="connected_devices.resx">
+    <EmbeddedResource Include="tools\connected_devices.resx">
       <DependentUpon>connected_devices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainWindow_global_variable\mainWindow.resx">
@@ -133,7 +133,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="dev_history.txt" />
+    <Content Include="document\dev_history.txt" />
+    <Content Include="document\test_system_informations.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

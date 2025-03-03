@@ -11,13 +11,41 @@ namespace test_system
     internal class power_supply_KA3305P
     {
 
+        functions functions = new functions();
+
+
+        //=======================================================================================================================
+        /// <summary>
+        ///     branje idetifikacijskega stringa      
+        /// </summary>
         //--    KORAD KA3305P V7.0 SN:30057214
+        //=======================================================================================================================
         public void fun_KA3305P_identifaction()
         {
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine("*IDN?");
-            COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
-       }
+            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+            COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
+            //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+            //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+            //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+        }
 
+        //=======================================================================================================================
+        //=======================================================================================================================
+        //=======================================================================================================================
+        //=======================================================================================================================
+        //=======================================================================================================================
+        //=======================================================================================================================
+        //=======================================================================================================================
+
+
+
+        public void fun_KA3305P_on(int selectChannel )
+        {
+
+
+
+        }
 
 
 
@@ -29,60 +57,27 @@ namespace test_system
 
 
 /*
-  
-  
+    1. ISET<X>:<NR2>    Description： Sets the output current.   Example:ISET1:2.225 Response time 50ms      Sets the CH1 output current to 2.225A
+    2. ISET<X>?         Description： Returns the output current setting.    Example: ISET1?         Returns the CH1 output current setting.
+    3. VSET<X>:<NR2>    Description：Sets the output voltage.    Example VSET1:20.50     Sets the CH1 voltage to 20.50V
+    4. VSET<X>?         Description：Returns the output voltage setting.     Example VSET1?      Returns the CH1 voltage setting
+    5. IOUT<X>?         Description：Returns the actual output current.  Example IOUT1?  Returns the CH1 output current
+    6. VOUT<X>?         Description：Returns the actual output voltage.  Example VOUT1?
+    7. OUT<Boolean>     Description：Turns on or off the output.     Boolean：0 OFF,1 ON      Example: OUT1 Turns on the output
+    8. STATUS?          Description：Returns the POWER SUPPLY status.
+                        Contents 8 bits in the following format
+                        Bit Item Description
+                        0 CH1 0=CC mode, 1=CV mode
+                        1 CH2 0=CC mode, 1=CV mode
+                        2,3,4,5 N/A
+                        6 Output 0=Off, 1=On
+                        7 N/AN/A
+    9. *IDN?            Description：Returns the KA3305P identification. Example *IDN?   Contents KORAD KA3305P V2.0 (Manufacturer, modelname,).
+    10. RCL<NR1>        Description：Recalls a panel setting.    NR1 1 5: Memory number 1 to 5   Example RCL1 Recalls the panel setting stored in    memory number 1
+    11. SAV<NR1>        Description：Stores the panel setting.   NR1 1 5: Memory number 1 to 5   Example ： SAV1 Stores the panel setting in memorynumber 1
+    12. OCP<NR1>        Description：Over current    Example ：OCP1 OCP OPEN
 
 
-
-
-
-
-
-
-
-  
-  from dataclasses import dataclass
-from openhtf.util import conf
-from serial.tools.list_ports import comports
-from openhtf.plugs.visa_tools import VisaSerial, VisaComError
-from openhtf.core.base_plugs import DevicePlug
-from openhtf.core.base_plugs import DevicePlug
-from re import compile
-
-
-class PowerSupply_KORAD_PA3305P_SERIAL(VisaSerial):
-    def __init__(self, device_config):
-
-        if device_config[0:5] == '/dev/':
-            self.serial_device = device_config
-            self.search_type_port =  True
-            super().__init__(self.serial_device, baud=115200, read_termination='\n', write_termination='\n',  timeout=50)
-        else:
-            pass
-
-
-    @property
-    #-- KORAD KA3305P   IDN   KORAD KA3305P V7.0 SN:30057214     Serial number =  003204450454
-    def is_available(self) -> bool:
-        try:
-            #idn_string = self.idn()
-            x = self.idn().find("KORAD KA3305P")
-            if (x>-1):
-                return True
-            else:
-                return False
-        except Exception:
-            #print ("ERROR  ", self.serial_device )
-            return False
-    
-    def query_value(self, request: str) -> float:
-        reading = super().query(request)
-        try:
-            return float(str(reading).strip('\n').strip())
-        except Exception:
-            return reading
-
-    
     #============================================================================================================================
     #============================================================================================================================
     def set_output_on(self): 

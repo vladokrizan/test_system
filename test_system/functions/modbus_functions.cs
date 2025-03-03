@@ -80,7 +80,6 @@ namespace test_system
         public funErrorCode funModbusRTU_send_request_read_function_3(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
         {
 
-
             mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
 
             bCOMport_sendLen[selectCOMport] = 0;

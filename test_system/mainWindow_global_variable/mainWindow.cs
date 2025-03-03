@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -26,7 +27,7 @@ namespace test_system
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
-        modbus_functions modbus_functions = new modbus_functions(); 
+        modbus_functions modbus_functions = new modbus_functions();
 
 
         connected_devices connected_devices = new connected_devices();
@@ -136,7 +137,7 @@ namespace test_system
 
 
                 COM_PORT_05.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_05_DataReceived);
-                COM_PORT_01.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_01_DataReceived);
+                COM_PORT_06.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_06_DataReceived);
 
 
 
@@ -164,7 +165,7 @@ namespace test_system
         /// <param name="sender"></param>
         /// <param name="e"></param>
         //=============================================================================================================
-        private  void COM_PORT_05_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void COM_PORT_05_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //byte selectCOMporLocal = 0;
             byte receiveByteLocal;
@@ -185,7 +186,7 @@ namespace test_system
 
                     //COMport_SELECT_SUPPLY_RD6006
 
-     
+
                     //-----------------------------------------------------------------------------
                     //for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[COMport_SELECT_SUPPLY_RD6006, loc_loop] = receiveByte_local[loc_loop]; }
                     //-----------------------------------------------------------------------------
@@ -197,15 +198,15 @@ namespace test_system
 
         //public const byte COMport_SELECT_SUPPLY_RD6024 = 5;
         //public const byte COMport_SELECT_SUPPLY_RD6006 = 6;
-       // public static byte[] receiveByte_RD6006 = new byte[100];
-       // public static byte[] receiveByte_RD6024 = new byte[100];
+        // public static byte[] receiveByte_RD6006 = new byte[100];
+        // public static byte[] receiveByte_RD6024 = new byte[100];
 
 
         #endregion
         #region "COM port 01"
         //=============================================================================================================
         //=============================================================================================================
-        private void COM_PORT_01_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void COM_PORT_06_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //byte selectCOMporLocal = 1;
             byte receiveByteLocal;
@@ -276,13 +277,13 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
 
+            // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
             //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
             //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
 
-            COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
+            //COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
 
 
 

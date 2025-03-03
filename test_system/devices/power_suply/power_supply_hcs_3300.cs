@@ -20,54 +20,75 @@ namespace test_system
         byte[] dataArray = new byte[50];
 
 
-        //--    GMAX[CR] Return value:   <voltage><current>[CR] OK[CR]   Get PS maximum Voltage & Current value    <voltage>=???   <current>=???
-        //--    GMAX[CR] Return value:   180200[CR]             OK[CR]   Meaning:    Maximum Voltage is 18.0V Maximum Current is 20.0A
-        //--    ("GMAX");
-        public void fun_HCS_330_identifaction()
+        //=======================================================================================================================
+        //--
+        //=======================================================================================================================
+        private void fun_send_command(string sendString)
         {
-
             dataArray = Encoding.ASCII.GetBytes("GMAX\r");
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+        }
+
+
+
+
+        //=======================================================================================================================
+        //--    GMAX[CR] Return value:   <voltage><current>[CR] OK[CR]   Get PS maximum Voltage & Current value    <voltage>=???   <current>=???
+        //--    GMAX[CR] Return value:   180200[CR]             OK[CR]   Meaning:    Maximum Voltage is 18.0V Maximum Current is 20.0A
+        //--    ("GMAX");
+        //=======================================================================================================================
+        public void fun_HCS_330_identifaction()
+        {
+
+            fun_send_command("GMAX\r");
+            //dataArray = Encoding.ASCII.GetBytes("GMAX\r");
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
             Thread.Sleep(20);
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
             COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
             //device_ET3916_read_all_temperature = true;
         }
-
-
+        //=======================================================================================================================
         //--    SOUT<status>[CR] Return value:   OK[CR] Switch on/off the output of PS<status>=0/1 (0=ON, 1=OFF)
         //--    SOUT0[CR] Return value:   OK[CR] Meaning:    Switch on the output of PS
+        //=======================================================================================================================
         public void fun_HCS_330_off()
         {
-            dataArray = Encoding.ASCII.GetBytes("SOUT0\r");
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+            fun_send_command("SOUT0\r");
+            //dataArray = Encoding.ASCII.GetBytes("SOUT0\r");
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
         }
+        //=======================================================================================================================
+        //=======================================================================================================================
         public void fun_HCS_330_on()
         {
-            dataArray = Encoding.ASCII.GetBytes("SOUT1\r");
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+            fun_send_command("SOUT1\r");
+            //dataArray = Encoding.ASCII.GetBytes("SOUT1\r");
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
         }
 
 
-
-
+        //=======================================================================================================================
         //--  GETD[CR] Return value:   <voltage><current><status>[CR] OK[CR]
         //--      Get PS Display values of Voltage, Current and   Status of CC/CV
         //--            <voltage>=????  <current>=????  <status>=0/1 (0=CV, 1=CC)
         //--    GETD[CR] Return value:
         //--        150016001[CR] OK[CR] Meaning:    The PS Display value is 15V and 16A.It is in CC mode.
         //--    000300040 OK
+        //=======================================================================================================================
         public void fun_HCS_330_get_measure()
         {
-            dataArray = Encoding.ASCII.GetBytes("GETD\r");
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+            fun_send_command("GETD\r");
+            //dataArray = Encoding.ASCII.GetBytes("GETD\r");
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
             Thread.Sleep(20);
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 12);
-            strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();  
+            strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();
             //device_ET3916_read_all_temperature = true;
         }
 

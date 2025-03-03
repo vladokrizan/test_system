@@ -19,13 +19,17 @@ namespace test_system
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P(); 
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
+        power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
         multimeter_XDM1041 multimeter_XDM1041 = new multimeter_XDM1041();
 
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
 
+        modbus_functions modbus_functions = new modbus_functions();
         write_log_files write_log_files = new write_log_files();
 
+
+        #region "nalaganje okna  "
         public all_devices()
         {
             InitializeComponent();
@@ -34,8 +38,9 @@ namespace test_system
         {
 
         }
+        #endregion
 
-
+        #region "Timer "
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -51,10 +56,7 @@ namespace test_system
 
         }
 
-
-
-
-
+        #endregion
         #region " Power supply "
         #region " Power supply  - Manson  1-16V 30A   HCS - 3300"
 
@@ -112,7 +114,23 @@ namespace test_system
 
         #endregion
 
+        #region " Power supply  ---- RD6006     ------     "
 
+
+        private void btnPowerSupply_RD6006_ON_Click(object sender, EventArgs e)
+        {
+            power_supply_RD6006.funRD6006_on();
+            //modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 1, COMport_SELECT_SUPPLY_RD6006);
+        }
+
+        private void btnPowerSupply_RD6006_OFF_Click(object sender, EventArgs e)
+        {
+            power_supply_RD6006.funRD6006_off();
+            //modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
+        }
+
+
+        #endregion
 
 
         #endregion
@@ -218,5 +236,6 @@ namespace test_system
         {
             write_log_files.funWriteLogFile_Devices_idents();
         }
+
     }
 }

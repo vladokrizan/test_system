@@ -112,8 +112,11 @@ namespace test_system
         public const byte COMport_SELECT_MULTIMETER_XDM2041 = 2;
         public const byte COMport_SELECT_MULTIMETER_XDM1041 = 3;
         public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
         public const byte COMport_SELECT_SUPPLY_RD6006 = 5;
         public const byte COMport_SELECT_SUPPLY_RD6024 = 6;
+        //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_HCS_330 = 7;
         public const byte COMport_SELECT_LOAD_KEL103 = 8;
         public const byte COMport_SELECT_TEMPERATURE_ET3916 = 9;
@@ -211,8 +214,6 @@ namespace test_system
 
         public static byte[] receiveByte_RD6006 = new byte[100];
         public static byte[] receiveByte_RD6024 = new byte[100];
-
-
 
 
         public static byte[] bCOMport_sendLen = new byte[COMport_SELECT_MAXnumber];

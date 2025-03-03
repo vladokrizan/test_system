@@ -50,11 +50,17 @@
             this.btnPowerSupply_1_1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLoad = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox_load_KEL103 = new System.Windows.Forms.GroupBox();
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox_powerSupply_RD6006 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnPowerSupply_RD6006_ON = new System.Windows.Forms.Button();
+            this.btnPowerSupply_RD6006_OFF = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_multimeter_XDM1041.SuspendLayout();
@@ -65,6 +71,7 @@
             this.groupBox_powerSupply_hcs_330.SuspendLayout();
             this.tabLoad.SuspendLayout();
             this.groupBox_load_KEL103.SuspendLayout();
+            this.groupBox_powerSupply_RD6006.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -178,6 +185,7 @@
             // 
             // tabPowerSupply
             // 
+            this.tabPowerSupply.Controls.Add(this.groupBox_powerSupply_RD6006);
             this.tabPowerSupply.Controls.Add(this.groupBox_powerSupply_KA3305P);
             this.tabPowerSupply.Controls.Add(this.groupBox_powerSupply_hcs_330);
             this.tabPowerSupply.Location = new System.Drawing.Point(4, 29);
@@ -193,7 +201,7 @@
             this.groupBox_powerSupply_KA3305P.Controls.Add(this.btnPowerSupply_KA3305P_ident1);
             this.groupBox_powerSupply_KA3305P.Controls.Add(this.txtBosPowerSupply_KA3305P_ident);
             this.groupBox_powerSupply_KA3305P.Controls.Add(this.label2);
-            this.groupBox_powerSupply_KA3305P.Location = new System.Drawing.Point(21, 20);
+            this.groupBox_powerSupply_KA3305P.Location = new System.Drawing.Point(20, 20);
             this.groupBox_powerSupply_KA3305P.Name = "groupBox_powerSupply_KA3305P";
             this.groupBox_powerSupply_KA3305P.Size = new System.Drawing.Size(235, 519);
             this.groupBox_powerSupply_KA3305P.TabIndex = 0;
@@ -275,6 +283,16 @@
             this.tabLoad.Text = "  LOAD  ";
             this.tabLoad.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(687, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(324, 37);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Save Idents";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox_load_KEL103
             // 
             this.groupBox_load_KEL103.Controls.Add(this.btnLoad_KEL103_ident);
@@ -308,15 +326,65 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
+            // groupBox_powerSupply_RD6006
             // 
-            this.button1.Location = new System.Drawing.Point(687, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(324, 37);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save Idents";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_OFF);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.btnPowerSupply_RD6006_ON);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.button2);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.textBox1);
+            this.groupBox_powerSupply_RD6006.Controls.Add(this.label3);
+            this.groupBox_powerSupply_RD6006.Location = new System.Drawing.Point(321, 34);
+            this.groupBox_powerSupply_RD6006.Name = "groupBox_powerSupply_RD6006";
+            this.groupBox_powerSupply_RD6006.Size = new System.Drawing.Size(235, 515);
+            this.groupBox_powerSupply_RD6006.TabIndex = 0;
+            this.groupBox_powerSupply_RD6006.TabStop = false;
+            this.groupBox_powerSupply_RD6006.Text = "RD 6006";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 67);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(170, 30);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnPowerSupply_KA3305P_ident1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 103);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(217, 26);
+            this.textBox1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "0-60V     0 - 6 A";
+            // 
+            // btnPowerSupply_RD6006_ON
+            // 
+            this.btnPowerSupply_RD6006_ON.Location = new System.Drawing.Point(7, 163);
+            this.btnPowerSupply_RD6006_ON.Name = "btnPowerSupply_RD6006_ON";
+            this.btnPowerSupply_RD6006_ON.Size = new System.Drawing.Size(100, 30);
+            this.btnPowerSupply_RD6006_ON.TabIndex = 4;
+            this.btnPowerSupply_RD6006_ON.Text = "ON";
+            this.btnPowerSupply_RD6006_ON.UseVisualStyleBackColor = true;
+            this.btnPowerSupply_RD6006_ON.Click += new System.EventHandler(this.btnPowerSupply_RD6006_ON_Click);
+            // 
+            // btnPowerSupply_RD6006_OFF
+            // 
+            this.btnPowerSupply_RD6006_OFF.Location = new System.Drawing.Point(128, 163);
+            this.btnPowerSupply_RD6006_OFF.Name = "btnPowerSupply_RD6006_OFF";
+            this.btnPowerSupply_RD6006_OFF.Size = new System.Drawing.Size(100, 30);
+            this.btnPowerSupply_RD6006_OFF.TabIndex = 5;
+            this.btnPowerSupply_RD6006_OFF.Text = "OFF";
+            this.btnPowerSupply_RD6006_OFF.UseVisualStyleBackColor = true;
+            this.btnPowerSupply_RD6006_OFF.Click += new System.EventHandler(this.btnPowerSupply_RD6006_OFF_Click);
             // 
             // all_devices
             // 
@@ -345,6 +413,8 @@
             this.tabLoad.ResumeLayout(false);
             this.groupBox_load_KEL103.ResumeLayout(false);
             this.groupBox_load_KEL103.PerformLayout();
+            this.groupBox_powerSupply_RD6006.ResumeLayout(false);
+            this.groupBox_powerSupply_RD6006.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -377,5 +447,11 @@
         private System.Windows.Forms.Button btnLoad_KEL103_ident;
         private System.Windows.Forms.TextBox txtBoxLoad_KEL103_ident;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox_powerSupply_RD6006;
+        private System.Windows.Forms.Button btnPowerSupply_RD6006_OFF;
+        private System.Windows.Forms.Button btnPowerSupply_RD6006_ON;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
