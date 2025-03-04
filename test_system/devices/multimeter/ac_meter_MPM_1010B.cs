@@ -54,13 +54,30 @@ namespace test_system
 
         public void fun_read_all_MPM_1010B_read()
         {
+            
             device_MPM1010B_read_all_read = false;
-            mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].Read(read_buffer, 0, 21);
-            device_MPM1010B_voltage = Convert.ToDouble(get_MPM_1010B_one_value(1));
-            device_MPM1010B_current = Convert.ToDouble(get_MPM_1010B_one_value(5));
-            device_MPM1010B_power = Convert.ToDouble(get_MPM_1010B_one_value(9));
-            device_MPM1010B_power_factor = Convert.ToDouble(get_MPM_1010B_one_value(13));
-            device_MPM1010B_freguency = Convert.ToDouble(get_MPM_1010B_one_value(17));
+
+            int number_bytes_to_read= mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].BytesToRead;
+
+            if (number_bytes_to_read == 21)
+            {
+                mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].Read(read_buffer, 0, 21);
+                device_MPM1010B_voltage = Convert.ToDouble(get_MPM_1010B_one_value(1));
+                device_MPM1010B_current = Convert.ToDouble(get_MPM_1010B_one_value(5));
+                device_MPM1010B_power = Convert.ToDouble(get_MPM_1010B_one_value(9));
+                device_MPM1010B_power_factor = Convert.ToDouble(get_MPM_1010B_one_value(13));
+                device_MPM1010B_freguency = Convert.ToDouble(get_MPM_1010B_one_value(17));
+            }
+            device_MPM1010B_show_data = true;
+
+            if (number_bytes_to_read == 21) COMport_active[COMport_SELECT_AC_METER_MPM_1010B] = true;
+            else COMport_active[COMport_SELECT_AC_METER_MPM_1010B] = false;
+
+
+            //strGeneralString = number_bytes_to_read.ToString();
+
+
+
         }
 
 

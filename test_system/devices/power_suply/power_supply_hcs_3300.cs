@@ -28,22 +28,27 @@ namespace test_system
         private void fun_send_command(string sendString)
         {
             dataArray = Encoding.ASCII.GetBytes("GMAX\r");
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Write(dataArray, 0, dataArray.Length);
         }
         //=======================================================================================================================
         //--    GMAX[CR] Return value:   <voltage><current>[CR] OK[CR]   Get PS maximum Voltage & Current value    <voltage>=???   <current>=???
         //--    GMAX[CR] Return value:   180200[CR]             OK[CR]   Meaning:    Maximum Voltage is 18.0V Maximum Current is 20.0A
         //--    ("GMAX");
+        //--    162330
         //=======================================================================================================================
         public void fun_HCS_330_identifaction()
         {
             fun_send_command("GMAX\r");
             Thread.Sleep(20);
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
+            int number_bytes_to_read = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
+             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, number_bytes_to_read);
             string ident_readRaw = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
-            COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
-        }
+            COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300] = functions.fun_ascii_only(ident_readRaw);
+            
+            if (ident_readRaw.Contains("162330")) { COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = true; }
+            else COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = false;
+         }
 
         //=======================================================================================================================
         //--    SOUT<status>[CR] Return value:   OK[CR] Switch on/off the output of PS<status>=0/1 (0=ON, 1=OFF)
@@ -82,7 +87,7 @@ namespace test_system
             //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
             //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
             Thread.Sleep(20);
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 12);
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, 12);
             strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();
             //device_ET3916_read_all_temperature = true;
         }

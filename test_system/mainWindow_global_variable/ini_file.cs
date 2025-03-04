@@ -72,8 +72,8 @@ namespace test_system
                 MyIni.Write("COMport_name_SUPPLY_RD6006", COMport_name[COMport_SELECT_SUPPLY_RD6006], "Device COMport");
                 MyIni.Write("COMport_baudrate_SUPPLY_RD6006", COMport_baudRate[COMport_SELECT_SUPPLY_RD6006].ToString(), "Device COMport");
                 //---------------------------------------------------------------------------------------------------------------
-                MyIni.Write("COMport_name_SUPPLY_HCS_330", COMport_name[COMport_SELECT_SUPPLY_HCS_330], "Device COMport");
-                MyIni.Write("COMport_baudrate_SUPPLY_HCS_330", COMport_baudRate[COMport_SELECT_SUPPLY_HCS_330].ToString(), "Device COMport");
+                MyIni.Write("COMport_name_SUPPLY_HCS_330", COMport_name[COMport_SELECT_SUPPLY_HCS_3300], "Device COMport");
+                MyIni.Write("COMport_baudrate_SUPPLY_HCS_330", COMport_baudRate[COMport_SELECT_SUPPLY_HCS_3300].ToString(), "Device COMport");
                 //---------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------
                 MyIni.Write("COMport_name_LOAD_KEL103", COMport_name[COMport_SELECT_LOAD_KEL103], "Device COMport");
@@ -131,8 +131,8 @@ namespace test_system
                 COMport_name[COMport_SELECT_SUPPLY_RD6006] = ini.Read("COMport_name_SUPPLY_RD6006", "Device COMport");
                 COMport_baudRate[COMport_SELECT_SUPPLY_RD6006] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_RD6006", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------
-                COMport_name[COMport_SELECT_SUPPLY_HCS_330] = ini.Read("COMport_name_SUPPLY_HCS_330", "Device COMport");
-                COMport_baudRate[COMport_SELECT_SUPPLY_HCS_330] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_HCS_330", "Device COMport"));
+                COMport_name[COMport_SELECT_SUPPLY_HCS_3300] = ini.Read("COMport_name_SUPPLY_HCS_330", "Device COMport");
+                COMport_baudRate[COMport_SELECT_SUPPLY_HCS_3300] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_HCS_330", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------
                 COMport_name[COMport_SELECT_LOAD_KEL103] = ini.Read("COMport_name_LOAD_KEL103", "Device COMport");
                 COMport_baudRate[COMport_SELECT_LOAD_KEL103] = Convert.ToUInt32(ini.Read("COMport_baudrate_LOAD_KEL103", "Device COMport"));

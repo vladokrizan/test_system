@@ -53,7 +53,7 @@ namespace test_system
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_SUPPLY_KA3305A);
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_SUPPLY_RD6024);
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_SUPPLY_RD6006);
-            fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_SUPPLY_HCS_330);
+            fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_SUPPLY_HCS_3300);
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_LOAD_KEL103);
             return fun_set_com_port_selev_value;
         }
@@ -120,7 +120,7 @@ namespace test_system
                 fileDataLine = fileDataLine + "AC_METER_MPM_1010B         " + COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] + strNewLineSeparator;
                 //-------------------------------------------------------------------------------------------------------------------
                 fileDataLine = fileDataLine + "SUPPLY_KA3305A             " + COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] + strNewLineSeparator;
-                fileDataLine = fileDataLine + "SUPPLY_HCS_330             " + COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] + strNewLineSeparator;
+                fileDataLine = fileDataLine + "SUPPLY_HCS_330             " + COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300] + strNewLineSeparator;
                 fileDataLine = fileDataLine + "SUPPLY_RD6006              " + COMport_device_ident[COMport_SELECT_SUPPLY_RD6006] + strNewLineSeparator;
                 fileDataLine = fileDataLine + "SUPPLY_RD6024              " + COMport_device_ident[COMport_SELECT_SUPPLY_RD6024] + strNewLineSeparator;
                 //-------------------------------------------------------------------------------------------------------------------

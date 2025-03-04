@@ -17,7 +17,7 @@ namespace test_system
 
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
-        power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P(); 
+        power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
@@ -56,22 +56,25 @@ namespace test_system
 
 
 
-            if (device_RD6006_show_all_measure )
+            if (device_RD6006_show_all_measure)
             {
-                device_RD6006_show_all_measure=false;
+                device_RD6006_show_all_measure = false;
 
                 labRD6006_set_volt.Text = "Set Voltage      " + rd6006_setVoltage.ToString("0.00") + " V";
                 labRD6006_set_curr.Text = "Set Current      " + rd6006_setCurrent.ToString("0.00") + " A";
                 labRD6006_inp_volt.Text = "Input Voltage    " + rd6006_InputVoltage.ToString("0.00") + " V";
 
-                labRD6006_out_volt.Text =  "Output Voltage   " + rd6006_OutputVoltag.ToString("0.00") + " V";
-                labRD6006_out_curr.Text =  "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
+                labRD6006_out_volt.Text = "Output Voltage   " + rd6006_OutputVoltag.ToString("0.00") + " V";
+                labRD6006_out_curr.Text = "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
                 labRD6006_out_power.Text = "Output Power     " + rd6006_OutputPower.ToString("0.00") + " W";
-
-     
-
+            }
 
 
+            if ( device_MPM1010B_show_data )
+            {
+                device_MPM1010B_show_data=false;
+
+                labMPM1010B_voltage.Text = device_MPM1010B_voltage.ToString();
             }
 
 
@@ -86,9 +89,8 @@ namespace test_system
         //-- IDENT 
         private void btnPowerSupply_1_1_Click(object sender, EventArgs e)
         {
-
             power_supply_hcs_3300.fun_HCS_330_identifaction();
-            txtBosPowerSupply_1_1.Text = COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330];
+            txtBosPowerSupply_1_1.Text = COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300];
         }
 
 
@@ -162,18 +164,51 @@ namespace test_system
 
 
         #endregion
+        #region " Power supply  ---- RD6024     ------     "
+
+        private void btnPowerSupply_RD6024_ON_Click(object sender, EventArgs e)
+        {
+            modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 1, COMport_SELECT_SUPPLY_RD6024);
+
+        }
+
+        private void btnPowerSupply_RD6024_OFF_Click(object sender, EventArgs e)
+        {
+            modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6024);
+
+        }
+
+        private void btnPowerSupply_RD6024_measure_Click(object sender, EventArgs e)
+        {
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 10, COMport_SELECT_SUPPLY_RD6024);
+
+        }
+
+        #endregion
 
 
         #endregion
 
         #region "MULTIMETER "
+
+        #region " AC POWER METRER  --- MATRIX  --- MPM-1010B ----  "
+
+        private void btnMPM1010B_measure_Click(object sender, EventArgs e)
+        {
+            device_MPM1010B_read_all_write = true;
+            device_MPM1010B_read_all_read = true;
+        }
+
+        #endregion
+
         #region " Multimeter --- East Tester --- ET916-8 ---- temperature meter "
 
         private void btnET3916_ident_Click(object sender, EventArgs e)
         {
             temperature_ET3916.fun_ET3916_read_serial_number();
             device_ET3916_serial_number_show = true;
-            
+
             //txtBox_ET3916_1.Text = device_ET3916_serial_number;
 
         }
@@ -240,6 +275,9 @@ namespace test_system
 
 
 
+
+
+
         #endregion
 
         #region "LOADS  "
@@ -281,17 +319,13 @@ namespace test_system
             if (COMport_device_ident[COMport_SELECT_SUPPLY_RD6006] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_RD6006]);
             if (COMport_device_ident[COMport_SELECT_SUPPLY_RD6024] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_RD6024]);
 
-            if (COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330]);
+            if (COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300]);
             if (COMport_device_ident[COMport_SELECT_LOAD_KEL103] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_LOAD_KEL103]);
             if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]);
             if (COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B]);
 
         }
 
-     
-
-
-
-
+   
     }
 }

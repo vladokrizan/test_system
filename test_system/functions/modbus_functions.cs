@@ -14,23 +14,13 @@ namespace test_system
 
         //-----------------------------------------------------------------------------------------
         //public static bool blnMODBUS_KP184 = false;
-
-
         //-----------------------------------------------------------------------------------------
-
         public static byte byteSlaveAddress = 1;
 
         public static byte intModbusRTUreceiveCRC_numberBytes;
-        //public static UInt16[] intModbusRTUreceiveCRC_registers = new UInt16[10];
-
+    
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
-
-
-
-
-        //COMports COMports = new COMports();
-        // dc_load_KP184 dc_load_KP184 = new dc_load_KP184();  
 
         #region "MODBUS RTU function - SEND message  "
 
@@ -103,16 +93,20 @@ namespace test_system
             mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
             //-------------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
-           // COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
+            // COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
             //globalStringDebug[4] = strCOMport_SendMessage[selectCOMport];
-  
+
 
             if (selectCOMport == COMport_SELECT_SUPPLY_RD6006)
             {
-                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2 + 5;
+            }
+            else if (selectCOMport == COMport_SELECT_SUPPLY_RD6024)
+            {
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = numberRegister * 2 +5;
             }
 
-           // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
+            // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
 
 
             /*

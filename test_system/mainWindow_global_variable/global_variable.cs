@@ -78,6 +78,7 @@ namespace test_system
 
         public static bool device_MPM1010B_read_all_write = false;
         public static bool device_MPM1010B_read_all_read = false;
+        public static bool device_MPM1010B_show_data = false;
 
 
         //voltage = get_one_measure_value(1)
@@ -139,11 +140,14 @@ namespace test_system
         public const byte COMport_SELECT_METER_FREE = 6;
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_KA3305A = 7;
-        public const byte COMport_SELECT_SUPPLY_HCS_330 = 8;
+        public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
+
         //-----------------------------------------------------------------------------------------------------------------------
         //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
         public const byte COMport_SELECT_SUPPLY_RD6006 = 9;
         public const byte COMport_SELECT_SUPPLY_RD6024 = 10;
+
+     
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_FREE = 11;
         //-----------------------------------------------------------------------------------------------------------------------
@@ -193,7 +197,7 @@ namespace test_system
         public const string strCOMport_supply_PID_RD6006 = "6001";
         public const string strCOMport_supply_serial_RD6006 = "AI03U0UW";
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_supply_name_HCS_330 = "MANSON: HCS-330";
+        public const string strCOMport_supply_name_HCS_330 = "MANSON: HCS-3300";
         public const string strCOMport_supply_VID_HCS_330 = "10C4";
         public const string strCOMport_supply_PID_HCS_330 = "EA60";
         public const string strCOMport_supply_serial_HCS_330 = "0001";

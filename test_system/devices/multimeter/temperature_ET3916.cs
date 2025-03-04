@@ -194,6 +194,8 @@ namespace test_system
                     device_ET3916_serial_number = device_ET3916_serial_number + ((Char)(read_buffer[17])).ToString();
 
                     COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] = functions.fun_ascii_only(device_ET3916_serial_number);
+                    if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916].Contains("065124120022")) { COMport_active[COMport_SELECT_TEMPERATURE_ET3916] = true; }
+                    else COMport_active[COMport_SELECT_TEMPERATURE_ET3916] = false;
 
                     //COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]= device_ET3916_serial_number;
 

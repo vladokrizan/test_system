@@ -287,7 +287,7 @@ Reg ID   Description
                     // globalStringDebug[1] = "measure   " + rd6006_setVoltage.ToString() + "   " + rd6006_setCurrent.ToString() + "   " + rd6006_OutputVoltag.ToString();
                     // globalStringDebug[2] = "measure   " + rd6006_OutputCurrent.ToString() + "   " + rd6006_OutputPower.ToString() + "   " + rd6006_InputVoltage.ToString();
 
-                    strGeneralString = rd6006_setVoltage.ToString() + "    " + rd6006_InputVoltage.ToString(); ;
+                   // strGeneralString = rd6006_setVoltage.ToString() + "    " + rd6006_InputVoltage.ToString(); ;
                     device_RD6006_show_all_measure = true;
                 }
             }

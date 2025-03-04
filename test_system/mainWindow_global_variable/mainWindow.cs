@@ -137,7 +137,7 @@ namespace test_system
                 if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1041) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM3051) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_SUPPLY_KA3305A) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_330) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_3300) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_LOAD_KEL103) == 0) { }
@@ -147,6 +147,9 @@ namespace test_system
                 //-- RD6006 in RD6024 -- MODBUS komunikacija
                 COM_PORT_09.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6006_DataReceived);
                 COM_PORT_10.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6024_DataReceived);
+
+
+                COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = 100;
 
                 /*
                                 string show_connected = "";
@@ -181,6 +184,7 @@ namespace test_system
             try
             {
                 receiveByteLocal = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
+                strGeneralString = receiveByteLocal.ToString();
 
                 if (receiveByteLocal > 0)
                 {
@@ -206,17 +210,22 @@ namespace test_system
         //=============================================================================================================
         private void COM_PORT_RD6024_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //byte selectCOMporLocal = 1;
             byte receiveByteLocal;
-            //byte[] receiveByte_local = new byte[100];
-            //byte loc_loop;
-            try
+              try
             {
                 receiveByteLocal = (byte)mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].BytesToRead;
+             
+
                 if (receiveByteLocal > 0)
                 {
                     //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
                     mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_RD6024, 0, receiveByteLocal);
+
+
+                    strGeneralString = receiveByteLocal.ToString() + "  " + receiveByte_RD6024[0].ToString() + "  " + receiveByte_RD6024[1].ToString() + "  " + receiveByte_RD6024[2].ToString();
+
+
+
                     //-----------------------------------------------------------------------------
                     ///for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[selectCOMporLocal, loc_loop] = receiveByte_local[loc_loop]; }
                     //-----------------------------------------------------------------------------
@@ -244,9 +253,6 @@ namespace test_system
 
         public void fun_show_connected_device()
         {
-            COMport_connected[COMport_SELECT_MULTIMETER_XDM3051] = true;
-            COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = true;
-
             fun_show_one_device(COMport_SELECT_MULTIMETER_XDM3051);
             fun_show_one_device(COMport_SELECT_MULTIMETER_XDM2041);
             fun_show_one_device(COMport_SELECT_MULTIMETER_XDM1041);
@@ -254,7 +260,7 @@ namespace test_system
             fun_show_one_device(COMport_SELECT_AC_METER_MPM_1010B);
             fun_show_one_device(COMport_SELECT_METER_FREE);
             fun_show_one_device(COMport_SELECT_SUPPLY_KA3305A);
-            fun_show_one_device(COMport_SELECT_SUPPLY_HCS_330);
+            fun_show_one_device(COMport_SELECT_SUPPLY_HCS_3300);
             fun_show_one_device(COMport_SELECT_SUPPLY_RD6006);
             fun_show_one_device(COMport_SELECT_SUPPLY_RD6024);
             fun_show_one_device(COMport_SELECT_SUPPLY_FREE);
@@ -270,12 +276,16 @@ namespace test_system
             //-------------------------------------------------------------------------------------------------------------------
             //-- prikaz prikljucenih COM portov in aktivnih instrumentov 
             fun_show_connected_device();
+            textBox1.Text = strGeneralString;
+
+            label1.Text = COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold.ToString()+"   "+  COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold.ToString();
 
 
-           // label13.Text = strGeneralString;
+
+            // label13.Text = strGeneralString;
             //label10.Text = COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString() + "   " + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString() + "   " + device_ET3916_serial_number;
             //label10.Text = " XDM 1041 " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
-           // labGlobalString.Text = strGeneralString;
+            // labGlobalString.Text = strGeneralString;
             //-------------------------------------------------------------------------------------------------------------------
             //-- MATRIX AC Meter MPM1010B
             if (device_MPM1010B_read_all_read)
