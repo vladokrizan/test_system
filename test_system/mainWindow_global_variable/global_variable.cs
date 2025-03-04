@@ -105,9 +105,11 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         //-- COMport variable
         //-----------------------------------------------------------------------------------------------------------------------
-
+        //-- COM port je priključen
         public static bool[] COMport_connected = new bool[COMport_SELECT_MAXnumber];
-
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- COM port je priključen in instrument je prižgan, dobi se ident informacija 
+        public static bool[] COMport_active = new bool[COMport_SELECT_MAXnumber];
         //----------------------------------------------------------------------------------------
         // --- COM port - COMXX
         public static string[] COMport_name = new string[COMport_SELECT_MAXnumber];
@@ -124,21 +126,33 @@ namespace test_system
 
 
         //-----------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------
         //-- izbira posameznih instrumentov 
+        //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_MAXnumber = 20;
+        //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
         public const byte COMport_SELECT_MULTIMETER_XDM2041 = 2;
         public const byte COMport_SELECT_MULTIMETER_XDM1041 = 3;
-        public const byte COMport_SELECT_SUPPLY_KA3305A = 4;
+        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 4;
+        public const byte COMport_SELECT_AC_METER_MPM_1010B = 5;
+        public const byte COMport_SELECT_METER_FREE = 6;
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const byte COMport_SELECT_SUPPLY_KA3305A = 7;
+        public const byte COMport_SELECT_SUPPLY_HCS_330 = 8;
         //-----------------------------------------------------------------------------------------------------------------------
         //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
-        public const byte COMport_SELECT_SUPPLY_RD6006 = 5;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 6;
+        public const byte COMport_SELECT_SUPPLY_RD6006 = 9;
+        public const byte COMport_SELECT_SUPPLY_RD6024 = 10;
         //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_SUPPLY_HCS_330 = 7;
-        public const byte COMport_SELECT_LOAD_KEL103 = 8;
-        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 9;
-        public const byte COMport_SELECT_AC_METER_MPM_1010B = 10;
+        public const byte COMport_SELECT_SUPPLY_FREE = 11;
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const byte COMport_SELECT_LOAD_KEL103 = 12;
+
+
+
+
+        //-----------------------------------------------------------------------------------------------------------------------
 
         //-----------------------------------------------------------------------------------------------------------------------
         //-- DC multimetrer  
@@ -199,13 +213,7 @@ namespace test_system
         public const string strCOMport_VID_ET3916 = "1A86";
         public const string strCOMport_PID_ET3916 = "7523";
         public const string strCOMport_serial_ET3916 = "25D67E33";
-        //public const string strCOMport_load_serial_ET6916 = " 7&25495295&0&1";
-        //public const string strCOMport_load_serial_ET6916 = " 7&25495295&0&1";
-        //public const string strCOMport_serial_ET6916 = "7&25495295&0";
-        //public const string strCOMport_serial_ET6916 = "25495295";
-        //public const string strCOMport_serial_ET6916 = "54";
-
-        //-----------------------------------------------------------------------------------------------------------------------
+       //-----------------------------------------------------------------------------------------------------------------------
         //-- AC POWER METER 
         //-----------------------------------------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------------------------------------
@@ -220,6 +228,7 @@ namespace test_system
 
         #region "LOG FILES "
         public static string strExcelSeparator = ";";
+        public static string strNewLineSeparator = "\r\n";
 
 
         public static string strLogFiles_COMports = "";

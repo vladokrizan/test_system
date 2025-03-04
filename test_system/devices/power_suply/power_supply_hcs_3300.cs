@@ -31,10 +31,6 @@ namespace test_system
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
         }
-
-
-
-
         //=======================================================================================================================
         //--    GMAX[CR] Return value:   <voltage><current>[CR] OK[CR]   Get PS maximum Voltage & Current value    <voltage>=???   <current>=???
         //--    GMAX[CR] Return value:   180200[CR]             OK[CR]   Meaning:    Maximum Voltage is 18.0V Maximum Current is 20.0A
@@ -42,22 +38,13 @@ namespace test_system
         //=======================================================================================================================
         public void fun_HCS_330_identifaction()
         {
-
             fun_send_command("GMAX\r");
-            //dataArray = Encoding.ASCII.GetBytes("GMAX\r");
-            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
             Thread.Sleep(20);
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
-
-            ///COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
             string ident_readRaw = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
-           // string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
             COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
-
-
-            //device_ET3916_read_all_temperature = true;
         }
+
         //=======================================================================================================================
         //--    SOUT<status>[CR] Return value:   OK[CR] Switch on/off the output of PS<status>=0/1 (0=ON, 1=OFF)
         //--    SOUT0[CR] Return value:   OK[CR] Meaning:    Switch on the output of PS

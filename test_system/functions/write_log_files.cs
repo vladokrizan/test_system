@@ -42,7 +42,7 @@ namespace test_system
             return returnValue;
         }
 
-        private string fun_log_file_ComPort_value (int selectValue)
+        private string fun_log_file_ComPort_value(int selectValue)
         {
             string fun_set_com_port_selev_value = "";
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SELECT_MULTIMETER_XDM3051);
@@ -108,31 +108,27 @@ namespace test_system
         public void funWriteLogFile_Devices_idents()
         {
             string fileDataLine = "";
-
-            //-----------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------
             //-- zapis merilnih podatkov 
             using (StreamWriter sw = File.AppendText(strLogFiles_Devices_ident))
             {
-                fileDataLine =  DateTime.Now.ToString("dd.MM.yyyy")   + "      " + DateTime.Now.ToString("HH:mm:ss"); sw.WriteLine(fileDataLine);
-                 fileDataLine = "MULTIMETER_XDM3051         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] ; sw.WriteLine(fileDataLine);
-                fileDataLine =  "MULTIMETER_XDM2041         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] ; sw.WriteLine(fileDataLine);
-                fileDataLine =  "MULTIMETER_XDM1041         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] ; sw.WriteLine(fileDataLine);
-                sw.WriteLine("");
-            }
-
-/* + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_SUPPLY_RD6024] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_SUPPLY_RD6006] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] + strExcelSeparator;
-            fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_LOAD_KEL103] + strExcelSeparator;
-*/
-
-
+                fileDataLine = DateTime.Now.ToString("dd.MM.yyyy") + "      " + DateTime.Now.ToString("HH:mm:ss") + strNewLineSeparator;
+                fileDataLine = fileDataLine + "MULTIMETER_XDM3051         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] + strNewLineSeparator; //sw.WriteLine(fileDataLine);
+                fileDataLine = fileDataLine + "MULTIMETER_XDM2041         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] + strNewLineSeparator; //sw.WriteLine(fileDataLine);
+                fileDataLine = fileDataLine + "MULTIMETER_XDM1041         " + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] + strNewLineSeparator; //sw.WriteLine(fileDataLine);
+                fileDataLine = fileDataLine + "TEMPERATURE_ET3916         " + COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] + strNewLineSeparator; //sw.WriteLine(fileDataLine);
+                fileDataLine = fileDataLine + "AC_METER_MPM_1010B         " + COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] + strNewLineSeparator;
+                //-------------------------------------------------------------------------------------------------------------------
+                fileDataLine = fileDataLine + "SUPPLY_KA3305A             " + COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] + strNewLineSeparator;
+                fileDataLine = fileDataLine + "SUPPLY_HCS_330             " + COMport_device_ident[COMport_SELECT_SUPPLY_HCS_330] + strNewLineSeparator;
+                fileDataLine = fileDataLine + "SUPPLY_RD6006              " + COMport_device_ident[COMport_SELECT_SUPPLY_RD6006] + strNewLineSeparator;
+                fileDataLine = fileDataLine + "SUPPLY_RD6024              " + COMport_device_ident[COMport_SELECT_SUPPLY_RD6024] + strNewLineSeparator;
+                //-------------------------------------------------------------------------------------------------------------------
+                fileDataLine = fileDataLine + "LOAD_KEL103                " + COMport_device_ident[COMport_SELECT_LOAD_KEL103] + strNewLineSeparator;
+                //-------------------------------------------------------------------------------------------------------------------
+                fileDataLine = fileDataLine + strNewLineSeparator;
+                sw.WriteLine(fileDataLine);
+             }
         }
 
 

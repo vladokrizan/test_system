@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="functions\COMports_functions.cs" />
     <Compile Include="devices\load\dc_load_KEL103.cs" />
     <Compile Include="devices\multimeter\multimeter_XDM1041.cs" />
     <Compile Include="devices\multimeter\multimeter_XDM2041.cs" />
@@ -55,6 +56,12 @@
     <Compile Include="functions\functions.cs" />
     <Compile Include="functions\modbus_functions.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
+    <Compile Include="program_1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="program_1.Designer.cs">
+      <DependentUpon>program_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +101,9 @@
       <DependentUpon>test_system_identification.cs</DependentUpon>
     </Compile>
     <Compile Include="functions\write_log_files.cs" />
+    <EmbeddedResource Include="program_1.resx">
+      <DependentUpon>program_1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="tools\all_devices.resx">
       <DependentUpon>all_devices.cs</DependentUpon>
     </EmbeddedResource>
