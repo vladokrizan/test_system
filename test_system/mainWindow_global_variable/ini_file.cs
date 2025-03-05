@@ -57,7 +57,7 @@ namespace test_system
                 MyIni.Write("COMport_baudrate_MULTIMETER_XDM3051", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM3051].ToString(), "Device COMport");
                 MyIni.Write("COMport_name_MULTIMETER_XDM1041", COMport_port[COMport_SELECT_MULTIMETER_XDM1041], "Device COMport");
                 MyIni.Write("COMport_baudrate_MULTIMETER_XDM1041", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041].ToString(), "Device COMport");
-                MyIni.Write("COMport_name_MULTIMETER_XDM2041", COMport_name[COMport_SELECT_MULTIMETER_XDM2041], "Device COMport");
+                MyIni.Write("COMport_name_MULTIMETER_XDM2041", COMport_port[COMport_SELECT_MULTIMETER_XDM2041], "Device COMport");
                 MyIni.Write("COMport_baudrate_MULTIMETER_XDM2041", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041].ToString(), "Device COMport");
                 //---------------------------------------------------------------------------------------------------------------
                 MyIni.Write("COMport_name_SUPPLY_KA3305A", COMport_port[COMport_SELECT_SUPPLY_KA3305A], "Device COMport");
@@ -100,7 +100,7 @@ namespace test_system
                 {
                     COMport_port[COMport_SELECT_MULTIMETER_XDM3051] = "";
                     COMport_port[COMport_SELECT_MULTIMETER_XDM1041] = "";
-                    COMport_name[COMport_SELECT_MULTIMETER_XDM2041] = "";
+                    COMport_port[COMport_SELECT_MULTIMETER_XDM2041] = "";
                     COMport_port[COMport_SELECT_SUPPLY_KA3305A] = "";
                     COMport_port[COMport_SELECT_SUPPLY_RD6024] = "";
                     COMport_port[COMport_SELECT_SUPPLY_RD6006] = "";
@@ -115,8 +115,16 @@ namespace test_system
                 COMport_baudRate[COMport_SELECT_MULTIMETER_XDM3051] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM3051", "Device COMport"));
                 COMport_port[COMport_SELECT_MULTIMETER_XDM1041] = ini.Read("COMport_name_MULTIMETER_XDM1041", "Device COMport");
                 COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM1041", "Device COMport"));
-                COMport_name[COMport_SELECT_MULTIMETER_XDM2041] = ini.Read("COMport_name_MULTIMETER_XDM2041", "Device COMport");
+                COMport_port[COMport_SELECT_MULTIMETER_XDM2041] = ini.Read("COMport_name_MULTIMETER_XDM2041", "Device COMport");
                 COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM2041", "Device COMport"));
+
+              //  strGeneralString = "init file   " + COMport_port[COMport_SELECT_MULTIMETER_XDM2041] + "    " + COMport_connected[COMport_SELECT_MULTIMETER_XDM2041].ToString() + "   " + COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041].ToString();
+               // strGeneralString = "init file   " + COMport_port[COMport_SELECT_MULTIMETER_XDM1041] + "    " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString() + "   " + COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041].ToString();
+
+                //MyIni.Write("COMport_name_MULTIMETER_XDM2041", COMport_port[COMport_SELECT_MULTIMETER_XDM2041], "Device COMport");
+                //MyIni.Write("COMport_baudrate_MULTIMETER_XDM2041", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041].ToString(), "Device COMport");
+
+
                 //---------------------------------------------------------------------------------------------------------------
                 COMport_port[COMport_SELECT_SUPPLY_KA3305A] = ini.Read("COMport_name_SUPPLY_KA3305A", "Device COMport");
                 COMport_baudRate[COMport_SELECT_SUPPLY_KA3305A] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_KA3305A", "Device COMport"));
@@ -139,6 +147,9 @@ namespace test_system
                 COMport_port[COMport_SELECT_AC_METER_MPM_1010B] = ini.Read("COMport_name_ACmeter_MPM_1010B", "Device COMport");
                 COMport_baudRate[COMport_SELECT_AC_METER_MPM_1010B] = Convert.ToUInt32(ini.Read("COMport_baudrate_ACmeter_MPM_1010B", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------
+
+
+       
 
             }
             catch { }

@@ -140,7 +140,7 @@ namespace test_system
             if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
             {
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 10);
-                strGeneralString = ((Char)(read_buffer[4])).ToString() + ((Char)(read_buffer[5])).ToString() + ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
+                //strGeneralString = ((Char)(read_buffer[4])).ToString() + ((Char)(read_buffer[5])).ToString() + ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
             }
         }
 

@@ -191,9 +191,28 @@ Reg ID   Description
         //--    #0010 ERROR RO 0 = OK, 1 = OVP, 2 = OCP
         //--    #0012 OUTPUT ON/OFF R/W 0 = OFF, 1 = ON
 
-        public funErrorCode funModbusRTU_receive_mesasage_RD6006(byte SelectCOMport)
+        public funErrorCode funModbusRTU_receive_mesasage_RD6006()
         {
+           // UInt16 uint16Value = 0;
+            UInt32 uint32Value = 0;
+            double floatValue = 0;
 
+            //floatValue = uint16Value;
+            rd6006_setVoltage = ((float)(modbus_register[0])) / 100;
+            rd6006_setCurrent = ((float)(modbus_register[1])) / 1000;
+            rd6006_OutputVoltag = ((float)(modbus_register[2])) / 100;
+            rd6006_OutputCurrent = ((float)(modbus_register[3])) / 1000;
+
+            uint32Value = (UInt32) (modbus_register[4] * 0xFFFF + modbus_register[5]);
+            rd6006_OutputPower = uint32Value / 100;
+            rd6006_InputVoltage = ((float)(modbus_register[6])) / 100;
+
+
+            //rd6006_setCurrent = ((float)(modbus_register[1])) / 100;
+            //rd6006_setCurrent = ((float)(modbus_register[1])) / 100;
+
+
+            device_RD6006_show_all_measure = true;
 
 
             /*

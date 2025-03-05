@@ -70,6 +70,10 @@ namespace test_system
         public funErrorCode funModbusRTU_send_request_read_function_3(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
         {
 
+            modbus_start_register = registerAddress;
+            modbus_register_number= numberRegister;
+
+
             mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
 
             bCOMport_sendLen[selectCOMport] = 0;
@@ -426,6 +430,8 @@ namespace test_system
             byte loc_loop;
             //for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
 
+            modbus_register_type =0;
+
             intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(receiveByte_modbus, receiveByte_modbus_lenght - 2);
             intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_modbus[receiveByte_modbus_lenght - 1] * 256 + receiveByte_modbus[receiveByte_modbus_lenght - 2]);
 
@@ -437,10 +443,19 @@ namespace test_system
                 modbus_number_register = receiveByte_modbus[2];
                 selectByte = 3;
 
+                // strGeneralString = receiveByte_modbus_lenght.ToString() +"   " + modbus_register_type.ToString();
+
+
+
                 for (loc_loop = 0; loc_loop < modbus_number_register; loc_loop++)
                 {
                     modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectByte++] * 256 + receiveByte_modbus[selectByte++]);
                 }
+
+                strGeneralString = receiveByte_modbus_lenght.ToString() + "   " + modbus_register_type.ToString() + "   " + modbus_register[0].ToString() + "   " + modbus_register[1].ToString() + "   " + modbus_register[2].ToString();
+
+
+
                 // public static UInt16[] modbus_register = new UInt16[100];
                 // modbus_number_register
 

@@ -29,7 +29,7 @@ namespace test_system
             if (read_buffer[start + 2] > 10) Receive_value = Receive_value + ",";
             Receive_value = Receive_value + (read_buffer[start + 3] & 0x0F).ToString();
             if (read_buffer[start + 3] > 10) Receive_value = Receive_value + ",";
-            strGeneralString = Receive_value;
+            //strGeneralString = Receive_value;
 
             return Receive_value;
 

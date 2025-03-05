@@ -34,6 +34,9 @@
             this.groupBox_AC_meter_MPM_1010B = new System.Windows.Forms.GroupBox();
             this.labMPM1010B_voltage = new System.Windows.Forms.Label();
             this.btnMPM1010B_measure = new System.Windows.Forms.Button();
+            this.groupBox_multimeter_XDM2041 = new System.Windows.Forms.GroupBox();
+            this.btnXDM2041_ident = new System.Windows.Forms.Button();
+            this.txtBox_XDM2041_ident = new System.Windows.Forms.TextBox();
             this.groupBox_multimeter_XDM1041 = new System.Windows.Forms.GroupBox();
             this.btnXDM1041_ident = new System.Windows.Forms.Button();
             this.txtBox_XDM1041_ident = new System.Windows.Forms.TextBox();
@@ -45,12 +48,12 @@
             this.btnET3916_ident = new System.Windows.Forms.Button();
             this.tabPowerSupply = new System.Windows.Forms.TabPage();
             this.groupBox_powerSupply_RD6024 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labRD6024_inp_volt = new System.Windows.Forms.Label();
+            this.labRD6024_out_power = new System.Windows.Forms.Label();
+            this.labRD6024_out_curr = new System.Windows.Forms.Label();
+            this.labRD6024_out_volt = new System.Windows.Forms.Label();
+            this.labRD6024_set_curr = new System.Windows.Forms.Label();
+            this.labRD6024_set_volt = new System.Windows.Forms.Label();
             this.btnPowerSupply_RD6024_measure = new System.Windows.Forms.Button();
             this.btnPowerSupply_RD6024_OFF = new System.Windows.Forms.Button();
             this.btnPowerSupply_RD6024_ON = new System.Windows.Forms.Button();
@@ -86,12 +89,10 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.groupBox_multimeter_XDM2041 = new System.Windows.Forms.GroupBox();
-            this.txtBox_XDM2041_ident = new System.Windows.Forms.TextBox();
-            this.btnXDM2041_ident = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
+            this.groupBox_multimeter_XDM2041.SuspendLayout();
             this.groupBox_multimeter_XDM1041.SuspendLayout();
             this.groupBox_multimeter_XDM_3051.SuspendLayout();
             this.groupBox_multimeter_ET3916.SuspendLayout();
@@ -102,7 +103,6 @@
             this.groupBox_powerSupply_hcs_330.SuspendLayout();
             this.tabLoad.SuspendLayout();
             this.groupBox_load_KEL103.SuspendLayout();
-            this.groupBox_multimeter_XDM2041.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -161,6 +161,34 @@
             this.btnMPM1010B_measure.Text = "Measure";
             this.btnMPM1010B_measure.UseVisualStyleBackColor = true;
             this.btnMPM1010B_measure.Click += new System.EventHandler(this.btnMPM1010B_measure_Click);
+            // 
+            // groupBox_multimeter_XDM2041
+            // 
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_ident);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_ident);
+            this.groupBox_multimeter_XDM2041.Location = new System.Drawing.Point(228, 43);
+            this.groupBox_multimeter_XDM2041.Name = "groupBox_multimeter_XDM2041";
+            this.groupBox_multimeter_XDM2041.Size = new System.Drawing.Size(193, 505);
+            this.groupBox_multimeter_XDM2041.TabIndex = 1;
+            this.groupBox_multimeter_XDM2041.TabStop = false;
+            this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
+            // 
+            // btnXDM2041_ident
+            // 
+            this.btnXDM2041_ident.Location = new System.Drawing.Point(7, 43);
+            this.btnXDM2041_ident.Name = "btnXDM2041_ident";
+            this.btnXDM2041_ident.Size = new System.Drawing.Size(170, 30);
+            this.btnXDM2041_ident.TabIndex = 2;
+            this.btnXDM2041_ident.Text = "Ident";
+            this.btnXDM2041_ident.UseVisualStyleBackColor = true;
+            this.btnXDM2041_ident.Click += new System.EventHandler(this.btnXDM2041_ident_Click);
+            // 
+            // txtBox_XDM2041_ident
+            // 
+            this.txtBox_XDM2041_ident.Location = new System.Drawing.Point(6, 77);
+            this.txtBox_XDM2041_ident.Name = "txtBox_XDM2041_ident";
+            this.txtBox_XDM2041_ident.Size = new System.Drawing.Size(170, 26);
+            this.txtBox_XDM2041_ident.TabIndex = 1;
             // 
             // groupBox_multimeter_XDM1041
             // 
@@ -262,12 +290,12 @@
             // 
             // groupBox_powerSupply_RD6024
             // 
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label4);
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label5);
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label6);
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label7);
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label8);
-            this.groupBox_powerSupply_RD6024.Controls.Add(this.label9);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_inp_volt);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_out_power);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_out_curr);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_out_volt);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_set_curr);
+            this.groupBox_powerSupply_RD6024.Controls.Add(this.labRD6024_set_volt);
             this.groupBox_powerSupply_RD6024.Controls.Add(this.btnPowerSupply_RD6024_measure);
             this.groupBox_powerSupply_RD6024.Controls.Add(this.btnPowerSupply_RD6024_OFF);
             this.groupBox_powerSupply_RD6024.Controls.Add(this.btnPowerSupply_RD6024_ON);
@@ -281,65 +309,65 @@
             this.groupBox_powerSupply_RD6024.TabStop = false;
             this.groupBox_powerSupply_RD6024.Text = "RD 6024";
             // 
-            // label4
+            // labRD6024_inp_volt
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(6, 210);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 19);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "label5";
+            this.labRD6024_inp_volt.AutoSize = true;
+            this.labRD6024_inp_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_inp_volt.Location = new System.Drawing.Point(6, 210);
+            this.labRD6024_inp_volt.Name = "labRD6024_inp_volt";
+            this.labRD6024_inp_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_inp_volt.TabIndex = 9;
+            this.labRD6024_inp_volt.Text = "label5";
             // 
-            // label5
+            // labRD6024_out_power
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(6, 322);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 19);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "label4";
+            this.labRD6024_out_power.AutoSize = true;
+            this.labRD6024_out_power.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_out_power.Location = new System.Drawing.Point(6, 322);
+            this.labRD6024_out_power.Name = "labRD6024_out_power";
+            this.labRD6024_out_power.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_out_power.TabIndex = 8;
+            this.labRD6024_out_power.Text = "label4";
             // 
-            // label6
+            // labRD6024_out_curr
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(6, 292);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 19);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "label4";
+            this.labRD6024_out_curr.AutoSize = true;
+            this.labRD6024_out_curr.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_out_curr.Location = new System.Drawing.Point(6, 292);
+            this.labRD6024_out_curr.Name = "labRD6024_out_curr";
+            this.labRD6024_out_curr.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_out_curr.TabIndex = 8;
+            this.labRD6024_out_curr.Text = "label4";
             // 
-            // label7
+            // labRD6024_out_volt
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(6, 273);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 19);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "label4";
+            this.labRD6024_out_volt.AutoSize = true;
+            this.labRD6024_out_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_out_volt.Location = new System.Drawing.Point(6, 273);
+            this.labRD6024_out_volt.Name = "labRD6024_out_volt";
+            this.labRD6024_out_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_out_volt.TabIndex = 7;
+            this.labRD6024_out_volt.Text = "label4";
             // 
-            // label8
+            // labRD6024_set_curr
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(6, 248);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 19);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "label4";
+            this.labRD6024_set_curr.AutoSize = true;
+            this.labRD6024_set_curr.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_set_curr.Location = new System.Drawing.Point(6, 248);
+            this.labRD6024_set_curr.Name = "labRD6024_set_curr";
+            this.labRD6024_set_curr.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_set_curr.TabIndex = 8;
+            this.labRD6024_set_curr.Text = "label4";
             // 
-            // label9
+            // labRD6024_set_volt
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(6, 229);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 19);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "label4";
+            this.labRD6024_set_volt.AutoSize = true;
+            this.labRD6024_set_volt.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labRD6024_set_volt.Location = new System.Drawing.Point(6, 229);
+            this.labRD6024_set_volt.Name = "labRD6024_set_volt";
+            this.labRD6024_set_volt.Size = new System.Drawing.Size(63, 19);
+            this.labRD6024_set_volt.TabIndex = 7;
+            this.labRD6024_set_volt.Text = "label4";
             // 
             // btnPowerSupply_RD6024_measure
             // 
@@ -684,34 +712,6 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // groupBox_multimeter_XDM2041
-            // 
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_ident);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_ident);
-            this.groupBox_multimeter_XDM2041.Location = new System.Drawing.Point(228, 43);
-            this.groupBox_multimeter_XDM2041.Name = "groupBox_multimeter_XDM2041";
-            this.groupBox_multimeter_XDM2041.Size = new System.Drawing.Size(193, 505);
-            this.groupBox_multimeter_XDM2041.TabIndex = 1;
-            this.groupBox_multimeter_XDM2041.TabStop = false;
-            this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
-            // 
-            // txtBox_XDM2041_ident
-            // 
-            this.txtBox_XDM2041_ident.Location = new System.Drawing.Point(6, 77);
-            this.txtBox_XDM2041_ident.Name = "txtBox_XDM2041_ident";
-            this.txtBox_XDM2041_ident.Size = new System.Drawing.Size(170, 26);
-            this.txtBox_XDM2041_ident.TabIndex = 1;
-            // 
-            // btnXDM2041_ident
-            // 
-            this.btnXDM2041_ident.Location = new System.Drawing.Point(7, 43);
-            this.btnXDM2041_ident.Name = "btnXDM2041_ident";
-            this.btnXDM2041_ident.Size = new System.Drawing.Size(170, 30);
-            this.btnXDM2041_ident.TabIndex = 2;
-            this.btnXDM2041_ident.Text = "Ident";
-            this.btnXDM2041_ident.UseVisualStyleBackColor = true;
-            this.btnXDM2041_ident.Click += new System.EventHandler(this.btnXDM2041_ident_Click);
-            // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -727,6 +727,8 @@
             this.tabMultimeter.ResumeLayout(false);
             this.groupBox_AC_meter_MPM_1010B.ResumeLayout(false);
             this.groupBox_AC_meter_MPM_1010B.PerformLayout();
+            this.groupBox_multimeter_XDM2041.ResumeLayout(false);
+            this.groupBox_multimeter_XDM2041.PerformLayout();
             this.groupBox_multimeter_XDM1041.ResumeLayout(false);
             this.groupBox_multimeter_XDM1041.PerformLayout();
             this.groupBox_multimeter_XDM_3051.ResumeLayout(false);
@@ -745,8 +747,6 @@
             this.tabLoad.ResumeLayout(false);
             this.groupBox_load_KEL103.ResumeLayout(false);
             this.groupBox_load_KEL103.PerformLayout();
-            this.groupBox_multimeter_XDM2041.ResumeLayout(false);
-            this.groupBox_multimeter_XDM2041.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -798,12 +798,12 @@
         private System.Windows.Forms.Button btnMPM1010B_measure;
         private System.Windows.Forms.Label labMPM1010B_voltage;
         private System.Windows.Forms.GroupBox groupBox_powerSupply_RD6024;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labRD6024_inp_volt;
+        private System.Windows.Forms.Label labRD6024_out_power;
+        private System.Windows.Forms.Label labRD6024_out_curr;
+        private System.Windows.Forms.Label labRD6024_out_volt;
+        private System.Windows.Forms.Label labRD6024_set_curr;
+        private System.Windows.Forms.Label labRD6024_set_volt;
         private System.Windows.Forms.Button btnPowerSupply_RD6024_measure;
         private System.Windows.Forms.Button btnPowerSupply_RD6024_OFF;
         private System.Windows.Forms.Button btnPowerSupply_RD6024_ON;

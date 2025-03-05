@@ -69,6 +69,18 @@ namespace test_system
                 labRD6006_out_curr.Text = "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
                 labRD6006_out_power.Text = "Output Power     " + rd6006_OutputPower.ToString("0.00") + " W";
             }
+            if (device_RD6024_show_all_measure)
+            {
+                device_RD6024_show_all_measure = false;
+
+                labRD6024_set_volt.Text = "Set Voltage      " + rd6024_setVoltage.ToString("0.00") + " V";
+                labRD6024_set_curr.Text = "Set Current      " + rd6024_setCurrent.ToString("0.00") + " A";
+                labRD6024_inp_volt.Text = "Input Voltage    " + rd6024_InputVoltage.ToString("0.00") + " V";
+
+                labRD6024_out_volt.Text = "Output Voltage   " + rd6024_OutputVoltag.ToString("0.00") + " V";
+                labRD6024_out_curr.Text = "Output Current   " + rd6024_OutputCurrent.ToString("0.00") + " A";
+                labRD6024_out_power.Text = "Output Power     " + rd6024_OutputPower.ToString("0.00") + " W";
+            }
 
 
             if ( device_MPM1010B_show_data )
@@ -181,7 +193,11 @@ namespace test_system
         private void btnPowerSupply_RD6024_measure_Click(object sender, EventArgs e)
         {
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 10, COMport_SELECT_SUPPLY_RD6024);
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_SELECT_SUPPLY_RD6024);
+
+
+            // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].DiscardInBuffer();
+            // modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 10, COMport_SELECT_SUPPLY_RD6024);
 
         }
 
@@ -270,6 +286,8 @@ namespace test_system
         {
             multimeter_XDM2041.fun_XDM2041_identifaction();
             txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
+
+           // strGeneralString = "najden";
         }
 
         #endregion

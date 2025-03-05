@@ -56,6 +56,7 @@
     <Compile Include="functions\functions.cs" />
     <Compile Include="functions\modbus_functions.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
+    <Compile Include="power_supply_RD6024.cs" />
     <Compile Include="program_1.cs">
       <SubType>Form</SubType>
     </Compile>

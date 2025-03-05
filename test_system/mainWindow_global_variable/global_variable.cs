@@ -21,6 +21,17 @@ namespace test_system
         public static byte intModbusRTUreceiveCRC_numberBytes;
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
+        public static byte[] receiveByte_modbus = new byte[100];
+        public static byte receiveByte_modbus_lenght;
+
+        public static byte modbus_number_register;
+        public static byte modbus_register_type;
+
+        public static UInt16[] modbus_register = new UInt16[100];
+
+        public static UInt16 modbus_start_register;
+        public static UInt16 modbus_register_number;
+
 
 
         #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
@@ -31,13 +42,6 @@ namespace test_system
         #endregion
         #region "POWER SUPPLY ---- RD6006  / RD6024  "
 
-        public static byte[] receiveByte_modbus = new byte[100];
-        public static byte receiveByte_modbus_lenght;
-
-        public static byte modbus_number_register;
-        public static byte modbus_register_type;
-
-        public static UInt16[] modbus_register = new UInt16[100];
 
 
         // public static byte[] receiveByte_RD6006 = new byte[100];
@@ -59,6 +63,16 @@ namespace test_system
         public static double rd6006_OutputCurrent;
         public static double rd6006_OutputPower;
         public static double rd6006_InputVoltage;
+
+
+        public static bool device_RD6024_show_all_measure = false;
+        public static double rd6024_setVoltage;
+        public static double rd6024_setCurrent;
+        public static double rd6024_OutputVoltag;
+        public static double rd6024_OutputCurrent;
+        public static double rd6024_OutputPower;
+        public static double rd6024_InputVoltage;
+
 
         #endregion
 
@@ -179,7 +193,17 @@ namespace test_system
         public const string strCOMport_multimeter_name_XDM2041 = "OWON XDM 2041 - Multimeter";
         public const string strCOMport_multimeter_VID_XDM2041 = "0403";
         public const string strCOMport_multimeter_PID_XDM2041 = "6015";
-        public const string strCOMport_multimeter_serial_XDM2041 = "D30F6JOX";
+        public const string strCOMport_multimeter_serial_XDM2041 = "D30F6HTE";
+
+
+        //COM26 FTDIBUS\VID_0403+PID_6015+D30F6HTEA\0000
+
+        //\VID_1A86&PID_7523\7&25495295&0&2
+        //COM22 USB\VID_1A86&PID_7523\7&25495295&0&2
+        //COM22 USB\VID_1A86&PID_7523\7&25495295&0&2
+
+        //COM24 USB\VID_1A86&PID_7523\7&25D67E33&0&2
+        
         //-----------------------------------------------------------------------------------------------------------------------
         public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041 - Multimeter";
         public const string strCOMport_multimeter_VID_XDM1041 = "1A86";
