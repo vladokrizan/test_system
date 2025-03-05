@@ -37,7 +37,7 @@ namespace test_system
         private string fun_select_variable(int selectVariable, int selectSerialNumber)
         {
             string returnValue = "";
-            if (selectVariable == selectCOMport_name) { returnValue = COMport_name[selectSerialNumber] + strExcelSeparator; }
+            if (selectVariable == selectCOMport_name) { returnValue = COMport_port[selectSerialNumber] + strExcelSeparator; }
             if (selectVariable == selectCOMport_ident) { returnValue = COMport_device_ident[selectSerialNumber] + strExcelSeparator; }
             return returnValue;
         }

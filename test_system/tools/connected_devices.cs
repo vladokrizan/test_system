@@ -22,16 +22,16 @@ namespace test_system
         {
             dataTable_conneced_device.Rows.Clear();
             dataTable_conneced_device.ClearSelection();
-            if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B] != null)
+            if (COMport_port[COMport_SELECT_AC_METER_MPM_1010B] != null)
             {
-                if (COMport_name[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
+                if (COMport_port[COMport_SELECT_AC_METER_MPM_1010B].Length > 0)
                 {
                     dataTable_conneced_device.Rows.Add("MATRIX  AC METER MPM-101B ", COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString());
                 }
             }
-            if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916] != null)
+            if (COMport_port[COMport_SELECT_TEMPERATURE_ET3916] != null)
             {
-                if (COMport_name[COMport_SELECT_TEMPERATURE_ET3916].Length > 0)
+                if (COMport_port[COMport_SELECT_TEMPERATURE_ET3916].Length > 0)
                 {
                     dataTable_conneced_device.Rows.Add("East Tester Temperature meter ET3916-8 ", COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString());
                 }

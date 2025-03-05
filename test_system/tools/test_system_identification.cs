@@ -75,9 +75,9 @@ namespace test_system
                 {
                     if (current_ID.Contains(search_PID))
                     {
-                        COMport_name[select_device] = current_COMport;
+                        COMport_port[select_device] = current_COMport;
                         COMport_baudRate[select_device] = baudrate;
-                        listBox1.Items.Add(search_device_name + "     " + COMport_name[select_device] + "      " + COMport_baudRate[select_device].ToString());
+                        listBox1.Items.Add(search_device_name + "     " + COMport_port[select_device] + "      " + COMport_baudRate[select_device].ToString());
                     }
                 }
             }
@@ -86,15 +86,15 @@ namespace test_system
 
         private void funSelect_COMport_modules()
         {
-            COMport_name[COMport_SELECT_MULTIMETER_XDM3051] = "";
-            COMport_name[COMport_SELECT_MULTIMETER_XDM1041] = "";
-           // COMport_name[COMport_SELECT_MULTIMETER_XDM1241] = "";
-            COMport_name[COMport_SELECT_SUPPLY_KA3305A] = "";
-            COMport_name[COMport_SELECT_SUPPLY_RD6024] = "";
-            COMport_name[COMport_SELECT_SUPPLY_RD6006] = "";
-            COMport_name[COMport_SELECT_LOAD_KEL103] = "";
-            COMport_name[COMport_SELECT_TEMPERATURE_ET3916] = "";
-            COMport_name[COMport_SELECT_AC_METER_MPM_1010B] = "";
+            COMport_port[COMport_SELECT_MULTIMETER_XDM3051] = "";
+            COMport_port[COMport_SELECT_MULTIMETER_XDM1041] = "";
+            COMport_name[COMport_SELECT_MULTIMETER_XDM2041] = "";
+            COMport_port[COMport_SELECT_SUPPLY_KA3305A] = "";
+            COMport_port[COMport_SELECT_SUPPLY_RD6024] = "";
+            COMport_port[COMport_SELECT_SUPPLY_RD6006] = "";
+            COMport_port[COMport_SELECT_LOAD_KEL103] = "";
+            COMport_port[COMport_SELECT_TEMPERATURE_ET3916] = "";
+            COMport_port[COMport_SELECT_AC_METER_MPM_1010B] = "";
 
 
             using (ManagementClass i_Entity = new ManagementClass("Win32_PnPEntity"))
@@ -120,8 +120,8 @@ namespace test_system
                     //-----------------------------------------------------------------------------------------------------------------------
                     //-- DC multimetrer  
                     fun_search_device(COMport_SELECT_MULTIMETER_XDM3051, 115200, strCOMport_multimeter_name_XDM3051, strCOMport_multimeter_serial_XDM3051, strCOMport_multimeter_VID_XDM3051, strCOMport_multimeter_PID_XDM3051, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_SELECT_MULTIMETER_XDM2041, 115200, strCOMport_multimeter_name_XDM2041, strCOMport_multimeter_serial_XDM2041, strCOMport_multimeter_VID_XDM2041, strCOMport_multimeter_PID_XDM2041, s_DeviceID, s_PortName);
                     fun_search_device(COMport_SELECT_MULTIMETER_XDM1041, 115200, strCOMport_multimeter_name_XDM1041, strCOMport_multimeter_serial_XDM1041, strCOMport_multimeter_VID_XDM1041, strCOMport_multimeter_PID_XDM1041, s_DeviceID, s_PortName);
-                    //fun_search_device(COMport_SELECT_MULTIMETER_XDM1241, 115200, strCOMport_multimeter_name_XDM1241, strCOMport_multimeter_serial_XDM1241, strCOMport_multimeter_VID_XDM1241, strCOMport_multimeter_PID_XDM1241, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
                     fun_search_device(COMport_SELECT_LOAD_KEL103, 115200, strCOMport_load_name_KEL103, strCOMport_load_serial_KEL103, strCOMport_load_VID_KEL103, strCOMport_load_PID_KEL103, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------

@@ -40,6 +40,8 @@ namespace test_system
 
         public void fun_read_all_MPM_1010B_write()
         {
+
+
             device_MPM1010B_read_all_write = false;
             var dataArray = new byte[10];
             dataArray[0] = 63;

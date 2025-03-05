@@ -53,8 +53,15 @@
             this.labDevice_XDM2041 = new System.Windows.Forms.Label();
             this.labDevice_XDM3051 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.btnProgram_01 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.groupBox_connected_device.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -62,7 +69,7 @@
             this.button1.Location = new System.Drawing.Point(20, 58);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(220, 35);
+            this.button1.Size = new System.Drawing.Size(150, 30);
             this.button1.TabIndex = 0;
             this.button1.Text = "Identification";
             this.button1.UseVisualStyleBackColor = true;
@@ -72,7 +79,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(180, 561);
+            this.label1.Location = new System.Drawing.Point(16, 376);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 24);
@@ -81,7 +88,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 566);
+            this.button2.Location = new System.Drawing.Point(12, 333);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 40);
             this.button2.TabIndex = 2;
@@ -93,7 +100,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(180, 585);
+            this.label2.Location = new System.Drawing.Point(16, 400);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 24);
             this.label2.TabIndex = 3;
@@ -108,7 +115,7 @@
             // 
             this.button8.Location = new System.Drawing.Point(20, 102);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(220, 30);
+            this.button8.Size = new System.Drawing.Size(150, 30);
             this.button8.TabIndex = 10;
             this.button8.Text = "System";
             this.button8.UseVisualStyleBackColor = true;
@@ -117,16 +124,16 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(12, 612);
+            this.textBox1.Location = new System.Drawing.Point(12, 427);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(740, 31);
+            this.textBox1.Size = new System.Drawing.Size(146, 31);
             this.textBox1.TabIndex = 16;
             // 
             // button13
             // 
             this.button13.Location = new System.Drawing.Point(20, 139);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(220, 37);
+            this.button13.Size = new System.Drawing.Size(150, 30);
             this.button13.TabIndex = 17;
             this.button13.Text = "All Devices";
             this.button13.UseVisualStyleBackColor = true;
@@ -165,9 +172,9 @@
             this.groupBox_connected_device.Controls.Add(this.labDevice_XDM1041);
             this.groupBox_connected_device.Controls.Add(this.labDevice_XDM2041);
             this.groupBox_connected_device.Controls.Add(this.labDevice_XDM3051);
-            this.groupBox_connected_device.Location = new System.Drawing.Point(1230, 12);
+            this.groupBox_connected_device.Location = new System.Drawing.Point(1230, 38);
             this.groupBox_connected_device.Name = "groupBox_connected_device";
-            this.groupBox_connected_device.Size = new System.Drawing.Size(115, 653);
+            this.groupBox_connected_device.Size = new System.Drawing.Size(115, 618);
             this.groupBox_connected_device.TabIndex = 21;
             this.groupBox_connected_device.TabStop = false;
             // 
@@ -281,22 +288,75 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(20, 206);
+            this.button3.Location = new System.Drawing.Point(12, 270);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(220, 39);
+            this.button3.Size = new System.Drawing.Size(150, 30);
             this.button3.TabIndex = 22;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // btnProgram_01
+            // 
+            this.btnProgram_01.Location = new System.Drawing.Point(20, 197);
+            this.btnProgram_01.Name = "btnProgram_01";
+            this.btnProgram_01.Size = new System.Drawing.Size(150, 30);
+            this.btnProgram_01.TabIndex = 23;
+            this.btnProgram_01.Text = "Program 1";
+            this.btnProgram_01.UseVisualStyleBackColor = true;
+            this.btnProgram_01.Click += new System.EventHandler(this.btnProgram_01_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1357, 32);
+            this.menuStrip1.TabIndex = 24;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(70, 28);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(70, 28);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 28);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1357, 692);
+            this.Controls.Add(this.btnProgram_01);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox_connected_device);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button8);
@@ -305,14 +365,18 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "mainWindow";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.mainWindow_Load);
+            this.Move += new System.EventHandler(this.mainWindow_Move);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox_connected_device.ResumeLayout(false);
             this.groupBox_connected_device.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -344,6 +408,12 @@
         private System.Windows.Forms.Label labDevice_KA3305P;
         private System.Windows.Forms.Label labDevice_KEL103;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnProgram_01;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

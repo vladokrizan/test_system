@@ -27,7 +27,7 @@ namespace test_system
         //=======================================================================================================================
         private void fun_send_command(string sendString)
         {
-            dataArray = Encoding.ASCII.GetBytes("GMAX\r");
+            dataArray = Encoding.ASCII.GetBytes(sendString);
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Write(dataArray, 0, dataArray.Length);
         }
@@ -39,15 +39,19 @@ namespace test_system
         //=======================================================================================================================
         public void fun_HCS_330_identifaction()
         {
-            fun_send_command("GMAX\r");
-            Thread.Sleep(20);
-            int number_bytes_to_read = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
-             mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, number_bytes_to_read);
-            string ident_readRaw = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
-            COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300] = functions.fun_ascii_only(ident_readRaw);
-            
-            if (ident_readRaw.Contains("162330")) { COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = true; }
-            else COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = false;
+            if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+            {
+
+                fun_send_command("GMAX\r");
+                Thread.Sleep(20);
+                int number_bytes_to_read = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, number_bytes_to_read);
+                string ident_readRaw = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
+                COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300] = functions.fun_ascii_only(ident_readRaw);
+
+                if (ident_readRaw.Contains("162330")) { COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = true; }
+                else COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = false;
+            }
          }
 
         //=======================================================================================================================

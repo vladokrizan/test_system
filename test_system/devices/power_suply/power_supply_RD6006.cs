@@ -152,6 +152,7 @@ Reg ID   Description
     internal class power_supply_RD6006
     {
 
+       // byte[] receiveByte_local = new byte[100];
 
 
         modbus_functions modbus_functions = new modbus_functions();
@@ -172,13 +173,14 @@ Reg ID   Description
         #region "GET measure "
 
 
+        public funErrorCode funRD6006_measure()
+        {
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_SELECT_SUPPLY_RD6006);
 
-        //--    #0000 0xEA 0x9E RO Signature = 60062
-        //--    #0001 0 RO
-        //--    #0002 0x19 0x40 RO Serial number (6464)
-        //--    #0003 0x00 0x80 RO Firmware version (1.28) x 100
-        //--    #0005 TEMP SYS C RO
-        //--    #0007 TEMP SYS F RO
+            return (funErrorCode.OK);
+        }
+
         //--    #0008 V-SET R/W V value x 100
         //--    #0009 I-SET R/W I value x 1000
         //--    #000A V-OUT RO V value x 100
@@ -188,26 +190,22 @@ Reg ID   Description
         //--    #000F LOCK R/W 0 = OPEN, 1 = LOCKED
         //--    #0010 ERROR RO 0 = OK, 1 = OVP, 2 = OCP
         //--    #0012 OUTPUT ON/OFF R/W 0 = OFF, 1 = ON
-        //--    #0013 DATA USE R/W memory ID 0..9
-        //--    #0020 BATTERY MODE RO 0 = OFF, 1 = ON
-
 
         public funErrorCode funModbusRTU_receive_mesasage_RD6006(byte SelectCOMport)
         {
+
+
+
+            /*
             UInt16 uint16Value = 0;
             UInt32 uint32Value = 0;
             double floatValue = 0;
             byte selectByte;
             byte loc_loop;
-            byte[] receiveByte_local = new byte[100];
             for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
 
             intModbusRTUreceiveCRC_calculate = modbus_functions.ModRTU_receive_CRC(receiveByte_local, bCOMport_recLen[SelectCOMport] - 2);
             intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_local[bCOMport_recLen[SelectCOMport] - 1] * 256 + receiveByte_local[bCOMport_recLen[SelectCOMport] - 2]);
-
-
-            // strGeneralString = bCOMport_recLen[SelectCOMport].ToString()+"   "+  receiveByte_local[0].ToString()+"   "+ receiveByte_local[1].ToString() + "   " + receiveByte_local[2].ToString() + "   " + receiveByte_local[3].ToString() + "   " + receiveByte_local[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
-            //strGeneralString = intModbusRTUreceiveCRC_calculate.ToString()+"    "+ intModbusRTUreceiveCRC_receive.ToString () ;
 
 
             if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
@@ -216,26 +214,7 @@ Reg ID   Description
                 {
                     intModbusRTUreceiveCRC_numberBytes = receiveByte_local[2];
 
-                    // globalStringDebug[0] = "receive   " + intModbusRTUreceiveCRC_calculate.ToString() + "   " + intModbusRTUreceiveCRC_receive.ToString() + "   " + intModbusRTUreceiveCRC_numberBytes.ToString();
-
                     selectByte = 3;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
 
                     uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
                     floatValue = uint16Value;
@@ -266,38 +245,176 @@ Reg ID   Description
                     rd6006_InputVoltage = floatValue / 100;
 
 
-
-
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
-                    // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
-                    // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
-                    // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
-                    // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-
-                    //globalStringDebug[1] = "ON / OFF    " + uint16Value.ToString();
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 255 + receiveByte_local[selectByte++]);
-                    //globalStringDebug[2] = "memory    " + uint16Value.ToString();
-
-
-                    // globalStringDebug[1] = "measure   " + rd6006_setVoltage.ToString() + "   " + rd6006_setCurrent.ToString() + "   " + rd6006_OutputVoltag.ToString();
-                    // globalStringDebug[2] = "measure   " + rd6006_OutputCurrent.ToString() + "   " + rd6006_OutputPower.ToString() + "   " + rd6006_InputVoltage.ToString();
-
-                   // strGeneralString = rd6006_setVoltage.ToString() + "    " + rd6006_InputVoltage.ToString(); ;
                     device_RD6006_show_all_measure = true;
                 }
             }
+            */
+
+            return (funErrorCode.OK);
+        }
 
 
+
+
+
+        public funErrorCode funRD6006_ident()
+        {
+            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
+
+            return (funErrorCode.OK);
+        }
+
+        //--#0000 0xEA 0x9E RO Signature = 60062
+        //--#0001 0 RO
+        //--#0002 0x19 0x40 RO Serial number (6464)
+        //--#0003 0x00 0x80 RO Firmware version (1.28) x 100
+        //--#0005 TEMP SYS C RO
+        //--#0007 TEMP SYS F RO
+        //-- Reg ID   Description	
+        //--    0	ID	
+        //--    1	Serial number high bytes
+        //--    2	Serial number low bytes
+        //--    3	Firmware version
+        //--    4	Temperature °c sign(0=+, 1=-)
+        //--    5	Temperature °c	
+        //--    6	Temperature F sign(0=+, 1=-)
+        //--    7	Temperature F
+
+        public funErrorCode funModbusRTU_receive_ident_RD6006(byte SelectCOMport)
+        {
+           // UInt16 uint16Value = 0;
+            //UInt32 uint32Value = 0;
+            //double floatValue = 0;
+
+
+            /*
+            byte selectByte;
+            byte loc_loop;
+           // for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
+
+
+
+
+            intModbusRTUreceiveCRC_calculate = modbus_functions.ModRTU_receive_CRC(receiveByte_local, bCOMport_recLen[SelectCOMport] - 2);
+            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_local[bCOMport_recLen[SelectCOMport] - 1] * 256 + receiveByte_local[bCOMport_recLen[SelectCOMport] - 2]);
+
+
+            if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
+            {
+                if (receiveByte_local[1] == 3)
+                {
+                    intModbusRTUreceiveCRC_numberBytes = receiveByte_local[2];
+
+                    selectByte = 3;
+
+
+
+                }
+            }
+
+            */
 
 
             return (funErrorCode.OK);
         }
 
+
+
+
+
+
+
+
+        // strGeneralString = bCOMport_recLen[SelectCOMport].ToString()+"   "+  receiveByte_local[0].ToString()+"   "+ receiveByte_local[1].ToString() + "   " + receiveByte_local[2].ToString() + "   " + receiveByte_local[3].ToString() + "   " + receiveByte_local[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
+        //strGeneralString = intModbusRTUreceiveCRC_calculate.ToString()+"    "+ intModbusRTUreceiveCRC_receive.ToString () ;
+
+        /*
+                    if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
+                    {
+                        if (receiveByte_local[1] == 3)
+                        {
+                            intModbusRTUreceiveCRC_numberBytes = receiveByte_local[2];
+
+                            // globalStringDebug[0] = "receive   " + intModbusRTUreceiveCRC_calculate.ToString() + "   " + intModbusRTUreceiveCRC_receive.ToString() + "   " + intModbusRTUreceiveCRC_numberBytes.ToString();
+
+                            selectByte = 3;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            rd6006_setVoltage = floatValue / 100;
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            rd6006_setCurrent = floatValue / 1000;
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            rd6006_OutputVoltag = floatValue / 100;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            rd6006_OutputCurrent = floatValue / 1000;
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            uint32Value = uint16Value;
+                            uint32Value = uint32Value * 0xFFFF;
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            uint32Value = uint32Value + uint16Value;
+                            floatValue = uint32Value;
+                            rd6006_OutputPower = uint32Value / 100;
+
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            floatValue = uint16Value;
+                            rd6006_InputVoltage = floatValue / 100;
+
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
+                            // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
+                            // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
+                            // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
+                            // uint16Value = (UInt16)(byteCOMport_receiveByte[SelectCOMport, selectByte++] * 256 + byteCOMport_receiveByte[SelectCOMport, selectByte++]);
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+
+                            //globalStringDebug[1] = "ON / OFF    " + uint16Value.ToString();
+                            uint16Value = (UInt16)(receiveByte_local[selectByte++] * 255 + receiveByte_local[selectByte++]);
+                            //globalStringDebug[2] = "memory    " + uint16Value.ToString();
+
+
+                            // globalStringDebug[1] = "measure   " + rd6006_setVoltage.ToString() + "   " + rd6006_setCurrent.ToString() + "   " + rd6006_OutputVoltag.ToString();
+                            // globalStringDebug[2] = "measure   " + rd6006_OutputCurrent.ToString() + "   " + rd6006_OutputPower.ToString() + "   " + rd6006_InputVoltage.ToString();
+
+                           // strGeneralString = rd6006_setVoltage.ToString() + "    " + rd6006_InputVoltage.ToString(); ;
+                            device_RD6006_show_all_measure = true;
+                        }
+                    }
+
+
+
+
+                    return (funErrorCode.OK);
+                }
+
+
+                    */
 
         /*
         Public Function fun_get_dpsXXXX_measure() As Boolean
@@ -306,23 +423,23 @@ Reg ID   Description
         dps_setVoltage(dps_receive_module) = tmpDouble / 100
         tmpDouble = modbus_RTU.register_03(1)
         dps_setCurrent(var.dps_receive_module) = tmpDouble / 1000
-        
-        
+
+
         tmpDouble = modbus_RTU.register_03(2)
         dps_Voltage(var.dps_receive_module) = tmpDouble / 100
-       
-        
-        
+
+
+
         tmpDouble = modbus_RTU.register_03(3)
         dps_Current(var.dps_receive_module) = tmpDouble / 1000
-      
+
         tmpDouble = modbus_RTU.register_03(4)
         dps_Power(var.dps_receive_module) = tmpDouble / 100
-        
+
         tmpDouble = modbus_RTU.register_03(5)
         dps_inpVolt(dps_receive_module) = tmpDouble / 100
-     
-        
+
+
         dps_Key_lock(dps_receive_module) = modbus_RTU.register_03(6)
         dps_Protection_status(dps_receive_module) = modbus_RTU.register_03(7)
         dps_CV_CC(dps_receive_module) = modbus_RTU.register_03(8)

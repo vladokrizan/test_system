@@ -20,12 +20,15 @@ namespace test_system
         //=======================================================================================================================
         public void fun_KEL103_identifaction()
         {
-            mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine("*IDN?");
-            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
-            COMport_device_ident[COMport_SELECT_LOAD_KEL103] = functions.fun_ascii_only(ident_readRaw);
-            //-------------------------------------------------------------------------------------------------------------------
-            if (ident_readRaw.Contains("KORAD-KEL103 V3.30 SN:00022116")) { COMport_active[COMport_SELECT_LOAD_KEL103] = true; }
-            else COMport_active[COMport_SELECT_LOAD_KEL103] = false;
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+               mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine("*IDN?");
+                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                COMport_device_ident[COMport_SELECT_LOAD_KEL103] = functions.fun_ascii_only(ident_readRaw);
+                //-------------------------------------------------------------------------------------------------------------------
+                if (ident_readRaw.Contains("KORAD-KEL103 V3.30 SN:00022116")) { COMport_active[COMport_SELECT_LOAD_KEL103] = true; }
+                else COMport_active[COMport_SELECT_LOAD_KEL103] = false;
+            }
         }
 
         //=======================================================================================================================

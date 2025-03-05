@@ -22,12 +22,15 @@ namespace test_system
         //=======================================================================================================================
         public void fun_KA3305P_identifaction()
         {
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine("*IDN?");
-            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
-            COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
+            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            {
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine("*IDN?");
+                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+                COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
 
-            if (ident_readRaw.Contains("KORAD KA3305P V7.0 SN:30057214")) { COMport_active[COMport_SELECT_SUPPLY_KA3305A] = true; }
-            else COMport_active[COMport_SELECT_SUPPLY_KA3305A] = false;
+                if (ident_readRaw.Contains("KORAD KA3305P V7.0 SN:30057214")) { COMport_active[COMport_SELECT_SUPPLY_KA3305A] = true; }
+                else COMport_active[COMport_SELECT_SUPPLY_KA3305A] = false;
+            }
         }
 
         //=======================================================================================================================

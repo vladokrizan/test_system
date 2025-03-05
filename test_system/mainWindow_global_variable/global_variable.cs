@@ -29,7 +29,27 @@ namespace test_system
 
 
         #endregion
-        #region "POWER SUPPLY ---- RD6006   "
+        #region "POWER SUPPLY ---- RD6006  / RD6024  "
+
+        public static byte[] receiveByte_modbus = new byte[100];
+        public static byte receiveByte_modbus_lenght;
+
+        public static byte modbus_number_register;
+        public static byte modbus_register_type;
+
+        public static UInt16[] modbus_register = new UInt16[100];
+
+
+        // public static byte[] receiveByte_RD6006 = new byte[100];
+        // public static byte[] receiveByte_RD6024 = new byte[100];
+
+
+        public static byte[] bCOMport_sendLen = new byte[COMport_SELECT_MAXnumber];
+        //public static byte[] bCOMport_recLen = new byte[COMport_SELECT_MAXnumber];
+        public static byte[,] COMport_sendByte = new byte[COMport_SELECT_MAXnumber, 100];
+        //  public static byte[,] COMport_recByte = new byte[COMport_SELECT_MAXnumber, 100];
+
+
         public static bool device_RD6006_show_all_measure = false;
 
 
@@ -112,21 +132,17 @@ namespace test_system
         //-- COM port je priključen in instrument je prižgan, dobi se ident informacija 
         public static bool[] COMport_active = new bool[COMport_SELECT_MAXnumber];
         //----------------------------------------------------------------------------------------
-        // --- COM port - COMXX
+        // --- COM port - "OWON XDM 3051 - Multimeter"
         public static string[] COMport_name = new string[COMport_SELECT_MAXnumber];
+        //----------------------------------------------------------------------------------------
+        // --- COM port - COMXX
+        public static string[] COMport_port = new string[COMport_SELECT_MAXnumber];
         //----------------------------------------------------------------------------------------
         // --- COM port  Baudrate
         public static UInt32[] COMport_baudRate = new UInt32[COMport_SELECT_MAXnumber];
-
-
         //----------------------------------------------------------------------------------------
         // --- COMport - ident string 
         public static string[] COMport_device_ident = new string[COMport_SELECT_MAXnumber];
-
-
-
-
-        //-----------------------------------------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------------------------------------
         //-- izbira posameznih instrumentov 
         //-----------------------------------------------------------------------------------------------------------------------
@@ -141,63 +157,53 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_KA3305A = 7;
         public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
-
         //-----------------------------------------------------------------------------------------------------------------------
         //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
         public const byte COMport_SELECT_SUPPLY_RD6006 = 9;
         public const byte COMport_SELECT_SUPPLY_RD6024 = 10;
-
-     
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_FREE = 11;
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_LOAD_KEL103 = 12;
-
-
-
 
         //-----------------------------------------------------------------------------------------------------------------------
 
         //-----------------------------------------------------------------------------------------------------------------------
         //-- DC multimetrer  
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_multimeter_name_XDM3051 = "OWON XDM 3051";
+        public const string strCOMport_multimeter_name_XDM3051 = "OWON XDM 3051 - Multimeter";
         public const string strCOMport_multimeter_VID_XDM3051 = "0403";
         public const string strCOMport_multimeter_PID_XDM3051 = "6015";
         public const string strCOMport_multimeter_serial_XDM3051 = "D30F6JOX";
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041";
+        public const string strCOMport_multimeter_name_XDM2041 = "OWON XDM 2041 - Multimeter";
+        public const string strCOMport_multimeter_VID_XDM2041 = "0403";
+        public const string strCOMport_multimeter_PID_XDM2041 = "6015";
+        public const string strCOMport_multimeter_serial_XDM2041 = "D30F6JOX";
+        //-----------------------------------------------------------------------------------------------------------------------
+        public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041 - Multimeter";
         public const string strCOMport_multimeter_VID_XDM1041 = "1A86";
         public const string strCOMport_multimeter_PID_XDM1041 = "7523";
         public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D1";
-        //public const string strCOMport_multimeter_serial_XDM1041 = "334BB3D";
-        //-----------------------------------------------------------------------------------------------------------------------
-        //public const string strCOMport_multimeter_name_XDM1241 = "OWON XDM 1241";
-        //public const string strCOMport_multimeter_VID_XDM1241 = "1A86";
-        //public const string strCOMport_multimeter_PID_XDM1241 = "7523";
-        //public const string strCOMport_multimeter_serial_XDM1241 = "7&334BB3D1&0&4";
-
-
-
         //-----------------------------------------------------------------------------------------------------------------------
         //-- POWER SUPPLY 
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_supply_name_KA3305A = "KORAD KA3305A";
+        public const string strCOMport_supply_name_KA3305A = "KORAD KA3305A - Power supply";
         public const string strCOMport_supply_VID_KA3305A = "0416";
         public const string strCOMport_supply_PID_KA3305A = "5011";
         public const string strCOMport_supply_serial_KA3305A = "003204450454";
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_supply_name_RD6024 = "RIDEN RD6024";
+        public const string strCOMport_supply_name_RD6024 = "RIDEN RD6024 - Power Supply";
         public const string strCOMport_supply_VID_RD6024 = "10C4";
         public const string strCOMport_supply_PID_RD6024 = "EA60";
         public const string strCOMport_supply_serial_RD6024 = "123456";
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_supply_name_RD6006 = "RIDEN RD6006";
+        public const string strCOMport_supply_name_RD6006 = "RIDEN RD6006 - Power Supply";
         public const string strCOMport_supply_VID_RD6006 = "0403";
         public const string strCOMport_supply_PID_RD6006 = "6001";
         public const string strCOMport_supply_serial_RD6006 = "AI03U0UW";
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_supply_name_HCS_330 = "MANSON: HCS-3300";
+        public const string strCOMport_supply_name_HCS_330 = "MANSON: HCS-3300 - Power supply";
         public const string strCOMport_supply_VID_HCS_330 = "10C4";
         public const string strCOMport_supply_PID_HCS_330 = "EA60";
         public const string strCOMport_supply_serial_HCS_330 = "0001";
@@ -205,7 +211,7 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         //-- DC POWER LOAD 
         //-----------------------------------------------------------------------------------------------------------------------
-        public const string strCOMport_load_name_KEL103 = "KORAD  KEL103";
+        public const string strCOMport_load_name_KEL103 = "KORAD  KEL103 - DC Load";
         public const string strCOMport_load_VID_KEL103 = "0416";
         public const string strCOMport_load_PID_KEL103 = "5011";
         public const string strCOMport_load_serial_KEL103 = "00006E8D0000";
@@ -226,6 +232,10 @@ namespace test_system
         public const string strCOMport_PID_MPM_1010B = "6001";
         public const string strCOMport_serial_MPM_1010B = "A10191L7";
 
+
+
+
+
         #endregion
 
 
@@ -243,15 +253,7 @@ namespace test_system
         #endregion
 
 
-        public static byte[] receiveByte_RD6006 = new byte[100];
-        public static byte[] receiveByte_RD6024 = new byte[100];
-
-
-        public static byte[] bCOMport_sendLen = new byte[COMport_SELECT_MAXnumber];
-        public static byte[] bCOMport_recLen = new byte[COMport_SELECT_MAXnumber];
-        public static byte[,] COMport_sendByte = new byte[COMport_SELECT_MAXnumber, 100];
-      //  public static byte[,] COMport_recByte = new byte[COMport_SELECT_MAXnumber, 100];
-
+        #region "application variable "  
 
 
 
@@ -268,6 +270,27 @@ namespace test_system
             COM_PORT_ACTIVE,
             UNKNOW                       //--   in unknow state of function   
         }
+
+
+        //===========================================================================================================================================
+        //--  Main window  
+        //===========================================================================================================================================
+        //-- X and Y position of main window  
+        public static int intMainWindow_x;
+        public static int intMainWindow_y;
+
+        //-----------------------------------------------------------------------------------------
+        //-- začetni točki MDI okna ( baterija, master, update ..... )
+        public const int intMainWindow_x_MDI_window = 220;
+        public const int intMainWindow_y_MDI_window = 10;
+        //-----------------------------------------------------------------------------------------
+        //-- velikost MDI okna 
+        public const int intMDIwindow_x_size = 1000;
+        public const int intMDIwindow_y_size = 600;
+
+
+        #endregion
+
 
 
 

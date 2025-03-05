@@ -20,15 +20,15 @@ namespace test_system
         //--    OWON,XDM3051,2303195,V3.7.2,2
         public void fun_XDM3051_identifaction()
         {
-            mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
-            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
-            COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = functions.fun_ascii_only(ident_readRaw);
-            if (ident_readRaw.Contains("XDM3051,2303195")) { COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = true; }
-            else COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = false;
 
-
-
-
+            if (COMport_connected[COMport_SELECT_MULTIMETER_XDM3051])
+            {
+                mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
+                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+                COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = functions.fun_ascii_only(ident_readRaw);
+                if (ident_readRaw.Contains("XDM3051,2303195")) { COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = true; }
+                else COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = false;
+            }
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
             //  COMport_device_idnet[COMport_SELECT_MULTIMETER_XDM3051] = new string[COMport_SELECT_MAXnumber];
             //dataArray = Encoding.ASCII.GetBytes("GMAX\r");

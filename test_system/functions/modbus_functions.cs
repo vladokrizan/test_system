@@ -18,7 +18,7 @@ namespace test_system
         public static byte byteSlaveAddress = 1;
 
         public static byte intModbusRTUreceiveCRC_numberBytes;
-    
+
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
 
@@ -103,7 +103,7 @@ namespace test_system
             }
             else if (selectCOMport == COMport_SELECT_SUPPLY_RD6024)
             {
-                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = numberRegister * 2 +5;
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = numberRegister * 2 + 5;
             }
 
             // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
@@ -244,10 +244,10 @@ namespace test_system
             ModRTU_send_CRC(sendByte_local, 6, selectCOMport).ToString("X");
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
-        
-         
-            
-            
+
+
+
+
             //           COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
 
             return (funErrorCode.OK);
@@ -323,7 +323,7 @@ namespace test_system
 
 
 
-//                COMport_bussy[selectCOMport] = true;
+                //                COMport_bussy[selectCOMport] = true;
             }
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
@@ -334,7 +334,7 @@ namespace test_system
 
 
 
-//            COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
+            //            COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
             return (funErrorCode.OK);
         }
 
@@ -395,7 +395,7 @@ namespace test_system
 
 
 
-//                    COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
+                    //                    COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
                 }
             }
             return (funErrorCode.OK);
@@ -407,6 +407,82 @@ namespace test_system
         #endregion
 
         #region "MODBUS RTU function - receive message  "
+
+        //byte[] receiveByte_local = new byte[100];
+
+        //=======================================================================================================================
+        /// <summary>
+        /// obdelava bytov sprejetega MODBUS sporočila 
+        /// </summary>
+        /// <returns></returns>
+        //=======================================================================================================================
+
+        public funErrorCode funModbusRTU_receive_mesasage()
+        {
+            //UInt16 uint16Value = 0;
+            //UInt32 uint32Value = 0;
+            //double floatValue = 0;
+            byte selectByte;
+            byte loc_loop;
+            //for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
+
+            intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(receiveByte_modbus, receiveByte_modbus_lenght - 2);
+            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_modbus[receiveByte_modbus_lenght - 1] * 256 + receiveByte_modbus[receiveByte_modbus_lenght - 2]);
+
+            if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
+            {
+                //if (receiveByte_modbus[1] == 3)
+                //{
+                modbus_register_type = receiveByte_modbus[1];
+                modbus_number_register = receiveByte_modbus[2];
+                selectByte = 3;
+
+                for (loc_loop = 0; loc_loop < modbus_number_register; loc_loop++)
+                {
+                    modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectByte++] * 256 + receiveByte_modbus[selectByte++]);
+                }
+                // public static UInt16[] modbus_register = new UInt16[100];
+                // modbus_number_register
+
+                /*
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                //floatValue = uint16Value;
+                //rd6006_setVoltage = floatValue / 100;
+
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                floatValue = uint16Value;
+                rd6006_setCurrent = floatValue / 1000;
+
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                floatValue = uint16Value;
+                rd6006_OutputVoltag = floatValue / 100;
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                floatValue = uint16Value;
+                rd6006_OutputCurrent = floatValue / 1000;
+
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                uint32Value = uint16Value;
+                uint32Value = uint32Value * 0xFFFF;
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                uint32Value = uint32Value + uint16Value;
+                floatValue = uint32Value;
+                rd6006_OutputPower = uint32Value / 100;
+                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
+                floatValue = uint16Value;
+                rd6006_InputVoltage = floatValue / 100;
+
+
+                device_RD6006_show_all_measure = true;
+                */
+                //}
+            }
+
+            return (funErrorCode.OK);
+        }
+
+
+
+
 
         /*
         public funErrorCode funModbusRTU_parse_receive_mesasage()

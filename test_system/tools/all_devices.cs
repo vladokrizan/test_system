@@ -21,6 +21,7 @@ namespace test_system
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
+        multimeter_XDM2041 multimeter_XDM2041 = new multimeter_XDM2041();
         multimeter_XDM1041 multimeter_XDM1041 = new multimeter_XDM1041();
 
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
@@ -156,11 +157,10 @@ namespace test_system
 
         private void btnPowerSupply_RD6006_measure_Click(object sender, EventArgs e)
         {
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
-
+            power_supply_RD6006.funRD6006_measure();
+            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+            //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
         }
-
 
 
         #endregion
@@ -196,8 +196,11 @@ namespace test_system
 
         private void btnMPM1010B_measure_Click(object sender, EventArgs e)
         {
-            device_MPM1010B_read_all_write = true;
-            device_MPM1010B_read_all_read = true;
+            if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+            {
+                device_MPM1010B_read_all_write = true;
+                device_MPM1010B_read_all_read = true;
+            }
         }
 
         #endregion
@@ -260,6 +263,17 @@ namespace test_system
         }
 
         #endregion
+
+        #region " Multimeter --- OWON  --- XDM2041 ----  "
+
+         private void btnXDM2041_ident_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM2041.fun_XDM2041_identifaction();
+            txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
+        }
+
+        #endregion
+
 
         #region " Multimeter --- OWON  --- XDM1041 ----  "
 
@@ -326,6 +340,6 @@ namespace test_system
 
         }
 
-   
+  
     }
 }

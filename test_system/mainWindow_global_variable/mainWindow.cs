@@ -34,6 +34,7 @@ namespace test_system
         complete_system complete_System = new complete_system();
         all_devices all_devices = new all_devices();
 
+        //modbus_functions modbus_functions = new modbus_functions();
         write_log_files write_log_files = new write_log_files();
 
        System.Windows.Forms. Label[] device = new System.Windows.Forms.Label[20];
@@ -101,23 +102,46 @@ namespace test_system
 
             IsMdiContainer = true;
 
+            intMainWindow_x = this.Location.X;
+            intMainWindow_y = this.Location.Y;
 
 
         }
+
+        private void mainWindow_Move(object sender, EventArgs e)
+        {
+            intMainWindow_x = this.Location.X;
+            intMainWindow_y = this.Location.Y;
+
+        }
+
+
         #endregion
         #region "COMports  "
         private int fun_select_COMport_open(byte select_port)
         {
+            if (select_port == COMport_SELECT_MULTIMETER_XDM3051) COMport_name[select_port] = strCOMport_multimeter_name_XDM3051;
+            else if (select_port == COMport_SELECT_MULTIMETER_XDM2041) COMport_name[select_port] = strCOMport_multimeter_name_XDM2041;
+            else if (select_port == COMport_SELECT_MULTIMETER_XDM1041) COMport_name[select_port] = strCOMport_multimeter_name_XDM1041;
+            else if (select_port == COMport_SELECT_TEMPERATURE_ET3916) COMport_name[select_port] = strCOMport_name_ET3916;
+            else if (select_port == COMport_SELECT_AC_METER_MPM_1010B) COMport_name[select_port] = strCOMport_name_MPM_1010B;
+
+            else if (select_port == COMport_SELECT_SUPPLY_KA3305A) COMport_name[select_port] = strCOMport_supply_name_KA3305A;
+            else if (select_port == COMport_SELECT_SUPPLY_HCS_3300) COMport_name[select_port] = strCOMport_supply_name_HCS_330;
+            else if (select_port == COMport_SELECT_SUPPLY_RD6006) COMport_name[select_port] = strCOMport_supply_name_RD6006;
+            else if (select_port == COMport_SELECT_SUPPLY_RD6024) COMport_name[select_port] = strCOMport_supply_PID_RD6024;
+            else if (select_port == COMport_SELECT_LOAD_KEL103) COMport_name[select_port] = strCOMport_load_name_KEL103;
+               
             COMport_connected[select_port] = false;
-            if (COMport_name[select_port] != null)
+            if (COMport_port[select_port] != null)
             {
-                if (COMport_name[select_port].Length > 0)
+                if (COMport_port[select_port].Length > 0)
                 {
                     try
                     {
                         //-----------------------------------------------------------------------------
                         //-- COM port in baudrate iz ini datoteke 
-                        COMportSerial[select_port].PortName = COMport_name[select_port];
+                        COMportSerial[select_port].PortName = COMport_port[select_port];
                         COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
                         COMportSerial[select_port].Open();
                         COMport_connected[select_port] = true;
@@ -135,6 +159,7 @@ namespace test_system
             try
             {
                 if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1041) == 0) { }
+                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM2041) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM3051) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_SUPPLY_KA3305A) == 0) { }
                 if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_3300) == 0) { }
@@ -147,28 +172,11 @@ namespace test_system
                 //-- RD6006 in RD6024 -- MODBUS komunikacija
                 COM_PORT_09.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6006_DataReceived);
                 COM_PORT_10.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6024_DataReceived);
-
-
+                COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = 100;
                 COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = 100;
-
-                /*
-                                string show_connected = "";
-                show_connected = "XDM1041: " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString();
-                show_connected = show_connected + "  XDM3051:" + COMport_connected[COMport_SELECT_MULTIMETER_XDM3051].ToString();
-                show_connected = show_connected + "  HCS_330:" + COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString();
-                show_connected = show_connected + "  MPM_1010B:" + COMport_connected[COMport_SELECT_AC_METER_MPM_1010B].ToString();
-                show_connected = show_connected + "  ET3916:" + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString();
-                show_connected = show_connected + "  KA3305A:" + COMport_connected[COMport_SELECT_SUPPLY_KA3305A].ToString();
-                show_connected = show_connected + "  KEL103:" + COMport_connected[COMport_SELECT_LOAD_KEL103].ToString();
-                show_connected = show_connected + "  RD6006:" + COMport_connected[COMport_SELECT_SUPPLY_RD6006].ToString();
-                show_connected = show_connected + "  RD6024:" + COMport_connected[COMport_SELECT_SUPPLY_RD6024].ToString();
-                label12.Text = show_connected;
-                */
             }
             catch { }
         }
-
-
         #region "COM port RD6006
         //=============================================================================================================
         /// <summary>
@@ -179,19 +187,21 @@ namespace test_system
         //=============================================================================================================
         private void COM_PORT_RD6006_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            byte receiveByteLocal;
+            //byte receiveByteLocal;
 
             try
             {
-                receiveByteLocal = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
-                strGeneralString = receiveByteLocal.ToString();
+                receiveByte_modbus_lenght = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
+                strGeneralString = receiveByte_modbus_lenght.ToString();
 
-                if (receiveByteLocal > 0)
+                if (receiveByte_modbus_lenght > 0)
                 {
-                    bCOMport_recLen[COMport_SELECT_SUPPLY_RD6006] = receiveByteLocal;
-                    COMportSerial[COMport_SELECT_SUPPLY_RD6006].Read(receiveByte_RD6006, 0, receiveByteLocal);
+                    //bCOMport_recLen[COMport_SELECT_SUPPLY_RD6006] = receiveByteLocal;
+                    COMportSerial[COMport_SELECT_SUPPLY_RD6006].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
+                    modbus_functions.funModbusRTU_receive_mesasage();
 
-                    power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006(COMport_SELECT_SUPPLY_RD6006);
+
+                   // power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006(COMport_SELECT_SUPPLY_RD6006);
 
 
                     //  strGeneralString = receiveByteLocal.ToString() +"    "+ receiveByte_RD6006[0].ToString()+"   "+ receiveByte_RD6006[1].ToString() + "   " + receiveByte_RD6006[2].ToString() + "   " + receiveByte_RD6006[3].ToString() + "   " + receiveByte_RD6006[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
@@ -219,10 +229,10 @@ namespace test_system
                 if (receiveByteLocal > 0)
                 {
                     //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_RD6024, 0, receiveByteLocal);
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_modbus, 0, receiveByteLocal);
 
 
-                    strGeneralString = receiveByteLocal.ToString() + "  " + receiveByte_RD6024[0].ToString() + "  " + receiveByte_RD6024[1].ToString() + "  " + receiveByte_RD6024[2].ToString();
+                    //strGeneralString = receiveByteLocal.ToString() + "  " + receiveByte_RD6024[0].ToString() + "  " + receiveByte_RD6024[1].ToString() + "  " + receiveByte_RD6024[2].ToString();
 
 
 
@@ -312,6 +322,34 @@ namespace test_system
 
         #endregion
 
+        #region "buttons"
+
+        private void btnProgram_01_Click(object sender, EventArgs e)
+        {
+            program_1 program_1 = new program_1();
+            program_1.MdiParent = this;
+            program_1.Show();
+
+        }
+
+
+        #endregion
+
+        #region "MENU LINE "
+
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+
+
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             test_system_identification test_system_identification = new test_system_identification();
@@ -320,14 +358,11 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = "OWON, XDM3051,2303195,V3.7.2,2";
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = "XDM1041,23120418,V4.1.0,3";
             //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = "KORAD KA3305P V7.0 SN: 30057214";
             //COMport_device_ident[COMport_SELECT_LOAD_KEL103] = "KORAD-KEL103 V3.30 SN: 00022116";
             //write_log_files.funWriteLogFile_Devices_idents();
-
             // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
             //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
             //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
@@ -386,5 +421,6 @@ namespace test_system
             program_1.Show();
 
         }
+
     }
 }
