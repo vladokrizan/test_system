@@ -288,17 +288,17 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 270);
+            this.button3.Location = new System.Drawing.Point(20, 230);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 30);
             this.button3.TabIndex = 22;
-            this.button3.Text = "button3";
+            this.button3.Text = "program 10";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // btnProgram_01
             // 
-            this.btnProgram_01.Location = new System.Drawing.Point(20, 197);
+            this.btnProgram_01.Location = new System.Drawing.Point(20, 194);
             this.btnProgram_01.Name = "btnProgram_01";
             this.btnProgram_01.Size = new System.Drawing.Size(150, 30);
             this.btnProgram_01.TabIndex = 23;

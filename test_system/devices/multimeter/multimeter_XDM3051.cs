@@ -15,32 +15,58 @@ namespace test_system
     internal class multimeter_XDM3051
     {
         functions functions = new functions();
+        owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
 
 
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+
+        public void fun_XDM3051_measure()
+        {
+            var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM3051);
+            strGeneralString = returnState.ToString() + "   " + returnValue.ToString();
+        }
+
+        //=======================================================================================================================
         //--    OWON,XDM3051,2303195,V3.7.2,2
+        //=======================================================================================================================
         public void fun_XDM3051_identifaction()
         {
-
-            if (COMport_connected[COMport_SELECT_MULTIMETER_XDM3051])
-            {
-                mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
-                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
-                COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = functions.fun_ascii_only(ident_readRaw);
-                if (ident_readRaw.Contains("XDM3051,2303195")) { COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = true; }
-                else COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = false;
-            }
-            //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
-            //  COMport_device_idnet[COMport_SELECT_MULTIMETER_XDM3051] = new string[COMport_SELECT_MAXnumber];
-            //dataArray = Encoding.ASCII.GetBytes("GMAX\r");
-            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
-            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
-            //Thread.Sleep(20);
-            //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
-            //device_HCS_3300_ident = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
-            //device_ET3916_read_all_temperature = true;
+            owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM3051, "XDM3051,2303195");
         }
 
 
+        /*
+    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM3051])
+    {
+        mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
+        string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+        COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = functions.fun_ascii_only(ident_readRaw);
+        if (ident_readRaw.Contains("XDM3051,2303195")) { COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = true; }
+        else COMport_active[COMport_SELECT_MULTIMETER_XDM3051] = false;
+    }
+    //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+    //  COMport_device_idnet[COMport_SELECT_MULTIMETER_XDM3051] = new string[COMport_SELECT_MAXnumber];
+    //dataArray = Encoding.ASCII.GetBytes("GMAX\r");
+    //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].DiscardInBuffer();
+    //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Write(dataArray, 0, dataArray.Length);
+    //Thread.Sleep(20);
+    //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_330].Read(read_buffer, 0, 7);
+    //device_HCS_3300_ident = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
+    //device_ET3916_read_all_temperature = true;
+}
+        */
+
+        /*
         public void fun_XDM3051_get_measure()
         {
 
@@ -48,7 +74,7 @@ namespace test_system
             string measureValue = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
         }
 
-
+        */
 
 
     }

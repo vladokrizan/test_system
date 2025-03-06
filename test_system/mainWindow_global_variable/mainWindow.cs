@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Reflection.Emit;
@@ -30,6 +31,7 @@ namespace test_system
         modbus_functions modbus_functions = new modbus_functions();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
+        multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
 
         connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
@@ -74,6 +76,11 @@ namespace test_system
             ini_file.read_device_COMport_identification();
             //------------------------------------------------------------------------------------
             fun_mainWindow_load_init_COMports();
+
+            if (!Directory.Exists(strSubFolderLogApplication)) { DirectoryInfo di = Directory.CreateDirectory(strSubFolderLogApplication); }
+            if (!Directory.Exists(strSubFolderLog)) { DirectoryInfo di = Directory.CreateDirectory(strSubFolderLog); }
+
+
 
             device[1] = labDevice_XDM3051;
             device[2] = labDevice_XDM2041;
@@ -389,8 +396,9 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            power_supply_RD6006.funRD6006_measure();
+            multimeter_XDM3051.fun_XDM3051_measure();
+         
+            //power_supply_RD6006.funRD6006_measure();
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = "OWON, XDM3051,2303195,V3.7.2,2";
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = "XDM1041,23120418,V4.1.0,3";
             //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = "KORAD KA3305P V7.0 SN: 30057214";
@@ -449,9 +457,9 @@ namespace test_system
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            program_1 program_1 = new program_1();
-            program_1.MdiParent = this;
-            program_1.Show();
+            program_10_test_supply_multimeter program_10_test_supply_multimeeter = new program_10_test_supply_multimeter();
+            program_10_test_supply_multimeeter.MdiParent = this;
+            program_10_test_supply_multimeeter.Show();
 
         }
 

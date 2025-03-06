@@ -152,7 +152,7 @@ Reg ID   Description
     internal class power_supply_RD6006
     {
 
-       // byte[] receiveByte_local = new byte[100];
+        // byte[] receiveByte_local = new byte[100];
 
 
         modbus_functions modbus_functions = new modbus_functions();
@@ -175,9 +175,11 @@ Reg ID   Description
 
         public funErrorCode funRD6006_measure()
         {
-            mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_SELECT_SUPPLY_RD6006);
-
+            if (COMport_connected[COMport_SELECT_SUPPLY_RD6006])
+            {
+                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+                modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_SELECT_SUPPLY_RD6006);
+            }
             return (funErrorCode.OK);
         }
 
@@ -193,82 +195,15 @@ Reg ID   Description
 
         public funErrorCode funModbusRTU_receive_mesasage_RD6006()
         {
-           // UInt16 uint16Value = 0;
             UInt32 uint32Value = 0;
-            double floatValue = 0;
-
-            //floatValue = uint16Value;
             rd6006_setVoltage = ((float)(modbus_register[0])) / 100;
             rd6006_setCurrent = ((float)(modbus_register[1])) / 1000;
             rd6006_OutputVoltag = ((float)(modbus_register[2])) / 100;
             rd6006_OutputCurrent = ((float)(modbus_register[3])) / 1000;
-
-            uint32Value = (UInt32) (modbus_register[4] * 0xFFFF + modbus_register[5]);
-            rd6006_OutputPower = uint32Value / 100;
+            uint32Value = (UInt32)(modbus_register[4] * 0xFFFF + modbus_register[5]);
+            rd6006_OutputPower = ((float)uint32Value) / 100;
             rd6006_InputVoltage = ((float)(modbus_register[6])) / 100;
-
-
-            //rd6006_setCurrent = ((float)(modbus_register[1])) / 100;
-            //rd6006_setCurrent = ((float)(modbus_register[1])) / 100;
-
-
             device_RD6006_show_all_measure = true;
-
-
-            /*
-            UInt16 uint16Value = 0;
-            UInt32 uint32Value = 0;
-            double floatValue = 0;
-            byte selectByte;
-            byte loc_loop;
-            for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
-
-            intModbusRTUreceiveCRC_calculate = modbus_functions.ModRTU_receive_CRC(receiveByte_local, bCOMport_recLen[SelectCOMport] - 2);
-            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_local[bCOMport_recLen[SelectCOMport] - 1] * 256 + receiveByte_local[bCOMport_recLen[SelectCOMport] - 2]);
-
-
-            if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
-            {
-                if (receiveByte_local[1] == 3)
-                {
-                    intModbusRTUreceiveCRC_numberBytes = receiveByte_local[2];
-
-                    selectByte = 3;
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    rd6006_setVoltage = floatValue / 100;
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    rd6006_setCurrent = floatValue / 1000;
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    rd6006_OutputVoltag = floatValue / 100;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    rd6006_OutputCurrent = floatValue / 1000;
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    uint32Value = uint16Value;
-                    uint32Value = uint32Value * 0xFFFF;
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    uint32Value = uint32Value + uint16Value;
-                    floatValue = uint32Value;
-                    rd6006_OutputPower = uint32Value / 100;
-
-
-                    uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                    floatValue = uint16Value;
-                    rd6006_InputVoltage = floatValue / 100;
-
-
-                    device_RD6006_show_all_measure = true;
-                }
-            }
-            */
-
             return (funErrorCode.OK);
         }
 
@@ -302,7 +237,7 @@ Reg ID   Description
 
         public funErrorCode funModbusRTU_receive_ident_RD6006(byte SelectCOMport)
         {
-           // UInt16 uint16Value = 0;
+            // UInt16 uint16Value = 0;
             //UInt32 uint32Value = 0;
             //double floatValue = 0;
 

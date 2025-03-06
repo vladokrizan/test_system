@@ -13,14 +13,9 @@ namespace test_system
     {
 
         //-----------------------------------------------------------------------------------------
-        //public static bool blnMODBUS_KP184 = false;
         //-----------------------------------------------------------------------------------------
         public static byte byteSlaveAddress = 1;
 
-        public static byte intModbusRTUreceiveCRC_numberBytes;
-
-        public static UInt16 intModbusRTUreceiveCRC_calculate;
-        public static UInt16 intModbusRTUreceiveCRC_receive;
 
         #region "MODBUS RTU function - SEND message  "
 
@@ -71,8 +66,7 @@ namespace test_system
         {
 
             modbus_start_register = registerAddress;
-            modbus_register_number= numberRegister;
-
+            modbus_register_number = numberRegister;
 
             mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
 
@@ -88,18 +82,11 @@ namespace test_system
             for (loc_loop = 0; loc_loop < 6; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
             ModRTU_send_CRC(sendByte_local, 6, selectCOMport);
             //-------------------------------------------------------------------------------------------
-            //byte loc_loop;
-            //byte[] sendByte_local = new byte[100];
-            //bCOMport_sendBytes[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)crc;
-            //bCOMport_sendBytes[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)(crc >> 8);
-            //-------------------------------------------------------------------------------------------
             for (loc_loop = 0; loc_loop < bCOMport_sendLen[selectCOMport]; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
             mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
             //-------------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
             // COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
-            //globalStringDebug[4] = strCOMport_SendMessage[selectCOMport];
-
 
             if (selectCOMport == COMport_SELECT_SUPPLY_RD6006)
             {
@@ -109,126 +96,12 @@ namespace test_system
             {
                 mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = numberRegister * 2 + 5;
             }
-
-            // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = numberRegister * 2;
-
-
-            /*
-
-                    public const byte COMport_SELECT_SUPPLY_RD6006 = 5;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 6;
-
-
-                //-------------------------------------------------------------------------------------------
-            //-- stevilo bytov za RX interrupt 
-            if (blnMODBUS_KP184)
-            {
-                blnMODBUS_KP184 = false;
-                mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = numberRegister * 2;
-            }
-            else
-            {
-                mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = 5 + numberRegister * 2;
-            }
-
-            */
-            //mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = 5 ;
             //-------------------------------------------------------------------------------------------
             return (funErrorCode.OK);
         }
 
-
-
-
-        /*
-                public funErrorCode funModbusRTU_send_request_read_function_3_read(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
-                {
-
-                    mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
-
-                    bCOMport_sendLen[selectCOMport] = 0;
-                    funModbusRTU_add_byte(slaveAddress, selectCOMport);
-                    funModbusRTU_add_byte(3, selectCOMport);
-                    funModbusRTU_add_uint16(registerAddress, selectCOMport);
-                    funModbusRTU_add_uint16(numberRegister, selectCOMport);
-                    //-----------------------------------------------------------------------------------------------
-                    //-- byte se prensejo v enodimenzionalno polje za izracun CRC 
-                    byte loc_loop;
-                    byte[] sendByte_local = new byte[100];
-                    for (loc_loop = 0; loc_loop < 6; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
-                    ModRTU_send_CRC(sendByte_local, 6, selectCOMport);
-                    //-------------------------------------------------------------------------------------------
-                    //byte loc_loop;
-                    //byte[] sendByte_local = new byte[100];
-                    //bCOMport_sendBytes[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)crc;
-                    //bCOMport_sendBytes[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)(crc >> 8);
-                    //-------------------------------------------------------------------------------------------
-                    for (loc_loop = 0; loc_loop < bCOMport_sendLen[selectCOMport]; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
-                    mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
-                    //-------------------------------------------------------------------------------------------
-                    //-- prikaz oddanega sporocila 
-                    COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
-
-                    Thread.Sleep(500);
-
-                    globalStringDebug[4] = strCOMport_SendMessage[selectCOMport];
-
-                    byte[] receiveByte_local = new byte[100];
-                    byte receiveByteLocal;
-                    receiveByteLocal = (byte)mainWindow.COMportSerial[selectCOMport].BytesToRead;
-
-
-                    if (receiveByteLocal > 0)
-                    {
-                        bCOMport_recLen[selectCOMport] = receiveByteLocal;
-                        mainWindow.COMportSerial[selectCOMport].Read(receiveByte_local, 0, receiveByteLocal);
-                        //-----------------------------------------------------------------------------
-                        for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[selectCOMport, loc_loop] = receiveByte_local[loc_loop]; }
-                        //-----------------------------------------------------------------------------
-                        //funCOMports_receive_parse_received_byte(selectCOMport);
-
-                        //if (selComPort_DCload_KP184 == selectCOMport) dc_load_KP184.funModbusRTU_receive_mesasage_KP184((byte)selectCOMport);
-
-                        COMports.fun_COMport_received_string(selectCOMport);
-
-                        globalStringDebug[5] = strCOMport_RecMessage[selectCOMport];
-
-
-                    }
-
-
-
-                */
-        /*
-        //-------------------------------------------------------------------------------------------
-        //-- stevilo bytov za RX interrupt 
-        if (blnMODBUS_KP184)
-        {
-            blnMODBUS_KP184 = false;
-            mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = numberRegister * 2;
-        }
-        else
-        {
-            mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = 5 + numberRegister * 2;
-        }
-        */
-        /*
-        //mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = 5 ;
-        //-------------------------------------------------------------------------------------------
-        return (funErrorCode.OK);
-    }
-
-*/
-
-
         #endregion
         #region "MODBUS RTU function - function  4  "
-
-
-
-
-
-
         //=============================================================================================================
         //=============================================================================================================
 
@@ -248,12 +121,7 @@ namespace test_system
             ModRTU_send_CRC(sendByte_local, 6, selectCOMport).ToString("X");
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
-
-
-
-
             //           COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
-
             return (funErrorCode.OK);
         }
 
@@ -322,23 +190,11 @@ namespace test_system
                 mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
                 mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
                 mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = 8;
-
-
-
-
-
-                //                COMport_bussy[selectCOMport] = true;
+                //COMport_bussy[selectCOMport] = true;
             }
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
-
-
-
-
-
-
-
-            //            COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
+            //  COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
             return (funErrorCode.OK);
         }
 
@@ -352,7 +208,6 @@ namespace test_system
         /// <param name="selectCOMport"></param>
         /// <returns></returns>
         //=============================================================================================================
-
         public funErrorCode funModbusRTU_send_set_single_register_function_6_KP184(byte slaveAddress, UInt16 registerAddress, UInt32 setRegister, UInt32 selectCOMport)
         {
 
@@ -363,9 +218,7 @@ namespace test_system
             {
                 if (COMport_connected[selectCOMport])        // --- pove, če je COM port povezan in delujoc
                 {
-
                     mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
-
                     bCOMport_sendLen[selectCOMport] = 0;
                     funModbusRTU_add_byte(slaveAddress, selectCOMport);
                     funModbusRTU_add_byte(6, selectCOMport);
@@ -393,155 +246,42 @@ namespace test_system
                     }
                     //-------------------------------------------------------------------------------------
                     //-- prikaz oddanega sporocila 
-
-
-
-
-
-
-                    //                    COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
+                    //COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
                 }
             }
             return (funErrorCode.OK);
         }
-
-
         #endregion
 
         #endregion
 
         #region "MODBUS RTU function - receive message  "
-
-        //byte[] receiveByte_local = new byte[100];
-
         //=======================================================================================================================
         /// <summary>
         /// obdelava bytov sprejetega MODBUS sporočila 
         /// </summary>
         /// <returns></returns>
         //=======================================================================================================================
-
         public funErrorCode funModbusRTU_receive_mesasage()
         {
-            //UInt16 uint16Value = 0;
-            //UInt32 uint32Value = 0;
-            //double floatValue = 0;
             byte selectByte;
             byte loc_loop;
-            //for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
-
-            modbus_register_type =0;
-
+            modbus_register_type = 0;
             intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(receiveByte_modbus, receiveByte_modbus_lenght - 2);
             intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_modbus[receiveByte_modbus_lenght - 1] * 256 + receiveByte_modbus[receiveByte_modbus_lenght - 2]);
 
             if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
             {
-                //if (receiveByte_modbus[1] == 3)
-                //{
                 modbus_register_type = receiveByte_modbus[1];
                 modbus_number_register = receiveByte_modbus[2];
                 selectByte = 3;
-
-                // strGeneralString = receiveByte_modbus_lenght.ToString() +"   " + modbus_register_type.ToString();
-
-
-
                 for (loc_loop = 0; loc_loop < modbus_number_register; loc_loop++)
                 {
                     modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectByte++] * 256 + receiveByte_modbus[selectByte++]);
                 }
-
-                strGeneralString = receiveByte_modbus_lenght.ToString() + "   " + modbus_register_type.ToString() + "   " + modbus_register[0].ToString() + "   " + modbus_register[1].ToString() + "   " + modbus_register[2].ToString();
-
-
-
-                // public static UInt16[] modbus_register = new UInt16[100];
-                // modbus_number_register
-
-                /*
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                //floatValue = uint16Value;
-                //rd6006_setVoltage = floatValue / 100;
-
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                floatValue = uint16Value;
-                rd6006_setCurrent = floatValue / 1000;
-
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                floatValue = uint16Value;
-                rd6006_OutputVoltag = floatValue / 100;
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                floatValue = uint16Value;
-                rd6006_OutputCurrent = floatValue / 1000;
-
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                uint32Value = uint16Value;
-                uint32Value = uint32Value * 0xFFFF;
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                uint32Value = uint32Value + uint16Value;
-                floatValue = uint32Value;
-                rd6006_OutputPower = uint32Value / 100;
-                uint16Value = (UInt16)(receiveByte_local[selectByte++] * 256 + receiveByte_local[selectByte++]);
-                floatValue = uint16Value;
-                rd6006_InputVoltage = floatValue / 100;
-
-
-                device_RD6006_show_all_measure = true;
-                */
-                //}
             }
-
             return (funErrorCode.OK);
         }
-
-
-
-
-
-        /*
-        public funErrorCode funModbusRTU_parse_receive_mesasage()
-        {
-            //strGlobalPrintValue_1 = "Parse RS485 receive  " + byteRS485_receiveLenght.ToString() + "      " + byteRS485receiveByte[0].ToString() + " " + byteRS485receiveByte[1].ToString() + " " + byteRS485receiveByte[2].ToString() + " " + byteRS485receiveByte[3].ToString() + " " + byteRS485receiveByte[4].ToString() + " " + byteRS485receiveByte[5].ToString() + " " + byteRS485receiveByte[6].ToString() + " " + byteRS485receiveByte[7].ToString() + " " + byteRS485receiveByte[8].ToString();
-
-            if (byteRS485receiveByte[0] == byteSlaveAddress)
-            {
-                intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(byteRS485receiveByte, byteRS485_receiveLenght - 2);
-                intModbusRTUreceiveCRC_receive = (UInt16)(byteRS485receiveByte[byteRS485_receiveLenght - 1] * 256 + byteRS485receiveByte[byteRS485_receiveLenght - 2]);
-
-                //  strGlobalPrintValue_2 = "receive CRC  calc =" + intModbusRTUreceiveCRC_calculate.ToString("X") + "   rec " + intModbusRTUreceiveCRC_receive.ToString("X");
-
-
-                if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
-                {
-                    if (byteRS485receiveByte[1] == 3)
-                    {
-                        intModbusRTUreceiveCRC_numberBytes = byteRS485receiveByte[2];
-
-                        if (intModbusRTUreceiveCRC_numberBytes == 2)
-                        {
-                            blniModbusRTUreceive_register = true;
-                            intModbusRTUreceiveCRC_registers[0] = (UInt16)(byteRS485receiveByte[3] * 256 + byteRS485receiveByte[4]);
-
-                        }
-
-                        //strGlobalPrintValue_3 = "Slave 1 , function 3  number_bytes  " + intModbusRTUreceiveCRC_numberBytes.ToString() + "  register 0   " + intModbusRTUreceiveCRC_registers[0].ToString();
-                    }
-
-                }   //--      if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
-            }       //--   if (byteRS485receiveByte[0] == byteSlavceAddress)
-
-
-
-
-
-
-            return (funErrorCode.OK);
-        }
-
-
-        */
-
 
         #endregion
         #region "CALCULATE CRC "
@@ -552,7 +292,6 @@ namespace test_system
         public UInt16 ModRTU_receive_CRC(byte[] buf, int len)
         {
             UInt16 crc = 0xFFFF;
-
             for (int pos = 0; pos < len; pos++)
             {
                 crc ^= (UInt16)buf[pos];                //-- XOR byte into least sig. byte of crc
@@ -569,10 +308,6 @@ namespace test_system
                 }
             }
             //----------------------------------------------------------------------------------------------------
-            //-- add calculate CRC to send message bytes 
-            //byteRS485sendByte[byteRS485_sendLenght++] = (byte)crc;
-            //byteRS485sendByte[byteRS485_sendLenght++] = (byte)(crc >> 8);
-            //-- Note, this number has low and high bytes swapped, so use it accordingly (or swap bytes)
             return crc;
         }
 
@@ -604,15 +339,8 @@ namespace test_system
             COMport_sendByte[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)crc;
             COMport_sendByte[selectCOMport, bCOMport_sendLen[selectCOMport]++] = (byte)(crc >> 8);
 
-            //-- Note, this number has low and high bytes swapped, so use it accordingly (or swap bytes)
-
             return crc;
         }
-
-
-
-
-
 
 
         public UInt16 ModRTU_send_CRC_LH(byte[] buf, int len, UInt32 selectCOMport)

@@ -21,6 +21,10 @@ namespace test_system
         public static byte intModbusRTUreceiveCRC_numberBytes;
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
+
+        //public static UInt16 intModbusRTUreceiveCRC_calculate;
+        //public static UInt16 intModbusRTUreceiveCRC_receive;
+
         public static byte[] receiveByte_modbus = new byte[100];
         public static byte receiveByte_modbus_lenght;
 
@@ -265,6 +269,11 @@ namespace test_system
 
 
         #region "LOG FILES "
+
+        public static string strSubFolderLog = "log";
+        public static string strSubFolderLogApplication = "log_app";
+
+
         public static string strExcelSeparator = ";";
         public static string strNewLineSeparator = "\r\n";
 
