@@ -89,6 +89,24 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnXDM3051_measure = new System.Windows.Forms.Button();
+            this.txtBox_XDM3051_measure = new System.Windows.Forms.TextBox();
+            this.labXDM3051_measure_ok = new System.Windows.Forms.Label();
+            this.txtBox_XDM2041_measure = new System.Windows.Forms.TextBox();
+            this.labXDM2041_measure_ok = new System.Windows.Forms.Label();
+            this.btnXDM2041_measure = new System.Windows.Forms.Button();
+            this.btnXDM1041_measure = new System.Windows.Forms.Button();
+            this.txtBox_XDM1041_measure = new System.Windows.Forms.TextBox();
+            this.labXDM1041_measure_ok = new System.Windows.Forms.Label();
+            this.btnHCS_3300_on = new System.Windows.Forms.Button();
+            this.btnHCS_3300_off = new System.Windows.Forms.Button();
+            this.btnHCS_3300_measure = new System.Windows.Forms.Button();
+            this.labHCS3300_voltage = new System.Windows.Forms.Label();
+            this.labHCS3300_current = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.labHCS3300_status = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -164,8 +182,11 @@
             // 
             // groupBox_multimeter_XDM2041
             // 
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_measure);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.labXDM2041_measure_ok);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_ident);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_ident);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_measure);
             this.groupBox_multimeter_XDM2041.Location = new System.Drawing.Point(228, 43);
             this.groupBox_multimeter_XDM2041.Name = "groupBox_multimeter_XDM2041";
             this.groupBox_multimeter_XDM2041.Size = new System.Drawing.Size(193, 505);
@@ -192,8 +213,11 @@
             // 
             // groupBox_multimeter_XDM1041
             // 
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_measure);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.labXDM1041_measure_ok);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_ident);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.txtBox_XDM1041_ident);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.txtBox_XDM1041_measure);
             this.groupBox_multimeter_XDM1041.Location = new System.Drawing.Point(437, 43);
             this.groupBox_multimeter_XDM1041.Name = "groupBox_multimeter_XDM1041";
             this.groupBox_multimeter_XDM1041.Size = new System.Drawing.Size(193, 505);
@@ -220,6 +244,9 @@
             // 
             // groupBox_multimeter_XDM_3051
             // 
+            this.groupBox_multimeter_XDM_3051.Controls.Add(this.labXDM3051_measure_ok);
+            this.groupBox_multimeter_XDM_3051.Controls.Add(this.btnXDM3051_measure);
+            this.groupBox_multimeter_XDM_3051.Controls.Add(this.txtBox_XDM3051_measure);
             this.groupBox_multimeter_XDM_3051.Controls.Add(this.txtBox_XDM3051_ident);
             this.groupBox_multimeter_XDM_3051.Controls.Add(this.btnXDM3051_ident);
             this.groupBox_multimeter_XDM_3051.Location = new System.Drawing.Point(20, 43);
@@ -601,6 +628,15 @@
             // 
             // groupBox_powerSupply_hcs_330
             // 
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.label6);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.label5);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_status);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.textBox3);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_current);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_voltage);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_measure);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_off);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_on);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.txtBosPowerSupply_1_1);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnPowerSupply_1_1);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.label1);
@@ -712,6 +748,166 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnXDM3051_measure
+            // 
+            this.btnXDM3051_measure.Location = new System.Drawing.Point(7, 135);
+            this.btnXDM3051_measure.Name = "btnXDM3051_measure";
+            this.btnXDM3051_measure.Size = new System.Drawing.Size(169, 30);
+            this.btnXDM3051_measure.TabIndex = 2;
+            this.btnXDM3051_measure.Text = "button4";
+            this.btnXDM3051_measure.UseVisualStyleBackColor = true;
+            this.btnXDM3051_measure.Click += new System.EventHandler(this.btnXDM3051_measure_Click);
+            // 
+            // txtBox_XDM3051_measure
+            // 
+            this.txtBox_XDM3051_measure.Location = new System.Drawing.Point(64, 172);
+            this.txtBox_XDM3051_measure.Name = "txtBox_XDM3051_measure";
+            this.txtBox_XDM3051_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM3051_measure.TabIndex = 1;
+            // 
+            // labXDM3051_measure_ok
+            // 
+            this.labXDM3051_measure_ok.AutoSize = true;
+            this.labXDM3051_measure_ok.Location = new System.Drawing.Point(10, 177);
+            this.labXDM3051_measure_ok.Name = "labXDM3051_measure_ok";
+            this.labXDM3051_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM3051_measure_ok.TabIndex = 3;
+            this.labXDM3051_measure_ok.Text = "label4";
+            // 
+            // txtBox_XDM2041_measure
+            // 
+            this.txtBox_XDM2041_measure.Location = new System.Drawing.Point(63, 171);
+            this.txtBox_XDM2041_measure.Name = "txtBox_XDM2041_measure";
+            this.txtBox_XDM2041_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM2041_measure.TabIndex = 1;
+            // 
+            // labXDM2041_measure_ok
+            // 
+            this.labXDM2041_measure_ok.AutoSize = true;
+            this.labXDM2041_measure_ok.Location = new System.Drawing.Point(9, 176);
+            this.labXDM2041_measure_ok.Name = "labXDM2041_measure_ok";
+            this.labXDM2041_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM2041_measure_ok.TabIndex = 3;
+            this.labXDM2041_measure_ok.Text = "label4";
+            // 
+            // btnXDM2041_measure
+            // 
+            this.btnXDM2041_measure.Location = new System.Drawing.Point(13, 136);
+            this.btnXDM2041_measure.Name = "btnXDM2041_measure";
+            this.btnXDM2041_measure.Size = new System.Drawing.Size(163, 29);
+            this.btnXDM2041_measure.TabIndex = 4;
+            this.btnXDM2041_measure.Text = "button4";
+            this.btnXDM2041_measure.UseVisualStyleBackColor = true;
+            this.btnXDM2041_measure.Click += new System.EventHandler(this.btnXDM2041_measure_Click);
+            // 
+            // btnXDM1041_measure
+            // 
+            this.btnXDM1041_measure.Location = new System.Drawing.Point(7, 136);
+            this.btnXDM1041_measure.Name = "btnXDM1041_measure";
+            this.btnXDM1041_measure.Size = new System.Drawing.Size(169, 29);
+            this.btnXDM1041_measure.TabIndex = 3;
+            this.btnXDM1041_measure.Text = "button4";
+            this.btnXDM1041_measure.UseVisualStyleBackColor = true;
+            this.btnXDM1041_measure.Click += new System.EventHandler(this.btnXDM1041_measure_Click);
+            // 
+            // txtBox_XDM1041_measure
+            // 
+            this.txtBox_XDM1041_measure.Location = new System.Drawing.Point(63, 170);
+            this.txtBox_XDM1041_measure.Name = "txtBox_XDM1041_measure";
+            this.txtBox_XDM1041_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM1041_measure.TabIndex = 1;
+            // 
+            // labXDM1041_measure_ok
+            // 
+            this.labXDM1041_measure_ok.AutoSize = true;
+            this.labXDM1041_measure_ok.Location = new System.Drawing.Point(6, 174);
+            this.labXDM1041_measure_ok.Name = "labXDM1041_measure_ok";
+            this.labXDM1041_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM1041_measure_ok.TabIndex = 3;
+            this.labXDM1041_measure_ok.Text = "label4";
+            // 
+            // btnHCS_3300_on
+            // 
+            this.btnHCS_3300_on.Location = new System.Drawing.Point(7, 110);
+            this.btnHCS_3300_on.Name = "btnHCS_3300_on";
+            this.btnHCS_3300_on.Size = new System.Drawing.Size(100, 30);
+            this.btnHCS_3300_on.TabIndex = 4;
+            this.btnHCS_3300_on.Text = "ON";
+            this.btnHCS_3300_on.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_on.Click += new System.EventHandler(this.btnHCS_3300_on_Click);
+            // 
+            // btnHCS_3300_off
+            // 
+            this.btnHCS_3300_off.Location = new System.Drawing.Point(113, 110);
+            this.btnHCS_3300_off.Name = "btnHCS_3300_off";
+            this.btnHCS_3300_off.Size = new System.Drawing.Size(100, 30);
+            this.btnHCS_3300_off.TabIndex = 5;
+            this.btnHCS_3300_off.Text = "OFF";
+            this.btnHCS_3300_off.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_off.Click += new System.EventHandler(this.btnHCS_3300_off_Click);
+            // 
+            // btnHCS_3300_measure
+            // 
+            this.btnHCS_3300_measure.Location = new System.Drawing.Point(7, 145);
+            this.btnHCS_3300_measure.Name = "btnHCS_3300_measure";
+            this.btnHCS_3300_measure.Size = new System.Drawing.Size(200, 30);
+            this.btnHCS_3300_measure.TabIndex = 6;
+            this.btnHCS_3300_measure.Text = "Measure";
+            this.btnHCS_3300_measure.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_measure.Click += new System.EventHandler(this.btnHCS_3300_measure_Click);
+            // 
+            // labHCS3300_voltage
+            // 
+            this.labHCS3300_voltage.AutoSize = true;
+            this.labHCS3300_voltage.Location = new System.Drawing.Point(7, 191);
+            this.labHCS3300_voltage.Name = "labHCS3300_voltage";
+            this.labHCS3300_voltage.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_voltage.TabIndex = 7;
+            this.labHCS3300_voltage.Text = "label4";
+            // 
+            // labHCS3300_current
+            // 
+            this.labHCS3300_current.AutoSize = true;
+            this.labHCS3300_current.Location = new System.Drawing.Point(7, 219);
+            this.labHCS3300_current.Name = "labHCS3300_current";
+            this.labHCS3300_current.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_current.TabIndex = 8;
+            this.labHCS3300_current.Text = "label5";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(7, 417);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(202, 26);
+            this.textBox3.TabIndex = 9;
+            // 
+            // labHCS3300_status
+            // 
+            this.labHCS3300_status.AutoSize = true;
+            this.labHCS3300_status.Location = new System.Drawing.Point(7, 251);
+            this.labHCS3300_status.Name = "labHCS3300_status";
+            this.labHCS3300_status.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_status.TabIndex = 10;
+            this.labHCS3300_status.Text = "label4";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 326);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 20);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "label5";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 350);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 20);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "label6";
+            // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -813,5 +1009,23 @@
         private System.Windows.Forms.GroupBox groupBox_multimeter_XDM2041;
         private System.Windows.Forms.TextBox txtBox_XDM2041_ident;
         private System.Windows.Forms.Button btnXDM2041_ident;
+        private System.Windows.Forms.Button btnXDM3051_measure;
+        private System.Windows.Forms.TextBox txtBox_XDM3051_measure;
+        private System.Windows.Forms.Label labXDM3051_measure_ok;
+        private System.Windows.Forms.Button btnXDM2041_measure;
+        private System.Windows.Forms.Label labXDM2041_measure_ok;
+        private System.Windows.Forms.TextBox txtBox_XDM2041_measure;
+        private System.Windows.Forms.Button btnXDM1041_measure;
+        private System.Windows.Forms.Label labXDM1041_measure_ok;
+        private System.Windows.Forms.TextBox txtBox_XDM1041_measure;
+        private System.Windows.Forms.Button btnHCS_3300_off;
+        private System.Windows.Forms.Button btnHCS_3300_on;
+        private System.Windows.Forms.Label labHCS3300_current;
+        private System.Windows.Forms.Label labHCS3300_voltage;
+        private System.Windows.Forms.Button btnHCS_3300_measure;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labHCS3300_status;
     }
 }

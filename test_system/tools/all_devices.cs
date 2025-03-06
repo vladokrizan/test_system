@@ -106,40 +106,67 @@ namespace test_system
             txtBosPowerSupply_1_1.Text = COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300];
         }
 
-
-        /*
-
-
-                private void button11_Click(object sender, EventArgs e)
+        private void btnHCS_3300_on_Click(object sender, EventArgs e)
         {
-            power_supply_hcs_3300.fun_HCS_330_off();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            power_supply_hcs_3300.fun_HCS_330_on();
+            power_supply_hcs_3300.fun_HCS_3300_on();
 
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void btnHCS_3300_off_Click(object sender, EventArgs e)
+        {
+            power_supply_hcs_3300.fun_HCS_3300_off();
+        }
+
+
+        private void btnHCS_3300_measure_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_330_get_measure();
-            label9.Text = strGeneralString;
-            textBox1.Text = strGeneralString;
 
-        }
+            labHCS3300_voltage.Text = "Out Voltage: " + HSC3300_out_voltage.ToString("0.00")+ " V";
+            labHCS3300_current.Text = "Out Current: " + HSC3300_out_current.ToString("0.00") + " A";
+            labHCS3300_status.Text = HSC3300_out_status;
 
-
-        */
-
-
-
-        #endregion
+           // textBox3.Text = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300];
+           //  public static double HSC3300_out_voltage = 0;
+           //public static double HSC3300_out_current = 0;
 
 
-        #region " Power supply  ---- KORAD  ---  KA3305P    "
+    }
 
-        private void btnPowerSupply_KA3305P_ident1_Click(object sender, EventArgs e)
+
+
+    /*
+
+
+            private void button11_Click(object sender, EventArgs e)
+    {
+        power_supply_hcs_3300.fun_HCS_330_off();
+    }
+
+    private void button10_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void button12_Click(object sender, EventArgs e)
+    {
+        power_supply_hcs_3300.fun_HCS_330_get_measure();
+        label9.Text = strGeneralString;
+        textBox1.Text = strGeneralString;
+
+    }
+
+
+    */
+
+
+
+    #endregion
+
+
+    #region " Power supply  ---- KORAD  ---  KA3305P    "
+
+    private void btnPowerSupply_KA3305P_ident1_Click(object sender, EventArgs e)
         {
             power_supply_KA3305P.fun_KA3305P_identifaction();
             txtBosPowerSupply_KA3305P_ident.Text = COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A];
@@ -278,11 +305,19 @@ namespace test_system
             txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
         }
 
+        private void btnXDM3051_measure_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM3051.fun_XDM3051_measure();
+            // txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
+            txtBox_XDM3051_measure.Text = device_XDM3051_measure.ToString();
+           labXDM3051_measure_ok.Text = device_XDM3051_measure_ok.ToString();
+        }
+  
         #endregion
 
         #region " Multimeter --- OWON  --- XDM2041 ----  "
 
-         private void btnXDM2041_ident_Click(object sender, EventArgs e)
+        private void btnXDM2041_ident_Click(object sender, EventArgs e)
         {
             multimeter_XDM2041.fun_XDM2041_identifaction();
             txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
@@ -290,10 +325,39 @@ namespace test_system
            // strGeneralString = "najden";
         }
 
+
+        private void btnXDM2041_measure_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM2041.fun_XDM2041_measure();
+            txtBox_XDM2041_measure.Text = device_XDM2041_measure.ToString();
+            labXDM2041_measure_ok.Text = device_XDM2041_measure_ok.ToString();
+        }
+
+
         #endregion
 
 
         #region " Multimeter --- OWON  --- XDM1041 ----  "
+
+
+        private void btnXDM1041_measure_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM1041.fun_XDM1041_measure();
+            if (device_XDM1041_measure_ok == funErrorCode.OK)
+            {
+                txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
+                labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
+            }
+            else
+            {
+                multimeter_XDM1041.fun_XDM1041_measure();
+                txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
+                labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
+            }
+
+
+        }
+
 
         private void btnXDM1041_ident_Click(object sender, EventArgs e)
         {
@@ -358,6 +422,6 @@ namespace test_system
 
         }
 
-  
+   
     }
 }

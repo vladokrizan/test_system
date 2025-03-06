@@ -12,37 +12,31 @@ namespace test_system
         functions functions = new functions();
         owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
 
+
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+        public void fun_XDM1041_measure()
+        {
+            var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM1041);
+            device_XDM1041_measure_ok = returnState;
+            if (returnState == funErrorCode.OK) device_XDM1041_measure = returnValue;
+         }
+
+
         //--    OWON,XDM1041,23120418,V4.1.0,3
         public void fun_XDM1041_identifaction()
         {
-            owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418");
-        }
-
-
-        /*
-        if (COMport_connected[COMport_SELECT_MULTIMETER_XDM1041])
-        {
-            try
+            if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funErrorCode.OK)
             {
-                mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].WriteLine("*IDN?");
-                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].ReadLine();
-                COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = functions.fun_ascii_only(ident_readRaw);
-                if (ident_readRaw.Contains("XDM1041,23120418")) { COMport_active[COMport_SELECT_MULTIMETER_XDM1041] = true; }
-                else COMport_active[COMport_SELECT_MULTIMETER_XDM1041] = false;
+                if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funErrorCode.OK)
+                {
+                    owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418");
+                }
             }
-            catch
-            {
-                mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].WriteLine("*IDN?");
-                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM1041].ReadLine();
-                COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = functions.fun_ascii_only(ident_readRaw);
-                if (ident_readRaw.Contains("XDM1041,23120418")) { COMport_active[COMport_SELECT_MULTIMETER_XDM1041] = true; }
-                else COMport_active[COMport_SELECT_MULTIMETER_XDM1041] = false;
-                
-    }
-}
         }
 
-*/
+
 
 
 

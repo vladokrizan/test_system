@@ -57,11 +57,11 @@
     <Compile Include="functions\modbus_functions.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
     <Compile Include="devices\multimeter\owon_multimeter_common.cs" />
-    <Compile Include="power_supply_RD6024.cs" />
-    <Compile Include="program_1.cs">
+    <Compile Include="devices\power_suply\power_supply_RD6024.cs" />
+    <Compile Include="programs\program_1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="program_1.Designer.cs">
+    <Compile Include="programs\program_1.Designer.cs">
       <DependentUpon>program_1.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program_10_test_supply_multimeter.cs">
@@ -113,7 +113,7 @@
     <EmbeddedResource Include="programs\program_10_test_supply_multimeter.resx">
       <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="program_1.resx">
+    <EmbeddedResource Include="programs\program_1.resx">
       <DependentUpon>program_1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tools\all_devices.resx">

@@ -33,7 +33,10 @@ namespace test_system
         public void fun_XDM3051_measure()
         {
             var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM3051);
-            strGeneralString = returnState.ToString() + "   " + returnValue.ToString();
+            device_XDM3051_measure_ok = returnState;
+            if (returnState == funErrorCode.OK) device_XDM3051_measure = returnValue;
+
+            //strGeneralString = returnState.ToString() + "   " + returnValue.ToString();
         }
 
         //=======================================================================================================================

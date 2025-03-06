@@ -40,6 +40,10 @@ namespace test_system
 
         #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
         // public static string device_HCS_3300_ident = "";
+        //int receive_lengt
+        public static double HSC3300_out_voltage = 0;
+        public static double HSC3300_out_current = 0;
+        public static string HSC3300_out_status= "";
 
 
 
@@ -140,12 +144,23 @@ namespace test_system
 
         #region "OWON  --- multimeter   -----      XDM3051    "
         //public static string device_XDM3051_ident = "";
+        public static funErrorCode device_XDM3051_measure_ok;
+        public static double device_XDM3051_measure;
 
 
         #endregion
+        #region "OWON  --- multimeter   -----      XDM2041    "
+        //public static string device_XDM1041_ident = "";
+        public static funErrorCode device_XDM2041_measure_ok;
+        public static double device_XDM2041_measure;
 
+
+
+        #endregion
         #region "OWON  --- multimeter   -----      XDM1041    "
         //public static string device_XDM1041_ident = "";
+        public static funErrorCode device_XDM1041_measure_ok;
+        public static double device_XDM1041_measure;
 
 
         #endregion
@@ -173,6 +188,12 @@ namespace test_system
         //----------------------------------------------------------------------------------------
         // --- COMport - ident string 
         public static string[] COMport_device_ident = new string[COMport_SELECT_MAXnumber];
+
+        //----------------------------------------------------------------------------------------
+        // --- COMport - velikost sprejetega paketa 
+        public static int[] COMport_receive_lenght = new int[COMport_SELECT_MAXnumber];
+        public static string[] COMport_receive_string = new string[COMport_SELECT_MAXnumber];
+
         //-----------------------------------------------------------------------------------------------------------------------
         //-- izbira posameznih instrumentov 
         //-----------------------------------------------------------------------------------------------------------------------
