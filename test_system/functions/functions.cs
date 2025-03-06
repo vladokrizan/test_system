@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,69 @@ namespace test_system
             returnValue = System.Text.Encoding.UTF8.GetString(return_bytes);
             return returnValue;   
         }
+
+
+        public string fun_convert_string_to_current_decimal_separator(string get_string)
+        {
+            string strReturnString = "";
+            int loop;
+            try
+            {
+                string decimalSeparator = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                if (decimalSeparator.Equals(","))
+                {
+                    for (loop = 0; loop <= get_string.Length - 1; loop++)
+                    {
+                        if (get_string[loop] == '.')
+                            strReturnString = strReturnString + ',';
+                        else
+                            strReturnString = strReturnString + (get_string[loop]);
+                    }
+                }
+                if (decimalSeparator.Equals("."))
+                {
+                    for (loop = 0; loop <= get_string.Length - 1; loop++)
+                    {
+                        if (get_string[loop] == ',')
+                            strReturnString = strReturnString + '.';
+                        else
+                            strReturnString = strReturnString + (get_string[loop]);
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return (strReturnString);
+        }
+
+
+
+        //=============================================================================================================
+        //=============================================================================================================
+        public string fun_convert_string_to_decimal_separator_pika(string get_string)
+        {
+            string strReturnString = "";
+            int loop;
+            try
+            {
+                for (loop = 0; loop <= get_string.Length - 1; loop++)
+                {
+                    if (get_string[loop] == ',')
+                        strReturnString = strReturnString + '.';
+                    else
+                        strReturnString = strReturnString + (get_string[loop]);
+                }
+            }
+            catch
+            {
+            }
+            return (strReturnString);
+        }
+
+
+
+
 
 
         /*
@@ -100,6 +164,10 @@ namespace test_system
         textBox1.Text = tmpString;
 
         */
+
+
+
+
 
 
 

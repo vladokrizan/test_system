@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using test_system.Properties;
 using static test_system.global_variable;
 
 
@@ -12,6 +14,85 @@ namespace test_system
     {
 
         functions functions = new functions();
+
+
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        ///--   6. VOUT<X>?     Description：Returns the actual output voltage.Example VOUT1?
+        ///    5. IOUT<X>?      Description：Returns the actual output current.  Example IOUT1?  Returns the CH1 output current
+        /// 
+        /// </summary>
+        //=======================================================================================================================
+
+        public funErrorCode fun_KA3305P_get_voltage_current(int select_channel)
+        {
+            string send_command;
+            string read_answer;
+            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            {
+                if (COMport_active[COMport_SELECT_SUPPLY_KA3305A])
+                {
+                    send_command = "VOUT" + select_channel.ToString() + "?";
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine(send_command);
+                    read_answer = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+
+                    switch (select_channel)
+                    {
+                        case 1: KA3305P_out_voltage_1 = Convert.ToDouble(read_answer); break;
+                        case 2: KA3305P_out_voltage_2 = Convert.ToDouble(read_answer); break;
+                    }
+                    send_command = "IOUT" + select_channel.ToString() + "?";
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine(send_command);
+                    read_answer = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+
+                    switch (select_channel)
+                    {
+                        case 1: KA3305P_out_current_1 = Convert.ToDouble(read_answer); break;
+                        case 2: KA3305P_out_current_2 = Convert.ToDouble(read_answer); break;
+                    }
+
+
+                    return (funErrorCode.OK);
+                }
+                return (funErrorCode.COM_PORT_ACTIVE);
+            }
+            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+        }
+
+
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="select_channel"></param>
+        /// <param name="set_voltage"></param>
+        /// 
+        ///     1. ISET<X>:<NR2>    Description： Sets the output current.   Example:ISET1:2.225 Response time 50ms      Sets the CH1 output current to 2.225A
+        ///     2. ISET<X>? Description： Returns the output current setting.Example: ISET1? Returns the CH1 output current setting.
+        ///     3. VSET<X>:<NR2>    Description：Sets the output voltage.Example VSET1:20.50     Sets the CH1 voltage to 20.50V
+        ///     4. VSET<X>? Description：Returns the output voltage setting.Example VSET1?      Returns the CH1 voltage setting
+        /// 
+        /// <returns></returns>
+        //=======================================================================================================================
+        public funErrorCode fun_KA3305P_set_voltage(int select_channel, double set_voltage)
+        {
+            string send_command;
+            string read_answer;
+            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            {
+                if (COMport_active[COMport_SELECT_SUPPLY_KA3305A])
+                {
+
+                    return (funErrorCode.OK);
+                }
+                return (funErrorCode.COM_PORT_ACTIVE);
+            }
+            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+        }
+
+
+
 
 
         //=======================================================================================================================
@@ -43,7 +124,7 @@ namespace test_system
 
 
 
-        public void fun_KA3305P_on(int selectChannel )
+        public void fun_KA3305P_on(int selectChannel)
         {
 
 

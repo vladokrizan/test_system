@@ -18,6 +18,34 @@ namespace test_system
 
         #region "Device  variable in konstante"
 
+
+
+
+        #region "POWER SUPPLY ---- KORAD   ---- KA3305P  -----  0-30V 5A  "
+        // public static string device_HCS_3300_ident = "";
+        public static double KA3305P_out_voltage_1;
+        public static double KA3305P_out_current_1;
+        public static double KA3305P_out_voltage_2;
+        public static double KA3305P_out_current_2;
+        public static double KA3305P_out_voltage_serial;
+        public static double KA3305P_out_current_serial;
+        public static double KA3305P_out_voltage_parallel;
+        public static double KA3305P_out_current_parallel;
+
+
+
+
+        #endregion
+
+
+        #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
+        // public static string device_HCS_3300_ident = "";
+
+
+
+        #endregion
+        #region "POWER SUPPLY ---- RD6006  / RD6024  "
+
         public static byte intModbusRTUreceiveCRC_numberBytes;
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
@@ -35,22 +63,6 @@ namespace test_system
 
         public static UInt16 modbus_start_register;
         public static UInt16 modbus_register_number;
-
-
-
-        #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
-        // public static string device_HCS_3300_ident = "";
-
-
-
-        #endregion
-        #region "POWER SUPPLY ---- RD6006  / RD6024  "
-
-
-
-        // public static byte[] receiveByte_RD6006 = new byte[100];
-        // public static byte[] receiveByte_RD6024 = new byte[100];
-
 
         public static byte[] bCOMport_sendLen = new byte[COMport_SELECT_MAXnumber];
         //public static byte[] bCOMport_recLen = new byte[COMport_SELECT_MAXnumber];
