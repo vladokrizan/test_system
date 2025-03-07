@@ -57,26 +57,12 @@ namespace test_system
             this.FormBorderStyle = FormBorderStyle.None;
             this.Size = new System.Drawing.Size(intMDIwindow_x_size, intMDIwindow_y_size);
 
-
-
             labName.Text = "Find all connected devices, test measured";
-
             listView_connected.BeginUpdate();
-            //listView_connected.ItemChecked -= listView_connected;
-            //var selectedNet = (listView_connected.SelectedIndices.Count > 0 ? listView_connected.SelectedItems[0].Tag as PCanNet : PCanNet.NONE);
             listView_connected.Groups.Clear();
             listView_connected.Items.Clear();
 
-            //listView_connected.Items.Add("AAAA", "BBBB", ".CCCCCC");
-            // listView_connected.Items.Add(new ListViewItem(new string[] { "John dsfsfsdfs ", "1", "100" }));
-            //listView_connected.Columns.Add("Column1Name");
-            //listView_connected.Columns.Add("Column2Name");
-            //listView_connected.Columns.Add("Column3Name");
-
-
-
             listView_connected.EndUpdate();
-
 
         }
 
@@ -88,58 +74,143 @@ namespace test_system
         #endregion
         #region " TIMER "
 
+        private void fun_increase_device_counter(int select_device)
+        {
+            if (COMport_device_ident[select_device].Length > 5)
+            {
+                program_counter++;
+            }
+
+        }
+
+        private void fun_set_one_device(int select_device)
+        {
+            strDevice_name = COMport_name[select_device];
+            strDevice_port = COMport_port[select_device];
+            strDevice_ident = COMport_device_ident[select_device];
+        }
 
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            labProgramCounter.Text = "Current test   " + program_counter.ToString();
 
-            if (program_counter < 10)
+            if (program_counter < 15)
             {
-
                 if (program_counter == 0)
                 {
-                    multimeter_XDM3051.fun_XDM3051_identifaction();
-                    strDevice_name = COMport_name[COMport_SELECT_MULTIMETER_XDM3051];
-                    strDevice_port = COMport_port[COMport_SELECT_MULTIMETER_XDM3051];
-                    strDevice_ident = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
-                    program_counter++;
+                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM3051])
+                    {
+                        multimeter_XDM3051.fun_XDM3051_identifaction();
+                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM3051);
+                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM3051);
+                    }
+                    else program_counter++;
                 }
                 else if (program_counter == 1)
                 {
-                    multimeter_XDM2041.fun_XDM2041_identifaction();
-                    strDevice_name = COMport_name[COMport_SELECT_MULTIMETER_XDM2041];
-                    strDevice_port = COMport_port[COMport_SELECT_MULTIMETER_XDM2041];
-                    strDevice_ident = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
-                    program_counter++;
+                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM2041])
+                    {
+                        multimeter_XDM2041.fun_XDM2041_identifaction();
+                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM2041);
+                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM2041);
+                    }
+                    else program_counter++;
                 }
                 else if (program_counter == 2)
                 {
-                    multimeter_XDM1041.fun_XDM1041_identifaction();
-                    strDevice_name = COMport_name[COMport_SELECT_MULTIMETER_XDM1041];
-                    strDevice_port = COMport_port[COMport_SELECT_MULTIMETER_XDM1041];
-                    strDevice_ident = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041];
+                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM1041])
+                    {
+                        multimeter_XDM1041.fun_XDM1041_identifaction();
+                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM1041);
+                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM1041);
+                    }
+                    else program_counter++;
+                }
+                //---------------------------------------------------------------------------------------------------------------
+                //-- NE DELUJE 
+                else if (program_counter == 3)
+                {
+                    if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+                    {
+                        device_MPM1010B_read_all_write = true;
+                        device_MPM1010B_read_all_read = true;
+                    }
                     program_counter++;
                 }
+                else if (program_counter == 4)
+                {
+                    if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+                    {
+                        program_counter++;
+                    }
+                    else program_counter++;
+                }
+                //---------------------------------------------------------------------------------------------------------------
+                else if (program_counter == 5)
+                {
+                    if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
+                    {
+                        temperature_ET3916.fun_ET3916_read_serial_number();
+                    }
+                    program_counter++;
+                }
+                else if (program_counter == 6)
+                {
+                    if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
+                    {
+                        if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916].Length > 5)
+                        {
+                            fun_set_one_device(COMport_SELECT_TEMPERATURE_ET3916);
+                        }
+                        else
+                        {
+                            program_counter = 5;
+                        }
+                    }
+                    else program_counter++;
+                }
 
+                else if (program_counter == 7)
+                {
+                    if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+                    {
+                        power_supply_KA3305P.fun_KA3305P_identifaction();
+                        fun_set_one_device(COMport_SELECT_SUPPLY_KA3305A);
+                        fun_increase_device_counter(COMport_SELECT_SUPPLY_KA3305A);
 
-/*
-        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 4;
-        public const byte COMport_SELECT_AC_METER_MPM_1010B = 5;
-        public const byte COMport_SELECT_METER_FREE = 6;
-        //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_SUPPLY_KA3305A = 7;
-        public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
-        //-----------------------------------------------------------------------------------------------------------------------
-        //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
-        public const byte COMport_SELECT_SUPPLY_RD6006 = 9;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 10;
-        //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_SUPPLY_FREE = 11;
-        //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_LOAD_KEL103 = 12;
-*/
+                    }
+                    else program_counter++;
+                }
+                //---------------------------------------------------------------------------------------------------------------
+                //     public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
+                else if (program_counter == 8)
+                {
+                    if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+                    {
+                        power_supply_hcs_3300.fun_HCS_330_identifaction();
+                        fun_set_one_device(COMport_SELECT_SUPPLY_HCS_3300);
+                        fun_increase_device_counter(COMport_SELECT_SUPPLY_HCS_3300);
+                    }
+                    else program_counter++;
+                }
+                //---------------------------------------------------------------------------------------------------------------
+                //-- public const byte COMport_SELECT_LOAD_KEL103 = 12;
+                else if (program_counter == 9)
+                {
+                    if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+                    {
+                        dc_load_KEL103.fun_KEL103_identifaction();
+                        fun_set_one_device(COMport_SELECT_LOAD_KEL103);
+                        fun_increase_device_counter(COMport_SELECT_LOAD_KEL103);
 
-                // listView_connected.Items.Add(new ListViewItem(new string[] { "John dsfsfsdfs ", "1", "100" }));
+                    }
+                    else program_counter++;
+                }
+                else if (program_counter == 10)
+                {
+                    this.Close();
+                }
 
                 if (strDevice_name.Length > 4)
                 {
@@ -151,7 +222,7 @@ namespace test_system
                 // if (program_counter > 6) listView_connected.Items[5].BackColor = Color.Yellow;
 
 
-             }
+            }
 
 
 

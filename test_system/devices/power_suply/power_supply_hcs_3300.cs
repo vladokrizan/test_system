@@ -42,7 +42,6 @@ namespace test_system
         {
             if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
             {
-
                 mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
                 fun_send_command("GMAX\r");
                 Thread.Sleep(20);
@@ -54,7 +53,7 @@ namespace test_system
                 if (ident_readRaw.Contains("162330")) { COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = true; }
                 else COMport_active[COMport_SELECT_SUPPLY_HCS_3300] = false;
             }
-         }
+        }
 
         //=======================================================================================================================
         //--    SOUT<status>[CR] Return value:   OK[CR] Switch on/off the output of PS<status>=0/1 (0=ON, 1=OFF)
@@ -69,7 +68,7 @@ namespace test_system
                     fun_send_command("SOUT1\r");
                 }
             }
-         }
+        }
         //=======================================================================================================================
         //=======================================================================================================================
         public void fun_HCS_3300_on()
@@ -102,7 +101,6 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
                 {
-
                     mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
                     fun_send_command("GETD\r");
                     Thread.Sleep(20);
@@ -124,42 +122,111 @@ namespace test_system
                 }
             }
 
-        // strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();
-        //device_ET3916_read_all_temperature = true;
-    }
-
-
-    //--    GETS[CR] Return value:   <voltage><current>[CR] OK[CR]
-    //--              Get PS preset Voltage & Current value<voltage>=???   <current>=???
-    //--    GETS[CR]
-    //--    Return value:   150180[CR] OK[CR]
-    //--          Meaning:    The Voltage value set at 15V and Current value set at 18A
-    public void fun_HCS_330_get_limit()
-        {
+            // strGeneralString = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString() + Convert.ToChar(read_buffer[6]).ToString() + Convert.ToChar(read_buffer[7]).ToString() + Convert.ToChar(read_buffer[8]).ToString() + Convert.ToChar(read_buffer[9]).ToString() + Convert.ToChar(read_buffer[10]).ToString() + Convert.ToChar(read_buffer[11]).ToString();
+            //device_ET3916_read_all_temperature = true;
         }
 
+        //=======================================================================================================================
 
+        //--    GETS[CR] Return value:   <voltage><current>[CR] OK[CR]
+        //--              Get PS preset Voltage & Current value<voltage>=???   <current>=???
+        //--    GETS[CR]
+        //--    Return value:   150180[CR] OK[CR]
+        //--          Meaning:    The Voltage value set at 15V and Current value set at 18A
+        //=======================================================================================================================
+        public void fun_HCS_3300_get_limit()
+        {
+            if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+            {
+                if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
+                {
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
+                    fun_send_command("GETS\r");
+                    Thread.Sleep(20);
+                    COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300]);
+                    COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300] = Encoding.UTF8.GetString(read_buffer);
+
+
+                    string voltage = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(0, 3);
+                    int voltage_value = Convert.ToInt16(voltage);
+                    HSC3300_get_set_voltage = ((double)voltage_value) / 10;
+
+                    string current = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(3, 4);
+                    int current_value = Convert.ToInt16(current);
+                    HSC3300_get_set_current = ((double)current_value) / 10;
+
+                }
+            }
+        }
+
+        //=======================================================================================================================
         //--    VOLT<voltage>[CR] Return value:   OK[CR]
         //--          Preset Voltage value<voltage>=010<???<Max-Volt* Max-Volt value refer to product specification
         //--    VOLT127[CR]             Set Voltage value as 12.7V
         //--      Return value:   OK[CR] Meaning:    
+        //=======================================================================================================================
         public void fun_HCS_330_set_voltage()
         {
+            double setValue;
+            string setValueString;
+            if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+            {
+                if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
+                {
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
+                }
+            }
+            // strGeneralString = HSC3300_set_set_voltage;
+            setValue = Convert.ToDouble(HSC3300_set_set_voltage);
+            setValue = setValue * 10;
+            if (setValue > 160) setValue = 160;
+
+            setValueString = setValue.ToString();
+
+            if (setValue < 10) setValueString = "00" + setValueString;
+            else if (setValue < 100) setValueString = "0" + setValueString;
+            if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
+
+
+            strGeneralString = setValueString.ToString();
         }
 
 
+        //=======================================================================================================================
         //--     CURR<current>[CR]      Preset Current value<current>=000<???<Max-Curr* Max-Curr value refer to product specification
         //--     Return value:   OK[CR] 
         //--    CURR120[CR]         Set Current value as 12.0A
         //--    Return value:   OK[CR] Meaning:    
-
+        //=======================================================================================================================
         public void fun_HCS_330_set_current()
         {
+            double setValue;
+            string setValueString;
+
+            if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+            {
+                if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
+                {
+                }
+            }
+            setValue = Convert.ToDouble(HSC3300_set_set_current);
+            setValue = setValue * 10;
+            if (setValue > 300) setValue = 160;
+
+            setValueString = setValue.ToString();
+
+            if (setValue < 10) setValueString = "00" + setValueString;
+            else if (setValue < 100) setValueString = "0" + setValueString;
+            if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
+
+
+            strGeneralString = strGeneralString + "    " + setValueString.ToString();
+
+
+
+
         }
-
-
-
-
 
 
     }
@@ -172,7 +239,6 @@ namespace test_system
 
 
 /*
-
 
 PROM<voltage0><current0>    <voltage1><current1>    <voltage2><current2>[CR]    Return value:   OK[CR]
     Save Voltage and Current value into 3 PS memory locations   <voltageX>=???  <currentX>=???  (X is memory location number start from 0 to 2)
@@ -189,13 +255,6 @@ GETM[CR]    Return value:   111111[CR]  122122[CR]  133133[CR]  OK[CR]
     Meaning:    PS return following preset value from 3 memory locations;   Memory 0 is 11.1V and 11.1A Memory 1 is 12.2V and 12.2A Memory 2 is 13.3V and 13.3A
 RUNM<memory>[CR]    Return value:   OK[CR]  Set Voltage and Current using values saved in memory locations  <memory>=0/1/2
 RUNM1[CR]   Return value:   OK[CR]  Meaning:    Set Voltage and Current using values saved in memory location 1
-
-
-
-
-
-
-
 
 
 

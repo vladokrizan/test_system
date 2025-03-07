@@ -45,7 +45,11 @@ namespace test_system
         public static double HSC3300_out_current = 0;
         public static string HSC3300_out_status= "";
 
+        public static double HSC3300_get_set_voltage = 0;
+        public static double HSC3300_get_set_current = 0;
 
+        public static string HSC3300_set_set_voltage = "";
+        public static string HSC3300_set_set_current = "";
 
         #endregion
         #region "POWER SUPPLY ---- RD6006  / RD6024  "
@@ -129,6 +133,7 @@ namespace test_system
         public static double device_MPM1010B_freguency = 0;
 
 
+    
 
         public static bool device_MPM1010B_read_all_write = false;
         public static bool device_MPM1010B_read_all_read = false;
@@ -164,6 +169,32 @@ namespace test_system
 
 
         #endregion
+
+        #region "DC LOAD KORAD KEL 103"
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        //--    VOLT|CURR|RES|POW|SHORTDefine the functions:voltage, current,resistor and power
+        public const string KEL103_SET_FUN_VOLTAGE = "VOLT";
+        public const string KEL103_SET_FUN_CURRENT = "CURR";
+        public const string KEL103_SET_FUN_POWER = "POW";
+        public const string KEL103_SET_FUN_RESISTANCE = "RES";
+ 
+
+        public static double KEL103_voltage = 0;
+        public static double KEL103_current = 0;
+        public static double KEL103_power = 0;
+        public static double KEL103_resistance = 0;
+
+        public static double KEL103_get_set_voltage = 0;
+        public static double KEL103_get_set_current = 0;
+        public static double KEL103_get_set_power = 0;
+        public static double KEL103_get_set_resistance = 0;
+
+        public static double KEL103_set_set_voltage = 0;
+        public static double KEL103_set_set_current = 0;
+        public static double KEL103_set_set_power = 0;
+        public static double KEL103_set_set_resistance = 0;
+
 
 
         #endregion

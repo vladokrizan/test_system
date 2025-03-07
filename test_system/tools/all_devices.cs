@@ -83,9 +83,9 @@ namespace test_system
             }
 
 
-            if ( device_MPM1010B_show_data )
+            if (device_MPM1010B_show_data)
             {
-                device_MPM1010B_show_data=false;
+                device_MPM1010B_show_data = false;
 
                 labMPM1010B_voltage.Text = device_MPM1010B_voltage.ToString();
             }
@@ -98,79 +98,75 @@ namespace test_system
         #region " Power supply "
         #region " Power supply  - Manson  1-16V 30A   HCS - 3300"
 
+        //=======================================================================================================================
 
         //-- IDENT 
+        //=======================================================================================================================
         private void btnPowerSupply_1_1_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_330_identifaction();
             txtBosPowerSupply_1_1.Text = COMport_device_ident[COMport_SELECT_SUPPLY_HCS_3300];
         }
 
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnHCS_3300_on_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_3300_on();
-
         }
 
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnHCS_3300_off_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_3300_off();
         }
 
-
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnHCS_3300_measure_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_330_get_measure();
 
-            labHCS3300_voltage.Text = "Out Voltage: " + HSC3300_out_voltage.ToString("0.00")+ " V";
+            labHCS3300_voltage.Text = "Out Voltage: " + HSC3300_out_voltage.ToString("0.00") + " V";
             labHCS3300_current.Text = "Out Current: " + HSC3300_out_current.ToString("0.00") + " A";
             labHCS3300_status.Text = HSC3300_out_status;
 
-           // textBox3.Text = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300];
-           //  public static double HSC3300_out_voltage = 0;
-           //public static double HSC3300_out_current = 0;
+            // textBox3.Text = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300];
+            //  public static double HSC3300_out_voltage = 0;
+            //public static double HSC3300_out_current = 0;
+        }
+        //=======================================================================================================================
+        //=======================================================================================================================
+        private void btnHCS_3300_set_Click(object sender, EventArgs e)
+        {
+            HSC3300_set_set_voltage = txtCS3300_set_voltage.Text;
+            HSC3300_set_set_current = txtCS3300_set_current.Text;
+            power_supply_hcs_3300.fun_HCS_330_set_voltage();
+            power_supply_hcs_3300.fun_HCS_330_set_current();
+        }
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+        private void btnHCS_3300_get_set_value_Click(object sender, EventArgs e)
+        {
+            power_supply_hcs_3300.fun_HCS_3300_get_limit();
+            txtCS3300_set_voltage.Text = HSC3300_set_set_voltage.ToString();
+            txtCS3300_set_current.Text = HSC3300_set_set_current.ToString();
+        }
 
 
-    }
+        #endregion
 
 
+        #region " Power supply  ---- KORAD  ---  KA3305P    "
 
-    /*
-
-
-            private void button11_Click(object sender, EventArgs e)
-    {
-        power_supply_hcs_3300.fun_HCS_330_off();
-    }
-
-    private void button10_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void button12_Click(object sender, EventArgs e)
-    {
-        power_supply_hcs_3300.fun_HCS_330_get_measure();
-        label9.Text = strGeneralString;
-        textBox1.Text = strGeneralString;
-
-    }
-
-
-    */
-
-
-
-    #endregion
-
-
-    #region " Power supply  ---- KORAD  ---  KA3305P    "
-
-    private void btnPowerSupply_KA3305P_ident1_Click(object sender, EventArgs e)
+        //=======================================================================================================================
+        //=======================================================================================================================
+        private void btnPowerSupply_KA3305P_ident1_Click(object sender, EventArgs e)
         {
             power_supply_KA3305P.fun_KA3305P_identifaction();
             txtBosPowerSupply_KA3305P_ident.Text = COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A];
-
         }
 
 
@@ -237,6 +233,8 @@ namespace test_system
 
         #region " AC POWER METRER  --- MATRIX  --- MPM-1010B ----  "
 
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnMPM1010B_measure_Click(object sender, EventArgs e)
         {
             if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
@@ -250,6 +248,8 @@ namespace test_system
 
         #region " Multimeter --- East Tester --- ET916-8 ---- temperature meter "
 
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnET3916_ident_Click(object sender, EventArgs e)
         {
             temperature_ET3916.fun_ET3916_read_serial_number();
@@ -297,49 +297,48 @@ namespace test_system
         #region " Multimeter --- OWON  --- XDM3051 ----  "
 
 
-
+        //=======================================================================================================================
         //--    OWON,XDM3051,2303195,V3.7.2,2
+        //=======================================================================================================================
         private void btnXDM3051_ident_Click(object sender, EventArgs e)
         {
             multimeter_XDM3051.fun_XDM3051_identifaction();
             txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
         }
+        //=======================================================================================================================
+        //=======================================================================================================================
 
         private void btnXDM3051_measure_Click(object sender, EventArgs e)
         {
             multimeter_XDM3051.fun_XDM3051_measure();
-            // txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
             txtBox_XDM3051_measure.Text = device_XDM3051_measure.ToString();
-           labXDM3051_measure_ok.Text = device_XDM3051_measure_ok.ToString();
+            labXDM3051_measure_ok.Text = device_XDM3051_measure_ok.ToString();
         }
-  
+
         #endregion
 
         #region " Multimeter --- OWON  --- XDM2041 ----  "
 
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnXDM2041_ident_Click(object sender, EventArgs e)
         {
             multimeter_XDM2041.fun_XDM2041_identifaction();
             txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
-
-           // strGeneralString = "najden";
         }
 
-
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnXDM2041_measure_Click(object sender, EventArgs e)
         {
             multimeter_XDM2041.fun_XDM2041_measure();
             txtBox_XDM2041_measure.Text = device_XDM2041_measure.ToString();
             labXDM2041_measure_ok.Text = device_XDM2041_measure_ok.ToString();
         }
-
-
         #endregion
-
-
         #region " Multimeter --- OWON  --- XDM1041 ----  "
-
-
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnXDM1041_measure_Click(object sender, EventArgs e)
         {
             multimeter_XDM1041.fun_XDM1041_measure();
@@ -354,24 +353,15 @@ namespace test_system
                 txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
                 labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
             }
-
-
         }
-
-
+        //=======================================================================================================================
+        //=======================================================================================================================
         private void btnXDM1041_ident_Click(object sender, EventArgs e)
         {
             multimeter_XDM1041.fun_XDM1041_identifaction();
             txtBox_XDM1041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041];
-
         }
-
-
         #endregion
-
-
-
-
 
 
         #endregion
@@ -380,9 +370,90 @@ namespace test_system
         #region " Loads --- Korad  ---  KEL103 ---- DC LOAD  "
         private void btnLoad_KEL103_ident_Click(object sender, EventArgs e)
         {
-            dc_load_KEL103.fun_KEL103_identifaction();
-            txtBoxLoad_KEL103_ident.Text = COMport_device_ident[COMport_SELECT_LOAD_KEL103];
+            if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+            {
+                dc_load_KEL103.fun_KEL103_identifaction();
+                txtBoxLoad_KEL103_ident.Text = COMport_device_ident[COMport_SELECT_LOAD_KEL103];
+            }
+        }
 
+
+
+
+        private void btnKEL103_on_Click(object sender, EventArgs e)
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    dc_load_KEL103.fun_KEL103_on();
+                }
+            }
+        }
+
+        private void btnKEL103_off_Click(object sender, EventArgs e)
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    dc_load_KEL103.fun_KEL103_off();
+                }
+            }
+
+        }
+
+        private void btnKEL103_measure_Click(object sender, EventArgs e)
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    dc_load_KEL103.fun_KEL103_get_voltage();
+                    dc_load_KEL103.fun_KEL103_get_current();
+                    dc_load_KEL103.fun_KEL103_get_power();
+                    dc_load_KEL103.fun_KEL103_get_resistance();
+
+
+
+
+                }
+
+
+            }
+
+
+        }
+
+        private void btnKEL103_get_set_value_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnKEL103_set_set_value_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    
+        private void radioFunction_1_CheckedChanged(object sender, EventArgs e)
+        {
+            dc_load_KEL103.fun_KEL103_set_function(KEL103_SET_FUN_VOLTAGE);
+        }
+
+        private void radioFunction_2_CheckedChanged(object sender, EventArgs e)
+        {
+            dc_load_KEL103.fun_KEL103_set_function(KEL103_SET_FUN_CURRENT);
+        }
+
+        private void radioFunction_3_CheckedChanged(object sender, EventArgs e)
+        {
+            dc_load_KEL103.fun_KEL103_set_function(KEL103_SET_FUN_POWER);
+        }
+
+        private void radioFunction_4_CheckedChanged(object sender, EventArgs e)
+        {
+            dc_load_KEL103.fun_KEL103_set_function(KEL103_SET_FUN_RESISTANCE);
         }
 
 
@@ -420,8 +491,10 @@ namespace test_system
             if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916]);
             if (COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B] != null) listBox1.Items.Add(COMport_device_ident[COMport_SELECT_AC_METER_MPM_1010B]);
 
+
         }
 
-   
+      
+
     }
-}
+    }

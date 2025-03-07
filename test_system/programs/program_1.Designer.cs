@@ -35,12 +35,13 @@
             this.colPort = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colIdent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.labProgramCounter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labName
             // 
             this.labName.AutoSize = true;
-            this.labName.Location = new System.Drawing.Point(13, 9);
+            this.labName.Location = new System.Drawing.Point(13, 19);
             this.labName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labName.Name = "labName";
             this.labName.Size = new System.Drawing.Size(51, 20);
@@ -55,9 +56,9 @@
             this.colIdent});
             this.listView_connected.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listView_connected.HideSelection = false;
-            this.listView_connected.Location = new System.Drawing.Point(17, 52);
+            this.listView_connected.Location = new System.Drawing.Point(12, 42);
             this.listView_connected.Name = "listView_connected";
-            this.listView_connected.Size = new System.Drawing.Size(975, 171);
+            this.listView_connected.Size = new System.Drawing.Size(975, 278);
             this.listView_connected.TabIndex = 1;
             this.listView_connected.UseCompatibleStateImageBehavior = false;
             this.listView_connected.View = System.Windows.Forms.View.Details;
@@ -83,11 +84,21 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // labProgramCounter
+            // 
+            this.labProgramCounter.AutoSize = true;
+            this.labProgramCounter.Location = new System.Drawing.Point(17, 337);
+            this.labProgramCounter.Name = "labProgramCounter";
+            this.labProgramCounter.Size = new System.Drawing.Size(51, 20);
+            this.labProgramCounter.TabIndex = 2;
+            this.labProgramCounter.Text = "label1";
+            // 
             // program_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 716);
+            this.Controls.Add(this.labProgramCounter);
             this.Controls.Add(this.listView_connected);
             this.Controls.Add(this.labName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -109,5 +120,6 @@
         private System.Windows.Forms.ColumnHeader colPort;
         private System.Windows.Forms.ColumnHeader colIdent;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label labProgramCounter;
     }
 }

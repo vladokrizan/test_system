@@ -35,12 +35,21 @@
             this.labMPM1010B_voltage = new System.Windows.Forms.Label();
             this.btnMPM1010B_measure = new System.Windows.Forms.Button();
             this.groupBox_multimeter_XDM2041 = new System.Windows.Forms.GroupBox();
+            this.btnXDM2041_measure = new System.Windows.Forms.Button();
+            this.labXDM2041_measure_ok = new System.Windows.Forms.Label();
             this.btnXDM2041_ident = new System.Windows.Forms.Button();
             this.txtBox_XDM2041_ident = new System.Windows.Forms.TextBox();
+            this.txtBox_XDM2041_measure = new System.Windows.Forms.TextBox();
             this.groupBox_multimeter_XDM1041 = new System.Windows.Forms.GroupBox();
+            this.btnXDM1041_measure = new System.Windows.Forms.Button();
+            this.labXDM1041_measure_ok = new System.Windows.Forms.Label();
             this.btnXDM1041_ident = new System.Windows.Forms.Button();
             this.txtBox_XDM1041_ident = new System.Windows.Forms.TextBox();
+            this.txtBox_XDM1041_measure = new System.Windows.Forms.TextBox();
             this.groupBox_multimeter_XDM_3051 = new System.Windows.Forms.GroupBox();
+            this.labXDM3051_measure_ok = new System.Windows.Forms.Label();
+            this.btnXDM3051_measure = new System.Windows.Forms.Button();
+            this.txtBox_XDM3051_measure = new System.Windows.Forms.TextBox();
             this.txtBox_XDM3051_ident = new System.Windows.Forms.TextBox();
             this.btnXDM3051_ident = new System.Windows.Forms.Button();
             this.groupBox_multimeter_ET3916 = new System.Windows.Forms.GroupBox();
@@ -78,6 +87,18 @@
             this.txtBosPowerSupply_KA3305P_ident = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox_powerSupply_hcs_330 = new System.Windows.Forms.GroupBox();
+            this.btnHCS_3300_get_set_value = new System.Windows.Forms.Button();
+            this.btnHCS_3300_set = new System.Windows.Forms.Button();
+            this.labHCS3300_set_current = new System.Windows.Forms.Label();
+            this.labHCS3300_set_voltage = new System.Windows.Forms.Label();
+            this.labHCS3300_status = new System.Windows.Forms.Label();
+            this.txtCS3300_set_voltage = new System.Windows.Forms.TextBox();
+            this.txtCS3300_set_current = new System.Windows.Forms.TextBox();
+            this.labHCS3300_current = new System.Windows.Forms.Label();
+            this.labHCS3300_voltage = new System.Windows.Forms.Label();
+            this.btnHCS_3300_measure = new System.Windows.Forms.Button();
+            this.btnHCS_3300_off = new System.Windows.Forms.Button();
+            this.btnHCS_3300_on = new System.Windows.Forms.Button();
             this.txtBosPowerSupply_1_1 = new System.Windows.Forms.TextBox();
             this.btnPowerSupply_1_1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -89,24 +110,26 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnXDM3051_measure = new System.Windows.Forms.Button();
-            this.txtBox_XDM3051_measure = new System.Windows.Forms.TextBox();
-            this.labXDM3051_measure_ok = new System.Windows.Forms.Label();
-            this.txtBox_XDM2041_measure = new System.Windows.Forms.TextBox();
-            this.labXDM2041_measure_ok = new System.Windows.Forms.Label();
-            this.btnXDM2041_measure = new System.Windows.Forms.Button();
-            this.btnXDM1041_measure = new System.Windows.Forms.Button();
-            this.txtBox_XDM1041_measure = new System.Windows.Forms.TextBox();
-            this.labXDM1041_measure_ok = new System.Windows.Forms.Label();
-            this.btnHCS_3300_on = new System.Windows.Forms.Button();
-            this.btnHCS_3300_off = new System.Windows.Forms.Button();
-            this.btnHCS_3300_measure = new System.Windows.Forms.Button();
-            this.labHCS3300_voltage = new System.Windows.Forms.Label();
-            this.labHCS3300_current = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.labHCS3300_status = new System.Windows.Forms.Label();
+            this.btnKEL103_get_set_value = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.labKEL103_power = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.labKEL103_current = new System.Windows.Forms.Label();
+            this.labKEL103_voltaage = new System.Windows.Forms.Label();
+            this.btnKEL103_measure = new System.Windows.Forms.Button();
+            this.btnKEL103_off = new System.Windows.Forms.Button();
+            this.btnKEL103_on = new System.Windows.Forms.Button();
+            this.labKEL103_resistance = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.radioFunction_1 = new System.Windows.Forms.RadioButton();
+            this.radioFunction_2 = new System.Windows.Forms.RadioButton();
+            this.radioFunction_3 = new System.Windows.Forms.RadioButton();
+            this.radioFunction_4 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -194,6 +217,25 @@
             this.groupBox_multimeter_XDM2041.TabStop = false;
             this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
             // 
+            // btnXDM2041_measure
+            // 
+            this.btnXDM2041_measure.Location = new System.Drawing.Point(13, 136);
+            this.btnXDM2041_measure.Name = "btnXDM2041_measure";
+            this.btnXDM2041_measure.Size = new System.Drawing.Size(163, 29);
+            this.btnXDM2041_measure.TabIndex = 4;
+            this.btnXDM2041_measure.Text = "button4";
+            this.btnXDM2041_measure.UseVisualStyleBackColor = true;
+            this.btnXDM2041_measure.Click += new System.EventHandler(this.btnXDM2041_measure_Click);
+            // 
+            // labXDM2041_measure_ok
+            // 
+            this.labXDM2041_measure_ok.AutoSize = true;
+            this.labXDM2041_measure_ok.Location = new System.Drawing.Point(9, 176);
+            this.labXDM2041_measure_ok.Name = "labXDM2041_measure_ok";
+            this.labXDM2041_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM2041_measure_ok.TabIndex = 3;
+            this.labXDM2041_measure_ok.Text = "label4";
+            // 
             // btnXDM2041_ident
             // 
             this.btnXDM2041_ident.Location = new System.Drawing.Point(7, 43);
@@ -211,6 +253,13 @@
             this.txtBox_XDM2041_ident.Size = new System.Drawing.Size(170, 26);
             this.txtBox_XDM2041_ident.TabIndex = 1;
             // 
+            // txtBox_XDM2041_measure
+            // 
+            this.txtBox_XDM2041_measure.Location = new System.Drawing.Point(63, 171);
+            this.txtBox_XDM2041_measure.Name = "txtBox_XDM2041_measure";
+            this.txtBox_XDM2041_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM2041_measure.TabIndex = 1;
+            // 
             // groupBox_multimeter_XDM1041
             // 
             this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_measure);
@@ -224,6 +273,25 @@
             this.groupBox_multimeter_XDM1041.TabIndex = 1;
             this.groupBox_multimeter_XDM1041.TabStop = false;
             this.groupBox_multimeter_XDM1041.Text = "OWON XDM1041 ";
+            // 
+            // btnXDM1041_measure
+            // 
+            this.btnXDM1041_measure.Location = new System.Drawing.Point(7, 136);
+            this.btnXDM1041_measure.Name = "btnXDM1041_measure";
+            this.btnXDM1041_measure.Size = new System.Drawing.Size(169, 29);
+            this.btnXDM1041_measure.TabIndex = 3;
+            this.btnXDM1041_measure.Text = "button4";
+            this.btnXDM1041_measure.UseVisualStyleBackColor = true;
+            this.btnXDM1041_measure.Click += new System.EventHandler(this.btnXDM1041_measure_Click);
+            // 
+            // labXDM1041_measure_ok
+            // 
+            this.labXDM1041_measure_ok.AutoSize = true;
+            this.labXDM1041_measure_ok.Location = new System.Drawing.Point(6, 174);
+            this.labXDM1041_measure_ok.Name = "labXDM1041_measure_ok";
+            this.labXDM1041_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM1041_measure_ok.TabIndex = 3;
+            this.labXDM1041_measure_ok.Text = "label4";
             // 
             // btnXDM1041_ident
             // 
@@ -242,6 +310,13 @@
             this.txtBox_XDM1041_ident.Size = new System.Drawing.Size(170, 26);
             this.txtBox_XDM1041_ident.TabIndex = 1;
             // 
+            // txtBox_XDM1041_measure
+            // 
+            this.txtBox_XDM1041_measure.Location = new System.Drawing.Point(63, 170);
+            this.txtBox_XDM1041_measure.Name = "txtBox_XDM1041_measure";
+            this.txtBox_XDM1041_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM1041_measure.TabIndex = 1;
+            // 
             // groupBox_multimeter_XDM_3051
             // 
             this.groupBox_multimeter_XDM_3051.Controls.Add(this.labXDM3051_measure_ok);
@@ -255,6 +330,32 @@
             this.groupBox_multimeter_XDM_3051.TabIndex = 1;
             this.groupBox_multimeter_XDM_3051.TabStop = false;
             this.groupBox_multimeter_XDM_3051.Text = "OWON XDM3051 51/2";
+            // 
+            // labXDM3051_measure_ok
+            // 
+            this.labXDM3051_measure_ok.AutoSize = true;
+            this.labXDM3051_measure_ok.Location = new System.Drawing.Point(10, 177);
+            this.labXDM3051_measure_ok.Name = "labXDM3051_measure_ok";
+            this.labXDM3051_measure_ok.Size = new System.Drawing.Size(51, 20);
+            this.labXDM3051_measure_ok.TabIndex = 3;
+            this.labXDM3051_measure_ok.Text = "label4";
+            // 
+            // btnXDM3051_measure
+            // 
+            this.btnXDM3051_measure.Location = new System.Drawing.Point(7, 135);
+            this.btnXDM3051_measure.Name = "btnXDM3051_measure";
+            this.btnXDM3051_measure.Size = new System.Drawing.Size(169, 30);
+            this.btnXDM3051_measure.TabIndex = 2;
+            this.btnXDM3051_measure.Text = "button4";
+            this.btnXDM3051_measure.UseVisualStyleBackColor = true;
+            this.btnXDM3051_measure.Click += new System.EventHandler(this.btnXDM3051_measure_Click);
+            // 
+            // txtBox_XDM3051_measure
+            // 
+            this.txtBox_XDM3051_measure.Location = new System.Drawing.Point(64, 172);
+            this.txtBox_XDM3051_measure.Name = "txtBox_XDM3051_measure";
+            this.txtBox_XDM3051_measure.Size = new System.Drawing.Size(113, 26);
+            this.txtBox_XDM3051_measure.TabIndex = 1;
             // 
             // txtBox_XDM3051_ident
             // 
@@ -628,10 +729,13 @@
             // 
             // groupBox_powerSupply_hcs_330
             // 
-            this.groupBox_powerSupply_hcs_330.Controls.Add(this.label6);
-            this.groupBox_powerSupply_hcs_330.Controls.Add(this.label5);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_get_set_value);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_set);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_set_current);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_set_voltage);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_status);
-            this.groupBox_powerSupply_hcs_330.Controls.Add(this.textBox3);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.txtCS3300_set_voltage);
+            this.groupBox_powerSupply_hcs_330.Controls.Add(this.txtCS3300_set_current);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_current);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_voltage);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_measure);
@@ -646,6 +750,115 @@
             this.groupBox_powerSupply_hcs_330.TabIndex = 0;
             this.groupBox_powerSupply_hcs_330.TabStop = false;
             this.groupBox_powerSupply_hcs_330.Text = "Manson  HCS  3300";
+            // 
+            // btnHCS_3300_get_set_value
+            // 
+            this.btnHCS_3300_get_set_value.Location = new System.Drawing.Point(7, 291);
+            this.btnHCS_3300_get_set_value.Name = "btnHCS_3300_get_set_value";
+            this.btnHCS_3300_get_set_value.Size = new System.Drawing.Size(200, 30);
+            this.btnHCS_3300_get_set_value.TabIndex = 14;
+            this.btnHCS_3300_get_set_value.Text = "Get Set Value";
+            this.btnHCS_3300_get_set_value.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_get_set_value.Click += new System.EventHandler(this.btnHCS_3300_get_set_value_Click);
+            // 
+            // btnHCS_3300_set
+            // 
+            this.btnHCS_3300_set.Location = new System.Drawing.Point(7, 398);
+            this.btnHCS_3300_set.Name = "btnHCS_3300_set";
+            this.btnHCS_3300_set.Size = new System.Drawing.Size(200, 30);
+            this.btnHCS_3300_set.TabIndex = 13;
+            this.btnHCS_3300_set.Text = "Set Voltage,Current";
+            this.btnHCS_3300_set.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_set.Click += new System.EventHandler(this.btnHCS_3300_set_Click);
+            // 
+            // labHCS3300_set_current
+            // 
+            this.labHCS3300_set_current.AutoSize = true;
+            this.labHCS3300_set_current.Location = new System.Drawing.Point(7, 366);
+            this.labHCS3300_set_current.Name = "labHCS3300_set_current";
+            this.labHCS3300_set_current.Size = new System.Drawing.Size(122, 20);
+            this.labHCS3300_set_current.TabIndex = 12;
+            this.labHCS3300_set_current.Text = "SET Current (A)";
+            // 
+            // labHCS3300_set_voltage
+            // 
+            this.labHCS3300_set_voltage.AutoSize = true;
+            this.labHCS3300_set_voltage.Location = new System.Drawing.Point(7, 337);
+            this.labHCS3300_set_voltage.Name = "labHCS3300_set_voltage";
+            this.labHCS3300_set_voltage.Size = new System.Drawing.Size(124, 20);
+            this.labHCS3300_set_voltage.TabIndex = 11;
+            this.labHCS3300_set_voltage.Text = "SET Voltage (V)";
+            // 
+            // labHCS3300_status
+            // 
+            this.labHCS3300_status.AutoSize = true;
+            this.labHCS3300_status.Location = new System.Drawing.Point(7, 251);
+            this.labHCS3300_status.Name = "labHCS3300_status";
+            this.labHCS3300_status.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_status.TabIndex = 10;
+            this.labHCS3300_status.Text = "label4";
+            // 
+            // txtCS3300_set_voltage
+            // 
+            this.txtCS3300_set_voltage.Location = new System.Drawing.Point(146, 331);
+            this.txtCS3300_set_voltage.Name = "txtCS3300_set_voltage";
+            this.txtCS3300_set_voltage.Size = new System.Drawing.Size(77, 26);
+            this.txtCS3300_set_voltage.TabIndex = 9;
+            // 
+            // txtCS3300_set_current
+            // 
+            this.txtCS3300_set_current.Location = new System.Drawing.Point(146, 363);
+            this.txtCS3300_set_current.Name = "txtCS3300_set_current";
+            this.txtCS3300_set_current.Size = new System.Drawing.Size(77, 26);
+            this.txtCS3300_set_current.TabIndex = 9;
+            // 
+            // labHCS3300_current
+            // 
+            this.labHCS3300_current.AutoSize = true;
+            this.labHCS3300_current.Location = new System.Drawing.Point(7, 219);
+            this.labHCS3300_current.Name = "labHCS3300_current";
+            this.labHCS3300_current.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_current.TabIndex = 8;
+            this.labHCS3300_current.Text = "label5";
+            // 
+            // labHCS3300_voltage
+            // 
+            this.labHCS3300_voltage.AutoSize = true;
+            this.labHCS3300_voltage.Location = new System.Drawing.Point(7, 191);
+            this.labHCS3300_voltage.Name = "labHCS3300_voltage";
+            this.labHCS3300_voltage.Size = new System.Drawing.Size(51, 20);
+            this.labHCS3300_voltage.TabIndex = 7;
+            this.labHCS3300_voltage.Text = "label4";
+            // 
+            // btnHCS_3300_measure
+            // 
+            this.btnHCS_3300_measure.Location = new System.Drawing.Point(7, 145);
+            this.btnHCS_3300_measure.Name = "btnHCS_3300_measure";
+            this.btnHCS_3300_measure.Size = new System.Drawing.Size(200, 30);
+            this.btnHCS_3300_measure.TabIndex = 6;
+            this.btnHCS_3300_measure.Text = "Measure";
+            this.btnHCS_3300_measure.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_measure.Click += new System.EventHandler(this.btnHCS_3300_measure_Click);
+            // 
+            // btnHCS_3300_off
+            // 
+            this.btnHCS_3300_off.Location = new System.Drawing.Point(107, 110);
+            this.btnHCS_3300_off.Name = "btnHCS_3300_off";
+            this.btnHCS_3300_off.Size = new System.Drawing.Size(90, 30);
+            this.btnHCS_3300_off.TabIndex = 5;
+            this.btnHCS_3300_off.Text = "OFF";
+            this.btnHCS_3300_off.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_off.Click += new System.EventHandler(this.btnHCS_3300_off_Click);
+            // 
+            // btnHCS_3300_on
+            // 
+            this.btnHCS_3300_on.Location = new System.Drawing.Point(7, 110);
+            this.btnHCS_3300_on.Name = "btnHCS_3300_on";
+            this.btnHCS_3300_on.Size = new System.Drawing.Size(90, 30);
+            this.btnHCS_3300_on.TabIndex = 4;
+            this.btnHCS_3300_on.Text = "ON";
+            this.btnHCS_3300_on.UseVisualStyleBackColor = true;
+            this.btnHCS_3300_on.Click += new System.EventHandler(this.btnHCS_3300_on_Click);
             // 
             // txtBosPowerSupply_1_1
             // 
@@ -688,9 +901,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(320, 43);
+            this.button3.Location = new System.Drawing.Point(628, 6);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(407, 40);
+            this.button3.Size = new System.Drawing.Size(407, 34);
             this.button3.TabIndex = 4;
             this.button3.Text = "Show ";
             this.button3.UseVisualStyleBackColor = true;
@@ -700,16 +913,16 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(308, 89);
+            this.listBox1.Location = new System.Drawing.Point(628, 89);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(802, 404);
+            this.listBox1.Size = new System.Drawing.Size(482, 404);
             this.listBox1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(776, 34);
+            this.button1.Location = new System.Drawing.Point(628, 46);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(324, 37);
+            this.button1.Size = new System.Drawing.Size(407, 37);
             this.button1.TabIndex = 2;
             this.button1.Text = "Save Idents";
             this.button1.UseVisualStyleBackColor = true;
@@ -717,20 +930,40 @@
             // 
             // groupBox_load_KEL103
             // 
+            this.groupBox_load_KEL103.Controls.Add(this.radioFunction_4);
+            this.groupBox_load_KEL103.Controls.Add(this.radioFunction_3);
+            this.groupBox_load_KEL103.Controls.Add(this.radioFunction_2);
+            this.groupBox_load_KEL103.Controls.Add(this.radioFunction_1);
+            this.groupBox_load_KEL103.Controls.Add(this.btnKEL103_get_set_value);
+            this.groupBox_load_KEL103.Controls.Add(this.label7);
+            this.groupBox_load_KEL103.Controls.Add(this.label6);
+            this.groupBox_load_KEL103.Controls.Add(this.label4);
+            this.groupBox_load_KEL103.Controls.Add(this.label5);
+            this.groupBox_load_KEL103.Controls.Add(this.labKEL103_resistance);
+            this.groupBox_load_KEL103.Controls.Add(this.labKEL103_power);
+            this.groupBox_load_KEL103.Controls.Add(this.textBox3);
+            this.groupBox_load_KEL103.Controls.Add(this.textBox6);
+            this.groupBox_load_KEL103.Controls.Add(this.textBox5);
+            this.groupBox_load_KEL103.Controls.Add(this.textBox4);
+            this.groupBox_load_KEL103.Controls.Add(this.labKEL103_current);
+            this.groupBox_load_KEL103.Controls.Add(this.labKEL103_voltaage);
+            this.groupBox_load_KEL103.Controls.Add(this.btnKEL103_measure);
+            this.groupBox_load_KEL103.Controls.Add(this.btnKEL103_off);
+            this.groupBox_load_KEL103.Controls.Add(this.btnKEL103_on);
             this.groupBox_load_KEL103.Controls.Add(this.btnLoad_KEL103_ident);
             this.groupBox_load_KEL103.Controls.Add(this.txtBoxLoad_KEL103_ident);
             this.groupBox_load_KEL103.Location = new System.Drawing.Point(28, 22);
             this.groupBox_load_KEL103.Name = "groupBox_load_KEL103";
-            this.groupBox_load_KEL103.Size = new System.Drawing.Size(235, 519);
+            this.groupBox_load_KEL103.Size = new System.Drawing.Size(336, 559);
             this.groupBox_load_KEL103.TabIndex = 1;
             this.groupBox_load_KEL103.TabStop = false;
             this.groupBox_load_KEL103.Text = "KORAD KEL103";
             // 
             // btnLoad_KEL103_ident
             // 
-            this.btnLoad_KEL103_ident.Location = new System.Drawing.Point(6, 67);
+            this.btnLoad_KEL103_ident.Location = new System.Drawing.Point(6, 31);
             this.btnLoad_KEL103_ident.Name = "btnLoad_KEL103_ident";
-            this.btnLoad_KEL103_ident.Size = new System.Drawing.Size(170, 30);
+            this.btnLoad_KEL103_ident.Size = new System.Drawing.Size(300, 30);
             this.btnLoad_KEL103_ident.TabIndex = 3;
             this.btnLoad_KEL103_ident.Text = "button1";
             this.btnLoad_KEL103_ident.UseVisualStyleBackColor = true;
@@ -738,9 +971,9 @@
             // 
             // txtBoxLoad_KEL103_ident
             // 
-            this.txtBoxLoad_KEL103_ident.Location = new System.Drawing.Point(6, 103);
+            this.txtBoxLoad_KEL103_ident.Location = new System.Drawing.Point(5, 67);
             this.txtBoxLoad_KEL103_ident.Name = "txtBoxLoad_KEL103_ident";
-            this.txtBoxLoad_KEL103_ident.Size = new System.Drawing.Size(217, 26);
+            this.txtBoxLoad_KEL103_ident.Size = new System.Drawing.Size(303, 26);
             this.txtBoxLoad_KEL103_ident.TabIndex = 2;
             // 
             // timer1
@@ -748,165 +981,193 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnXDM3051_measure
+            // btnKEL103_get_set_value
             // 
-            this.btnXDM3051_measure.Location = new System.Drawing.Point(7, 135);
-            this.btnXDM3051_measure.Name = "btnXDM3051_measure";
-            this.btnXDM3051_measure.Size = new System.Drawing.Size(169, 30);
-            this.btnXDM3051_measure.TabIndex = 2;
-            this.btnXDM3051_measure.Text = "button4";
-            this.btnXDM3051_measure.UseVisualStyleBackColor = true;
-            this.btnXDM3051_measure.Click += new System.EventHandler(this.btnXDM3051_measure_Click);
+            this.btnKEL103_get_set_value.Location = new System.Drawing.Point(2, 273);
+            this.btnKEL103_get_set_value.Name = "btnKEL103_get_set_value";
+            this.btnKEL103_get_set_value.Size = new System.Drawing.Size(300, 30);
+            this.btnKEL103_get_set_value.TabIndex = 26;
+            this.btnKEL103_get_set_value.Text = "Get Set Value";
+            this.btnKEL103_get_set_value.UseVisualStyleBackColor = true;
+            this.btnKEL103_get_set_value.Click += new System.EventHandler(this.btnKEL103_get_set_value_Click);
             // 
-            // txtBox_XDM3051_measure
+            // label4
             // 
-            this.txtBox_XDM3051_measure.Location = new System.Drawing.Point(64, 172);
-            this.txtBox_XDM3051_measure.Name = "txtBox_XDM3051_measure";
-            this.txtBox_XDM3051_measure.Size = new System.Drawing.Size(113, 26);
-            this.txtBox_XDM3051_measure.TabIndex = 1;
-            // 
-            // labXDM3051_measure_ok
-            // 
-            this.labXDM3051_measure_ok.AutoSize = true;
-            this.labXDM3051_measure_ok.Location = new System.Drawing.Point(10, 177);
-            this.labXDM3051_measure_ok.Name = "labXDM3051_measure_ok";
-            this.labXDM3051_measure_ok.Size = new System.Drawing.Size(51, 20);
-            this.labXDM3051_measure_ok.TabIndex = 3;
-            this.labXDM3051_measure_ok.Text = "label4";
-            // 
-            // txtBox_XDM2041_measure
-            // 
-            this.txtBox_XDM2041_measure.Location = new System.Drawing.Point(63, 171);
-            this.txtBox_XDM2041_measure.Name = "txtBox_XDM2041_measure";
-            this.txtBox_XDM2041_measure.Size = new System.Drawing.Size(113, 26);
-            this.txtBox_XDM2041_measure.TabIndex = 1;
-            // 
-            // labXDM2041_measure_ok
-            // 
-            this.labXDM2041_measure_ok.AutoSize = true;
-            this.labXDM2041_measure_ok.Location = new System.Drawing.Point(9, 176);
-            this.labXDM2041_measure_ok.Name = "labXDM2041_measure_ok";
-            this.labXDM2041_measure_ok.Size = new System.Drawing.Size(51, 20);
-            this.labXDM2041_measure_ok.TabIndex = 3;
-            this.labXDM2041_measure_ok.Text = "label4";
-            // 
-            // btnXDM2041_measure
-            // 
-            this.btnXDM2041_measure.Location = new System.Drawing.Point(13, 136);
-            this.btnXDM2041_measure.Name = "btnXDM2041_measure";
-            this.btnXDM2041_measure.Size = new System.Drawing.Size(163, 29);
-            this.btnXDM2041_measure.TabIndex = 4;
-            this.btnXDM2041_measure.Text = "button4";
-            this.btnXDM2041_measure.UseVisualStyleBackColor = true;
-            this.btnXDM2041_measure.Click += new System.EventHandler(this.btnXDM2041_measure_Click);
-            // 
-            // btnXDM1041_measure
-            // 
-            this.btnXDM1041_measure.Location = new System.Drawing.Point(7, 136);
-            this.btnXDM1041_measure.Name = "btnXDM1041_measure";
-            this.btnXDM1041_measure.Size = new System.Drawing.Size(169, 29);
-            this.btnXDM1041_measure.TabIndex = 3;
-            this.btnXDM1041_measure.Text = "button4";
-            this.btnXDM1041_measure.UseVisualStyleBackColor = true;
-            this.btnXDM1041_measure.Click += new System.EventHandler(this.btnXDM1041_measure_Click);
-            // 
-            // txtBox_XDM1041_measure
-            // 
-            this.txtBox_XDM1041_measure.Location = new System.Drawing.Point(63, 170);
-            this.txtBox_XDM1041_measure.Name = "txtBox_XDM1041_measure";
-            this.txtBox_XDM1041_measure.Size = new System.Drawing.Size(113, 26);
-            this.txtBox_XDM1041_measure.TabIndex = 1;
-            // 
-            // labXDM1041_measure_ok
-            // 
-            this.labXDM1041_measure_ok.AutoSize = true;
-            this.labXDM1041_measure_ok.Location = new System.Drawing.Point(6, 174);
-            this.labXDM1041_measure_ok.Name = "labXDM1041_measure_ok";
-            this.labXDM1041_measure_ok.Size = new System.Drawing.Size(51, 20);
-            this.labXDM1041_measure_ok.TabIndex = 3;
-            this.labXDM1041_measure_ok.Text = "label4";
-            // 
-            // btnHCS_3300_on
-            // 
-            this.btnHCS_3300_on.Location = new System.Drawing.Point(7, 110);
-            this.btnHCS_3300_on.Name = "btnHCS_3300_on";
-            this.btnHCS_3300_on.Size = new System.Drawing.Size(100, 30);
-            this.btnHCS_3300_on.TabIndex = 4;
-            this.btnHCS_3300_on.Text = "ON";
-            this.btnHCS_3300_on.UseVisualStyleBackColor = true;
-            this.btnHCS_3300_on.Click += new System.EventHandler(this.btnHCS_3300_on_Click);
-            // 
-            // btnHCS_3300_off
-            // 
-            this.btnHCS_3300_off.Location = new System.Drawing.Point(113, 110);
-            this.btnHCS_3300_off.Name = "btnHCS_3300_off";
-            this.btnHCS_3300_off.Size = new System.Drawing.Size(100, 30);
-            this.btnHCS_3300_off.TabIndex = 5;
-            this.btnHCS_3300_off.Text = "OFF";
-            this.btnHCS_3300_off.UseVisualStyleBackColor = true;
-            this.btnHCS_3300_off.Click += new System.EventHandler(this.btnHCS_3300_off_Click);
-            // 
-            // btnHCS_3300_measure
-            // 
-            this.btnHCS_3300_measure.Location = new System.Drawing.Point(7, 145);
-            this.btnHCS_3300_measure.Name = "btnHCS_3300_measure";
-            this.btnHCS_3300_measure.Size = new System.Drawing.Size(200, 30);
-            this.btnHCS_3300_measure.TabIndex = 6;
-            this.btnHCS_3300_measure.Text = "Measure";
-            this.btnHCS_3300_measure.UseVisualStyleBackColor = true;
-            this.btnHCS_3300_measure.Click += new System.EventHandler(this.btnHCS_3300_measure_Click);
-            // 
-            // labHCS3300_voltage
-            // 
-            this.labHCS3300_voltage.AutoSize = true;
-            this.labHCS3300_voltage.Location = new System.Drawing.Point(7, 191);
-            this.labHCS3300_voltage.Name = "labHCS3300_voltage";
-            this.labHCS3300_voltage.Size = new System.Drawing.Size(51, 20);
-            this.labHCS3300_voltage.TabIndex = 7;
-            this.labHCS3300_voltage.Text = "label4";
-            // 
-            // labHCS3300_current
-            // 
-            this.labHCS3300_current.AutoSize = true;
-            this.labHCS3300_current.Location = new System.Drawing.Point(7, 219);
-            this.labHCS3300_current.Name = "labHCS3300_current";
-            this.labHCS3300_current.Size = new System.Drawing.Size(51, 20);
-            this.labHCS3300_current.TabIndex = 8;
-            this.labHCS3300_current.Text = "label5";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(7, 417);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(202, 26);
-            this.textBox3.TabIndex = 9;
-            // 
-            // labHCS3300_status
-            // 
-            this.labHCS3300_status.AutoSize = true;
-            this.labHCS3300_status.Location = new System.Drawing.Point(7, 251);
-            this.labHCS3300_status.Name = "labHCS3300_status";
-            this.labHCS3300_status.Size = new System.Drawing.Size(51, 20);
-            this.labHCS3300_status.TabIndex = 10;
-            this.labHCS3300_status.Text = "label4";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 346);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(122, 20);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "SET Current (A)";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 326);
+            this.label5.Location = new System.Drawing.Point(1, 315);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "label5";
+            this.label5.Size = new System.Drawing.Size(124, 20);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "SET Voltage (V)";
+            // 
+            // labKEL103_power
+            // 
+            this.labKEL103_power.AutoSize = true;
+            this.labKEL103_power.Location = new System.Drawing.Point(6, 215);
+            this.labKEL103_power.Name = "labKEL103_power";
+            this.labKEL103_power.Size = new System.Drawing.Size(51, 20);
+            this.labKEL103_power.TabIndex = 22;
+            this.labKEL103_power.Text = "label4";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(189, 313);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(77, 26);
+            this.textBox3.TabIndex = 20;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(189, 346);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(77, 26);
+            this.textBox4.TabIndex = 21;
+            // 
+            // labKEL103_current
+            // 
+            this.labKEL103_current.AutoSize = true;
+            this.labKEL103_current.Location = new System.Drawing.Point(6, 192);
+            this.labKEL103_current.Name = "labKEL103_current";
+            this.labKEL103_current.Size = new System.Drawing.Size(51, 20);
+            this.labKEL103_current.TabIndex = 19;
+            this.labKEL103_current.Text = "label5";
+            // 
+            // labKEL103_voltaage
+            // 
+            this.labKEL103_voltaage.AutoSize = true;
+            this.labKEL103_voltaage.Location = new System.Drawing.Point(6, 168);
+            this.labKEL103_voltaage.Name = "labKEL103_voltaage";
+            this.labKEL103_voltaage.Size = new System.Drawing.Size(51, 20);
+            this.labKEL103_voltaage.TabIndex = 18;
+            this.labKEL103_voltaage.Text = "label4";
+            // 
+            // btnKEL103_measure
+            // 
+            this.btnKEL103_measure.Location = new System.Drawing.Point(8, 135);
+            this.btnKEL103_measure.Name = "btnKEL103_measure";
+            this.btnKEL103_measure.Size = new System.Drawing.Size(300, 30);
+            this.btnKEL103_measure.TabIndex = 17;
+            this.btnKEL103_measure.Text = "Measure";
+            this.btnKEL103_measure.UseVisualStyleBackColor = true;
+            this.btnKEL103_measure.Click += new System.EventHandler(this.btnKEL103_measure_Click);
+            // 
+            // btnKEL103_off
+            // 
+            this.btnKEL103_off.Location = new System.Drawing.Point(178, 99);
+            this.btnKEL103_off.Name = "btnKEL103_off";
+            this.btnKEL103_off.Size = new System.Drawing.Size(130, 30);
+            this.btnKEL103_off.TabIndex = 16;
+            this.btnKEL103_off.Text = "OFF";
+            this.btnKEL103_off.UseVisualStyleBackColor = true;
+            this.btnKEL103_off.Click += new System.EventHandler(this.btnKEL103_off_Click);
+            // 
+            // btnKEL103_on
+            // 
+            this.btnKEL103_on.Location = new System.Drawing.Point(6, 99);
+            this.btnKEL103_on.Name = "btnKEL103_on";
+            this.btnKEL103_on.Size = new System.Drawing.Size(130, 30);
+            this.btnKEL103_on.TabIndex = 15;
+            this.btnKEL103_on.Text = "ON";
+            this.btnKEL103_on.UseVisualStyleBackColor = true;
+            this.btnKEL103_on.Click += new System.EventHandler(this.btnKEL103_on_Click);
+            // 
+            // labKEL103_resistance
+            // 
+            this.labKEL103_resistance.AutoSize = true;
+            this.labKEL103_resistance.Location = new System.Drawing.Point(6, 238);
+            this.labKEL103_resistance.Name = "labKEL103_resistance";
+            this.labKEL103_resistance.Size = new System.Drawing.Size(51, 20);
+            this.labKEL103_resistance.TabIndex = 22;
+            this.labKEL103_resistance.Text = "label4";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(189, 379);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(77, 26);
+            this.textBox5.TabIndex = 21;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(189, 411);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(77, 26);
+            this.textBox6.TabIndex = 21;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 350);
+            this.label6.Location = new System.Drawing.Point(1, 379);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 20);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "label6";
+            this.label6.Size = new System.Drawing.Size(117, 20);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "SET Power (W)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(-1, 411);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(161, 20);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "SET Resistane (ohm)";
+            // 
+            // radioFunction_1
+            // 
+            this.radioFunction_1.AutoSize = true;
+            this.radioFunction_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.radioFunction_1.Location = new System.Drawing.Point(284, 319);
+            this.radioFunction_1.Name = "radioFunction_1";
+            this.radioFunction_1.Size = new System.Drawing.Size(14, 13);
+            this.radioFunction_1.TabIndex = 27;
+            this.radioFunction_1.TabStop = true;
+            this.radioFunction_1.UseVisualStyleBackColor = true;
+            this.radioFunction_1.CheckedChanged += new System.EventHandler(this.radioFunction_1_CheckedChanged);
+            // 
+            // radioFunction_2
+            // 
+            this.radioFunction_2.AutoSize = true;
+            this.radioFunction_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.radioFunction_2.Location = new System.Drawing.Point(284, 352);
+            this.radioFunction_2.Name = "radioFunction_2";
+            this.radioFunction_2.Size = new System.Drawing.Size(14, 13);
+            this.radioFunction_2.TabIndex = 27;
+            this.radioFunction_2.TabStop = true;
+            this.radioFunction_2.UseVisualStyleBackColor = true;
+            this.radioFunction_2.CheckedChanged += new System.EventHandler(this.radioFunction_2_CheckedChanged);
+            // 
+            // radioFunction_3
+            // 
+            this.radioFunction_3.AutoSize = true;
+            this.radioFunction_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.radioFunction_3.Location = new System.Drawing.Point(284, 387);
+            this.radioFunction_3.Name = "radioFunction_3";
+            this.radioFunction_3.Size = new System.Drawing.Size(14, 13);
+            this.radioFunction_3.TabIndex = 27;
+            this.radioFunction_3.TabStop = true;
+            this.radioFunction_3.UseVisualStyleBackColor = true;
+            this.radioFunction_3.CheckedChanged += new System.EventHandler(this.radioFunction_3_CheckedChanged);
+            // 
+            // radioFunction_4
+            // 
+            this.radioFunction_4.AutoSize = true;
+            this.radioFunction_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.radioFunction_4.Location = new System.Drawing.Point(284, 421);
+            this.radioFunction_4.Name = "radioFunction_4";
+            this.radioFunction_4.Size = new System.Drawing.Size(14, 13);
+            this.radioFunction_4.TabIndex = 27;
+            this.radioFunction_4.TabStop = true;
+            this.radioFunction_4.UseVisualStyleBackColor = true;
+            this.radioFunction_4.CheckedChanged += new System.EventHandler(this.radioFunction_4_CheckedChanged);
             // 
             // all_devices
             // 
@@ -1023,9 +1284,32 @@
         private System.Windows.Forms.Label labHCS3300_current;
         private System.Windows.Forms.Label labHCS3300_voltage;
         private System.Windows.Forms.Button btnHCS_3300_measure;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCS3300_set_current;
+        private System.Windows.Forms.Label labHCS3300_set_current;
+        private System.Windows.Forms.Label labHCS3300_set_voltage;
         private System.Windows.Forms.Label labHCS3300_status;
+        private System.Windows.Forms.TextBox txtCS3300_set_voltage;
+        private System.Windows.Forms.Button btnHCS_3300_set;
+        private System.Windows.Forms.Button btnHCS_3300_get_set_value;
+        private System.Windows.Forms.Button btnKEL103_get_set_value;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labKEL103_power;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label labKEL103_current;
+        private System.Windows.Forms.Label labKEL103_voltaage;
+        private System.Windows.Forms.Button btnKEL103_measure;
+        private System.Windows.Forms.Button btnKEL103_off;
+        private System.Windows.Forms.Button btnKEL103_on;
+        private System.Windows.Forms.Label labKEL103_resistance;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.RadioButton radioFunction_4;
+        private System.Windows.Forms.RadioButton radioFunction_3;
+        private System.Windows.Forms.RadioButton radioFunction_2;
+        private System.Windows.Forms.RadioButton radioFunction_1;
     }
 }
