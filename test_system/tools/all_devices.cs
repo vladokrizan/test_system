@@ -24,6 +24,7 @@ namespace test_system
         multimeter_XDM2041 multimeter_XDM2041 = new multimeter_XDM2041();
         multimeter_XDM1041 multimeter_XDM1041 = new multimeter_XDM1041();
 
+        owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
 
         modbus_functions modbus_functions = new modbus_functions();
@@ -38,6 +39,7 @@ namespace test_system
         private void all_devices_Load(object sender, EventArgs e)
         {
 
+            radioXDM3051_dc_range_5.Checked = true;
         }
         #endregion
 
@@ -55,6 +57,18 @@ namespace test_system
                 }
             }
 
+            if ( complete_device_ET391_read_all_temperature )
+            {
+
+                labComplete_temperature_1.Text = "Temp 1  " + device_ET3916_temperature[1].ToString("0.00");
+                labComplete_temperature_2.Text = "Temp 2  " + device_ET3916_temperature[2].ToString("0.00");
+                labComplete_temperature_3.Text = "Temp 3  " + device_ET3916_temperature[3].ToString("0.00");
+                labComplete_temperature_4.Text = "Temp 4  " + device_ET3916_temperature[4].ToString("0.00");
+                labComplete_temperature_5.Text = "Temp 5  " + device_ET3916_temperature[5].ToString("0.00");
+                labComplete_temperature_6.Text = "Temp 6  " + device_ET3916_temperature[6].ToString("0.00");
+                labComplete_temperature_7.Text = "Temp 7  " + device_ET3916_temperature[7].ToString("0.00");
+                labComplete_temperature_8.Text = "Temp 8  " + device_ET3916_temperature[8].ToString("0.00");
+            }
 
 
             if (device_RD6006_show_all_measure)
@@ -64,7 +78,6 @@ namespace test_system
                 labRD6006_set_volt.Text = "Set Voltage      " + rd6006_setVoltage.ToString("0.00") + " V";
                 labRD6006_set_curr.Text = "Set Current      " + rd6006_setCurrent.ToString("0.00") + " A";
                 labRD6006_inp_volt.Text = "Input Voltage    " + rd6006_InputVoltage.ToString("0.00") + " V";
-
                 labRD6006_out_volt.Text = "Output Voltage   " + rd6006_OutputVoltag.ToString("0.00") + " V";
                 labRD6006_out_curr.Text = "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
                 labRD6006_out_power.Text = "Output Power     " + rd6006_OutputPower.ToString("0.00") + " W";
@@ -72,11 +85,9 @@ namespace test_system
             if (device_RD6024_show_all_measure)
             {
                 device_RD6024_show_all_measure = false;
-
                 labRD6024_set_volt.Text = "Set Voltage      " + rd6024_setVoltage.ToString("0.00") + " V";
                 labRD6024_set_curr.Text = "Set Current      " + rd6024_setCurrent.ToString("0.00") + " A";
                 labRD6024_inp_volt.Text = "Input Voltage    " + rd6024_InputVoltage.ToString("0.00") + " V";
-
                 labRD6024_out_volt.Text = "Output Voltage   " + rd6024_OutputVoltag.ToString("0.00") + " V";
                 labRD6024_out_curr.Text = "Output Current   " + rd6024_OutputCurrent.ToString("0.00") + " A";
                 labRD6024_out_power.Text = "Output Power     " + rd6024_OutputPower.ToString("0.00") + " W";
@@ -86,10 +97,8 @@ namespace test_system
             if (device_MPM1010B_show_data)
             {
                 device_MPM1010B_show_data = false;
-
                 labMPM1010B_voltage.Text = device_MPM1010B_voltage.ToString();
             }
-
 
 
         }
@@ -142,7 +151,7 @@ namespace test_system
         {
             HSC3300_set_set_voltage = txtCS3300_set_voltage.Text;
             HSC3300_set_set_current = txtCS3300_set_current.Text;
-            power_supply_hcs_3300.fun_HCS_330_set_voltage();
+            power_supply_hcs_3300.fun_HCS_330_set_voltage(1);
             power_supply_hcs_3300.fun_HCS_330_set_current();
         }
 
@@ -151,8 +160,13 @@ namespace test_system
         private void btnHCS_3300_get_set_value_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_3300_get_limit();
-            txtCS3300_set_voltage.Text = HSC3300_set_set_voltage.ToString();
-            txtCS3300_set_current.Text = HSC3300_set_set_current.ToString();
+            txtCS3300_set_voltage.Text = HSC3300_get_set_voltage.ToString();
+            txtCS3300_set_current.Text = HSC3300_get_set_current.ToString();
+
+            //strGeneralString = "receeive  " + COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300].ToString() + "   <" + ">   Voltage =      " + HSC3300_get_set_voltage.ToString()+ "    " + HSC3300_get_set_current.ToString();
+
+
+
         }
 
 
@@ -259,6 +273,12 @@ namespace test_system
 
         }
 
+        private void btnET3916_measure_Click(object sender, EventArgs e)
+        {
+            complete_device_ET391_read_all_temperature = true;
+            temperature_ET3916.fun_ET3916_read_all_temperature();
+
+        }
 
         /*
                 private void button3_Click(object sender, EventArgs e)
@@ -315,6 +335,24 @@ namespace test_system
             labXDM3051_measure_ok.Text = device_XDM3051_measure_ok.ToString();
         }
 
+        private void btnXDM3051_get_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM3051.fun_XDM3051_get_range_dc_volt();
+            labXDM3051_DC_range.Text = device_XDM3051_range_dc_volt.ToString();
+        }
+
+
+        private void btnXDM3051_set_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            if (radioXDM3051_dc_range_1.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(0.2);
+            if (radioXDM3051_dc_range_2.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(2);
+            if (radioXDM3051_dc_range_3.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(20);
+            if (radioXDM3051_dc_range_4.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(200);
+            if (radioXDM3051_dc_range_5.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(1000);
+        }
+
+
+
         #endregion
 
         #region " Multimeter --- OWON  --- XDM2041 ----  "
@@ -326,7 +364,6 @@ namespace test_system
             multimeter_XDM2041.fun_XDM2041_identifaction();
             txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
         }
-
         //=======================================================================================================================
         //=======================================================================================================================
         private void btnXDM2041_measure_Click(object sender, EventArgs e)
@@ -335,6 +372,14 @@ namespace test_system
             txtBox_XDM2041_measure.Text = device_XDM2041_measure.ToString();
             labXDM2041_measure_ok.Text = device_XDM2041_measure_ok.ToString();
         }
+
+        private void btnXDM2041_get_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            var (returnState, returnValue) = owon_multimeter_common.fun_owon_get_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041);
+            labXDM2041_DC_range.Text = returnValue.ToString();
+
+        }
+
         #endregion
         #region " Multimeter --- OWON  --- XDM1041 ----  "
         //=======================================================================================================================
@@ -361,7 +406,21 @@ namespace test_system
             multimeter_XDM1041.fun_XDM1041_identifaction();
             txtBox_XDM1041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041];
         }
+
+        private void btnXDM1041_get_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            var (returnState, returnValue) = owon_multimeter_common.fun_owon_get_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041);
+            labXDM1041_DC_range.Text = returnValue.ToString();
+
+        }
+
+
         #endregion
+
+
+
+
+
 
 
         #endregion
@@ -382,25 +441,13 @@ namespace test_system
 
         private void btnKEL103_on_Click(object sender, EventArgs e)
         {
-            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
-            {
-                if (COMport_active[COMport_SELECT_LOAD_KEL103])
-                {
-                    dc_load_KEL103.fun_KEL103_on();
-                }
-            }
-        }
+                      dc_load_KEL103.fun_KEL103_on();
+         }
 
         private void btnKEL103_off_Click(object sender, EventArgs e)
         {
-            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
-            {
-                if (COMport_active[COMport_SELECT_LOAD_KEL103])
-                {
-                    dc_load_KEL103.fun_KEL103_off();
-                }
-            }
-
+                     dc_load_KEL103.fun_KEL103_off();
+ 
         }
 
         private void btnKEL103_measure_Click(object sender, EventArgs e)
@@ -412,21 +459,32 @@ namespace test_system
                     dc_load_KEL103.fun_KEL103_get_voltage();
                     dc_load_KEL103.fun_KEL103_get_current();
                     dc_load_KEL103.fun_KEL103_get_power();
-                    dc_load_KEL103.fun_KEL103_get_resistance();
+                    //dc_load_KEL103.fun_KEL103_get_resistance();
 
-
-
-
+                    labKEL103_voltaage.Text = KEL103_voltage.ToString();
+                    labKEL103_current.Text = KEL103_current.ToString();
+                    labKEL103_power.Text = KEL103_power.ToString();
+                    //labKEL103_resistance.Text = KEL103_resistance.ToString();
                 }
-
-
             }
-
-
         }
 
         private void btnKEL103_get_set_value_Click(object sender, EventArgs e)
         {
+            dc_load_KEL103.fun_KEL103_get_set_voltage();
+            dc_load_KEL103.fun_KEL103_get_set_cureent();
+            dc_load_KEL103.fun_KEL103_get_set_power();
+            
+            txtKEL103_voltage.Text = KEL103_get_set_voltage.ToString();
+            txtKEL103_curr.Text = KEL103_get_set_current.ToString();
+            txtKEL103_power.Text = KEL103_get_set_power.ToString();
+
+
+            /*
+                             public static double KEL103_get_set_voltage = 0;
+                    public static double KEL103_get_set_current = 0;
+                    public static double KEL103_get_set_power = 0;
+            */
 
         }
 
@@ -455,6 +513,26 @@ namespace test_system
         {
             dc_load_KEL103.fun_KEL103_set_function(KEL103_SET_FUN_RESISTANCE);
         }
+
+
+        //--    :CURRent 2ASet the CC voltage as 2A :CURRent?>2AThe CC current is 2A
+        private void txtKEL103_curr_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if ( e=System.ke)
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                string valueSetting= txtKEL103_curr.Text;
+                //string valueSetting_pika = valueSetting.Replace(",", ".");
+                KEL103_set_set_current = Convert.ToDouble(valueSetting);
+
+                dc_load_KEL103.fun_KEL103_set_cureent (KEL103_set_set_current);
+
+ 
+            }
+
+        }
+
 
 
         #endregion
@@ -494,7 +572,14 @@ namespace test_system
 
         }
 
-      
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void txtKEL103_curr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     }

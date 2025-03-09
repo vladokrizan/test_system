@@ -94,9 +94,10 @@ namespace test_system
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
                     mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":MEAS:VOLT?");
-                    string read_raw_value = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
-
-                    KEL103_voltage = 0;
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                    string read_raw_value = read_raw_value_raw.Replace("V", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_voltage = Convert.ToDouble(read_raw_value_float);    
                 }
             }
             return 0;
@@ -118,8 +119,11 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
-                    KEL103_current = 0;
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":MEAS:CURR?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                    string read_raw_value = read_raw_value_raw.Replace("A", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_current = Convert.ToDouble(read_raw_value_float);
                 }
             }
             return 0;
@@ -138,8 +142,12 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
-                    KEL103_power = 0;
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":MEAS:POW?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                   // strGeneralString = read_raw_value_raw;
+                    string read_raw_value = read_raw_value_raw.Replace("W", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_power = Convert.ToDouble(read_raw_value_float);
                 }
             }
             return 0;
@@ -157,8 +165,19 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":MEAS:RES?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                     strGeneralString = read_raw_value_raw;
+                     string read_raw_value = read_raw_value_raw.Replace("A", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_current = Convert.ToDouble(read_raw_value_float);
+
+                    /*
+                    string read_raw_value = read_raw_value_raw.Replace("W", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_power = Convert.ToDouble(read_raw_value_float);
                     KEL103_resistance = 0;
+                    */
                 }
             }
             return 0;
@@ -176,31 +195,62 @@ namespace test_system
         //=======================================================================================================================
         //--    :CURRent:CURR   <NR2>MAX|MIN    Set the CC current and query it 
         //--    :CURRent 2ASet the CC voltage as 2A :CURRent?>2AThe CC current is 2A
-        public funErrorCode fun_KEL103_set_cureent( double setValue )
+        public funErrorCode fun_KEL103_get_set_cureent()
         {
             if (COMport_connected[COMport_SELECT_LOAD_KEL103])
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":CURR?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                    string read_raw_value = read_raw_value_raw.Replace("A", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_get_set_current = Convert.ToDouble(read_raw_value_float);
+
                 }
             }
             return (funErrorCode.OK);
         }
-
-
-
+        public funErrorCode fun_KEL103_set_cureent(double setValue)
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    string setValueString = setValue.ToString("");
+                    string setValueString_pika = setValueString.Replace(",", ".");
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":CURR " + setValueString_pika+"A");
+                  }
+            }
+            return (funErrorCode.OK);
+        }
+   
         //=======================================================================================================================
         //=======================================================================================================================
         //--    :VOLTage:VOLT   <NR2>MAX|MIN    Set CV voltage and query CV voltage
         //--    :VOLTage 20VSet the CV voltage as 20V   :VOLTage?>20VThe CV voltage is 20V
+        public funErrorCode fun_KEL103_get_set_voltage()
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":VOLT?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                    string read_raw_value = read_raw_value_raw.Replace("V", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_get_set_voltage = Convert.ToDouble(read_raw_value_float);
+                }
+            }
+            return (funErrorCode.OK);
+        }
         public funErrorCode fun_KEL103_set_voltage(double setValue)
         {
             if (COMport_connected[COMport_SELECT_LOAD_KEL103])
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                  //  mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
                 }
             }
             return (funErrorCode.OK);
@@ -217,7 +267,7 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                   // mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
                 }
             }
             return (funErrorCode.OK);
@@ -228,17 +278,36 @@ namespace test_system
         //=======================================================================================================================
         //--    :POWer:POW  <NR2>MAX|MIN    Set the CW power and query it
         //--    :POWer 20WSet the CW power as 20W   :POWer?>20WThe CW power is 20W
+        public funErrorCode fun_KEL103_get_set_power()
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":POW?");
+                    string read_raw_value_raw = mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].ReadLine();
+                    // strGeneralString = read_raw_value_raw;
+                    string read_raw_value = read_raw_value_raw.Replace("W", "");
+                    string read_raw_value_float = read_raw_value.Replace(".", ",");
+                    KEL103_get_set_power = Convert.ToDouble(read_raw_value_float);
+                }
+            }
+            return (funErrorCode.OK);
+        }
         public funErrorCode fun_KEL103_set_power(double setValue)
         {
             if (COMport_connected[COMport_SELECT_LOAD_KEL103])
             {
                 if (COMport_active[COMport_SELECT_LOAD_KEL103])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                    //mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
                 }
             }
             return (funErrorCode.OK);
         }
+
+
+      
 
         //=======================================================================================================================
         //=======================================================================================================================

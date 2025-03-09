@@ -58,31 +58,8 @@ namespace test_system
             {
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Write(device_ET3916_dataArraySend, 0, device_ET3916_bytes_to_send);
                 mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].DiscardInBuffer();
-                //mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 10);
-                //strGeneralString = ((Char)(read_buffer[4])).ToString() + ((Char)(read_buffer[5])).ToString() + ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
-            }
+             }
         }
-
-
-
-
-
-        /*
-                def send_request(self, command_bytes ):
-                    self.sendBytesReguest=bytearray(b'\xFE')
-                    CRCNumberBytes = bytearray(command_bytes)
-                    #print (CRCNumberBytes , hex (CRCNumberBytes[0]), hex (CRCNumberBytes[1]) , hex (CRCNumberBytes[2])  )
-                    crc = self.calc_crc(CRCNumberBytes)
-                    my_bytes = crc.to_bytes(2, byteorder = 'little')
-                    self.sendBytesReguest.append(CRCNumberBytes[0])
-                    self.sendBytesReguest.append(CRCNumberBytes[1])
-                    self.sendBytesReguest.append(CRCNumberBytes[2])
-                    self.sendBytesReguest.append(my_bytes[0])
-                    self.sendBytesReguest.append(my_bytes[1])
-                    print(hex (self.sendBytesReguest[0]), hex (self.sendBytesReguest[1]) , hex (self.sendBytesReguest[2]) , hex (self.sendBytesReguest[3]), hex (self.sendBytesReguest[4]), hex (self.sendBytesReguest[5]) )
-                    self.serialPort.write(self.sendBytesReguest)
-        */
-
 
 
         //=======================================================================================================================
@@ -244,39 +221,23 @@ namespace test_system
             device_ET3916_read_all_temperature = false;
             if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
             {
-                mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 37);
-                //strGeneralString = (read_buffer[4]).ToString()+"  " + (read_buffer[5]).ToString() +"   " + (read_buffer[6]).ToString() + "   " + (read_buffer[7]).ToString() + "   " + ((Char)(read_buffer[8])).ToString() + "   " + (read_buffer[9]).ToString();
-
-                device_ET3916_temperature[1] = System.BitConverter.ToSingle(read_buffer, 5);
-                device_ET3916_temperature[2] = System.BitConverter.ToSingle(read_buffer, 9);
-                device_ET3916_temperature[3] = System.BitConverter.ToSingle(read_buffer, 13);
-                device_ET3916_temperature[4] = System.BitConverter.ToSingle(read_buffer, 17);
-                device_ET3916_temperature[5] = System.BitConverter.ToSingle(read_buffer, 21);
-                device_ET3916_temperature[6] = System.BitConverter.ToSingle(read_buffer, 25);
-                device_ET3916_temperature[7] = System.BitConverter.ToSingle(read_buffer, 29);
-                device_ET3916_temperature[8] = System.BitConverter.ToSingle(read_buffer, 33);
-
-
+                if (COMport_active[COMport_SELECT_TEMPERATURE_ET3916])
+                {
+                    try
+                    {
+                        mainWindow.COMportSerial[COMport_SELECT_TEMPERATURE_ET3916].Read(read_buffer, 0, 37);
+                        device_ET3916_temperature[1] = System.BitConverter.ToSingle(read_buffer, 5);
+                        device_ET3916_temperature[2] = System.BitConverter.ToSingle(read_buffer, 9);
+                        device_ET3916_temperature[3] = System.BitConverter.ToSingle(read_buffer, 13);
+                        device_ET3916_temperature[4] = System.BitConverter.ToSingle(read_buffer, 17);
+                        device_ET3916_temperature[5] = System.BitConverter.ToSingle(read_buffer, 21);
+                        device_ET3916_temperature[6] = System.BitConverter.ToSingle(read_buffer, 25);
+                        device_ET3916_temperature[7] = System.BitConverter.ToSingle(read_buffer, 29);
+                        device_ET3916_temperature[8] = System.BitConverter.ToSingle(read_buffer, 33);
+                    }
+                    catch (Exception) { }
+                }
             }
-
-            /*
-            //--  19.33707 ° C
-            read_buffer[4] = 0x54;
-            read_buffer[5] = 0xB2;
-            read_buffer[6] = 0x9A;
-            read_buffer[7] = 0x41;
-
-            device_ET3916_temperature[1] = System.BitConverter.ToSingle(read_buffer, 4);
-
-            read_buffer[8] = 0x39;
-            read_buffer[9] = 0x1C;
-            read_buffer[10] = 0x99;
-            read_buffer[11] = 0x41;
-
-            device_ET3916_temperature[2] = System.BitConverter.ToSingle(read_buffer, 8);
-            */
-
-
         }
 
 

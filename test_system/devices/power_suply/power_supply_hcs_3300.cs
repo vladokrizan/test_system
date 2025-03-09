@@ -101,24 +101,25 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
                 {
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
-                    fun_send_command("GETD\r");
-                    Thread.Sleep(20);
-                    COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300]);
-                    COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300] = Encoding.UTF8.GetString(read_buffer);
-                    string voltage = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(0, 4);
-                    int voltage_value = Convert.ToInt16(voltage);
-                    HSC3300_out_voltage = ((double)voltage_value) / 100;
-                    string current = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(4, 4);
-                    int current_value = Convert.ToInt16(current);
-                    HSC3300_out_current = ((double)current_value) / 100;
-                    string status = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(8, 1);
-                    if (status == "0") HSC3300_out_status = "constant Voltage";
-                    if (status == "1") HSC3300_out_status = "constant Current";
-                    //  public static double HSC3300_out_voltage = 0;
-                    //public static double HSC3300_out_current = 0;
-                    //strGeneralString = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300];
+                    try
+                    {
+                        mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
+                        fun_send_command("GETD\r");
+                        Thread.Sleep(20);
+                        COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
+                        mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300]);
+                        COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300] = Encoding.UTF8.GetString(read_buffer);
+                        string voltage = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(0, 4);
+                        int voltage_value = Convert.ToInt16(voltage);
+                        HSC3300_out_voltage = ((double)voltage_value) / 100;
+                        string current = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(4, 4);
+                        int current_value = Convert.ToInt16(current);
+                        HSC3300_out_current = ((double)current_value) / 100;
+                        string status = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(8, 1);
+                        if (status == "0") HSC3300_out_status = "constant Voltage";
+                        if (status == "1") HSC3300_out_status = "constant Current";
+                    }
+                    catch { }
                 }
             }
 
@@ -133,6 +134,7 @@ namespace test_system
         //--    GETS[CR]
         //--    Return value:   150180[CR] OK[CR]
         //--          Meaning:    The Voltage value set at 15V and Current value set at 18A
+        //--    
         //=======================================================================================================================
         public void fun_HCS_3300_get_limit()
         {
@@ -144,18 +146,15 @@ namespace test_system
                     fun_send_command("GETS\r");
                     Thread.Sleep(20);
                     COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300] = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].BytesToRead;
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300]);
+                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].Read(read_buffer, 0, COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300] - 4);
                     COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300] = Encoding.UTF8.GetString(read_buffer);
-
-
-                    string voltage = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(0, 3);
+                    string correct_string = functions.fun_ascii_only(COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300]);
+                    string voltage = correct_string.Substring(0, 3);
                     int voltage_value = Convert.ToInt16(voltage);
                     HSC3300_get_set_voltage = ((double)voltage_value) / 10;
-
-                    string current = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300].Substring(3, 4);
+                    string current = correct_string.Substring(3, 3);
                     int current_value = Convert.ToInt16(current);
                     HSC3300_get_set_current = ((double)current_value) / 10;
-
                 }
             }
         }
@@ -166,31 +165,31 @@ namespace test_system
         //--    VOLT127[CR]             Set Voltage value as 12.7V
         //--      Return value:   OK[CR] Meaning:    
         //=======================================================================================================================
-        public void fun_HCS_330_set_voltage()
+        public void fun_HCS_330_set_voltage(double set_voltage )
         {
-            double setValue;
+            //double setValue;
             string setValueString;
             if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
             {
                 if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
                 {
                     mainWindow.COMportSerial[COMport_SELECT_SUPPLY_HCS_3300].DiscardInBuffer();
+                    // strGeneralString = HSC3300_set_set_voltage;
+                    //setValue = Convert.ToDouble(HSC3300_set_set_voltage);
+                    set_voltage = set_voltage * 10;
+                    if (set_voltage > 160) set_voltage = 160;
+
+                    setValueString = set_voltage.ToString();
+
+                    if (set_voltage < 10) setValueString = "00" + setValueString;
+                    else if (set_voltage < 100) setValueString = "0" + setValueString;
+                    if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
+                    fun_send_command("VOLT"+ setValueString+"\r");
+                    strGeneralString = setValueString.ToString();
                 }
             }
-            // strGeneralString = HSC3300_set_set_voltage;
-            setValue = Convert.ToDouble(HSC3300_set_set_voltage);
-            setValue = setValue * 10;
-            if (setValue > 160) setValue = 160;
 
-            setValueString = setValue.ToString();
-
-            if (setValue < 10) setValueString = "00" + setValueString;
-            else if (setValue < 100) setValueString = "0" + setValueString;
-            if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
-
-
-            strGeneralString = setValueString.ToString();
-        }
+         }
 
 
         //=======================================================================================================================
@@ -208,21 +207,17 @@ namespace test_system
             {
                 if (COMport_active[COMport_SELECT_SUPPLY_HCS_3300])
                 {
+                    setValue = Convert.ToDouble(HSC3300_set_set_current);
+                    setValue = setValue * 10;
+                    if (setValue > 300) setValue = 160;
+                    setValueString = setValue.ToString();
+                    if (setValue < 10) setValueString = "00" + setValueString;
+                    else if (setValue < 100) setValueString = "0" + setValueString;
+                    if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
+                    fun_send_command("CURR" + setValueString + "\r");
+                    strGeneralString = strGeneralString + "    " + setValueString.ToString();
                 }
             }
-            setValue = Convert.ToDouble(HSC3300_set_set_current);
-            setValue = setValue * 10;
-            if (setValue > 300) setValue = 160;
-
-            setValueString = setValue.ToString();
-
-            if (setValue < 10) setValueString = "00" + setValueString;
-            else if (setValue < 100) setValueString = "0" + setValueString;
-            if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
-
-
-            strGeneralString = strGeneralString + "    " + setValueString.ToString();
-
 
 
 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -16,8 +17,23 @@ using static test_system.program_10;
 
 namespace test_system
 {
-    public partial class program_10_test_supply_multimeter: Form
+    public partial class program_10_test_supply_multimeter : Form
     {
+
+        ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
+        temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
+        power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
+        power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
+        power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
+        multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
+        multimeter_XDM2041 multimeter_XDM2041 = new multimeter_XDM2041();
+        multimeter_XDM1041 multimeter_XDM1041 = new multimeter_XDM1041();
+
+        owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
+        dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
+
+
+
         public program_10_test_supply_multimeter()
         {
             InitializeComponent();
@@ -65,37 +81,120 @@ namespace test_system
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double voltage_XDM3051 = 10.51241;
-            double voltage_supply_set = 10.5;
 
-            program10_value.Clear();
-
-
-            program10_value.Add("SUPPLY KA3305P part 1 SET (V) ", voltage_supply_set.ToString("0.000"));
-            program10_value.Add("SUPPLY KA3305P part 1 GET (V) ", "10,1");
-            program10_value.Add("Multimeter XDM3051 (V) ", voltage_XDM3051.ToString("0.000"));
-            program10_value.Add("Multimeter XDM2041 (V) ", "10,11");
-            //program10_value.Add("Multimeter XDM1041 (V) ", "10,12");
-
-            program10_value["Multimeter XDM1041 (V)"] = "100,5555";
-
-
-
-
-            funWriteLogFile_program10();
+            button1.Enabled = false;
+            program_bool_run = true;
+            program_bool_run_start = true;
+            program_int_step_time_set = 5;
 
         }
 
         #region "TIMER  .. izvajanje programa  "
 
+        double set_voltage = 1.0;
+
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             labCurrentProgram.Text = program10_current_selected_program;
+
+            if (program_bool_run)
+            {
+                if (program_bool_run_start) fun_program10_start();
+                if (program_bool_run_stop) fun_program10_stop();
+                if (++program_int_step_time_run > program_int_step_time_set) { program_int_step_time_run = 0; fun_program10_step(); }
+
+
+
+
+            }
+
+
         }
 
-        #endregion
+   
 
+        #endregion
+        #region "program funkcije   "
+
+        private void fun_program10_start()
+        {
+            program_bool_run_start = false;
+
+            multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(20);
+
+            power_supply_hcs_3300.fun_HCS_330_set_voltage(set_voltage);
+            Thread.Sleep(5000);
+
+            dc_load_KEL103.fun_KEL103_set_cureent(1);
+            dc_load_KEL103.fun_KEL103_on();
+
+            temperature_ET3916.fun_ET3916_read_all_temperature();
+
+
+
+        }
+        private void fun_program10_stop()
+        {
+            program_bool_run_stop = false;
+         
+            power_supply_hcs_3300.fun_HCS_330_set_voltage(1);
+            dc_load_KEL103.fun_KEL103_off();
+
+            program_bool_run = false;
+
+            button1.Enabled = true;
+
+
+        }
+
+        private void fun_program10_step()
+        {
+
+            power_supply_hcs_3300.fun_HCS_330_set_voltage(set_voltage);
+
+            program10_value.Clear();
+            power_supply_hcs_3300.fun_HCS_330_get_measure();
+            program10_value.Add("HCS-3300 Voltage (V) ", HSC3300_out_voltage.ToString("0.00"));
+            program10_value.Add("HCS-3300 Current (A) ", HSC3300_out_current.ToString("0.00"));
+
+            multimeter_XDM3051.fun_XDM3051_measure();
+            if (device_XDM3051_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
+            else
+            {
+                multimeter_XDM3051.fun_XDM3051_measure();
+                if (device_XDM3051_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
+            }
+            multimeter_XDM2041.fun_XDM2041_measure();
+            if (device_XDM2041_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM2041 (V) ", device_XDM2041_measure.ToString());
+            multimeter_XDM1041.fun_XDM1041_measure();
+            if (device_XDM1041_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM1041 (V) ", device_XDM1041_measure.ToString());
+
+            dc_load_KEL103.fun_KEL103_get_voltage();
+            dc_load_KEL103.fun_KEL103_get_current();
+            dc_load_KEL103.fun_KEL103_get_power();
+            program10_value.Add("DC LOAD KEL103 Voltage (V) ", KEL103_voltage.ToString());
+            program10_value.Add("DC LOAD KEL103 Current (V) ", KEL103_current.ToString());
+            program10_value.Add("DC LOAD KEL103 Power (V) ", KEL103_power.ToString());
+
+            program10_value.Add("ET3916: temperature 1 (degC) ", device_ET3916_temperature[1].ToString());
+            program10_value.Add("ET3916: temperature 2 (degC) ", device_ET3916_temperature[2].ToString());
+
+            temperature_ET3916.fun_ET3916_read_all_temperature();
+
+            funWriteLogFile_program10();
+            set_voltage = set_voltage + 0.1;
+
+            if (set_voltage > 16 )      {         program_bool_run_stop = true;           }
+
+
+        }
+
+
+
+
+        #endregion
         #region "izbira programa  "
 
         //=======================================================================================================================
@@ -108,7 +207,7 @@ namespace test_system
 
         private void comboBox_select_program_Click(object sender, EventArgs e)
         {
-     
+
         }
         #endregion
 
@@ -117,11 +216,11 @@ namespace test_system
 
         //=======================================================================================================================
         //=======================================================================================================================
-        private void fun_set_log_file_name ()
+        private void fun_set_log_file_name()
         {
             program10_current_selected_program = comboBox_select_program.Text;
-             string[] comboBoxParts = program10_current_selected_program.Split(':');
-             strLogFiles_program10 = System.Environment.CurrentDirectory + "\\" + strSubFolderLog + ".\\"  + "program_10_"+ comboBoxParts[0] +  "_delay_" + program10_delay_after_set_supply.ToString() +"_"+ DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") +".csv";
+            string[] comboBoxParts = program10_current_selected_program.Split(':');
+            strLogFiles_program10 = System.Environment.CurrentDirectory + "\\" + strSubFolderLog + ".\\" + "program_10_" + comboBoxParts[0] + "_delay_" + program10_delay_after_set_supply.ToString() + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".csv";
 
         }
 
@@ -153,8 +252,8 @@ namespace test_system
                         fileDataLine = fileDataLine + diagnosisValueLocal.Value + strExcelSeparator;
                     sw.WriteLine(fileDataLine);
                 }
-             }
-            catch (Exception ex) {  }
+            }
+            catch (Exception ex) { }
         }
 
 

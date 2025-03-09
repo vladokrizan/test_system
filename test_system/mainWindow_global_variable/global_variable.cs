@@ -152,6 +152,7 @@ namespace test_system
         public static funErrorCode device_XDM3051_measure_ok;
         public static double device_XDM3051_measure;
 
+        public static int device_XDM3051_range_dc_volt;
 
         #endregion
         #region "OWON  --- multimeter   -----      XDM2041    "
@@ -197,6 +198,7 @@ namespace test_system
 
 
 
+        #endregion
         #endregion
         #region "COMport variable in konstante"
         //-----------------------------------------------------------------------------------------------------------------------
@@ -389,6 +391,21 @@ namespace test_system
         #endregion
 
 
+        #region "RUN program variable"
+
+        public static bool program_bool_run = false;
+        public static bool program_bool_run_start = false;
+        public static bool program_bool_run_stop = false;
+
+        public static int program_int_counter_run = 0;
+        public static int program_int_counter_set = 0;
+
+
+        public static int program_int_step_time_run = 0;
+        public static int program_int_step_time_set = 0;
+
+
+        #endregion
 
 
 

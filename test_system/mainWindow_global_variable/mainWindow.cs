@@ -113,6 +113,9 @@ namespace test_system
             intMainWindow_x = this.Location.X;
             intMainWindow_y = this.Location.Y;
 
+            program_1 program_1 = new program_1();
+            program_1.MdiParent = this;
+            program_1.Show();
 
         }
 
@@ -325,6 +328,7 @@ namespace test_system
             //-- prikaz prikljucenih COM portov in aktivnih instrumentov 
             fun_show_connected_device();
             textBox1.Text = strGeneralString;
+            label3.Text = strGeneralString;
 
             label1.Text = COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold.ToString() + "   " + COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold.ToString();
 

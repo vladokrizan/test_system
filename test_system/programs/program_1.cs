@@ -76,11 +76,17 @@ namespace test_system
 
         private void fun_increase_device_counter(int select_device)
         {
-            if (COMport_device_ident[select_device].Length > 5)
+            try
             {
-                program_counter++;
+                if (COMport_device_ident[select_device] != null)
+                {
+                    if (COMport_device_ident[select_device].Length > 2)
+                    {
+                        program_counter++;
+                    }
+                }
             }
-
+            catch { }
         }
 
         private void fun_set_one_device(int select_device)
@@ -159,6 +165,10 @@ namespace test_system
                 {
                     if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
                     {
+
+
+
+                        /*
                         if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916].Length > 5)
                         {
                             fun_set_one_device(COMport_SELECT_TEMPERATURE_ET3916);
@@ -167,6 +177,9 @@ namespace test_system
                         {
                             program_counter = 5;
                         }
+                        */
+                        program_counter++;
+
                     }
                     else program_counter++;
                 }
