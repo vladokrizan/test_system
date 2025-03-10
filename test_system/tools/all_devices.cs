@@ -40,6 +40,8 @@ namespace test_system
         {
 
             radioXDM3051_dc_range_5.Checked = true;
+            radioXDM2041_dc_range_6.Checked = true;
+            radioXDM1041_dc_range_4.Checked = true;
         }
         #endregion
 
@@ -379,6 +381,22 @@ namespace test_system
             labXDM2041_DC_range.Text = returnValue.ToString();
 
         }
+        private void btnXDM2041_set_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            if (radioXDM2041_dc_range_1.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 0.05);
+            if (radioXDM2041_dc_range_2.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 0.5);
+            if (radioXDM2041_dc_range_3.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 5);
+            if (radioXDM2041_dc_range_4.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 50);
+            if (radioXDM2041_dc_range_5.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 500);
+            if (radioXDM2041_dc_range_6.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 1000);
+
+
+
+
+        }
+
+        //--owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM2041, 50);
+
 
         #endregion
         #region " Multimeter --- OWON  --- XDM1041 ----  "
@@ -387,7 +405,7 @@ namespace test_system
         private void btnXDM1041_measure_Click(object sender, EventArgs e)
         {
             multimeter_XDM1041.fun_XDM1041_measure();
-            if (device_XDM1041_measure_ok == funErrorCode.OK)
+            if (device_XDM1041_measure_ok == funReturnCodeCOMport.OK)
             {
                 txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
                 labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
@@ -413,6 +431,17 @@ namespace test_system
             labXDM1041_DC_range.Text = returnValue.ToString();
 
         }
+
+
+        private void btnXDM1041_set_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            if (radioXDM1041_dc_range_1.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 5);
+            if (radioXDM1041_dc_range_2.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 50);
+            if (radioXDM1041_dc_range_3.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 500);
+            if (radioXDM1041_dc_range_4.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 1000);
+
+        }
+
 
 
         #endregion
@@ -579,6 +608,12 @@ namespace test_system
 
         private void txtKEL103_curr_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM1041, 0.0005);
 
         }
     }

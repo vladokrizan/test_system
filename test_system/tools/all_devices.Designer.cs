@@ -35,12 +35,11 @@
             this.labMPM1010B_voltage = new System.Windows.Forms.Label();
             this.btnMPM1010B_measure = new System.Windows.Forms.Button();
             this.groupBox_multimeter_XDM2041 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioXDM2041_dc_range_5 = new System.Windows.Forms.RadioButton();
+            this.radioXDM2041_dc_range_4 = new System.Windows.Forms.RadioButton();
+            this.radioXDM2041_dc_range_3 = new System.Windows.Forms.RadioButton();
+            this.radioXDM2041_dc_range_2 = new System.Windows.Forms.RadioButton();
+            this.radioXDM2041_dc_range_1 = new System.Windows.Forms.RadioButton();
             this.labXDM2041_DC_range = new System.Windows.Forms.Label();
             this.btnXDM2041_get_range_dc_volt = new System.Windows.Forms.Button();
             this.btnXDM2041_measure = new System.Windows.Forms.Button();
@@ -49,12 +48,11 @@
             this.txtBox_XDM2041_ident = new System.Windows.Forms.TextBox();
             this.txtBox_XDM2041_measure = new System.Windows.Forms.TextBox();
             this.groupBox_multimeter_XDM1041 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.btnXDM1041_set_range_dc_volt = new System.Windows.Forms.Button();
+            this.radioXDM1041_dc_range_4 = new System.Windows.Forms.RadioButton();
+            this.radioXDM1041_dc_range_3 = new System.Windows.Forms.RadioButton();
+            this.radioXDM1041_dc_range_2 = new System.Windows.Forms.RadioButton();
+            this.radioXDM1041_dc_range_1 = new System.Windows.Forms.RadioButton();
             this.labXDM1041_DC_range = new System.Windows.Forms.Label();
             this.btnXDM1041_get_range_dc_volt = new System.Windows.Forms.Button();
             this.btnXDM1041_measure = new System.Windows.Forms.Button();
@@ -158,6 +156,9 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnXDM2041_set_range_dc_volt = new System.Windows.Forms.Button();
+            this.radioXDM2041_dc_range_6 = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -187,6 +188,7 @@
             // 
             // tabMultimeter
             // 
+            this.tabMultimeter.Controls.Add(this.button2);
             this.tabMultimeter.Controls.Add(this.groupBox_AC_meter_MPM_1010B);
             this.tabMultimeter.Controls.Add(this.groupBox_multimeter_XDM2041);
             this.tabMultimeter.Controls.Add(this.groupBox_multimeter_XDM1041);
@@ -233,12 +235,13 @@
             // 
             // groupBox_multimeter_XDM2041
             // 
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.button2);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioButton1);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioButton2);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioButton3);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioButton4);
-            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioButton5);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_6);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_set_range_dc_volt);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_5);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_4);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_3);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_2);
+            this.groupBox_multimeter_XDM2041.Controls.Add(this.radioXDM2041_dc_range_1);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.labXDM2041_DC_range);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_get_range_dc_volt);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_measure);
@@ -253,69 +256,60 @@
             this.groupBox_multimeter_XDM2041.TabStop = false;
             this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
             // 
-            // button2
+            // radioXDM2041_dc_range_5
             // 
-            this.button2.Location = new System.Drawing.Point(16, 433);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 30);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Set";
-            this.button2.UseVisualStyleBackColor = true;
+            this.radioXDM2041_dc_range_5.AutoSize = true;
+            this.radioXDM2041_dc_range_5.Location = new System.Drawing.Point(24, 387);
+            this.radioXDM2041_dc_range_5.Name = "radioXDM2041_dc_range_5";
+            this.radioXDM2041_dc_range_5.Size = new System.Drawing.Size(69, 24);
+            this.radioXDM2041_dc_range_5.TabIndex = 18;
+            this.radioXDM2041_dc_range_5.TabStop = true;
+            this.radioXDM2041_dc_range_5.Text = "500 V";
+            this.radioXDM2041_dc_range_5.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioXDM2041_dc_range_4
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(24, 403);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(78, 24);
-            this.radioButton1.TabIndex = 18;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "1000 V";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioXDM2041_dc_range_4.AutoSize = true;
+            this.radioXDM2041_dc_range_4.Location = new System.Drawing.Point(24, 358);
+            this.radioXDM2041_dc_range_4.Name = "radioXDM2041_dc_range_4";
+            this.radioXDM2041_dc_range_4.Size = new System.Drawing.Size(60, 24);
+            this.radioXDM2041_dc_range_4.TabIndex = 17;
+            this.radioXDM2041_dc_range_4.TabStop = true;
+            this.radioXDM2041_dc_range_4.Text = "50 V";
+            this.radioXDM2041_dc_range_4.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radioXDM2041_dc_range_3
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(24, 373);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(65, 24);
-            this.radioButton2.TabIndex = 17;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "200V";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioXDM2041_dc_range_3.AutoSize = true;
+            this.radioXDM2041_dc_range_3.Location = new System.Drawing.Point(24, 331);
+            this.radioXDM2041_dc_range_3.Name = "radioXDM2041_dc_range_3";
+            this.radioXDM2041_dc_range_3.Size = new System.Drawing.Size(47, 24);
+            this.radioXDM2041_dc_range_3.TabIndex = 16;
+            this.radioXDM2041_dc_range_3.TabStop = true;
+            this.radioXDM2041_dc_range_3.Text = "5V";
+            this.radioXDM2041_dc_range_3.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // radioXDM2041_dc_range_2
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(24, 343);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(56, 24);
-            this.radioButton3.TabIndex = 16;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "20V";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioXDM2041_dc_range_2.AutoSize = true;
+            this.radioXDM2041_dc_range_2.Location = new System.Drawing.Point(24, 305);
+            this.radioXDM2041_dc_range_2.Name = "radioXDM2041_dc_range_2";
+            this.radioXDM2041_dc_range_2.Size = new System.Drawing.Size(82, 24);
+            this.radioXDM2041_dc_range_2.TabIndex = 15;
+            this.radioXDM2041_dc_range_2.TabStop = true;
+            this.radioXDM2041_dc_range_2.Text = "500 mV";
+            this.radioXDM2041_dc_range_2.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radioXDM2041_dc_range_1
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(24, 313);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(47, 24);
-            this.radioButton4.TabIndex = 15;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "2V";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(24, 283);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(82, 24);
-            this.radioButton5.TabIndex = 14;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "200 mV";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioXDM2041_dc_range_1.AutoSize = true;
+            this.radioXDM2041_dc_range_1.Location = new System.Drawing.Point(24, 281);
+            this.radioXDM2041_dc_range_1.Name = "radioXDM2041_dc_range_1";
+            this.radioXDM2041_dc_range_1.Size = new System.Drawing.Size(73, 24);
+            this.radioXDM2041_dc_range_1.TabIndex = 14;
+            this.radioXDM2041_dc_range_1.TabStop = true;
+            this.radioXDM2041_dc_range_1.Text = "50 mV";
+            this.radioXDM2041_dc_range_1.UseVisualStyleBackColor = true;
             // 
             // labXDM2041_DC_range
             // 
@@ -381,12 +375,11 @@
             // 
             // groupBox_multimeter_XDM1041
             // 
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.button5);
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioButton6);
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioButton7);
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioButton8);
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioButton9);
-            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioButton10);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_set_range_dc_volt);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioXDM1041_dc_range_4);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioXDM1041_dc_range_3);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioXDM1041_dc_range_2);
+            this.groupBox_multimeter_XDM1041.Controls.Add(this.radioXDM1041_dc_range_1);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.labXDM1041_DC_range);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_get_range_dc_volt);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_measure);
@@ -401,69 +394,59 @@
             this.groupBox_multimeter_XDM1041.TabStop = false;
             this.groupBox_multimeter_XDM1041.Text = "OWON XDM1041 ";
             // 
-            // button5
+            // btnXDM1041_set_range_dc_volt
             // 
-            this.button5.Location = new System.Drawing.Point(10, 428);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(70, 30);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Set";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnXDM1041_set_range_dc_volt.Location = new System.Drawing.Point(8, 375);
+            this.btnXDM1041_set_range_dc_volt.Name = "btnXDM1041_set_range_dc_volt";
+            this.btnXDM1041_set_range_dc_volt.Size = new System.Drawing.Size(70, 30);
+            this.btnXDM1041_set_range_dc_volt.TabIndex = 19;
+            this.btnXDM1041_set_range_dc_volt.Text = "Set";
+            this.btnXDM1041_set_range_dc_volt.UseVisualStyleBackColor = true;
+            this.btnXDM1041_set_range_dc_volt.Click += new System.EventHandler(this.btnXDM1041_set_range_dc_volt_Click);
             // 
-            // radioButton6
+            // radioXDM1041_dc_range_4
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(18, 398);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(78, 24);
-            this.radioButton6.TabIndex = 18;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "1000 V";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioXDM1041_dc_range_4.AutoSize = true;
+            this.radioXDM1041_dc_range_4.Location = new System.Drawing.Point(18, 351);
+            this.radioXDM1041_dc_range_4.Name = "radioXDM1041_dc_range_4";
+            this.radioXDM1041_dc_range_4.Size = new System.Drawing.Size(78, 24);
+            this.radioXDM1041_dc_range_4.TabIndex = 17;
+            this.radioXDM1041_dc_range_4.TabStop = true;
+            this.radioXDM1041_dc_range_4.Text = "1000 V";
+            this.radioXDM1041_dc_range_4.UseVisualStyleBackColor = true;
             // 
-            // radioButton7
+            // radioXDM1041_dc_range_3
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(18, 368);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(65, 24);
-            this.radioButton7.TabIndex = 17;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "200V";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioXDM1041_dc_range_3.AutoSize = true;
+            this.radioXDM1041_dc_range_3.Location = new System.Drawing.Point(18, 327);
+            this.radioXDM1041_dc_range_3.Name = "radioXDM1041_dc_range_3";
+            this.radioXDM1041_dc_range_3.Size = new System.Drawing.Size(69, 24);
+            this.radioXDM1041_dc_range_3.TabIndex = 16;
+            this.radioXDM1041_dc_range_3.TabStop = true;
+            this.radioXDM1041_dc_range_3.Text = "500 V";
+            this.radioXDM1041_dc_range_3.UseVisualStyleBackColor = true;
             // 
-            // radioButton8
+            // radioXDM1041_dc_range_2
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(18, 338);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(56, 24);
-            this.radioButton8.TabIndex = 16;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "20V";
-            this.radioButton8.UseVisualStyleBackColor = true;
+            this.radioXDM1041_dc_range_2.AutoSize = true;
+            this.radioXDM1041_dc_range_2.Location = new System.Drawing.Point(18, 303);
+            this.radioXDM1041_dc_range_2.Name = "radioXDM1041_dc_range_2";
+            this.radioXDM1041_dc_range_2.Size = new System.Drawing.Size(60, 24);
+            this.radioXDM1041_dc_range_2.TabIndex = 15;
+            this.radioXDM1041_dc_range_2.TabStop = true;
+            this.radioXDM1041_dc_range_2.Text = "50 V";
+            this.radioXDM1041_dc_range_2.UseVisualStyleBackColor = true;
             // 
-            // radioButton9
+            // radioXDM1041_dc_range_1
             // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(18, 308);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(47, 24);
-            this.radioButton9.TabIndex = 15;
-            this.radioButton9.TabStop = true;
-            this.radioButton9.Text = "2V";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // radioButton10
-            // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(18, 278);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(82, 24);
-            this.radioButton10.TabIndex = 14;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "200 mV";
-            this.radioButton10.UseVisualStyleBackColor = true;
+            this.radioXDM1041_dc_range_1.AutoSize = true;
+            this.radioXDM1041_dc_range_1.Location = new System.Drawing.Point(18, 278);
+            this.radioXDM1041_dc_range_1.Name = "radioXDM1041_dc_range_1";
+            this.radioXDM1041_dc_range_1.Size = new System.Drawing.Size(51, 24);
+            this.radioXDM1041_dc_range_1.TabIndex = 14;
+            this.radioXDM1041_dc_range_1.TabStop = true;
+            this.radioXDM1041_dc_range_1.Text = "5 V";
+            this.radioXDM1041_dc_range_1.UseVisualStyleBackColor = true;
             // 
             // labXDM1041_DC_range
             // 
@@ -575,10 +558,10 @@
             this.radioXDM3051_dc_range_4.AutoSize = true;
             this.radioXDM3051_dc_range_4.Location = new System.Drawing.Point(14, 377);
             this.radioXDM3051_dc_range_4.Name = "radioXDM3051_dc_range_4";
-            this.radioXDM3051_dc_range_4.Size = new System.Drawing.Size(65, 24);
+            this.radioXDM3051_dc_range_4.Size = new System.Drawing.Size(69, 24);
             this.radioXDM3051_dc_range_4.TabIndex = 9;
             this.radioXDM3051_dc_range_4.TabStop = true;
-            this.radioXDM3051_dc_range_4.Text = "200V";
+            this.radioXDM3051_dc_range_4.Text = "200 V";
             this.radioXDM3051_dc_range_4.UseVisualStyleBackColor = true;
             // 
             // radioXDM3051_dc_range_3
@@ -586,10 +569,10 @@
             this.radioXDM3051_dc_range_3.AutoSize = true;
             this.radioXDM3051_dc_range_3.Location = new System.Drawing.Point(14, 347);
             this.radioXDM3051_dc_range_3.Name = "radioXDM3051_dc_range_3";
-            this.radioXDM3051_dc_range_3.Size = new System.Drawing.Size(56, 24);
+            this.radioXDM3051_dc_range_3.Size = new System.Drawing.Size(60, 24);
             this.radioXDM3051_dc_range_3.TabIndex = 8;
             this.radioXDM3051_dc_range_3.TabStop = true;
-            this.radioXDM3051_dc_range_3.Text = "20V";
+            this.radioXDM3051_dc_range_3.Text = "20 V";
             this.radioXDM3051_dc_range_3.UseVisualStyleBackColor = true;
             // 
             // radioXDM3051_dc_range_2
@@ -1513,6 +1496,37 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnXDM2041_set_range_dc_volt
+            // 
+            this.btnXDM2041_set_range_dc_volt.Location = new System.Drawing.Point(13, 440);
+            this.btnXDM2041_set_range_dc_volt.Name = "btnXDM2041_set_range_dc_volt";
+            this.btnXDM2041_set_range_dc_volt.Size = new System.Drawing.Size(75, 33);
+            this.btnXDM2041_set_range_dc_volt.TabIndex = 19;
+            this.btnXDM2041_set_range_dc_volt.Text = "button2";
+            this.btnXDM2041_set_range_dc_volt.UseVisualStyleBackColor = true;
+            this.btnXDM2041_set_range_dc_volt.Click += new System.EventHandler(this.btnXDM2041_set_range_dc_volt_Click);
+            // 
+            // radioXDM2041_dc_range_6
+            // 
+            this.radioXDM2041_dc_range_6.AutoSize = true;
+            this.radioXDM2041_dc_range_6.Location = new System.Drawing.Point(24, 412);
+            this.radioXDM2041_dc_range_6.Name = "radioXDM2041_dc_range_6";
+            this.radioXDM2041_dc_range_6.Size = new System.Drawing.Size(78, 24);
+            this.radioXDM2041_dc_range_6.TabIndex = 20;
+            this.radioXDM2041_dc_range_6.TabStop = true;
+            this.radioXDM2041_dc_range_6.Text = "1000 V";
+            this.radioXDM2041_dc_range_6.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(660, 179);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(105, 41);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1667,21 +1681,22 @@
         private System.Windows.Forms.RadioButton radioXDM3051_dc_range_3;
         private System.Windows.Forms.RadioButton radioXDM3051_dc_range_2;
         private System.Windows.Forms.Button btnXDM3051_set_range_dc_volt;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_5;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_4;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_3;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_2;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_1;
         private System.Windows.Forms.Label labXDM2041_DC_range;
         private System.Windows.Forms.Button btnXDM2041_get_range_dc_volt;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.Button btnXDM1041_set_range_dc_volt;
+        private System.Windows.Forms.RadioButton radioXDM1041_dc_range_4;
+        private System.Windows.Forms.RadioButton radioXDM1041_dc_range_3;
+        private System.Windows.Forms.RadioButton radioXDM1041_dc_range_2;
+        private System.Windows.Forms.RadioButton radioXDM1041_dc_range_1;
         private System.Windows.Forms.Label labXDM1041_DC_range;
         private System.Windows.Forms.Button btnXDM1041_get_range_dc_volt;
+        private System.Windows.Forms.Button btnXDM2041_set_range_dc_volt;
+        private System.Windows.Forms.RadioButton radioXDM2041_dc_range_6;
+        private System.Windows.Forms.Button button2;
     }
 }

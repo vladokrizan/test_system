@@ -149,7 +149,7 @@ namespace test_system
 
         #region "OWON  --- multimeter   -----      XDM3051    "
         //public static string device_XDM3051_ident = "";
-        public static funErrorCode device_XDM3051_measure_ok;
+        public static funReturnCodeCOMport device_XDM3051_measure_ok;
         public static double device_XDM3051_measure;
 
         public static int device_XDM3051_range_dc_volt;
@@ -157,7 +157,7 @@ namespace test_system
         #endregion
         #region "OWON  --- multimeter   -----      XDM2041    "
         //public static string device_XDM1041_ident = "";
-        public static funErrorCode device_XDM2041_measure_ok;
+        public static funReturnCodeCOMport device_XDM2041_measure_ok;
         public static double device_XDM2041_measure;
 
 
@@ -165,7 +165,7 @@ namespace test_system
         #endregion
         #region "OWON  --- multimeter   -----      XDM1041    "
         //public static string device_XDM1041_ident = "";
-        public static funErrorCode device_XDM1041_measure_ok;
+        public static funReturnCodeCOMport device_XDM1041_measure_ok;
         public static double device_XDM1041_measure;
 
 
@@ -359,14 +359,13 @@ namespace test_system
         //-----------------------------------------------------------------------------------------
         //--  function return code   
         //-----------------------------------------------------------------------------------------
-        public enum funErrorCode
+        public enum funReturnCodeCOMport
         {
             OK,                         //--  0: functions runs correct 
             NOK,                        //--  1: functions runs uncorect 
             ERROR,                      //--  2: in functions happen ERROR  
-            COM_PORT_NOT_SELECTED,
-            COM_PORT_NOT_CONNECTED,
-            COM_PORT_ACTIVE,
+            NOT_CONNECTED,
+            NOT_ACTIVE,
             UNKNOW                       //--   in unknow state of function   
         }
 

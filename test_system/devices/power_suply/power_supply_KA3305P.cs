@@ -25,7 +25,7 @@ namespace test_system
         /// </summary>
         //=======================================================================================================================
 
-        public funErrorCode fun_KA3305P_get_voltage_current(int select_channel)
+        public funReturnCodeCOMport fun_KA3305P_get_voltage_current(int select_channel)
         {
             string send_command;
             string read_answer;
@@ -53,11 +53,11 @@ namespace test_system
                     }
 
 
-                    return (funErrorCode.OK);
+                    return (funReturnCodeCOMport.OK);
                 }
-                return (funErrorCode.COM_PORT_ACTIVE);
+                return (funReturnCodeCOMport.NOT_ACTIVE);
             }
-            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+            return (funReturnCodeCOMport.NOT_CONNECTED);
         }
 
 
@@ -75,7 +75,7 @@ namespace test_system
         /// 
         /// <returns></returns>
         //=======================================================================================================================
-        public funErrorCode fun_KA3305P_set_voltage(int select_channel, double set_voltage)
+        public funReturnCodeCOMport fun_KA3305P_set_voltage(int select_channel, double set_voltage)
         {
             string send_command;
             string read_answer;
@@ -84,11 +84,11 @@ namespace test_system
                 if (COMport_active[COMport_SELECT_SUPPLY_KA3305A])
                 {
 
-                    return (funErrorCode.OK);
+                    return (funReturnCodeCOMport.OK);
                 }
-                return (funErrorCode.COM_PORT_ACTIVE);
+                return (funReturnCodeCOMport.NOT_ACTIVE);
             }
-            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+            return (funReturnCodeCOMport.NOT_CONNECTED);
         }
 
 

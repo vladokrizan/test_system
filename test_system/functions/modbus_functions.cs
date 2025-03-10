@@ -29,10 +29,10 @@ namespace test_system
         /// <param name="SelectComPort"></param>
         /// <returns></returns>
         //=============================================================================================================
-        public funErrorCode funModbusRTU_add_byte(byte sendByte, UInt32 SelectComPort)
+        public funReturnCodeCOMport funModbusRTU_add_byte(byte sendByte, UInt32 SelectComPort)
         {
             COMport_sendByte[SelectComPort, bCOMport_sendLen[SelectComPort]++] = sendByte;
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
         //=============================================================================================================
         /// <summary>
@@ -42,11 +42,11 @@ namespace test_system
         /// <param name="SelectComPort"></param>
         /// <returns></returns>
         //=============================================================================================================
-        public funErrorCode funModbusRTU_add_uint16(UInt16 sendWord, UInt32 SelectComPort)
+        public funReturnCodeCOMport funModbusRTU_add_uint16(UInt16 sendWord, UInt32 SelectComPort)
         {
             COMport_sendByte[SelectComPort, bCOMport_sendLen[SelectComPort]++] = (byte)(sendWord >> 8);
             COMport_sendByte[SelectComPort, bCOMport_sendLen[SelectComPort]++] = (byte)(sendWord);
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace test_system
         /// <param name="selectCOMport"></param>
         /// <returns></returns>
         //=============================================================================================================
-        public funErrorCode funModbusRTU_send_request_read_function_3(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
+        public funReturnCodeCOMport funModbusRTU_send_request_read_function_3(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
         {
 
             modbus_start_register = registerAddress;
@@ -97,7 +97,7 @@ namespace test_system
                 mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = numberRegister * 2 + 5;
             }
             //-------------------------------------------------------------------------------------------
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
         #endregion
@@ -105,7 +105,7 @@ namespace test_system
         //=============================================================================================================
         //=============================================================================================================
 
-        public funErrorCode funModbusRTU_send_request_read_function_4(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
+        public funReturnCodeCOMport funModbusRTU_send_request_read_function_4(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
         {
             byteSlaveAddress = slaveAddress;
             bCOMport_sendLen[selectCOMport] = 0;
@@ -122,7 +122,7 @@ namespace test_system
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
             //           COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
         #endregion
@@ -159,7 +159,7 @@ namespace test_system
         /// <param name="selectCOMport"></param>
         /// <returns></returns>
         //=============================================================================================================
-        public funErrorCode funModbusRTU_send_set_single_register_function_6(byte slaveAddress, UInt16 registerAddress, UInt16 setRegister, UInt32 selectCOMport)
+        public funReturnCodeCOMport funModbusRTU_send_set_single_register_function_6(byte slaveAddress, UInt16 registerAddress, UInt16 setRegister, UInt32 selectCOMport)
         {
 
             mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
@@ -195,7 +195,7 @@ namespace test_system
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
             //  COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
         //=============================================================================================================
@@ -208,7 +208,7 @@ namespace test_system
         /// <param name="selectCOMport"></param>
         /// <returns></returns>
         //=============================================================================================================
-        public funErrorCode funModbusRTU_send_set_single_register_function_6_KP184(byte slaveAddress, UInt16 registerAddress, UInt32 setRegister, UInt32 selectCOMport)
+        public funReturnCodeCOMport funModbusRTU_send_set_single_register_function_6_KP184(byte slaveAddress, UInt16 registerAddress, UInt32 setRegister, UInt32 selectCOMport)
         {
 
             UInt16 high_register;
@@ -249,7 +249,7 @@ namespace test_system
                     //COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
                 }
             }
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
         #endregion
 
@@ -262,7 +262,7 @@ namespace test_system
         /// </summary>
         /// <returns></returns>
         //=======================================================================================================================
-        public funErrorCode funModbusRTU_receive_mesasage()
+        public funReturnCodeCOMport funModbusRTU_receive_mesasage()
         {
             byte selectByte;
             byte loc_loop;
@@ -280,7 +280,7 @@ namespace test_system
                     modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectByte++] * 256 + receiveByte_modbus[selectByte++]);
                 }
             }
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
         #endregion

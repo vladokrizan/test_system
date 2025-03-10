@@ -20,12 +20,12 @@ namespace test_system
         {
             var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM1041);
             device_XDM1041_measure_ok = returnState;
-            if (returnState == funErrorCode.OK) device_XDM1041_measure = returnValue;
+            if (returnState == funReturnCodeCOMport.OK) device_XDM1041_measure = returnValue;
             else
             {
                 (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM1041);
 
-                if (returnState == funErrorCode.OK) device_XDM1041_measure = returnValue;
+                if (returnState == funReturnCodeCOMport.OK) device_XDM1041_measure = returnValue;
                 else
                 {
                     (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM1041);
@@ -38,9 +38,9 @@ namespace test_system
         //--    OWON,XDM1041,23120418,V4.1.0,3
         public void fun_XDM1041_identifaction()
         {
-            if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funErrorCode.OK)
+            if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
             {
-                if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funErrorCode.OK)
+                if (owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
                 {
                     owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "XDM1041,23120418");
                 }

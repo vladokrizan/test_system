@@ -160,16 +160,16 @@ namespace test_system
             program10_value.Add("HCS-3300 Current (A) ", HSC3300_out_current.ToString("0.00"));
 
             multimeter_XDM3051.fun_XDM3051_measure();
-            if (device_XDM3051_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
+            if (device_XDM3051_measure_ok == funReturnCodeCOMport.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
             else
             {
                 multimeter_XDM3051.fun_XDM3051_measure();
-                if (device_XDM3051_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
+                if (device_XDM3051_measure_ok == funReturnCodeCOMport.OK) program10_value.Add("Multimeter XDM3051 (V) ", device_XDM3051_measure.ToString("0.000"));
             }
             multimeter_XDM2041.fun_XDM2041_measure();
-            if (device_XDM2041_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM2041 (V) ", device_XDM2041_measure.ToString());
+            if (device_XDM2041_measure_ok == funReturnCodeCOMport.OK) program10_value.Add("Multimeter XDM2041 (V) ", device_XDM2041_measure.ToString());
             multimeter_XDM1041.fun_XDM1041_measure();
-            if (device_XDM1041_measure_ok == funErrorCode.OK) program10_value.Add("Multimeter XDM1041 (V) ", device_XDM1041_measure.ToString());
+            if (device_XDM1041_measure_ok == funReturnCodeCOMport.OK) program10_value.Add("Multimeter XDM1041 (V) ", device_XDM1041_measure.ToString());
 
             dc_load_KEL103.fun_KEL103_get_voltage();
             dc_load_KEL103.fun_KEL103_get_current();

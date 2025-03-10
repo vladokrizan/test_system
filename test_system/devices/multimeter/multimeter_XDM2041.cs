@@ -21,7 +21,7 @@ namespace test_system
         {
             var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM2041);
             device_XDM2041_measure_ok = returnState;
-            if (returnState == funErrorCode.OK) device_XDM2041_measure = returnValue;
+            if (returnState == funReturnCodeCOMport.OK) device_XDM2041_measure = returnValue;
             //elsedevice_XDM2041_measure =
        }
 
