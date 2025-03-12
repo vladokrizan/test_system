@@ -24,8 +24,10 @@ namespace test_system
         private void fun_send_command(string sendString)
         {
             dataArray = Encoding.ASCII.GetBytes(sendString);
+
             mainWindow.COMportSerial[COMport_HCS_3300].DiscardInBuffer();
             mainWindow.COMportSerial[COMport_HCS_3300].Write(dataArray, 0, dataArray.Length);
+        // if (dataArray.Length==8)   strGeneralString = dataArray.Length +"  "+ dataArray[0].ToString () + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString() + " " + dataArray[6].ToString() + " " + dataArray[7].ToString();
         }
         //=======================================================================================================================
         //--    GMAX[CR] Return value:   <voltage><current>[CR] OK[CR]   Get PS maximum Voltage & Current value    <voltage>=???   <current>=???
@@ -175,7 +177,6 @@ namespace test_system
         //=======================================================================================================================
         public funReturnCodeCOMport fun_HCS_330_set_voltage(double set_voltage)
         {
-            //double setValue;
             string setValueString;
             if (dev_connected[COMport_HCS_3300])
             {
@@ -189,7 +190,7 @@ namespace test_system
                     else if (set_voltage < 100) setValueString = "0" + setValueString;
                     if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
                     fun_send_command("VOLT" + setValueString + "\r");
-                    strGeneralString = setValueString.ToString();
+                   // strGeneralString = setValueString.ToString();
                     return (funReturnCodeCOMport.OK);
                 }
                 else return (funReturnCodeCOMport.NOT_ACTIVE);
@@ -215,14 +216,15 @@ namespace test_system
                 if (dev_active[COMport_HCS_3300])
                 {
                     //setValue = Convert.ToDouble(HSC3300_set_set_current);
+                    mainWindow.COMportSerial[COMport_HCS_3300].DiscardInBuffer();
                     setValue = set_current * 10;
-                    if (setValue > 300) setValue = 160;
+                    if (setValue > 300) setValue = 300;
                     setValueString = setValue.ToString();
                     if (setValue < 10) setValueString = "00" + setValueString;
                     else if (setValue < 100) setValueString = "0" + setValueString;
                     if (setValueString.Length > 3) setValueString = setValueString.Substring(0, 3);
                     fun_send_command("CURR" + setValueString + "\r");
-                    strGeneralString = strGeneralString + "    " + setValueString.ToString();
+                    //strGeneralString = "    " + setValueString.ToString();
                     return (funReturnCodeCOMport.OK);
                 }
                 else return (funReturnCodeCOMport.NOT_ACTIVE);

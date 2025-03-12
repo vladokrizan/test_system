@@ -197,17 +197,6 @@ namespace test_system
         }
         //=======================================================================================================================
         //=======================================================================================================================
-        private void btnHCS_3300_set_Click(object sender, EventArgs e)
-        {
-          //  HSC3300_set_set_voltage = txtCS3300_set_voltage.Text;
-          //  HSC3300_set_set_current = txtCS3300_set_current.Text;
-            
-            
-            power_supply_hcs_3300.fun_HCS_330_set_voltage(1);
-            power_supply_hcs_3300.fun_HCS_330_set_current(1);
-        }
-        //=======================================================================================================================
-        //=======================================================================================================================
         private void btnHCS_3300_get_set_value_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_3300_get_limit();
@@ -215,6 +204,30 @@ namespace test_system
             txtCS3300_set_current.Text = HSC3300_get_set_current.ToString();
             //strGeneralString = "receeive  " + COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300].ToString() + "   <" + ">   Voltage =      " + HSC3300_get_set_voltage.ToString()+ "    " + HSC3300_get_set_current.ToString();
         }
+
+
+        private void txtCS3300_set_voltage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string set_value = txtCS3300_set_voltage.Text;
+                double set_value_correct = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(set_value));
+                //strGeneralString = "Set Voltage: " + set_value_correct.ToString("0.00") + " V";
+                power_supply_hcs_3300.fun_HCS_330_set_voltage(set_value_correct);
+
+            }
+        }
+        private void txtCS3300_set_current_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string set_value = txtCS3300_set_current.Text;
+                double set_value_correct = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(set_value));
+                //strGeneralString = "Set Voltage: " + set_value_correct.ToString("0.00") + " V";
+                power_supply_hcs_3300.fun_HCS_330_set_current(set_value_correct);
+            }
+        }
+
 
         #endregion
 
@@ -715,6 +728,11 @@ namespace test_system
 
         }
 
+        private void txtCS3300_set_voltage_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+     
     }
 }

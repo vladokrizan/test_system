@@ -35,6 +35,9 @@
             this.labMPM1010B_voltage = new System.Windows.Forms.Label();
             this.btnMPM1010B_measure = new System.Windows.Forms.Button();
             this.groupBox_multimeter_XDM2041 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBox_XDM2041_dc_current_range = new System.Windows.Forms.ComboBox();
+            this.btnXDM2041_set_range_dc_current = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox_XDM2041_voltage_range = new System.Windows.Forms.ComboBox();
             this.btnXDM2041_set_range_dc_volt = new System.Windows.Forms.Button();
@@ -46,7 +49,10 @@
             this.txtBox_XDM2041_ident = new System.Windows.Forms.TextBox();
             this.txtBox_XDM2041_measure = new System.Windows.Forms.TextBox();
             this.groupBox_multimeter_XDM1041 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.comboBox_XDM1041_dc_current_range = new System.Windows.Forms.ComboBox();
+            this.btnXDM1041_set_range_dc_current = new System.Windows.Forms.Button();
             this.comboBox_XDM1041_voltage_range = new System.Windows.Forms.ComboBox();
             this.btnXDM1041_set_range_dc_volt = new System.Windows.Forms.Button();
             this.labXDM1041_DC_range = new System.Windows.Forms.Label();
@@ -114,7 +120,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox_powerSupply_hcs_330 = new System.Windows.Forms.GroupBox();
             this.btnHCS_3300_get_set_value = new System.Windows.Forms.Button();
-            this.btnHCS_3300_set = new System.Windows.Forms.Button();
             this.labHCS3300_set_current = new System.Windows.Forms.Label();
             this.labHCS3300_set_voltage = new System.Windows.Forms.Label();
             this.labHCS3300_status = new System.Windows.Forms.Label();
@@ -152,12 +157,6 @@
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label12 = new System.Windows.Forms.Label();
-            this.comboBox_XDM2041_dc_current_range = new System.Windows.Forms.ComboBox();
-            this.btnXDM2041_set_range_dc_current = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBox_XDM1041_dc_current_range = new System.Windows.Forms.ComboBox();
-            this.btnXDM1041_set_range_dc_current = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -252,6 +251,33 @@
             this.groupBox_multimeter_XDM2041.TabIndex = 1;
             this.groupBox_multimeter_XDM2041.TabStop = false;
             this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(2, 340);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(141, 20);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "DC Current Range";
+            // 
+            // comboBox_XDM2041_dc_current_range
+            // 
+            this.comboBox_XDM2041_dc_current_range.FormattingEnabled = true;
+            this.comboBox_XDM2041_dc_current_range.Location = new System.Drawing.Point(6, 363);
+            this.comboBox_XDM2041_dc_current_range.Name = "comboBox_XDM2041_dc_current_range";
+            this.comboBox_XDM2041_dc_current_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM2041_dc_current_range.TabIndex = 27;
+            // 
+            // btnXDM2041_set_range_dc_current
+            // 
+            this.btnXDM2041_set_range_dc_current.Location = new System.Drawing.Point(113, 362);
+            this.btnXDM2041_set_range_dc_current.Name = "btnXDM2041_set_range_dc_current";
+            this.btnXDM2041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
+            this.btnXDM2041_set_range_dc_current.TabIndex = 26;
+            this.btnXDM2041_set_range_dc_current.Text = "Set";
+            this.btnXDM2041_set_range_dc_current.UseVisualStyleBackColor = true;
+            this.btnXDM2041_set_range_dc_current.Click += new System.EventHandler(this.btnXDM2041_set_range_dc_current_Click);
             // 
             // label9
             // 
@@ -364,6 +390,15 @@
             this.groupBox_multimeter_XDM1041.TabStop = false;
             this.groupBox_multimeter_XDM1041.Text = "OWON XDM1041 ";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 339);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(141, 20);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "DC Current Range";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -372,6 +407,24 @@
             this.label8.Size = new System.Drawing.Size(164, 20);
             this.label8.TabIndex = 25;
             this.label8.Text = "DC VOLTAGE Range";
+            // 
+            // comboBox_XDM1041_dc_current_range
+            // 
+            this.comboBox_XDM1041_dc_current_range.FormattingEnabled = true;
+            this.comboBox_XDM1041_dc_current_range.Location = new System.Drawing.Point(7, 362);
+            this.comboBox_XDM1041_dc_current_range.Name = "comboBox_XDM1041_dc_current_range";
+            this.comboBox_XDM1041_dc_current_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM1041_dc_current_range.TabIndex = 30;
+            // 
+            // btnXDM1041_set_range_dc_current
+            // 
+            this.btnXDM1041_set_range_dc_current.Location = new System.Drawing.Point(114, 361);
+            this.btnXDM1041_set_range_dc_current.Name = "btnXDM1041_set_range_dc_current";
+            this.btnXDM1041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
+            this.btnXDM1041_set_range_dc_current.TabIndex = 29;
+            this.btnXDM1041_set_range_dc_current.Text = "Set";
+            this.btnXDM1041_set_range_dc_current.UseVisualStyleBackColor = true;
+            this.btnXDM1041_set_range_dc_current.Click += new System.EventHandler(this.btnXDM1041_set_range_dc_current_Click);
             // 
             // comboBox_XDM1041_voltage_range
             // 
@@ -1029,7 +1082,6 @@
             // groupBox_powerSupply_hcs_330
             // 
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_get_set_value);
-            this.groupBox_powerSupply_hcs_330.Controls.Add(this.btnHCS_3300_set);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_set_current);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_set_voltage);
             this.groupBox_powerSupply_hcs_330.Controls.Add(this.labHCS3300_status);
@@ -1059,16 +1111,6 @@
             this.btnHCS_3300_get_set_value.Text = "Get Set Value";
             this.btnHCS_3300_get_set_value.UseVisualStyleBackColor = true;
             this.btnHCS_3300_get_set_value.Click += new System.EventHandler(this.btnHCS_3300_get_set_value_Click);
-            // 
-            // btnHCS_3300_set
-            // 
-            this.btnHCS_3300_set.Location = new System.Drawing.Point(7, 398);
-            this.btnHCS_3300_set.Name = "btnHCS_3300_set";
-            this.btnHCS_3300_set.Size = new System.Drawing.Size(200, 30);
-            this.btnHCS_3300_set.TabIndex = 13;
-            this.btnHCS_3300_set.Text = "Set Voltage,Current";
-            this.btnHCS_3300_set.UseVisualStyleBackColor = true;
-            this.btnHCS_3300_set.Click += new System.EventHandler(this.btnHCS_3300_set_Click);
             // 
             // labHCS3300_set_current
             // 
@@ -1103,6 +1145,8 @@
             this.txtCS3300_set_voltage.Name = "txtCS3300_set_voltage";
             this.txtCS3300_set_voltage.Size = new System.Drawing.Size(77, 26);
             this.txtCS3300_set_voltage.TabIndex = 9;
+            this.txtCS3300_set_voltage.TextChanged += new System.EventHandler(this.txtCS3300_set_voltage_TextChanged);
+            this.txtCS3300_set_voltage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCS3300_set_voltage_KeyDown);
             // 
             // txtCS3300_set_current
             // 
@@ -1110,6 +1154,7 @@
             this.txtCS3300_set_current.Name = "txtCS3300_set_current";
             this.txtCS3300_set_current.Size = new System.Drawing.Size(77, 26);
             this.txtCS3300_set_current.TabIndex = 9;
+            this.txtCS3300_set_current.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCS3300_set_current_KeyDown);
             // 
             // labHCS3300_current
             // 
@@ -1429,60 +1474,6 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(2, 340);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(141, 20);
-            this.label12.TabIndex = 28;
-            this.label12.Text = "DC Current Range";
-            // 
-            // comboBox_XDM2041_dc_current_range
-            // 
-            this.comboBox_XDM2041_dc_current_range.FormattingEnabled = true;
-            this.comboBox_XDM2041_dc_current_range.Location = new System.Drawing.Point(6, 363);
-            this.comboBox_XDM2041_dc_current_range.Name = "comboBox_XDM2041_dc_current_range";
-            this.comboBox_XDM2041_dc_current_range.Size = new System.Drawing.Size(98, 28);
-            this.comboBox_XDM2041_dc_current_range.TabIndex = 27;
-            // 
-            // btnXDM2041_set_range_dc_current
-            // 
-            this.btnXDM2041_set_range_dc_current.Location = new System.Drawing.Point(113, 362);
-            this.btnXDM2041_set_range_dc_current.Name = "btnXDM2041_set_range_dc_current";
-            this.btnXDM2041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
-            this.btnXDM2041_set_range_dc_current.TabIndex = 26;
-            this.btnXDM2041_set_range_dc_current.Text = "Set";
-            this.btnXDM2041_set_range_dc_current.UseVisualStyleBackColor = true;
-            this.btnXDM2041_set_range_dc_current.Click += new System.EventHandler(this.btnXDM2041_set_range_dc_current_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 339);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(141, 20);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "DC Current Range";
-            // 
-            // comboBox_XDM1041_dc_current_range
-            // 
-            this.comboBox_XDM1041_dc_current_range.FormattingEnabled = true;
-            this.comboBox_XDM1041_dc_current_range.Location = new System.Drawing.Point(7, 362);
-            this.comboBox_XDM1041_dc_current_range.Name = "comboBox_XDM1041_dc_current_range";
-            this.comboBox_XDM1041_dc_current_range.Size = new System.Drawing.Size(98, 28);
-            this.comboBox_XDM1041_dc_current_range.TabIndex = 30;
-            // 
-            // btnXDM1041_set_range_dc_current
-            // 
-            this.btnXDM1041_set_range_dc_current.Location = new System.Drawing.Point(114, 361);
-            this.btnXDM1041_set_range_dc_current.Name = "btnXDM1041_set_range_dc_current";
-            this.btnXDM1041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
-            this.btnXDM1041_set_range_dc_current.TabIndex = 29;
-            this.btnXDM1041_set_range_dc_current.Text = "Set";
-            this.btnXDM1041_set_range_dc_current.UseVisualStyleBackColor = true;
-            this.btnXDM1041_set_range_dc_current.Click += new System.EventHandler(this.btnXDM1041_set_range_dc_current_Click);
-            // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1602,7 +1593,6 @@
         private System.Windows.Forms.Label labHCS3300_set_voltage;
         private System.Windows.Forms.Label labHCS3300_status;
         private System.Windows.Forms.TextBox txtCS3300_set_voltage;
-        private System.Windows.Forms.Button btnHCS_3300_set;
         private System.Windows.Forms.Button btnHCS_3300_get_set_value;
         private System.Windows.Forms.Button btnKEL103_get_set_value;
         private System.Windows.Forms.Label label4;

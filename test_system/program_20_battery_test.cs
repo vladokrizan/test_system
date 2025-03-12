@@ -23,7 +23,7 @@ namespace test_system
 
         owon_multimeter owon_multimeter = new owon_multimeter();
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
-        write_log_files write_log_files = new write_log_files();    
+        write_log_files write_log_files = new write_log_files();
 
 
         #region "window load"
@@ -56,7 +56,7 @@ namespace test_system
             labResult_03.Text = "";
 
 
-            radioButton_discharge.Checked = true;   
+            radioButton_discharge.Checked = true;
         }
 
         #endregion
@@ -112,14 +112,14 @@ namespace test_system
             //-------------------------------------------------------------------------------------------------------------------
             if (blnDischarge_start) fun_program20_01_usb_pack___discharge_start();
 
-            
+
             if (blnDischarge_start_wait) fun_program20_01_usb_pack___wait_to_discgarge();
             if (blnDischarge_run_start) fun_program20_01_usb_pack___discharge_run_start();
             if (blnDischarge_run) fun_program20_01_usb_pack___discharge_run();
             if (blnDischarge_run_stop) fun_program20_01_usb_pack___discharge_stop();
 
 
-            
+
 
 
 
@@ -154,6 +154,31 @@ namespace test_system
 
 
         #endregion
+
+        #region "DISCHARGE cikel   -- funkcije   ---   public const string program20_01 = "USB battery pack";
+        private int fun_program20_01_usb_pack___function___read_load()
+        {
+            if (program_select_load == DEVICE_SELECT_LOAD_KEL103)
+            {
+                dc_load_KEL103.fun_KEL103_get_voltage();
+                dc_load_KEL103.fun_KEL103_get_current();
+                dc_load_KEL103.fun_KEL103_get_power();
+
+            }
+            return 0;
+        }
+
+        private int fun_program20_01_usb_pack___function___measure_multimeter()
+        {
+            owon_multimeter.fun_owon_measure(COMport_XDM3051);
+            owon_multimeter.fun_owon_measure(COMport_XDM2041);
+            owon_multimeter.fun_owon_measure(COMport_XDM1041);
+
+            return 0;
+        }
+
+
+        #endregion
         #region "DISCHARGE cikel   ---   public const string program20_01 = "USB battery pack";
 
         //=========================================================================================================
@@ -168,11 +193,9 @@ namespace test_system
         {
             endTime_part_program = DateTime.Now;
             duration_part_program = endTime_part_program - startTime_part_program;
-            floatDuration_part_program_run = duration_part_program.Minutes * 60 +  duration_part_program.Seconds + (float)(duration_part_program.Milliseconds) / 1000;
-
-            strDuration_part_program = duration_part_program.Hours.ToString() + ":" + duration_part_program.Minutes.ToString() + ":" + (duration_part_program.Seconds+(float)(duration_part_program.Milliseconds) / 1000).ToString("0.0");
-
-           // labCurrentState.Text = "DISCHARGE RUN    " + floatDuration_part_program_run.ToString("0.0") + " sec";
+            floatDuration_part_program_run = duration_part_program.Minutes * 60 + duration_part_program.Seconds + (float)(duration_part_program.Milliseconds) / 1000;
+            strDuration_part_program = duration_part_program.Hours.ToString() + " : " + duration_part_program.Minutes.ToString() + " : " + (duration_part_program.Seconds + (float)(duration_part_program.Milliseconds) / 1000).ToString("0.0");
+            // labCurrentState.Text = "DISCHARGE RUN    " + floatDuration_part_program_run.ToString("0.0") + " sec";
             labCurrentState.Text = "DISCHARGE RUN    " + strDuration_part_program;
 
             //-----------------------------------------------------------------------------------------------------
@@ -183,21 +206,14 @@ namespace test_system
             {
                 timer_old_second = timer_new_second;
                 program_result_value.Clear();
-
-
-                dc_load_KEL103.fun_KEL103_get_voltage();
-                dc_load_KEL103.fun_KEL103_get_current();
-                dc_load_KEL103.fun_KEL103_get_power();
+                fun_program20_01_usb_pack___function___read_load();
                 program_result_value.Add("DC LOAD KEL103 Voltage (V) ", KEL103_voltage.ToString());
                 program_result_value.Add("DC LOAD KEL103 Current (V) ", KEL103_current.ToString());
                 program_result_value.Add("DC LOAD KEL103 Power (V) ", KEL103_power.ToString());
                 //-------------------------------------------------------------------------------------------------------------------
-                //multimeter_XDM3051.fun_XDM3051_measure();
-                owon_multimeter.fun_owon_measure(COMport_XDM3051);
-               if (dev_meas_state[COMport_XDM3051] == funReturnCodeCOMport.OK) program_result_value.Add("Multimeter XDM3051 (V) ", dev_meas[COMport_XDM3051].ToString("0.000"));
-                owon_multimeter.fun_owon_measure(COMport_XDM2041);
-                 if (dev_meas_state[COMport_XDM2041] == funReturnCodeCOMport.OK) program_result_value.Add("Multimeter XDM2041 (A) ", dev_meas[COMport_XDM2041].ToString());
-                owon_multimeter.fun_owon_measure(COMport_XDM1041);
+                fun_program20_01_usb_pack___function___measure_multimeter();
+                if (dev_meas_state[COMport_XDM3051] == funReturnCodeCOMport.OK) program_result_value.Add("Multimeter XDM3051 (V) ", dev_meas[COMport_XDM3051].ToString("0.000"));
+                if (dev_meas_state[COMport_XDM2041] == funReturnCodeCOMport.OK) program_result_value.Add("Multimeter XDM2041 (A) ", dev_meas[COMport_XDM2041].ToString());
                 if (dev_meas_state[COMport_XDM1041] == funReturnCodeCOMport.OK) program_result_value.Add("Multimeter XDM1041 (V) ", dev_meas[COMport_XDM1041].ToString());
 
                 //-------------------------------------------------------------------------------------
@@ -215,13 +231,10 @@ namespace test_system
                 program_result_value.Add("WatSecond (Ws) ", floatBatteryCurve_WSecond.ToString());
                 program_result_value.Add("WatHour (Wh) ", floatBatteryCurve_WHour.ToString());
 
-                labResult_01.Text = "Voltage  " + dev_meas[COMport_XDM3051].ToString("0.000") + " V       (" + KEL103_voltage.ToString("0.00") +" V)";
-                labResult_02.Text = "Current  " + dev_meas[COMport_XDM2041].ToString("0.000") + " A       (" + KEL103_current.ToString("0.00") + " A)";
-                labResult_03.Text = "Capacity  " + floatBatteryCurve_AmperHour.ToString("0.00") + " Ah     "+ floatBatteryCurve_WHour.ToString("0.00")+" Wh";
-
-               // program_result_value.Add("DC LOAD KEL103 Voltage (V) ", KEL103_voltage.ToString());
-               // program_result_value.Add("DC LOAD KEL103 Current (V) ", KEL103_current.ToString());
-
+                labResult_01.Text = "Voltage   " + dev_meas[COMport_XDM3051].ToString("0.000") + " V       (" + KEL103_voltage.ToString("0.00") + " V)";
+                labResult_02.Text = "Current   " + dev_meas[COMport_XDM2041].ToString("0.000") + " A       (" + KEL103_current.ToString("0.00") + " A)";
+                labResult_03.Text = "Capacity  " + floatBatteryCurve_AmperHour.ToString("0.00") + " Ah       " + floatBatteryCurve_WHour.ToString("0.00") + " Wh";
+                //---------------------------------------------------------------------------------------------------------------
                 write_log_files.funWriteLogFile_program10();
 
             }
@@ -230,7 +243,7 @@ namespace test_system
         }
 
         private int fun_program20_01_usb_pack___discharge_stop()
-        { 
+        {
 
             blnDischarge_run_stop = false;
             blnDischarge_run = false;
@@ -242,8 +255,12 @@ namespace test_system
             {
                 dc_load_KEL103.fun_KEL103_off();
             }
+            fun_program20_01_usb_pack___function___read_load();
+            fun_program20_01_usb_pack___function___measure_multimeter();
 
-
+            labResult_01.Text = "Voltage   " + dev_meas[COMport_XDM3051].ToString("0.000") + " V       (" + KEL103_voltage.ToString("0.00") + " V)";
+            labResult_02.Text = "Current   " + dev_meas[COMport_XDM2041].ToString("0.000") + " A       (" + KEL103_current.ToString("0.00") + " A)";
+            labResult_03.Text = "Capacity  " + floatBatteryCurve_AmperHour.ToString("0.00") + " Ah       " + floatBatteryCurve_WHour.ToString("0.00") + " Wh";
             return 0;
         }
 
@@ -254,10 +271,7 @@ namespace test_system
             endTime_part_program = DateTime.Now;
             duration_part_program = endTime_part_program - startTime_part_program;
             floatDuration_part_program_run = duration_part_program.Seconds + (float)(duration_part_program.Milliseconds) / 1000;
-
             labCurrentState.Text = "DISCHARGE WAIT   " + floatDuration_part_program_run.ToString("0.0") + " sec" + "     of " + intDischarge_start_wait_time_set.ToString() + " sec";
-
-    
 
             if (floatDuration_part_program_run > intDischarge_start_wait_time_set)
             {
@@ -266,10 +280,7 @@ namespace test_system
                 blnDischarge_run_start = true;
                 floatDuration_part_program_complete = floatDuration_part_program_run;
                 startTime_part_program = DateTime.Now;
-
-
             }
-
             return 0;
         }
         private int fun_program20_01_usb_pack___discharge_run_start()
@@ -278,7 +289,6 @@ namespace test_system
             duration_part_program = endTime_part_program - startTime_part_program;
             floatDuration_part_program_run = duration_part_program.Seconds + (float)(duration_part_program.Milliseconds) / 1000;
             labCurrentState.Text = "DISCHARGE START   " + floatDuration_part_program_run.ToString("0.0") + " sec";
-
 
             if (program_select_load == DEVICE_SELECT_LOAD_KEL103)
             {
@@ -293,7 +303,7 @@ namespace test_system
             floatBatteryCurve_AmperHour = 0;
             floatBatteryCurve_WSecond = 0;
             floatBatteryCurve_WHour = 0;
-   
+
 
             return 0;
         }
@@ -338,7 +348,7 @@ namespace test_system
 
         private void button1_Click(object sender, EventArgs e)
         {
-            blnDischarge_start = true;  
+            blnDischarge_start = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
