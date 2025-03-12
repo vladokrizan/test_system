@@ -50,7 +50,6 @@ namespace test_system
         public static double chargeOff_cuttOFF_current = 0.1;
         //public static int  chargeOff_cuttOFF_current_counter ;
           
-
         //------------------------------------------------------------------------------------------
         //-- Čas po charge, preden gre v discharge cikel ( sekunde )
         public static UInt32 chargeOff_to_discharge_time =  5 * 60;
@@ -66,8 +65,6 @@ namespace test_system
         public static int intDischarge_start_wait_time_set = 0;
         //-----------------------------------------------------------------------------------------------------------------------
         public static bool blnDischarge_run_stop = false;
-
-
 
         //-- TRUE, ko je breme vklopljeno 
         //public static bool load_on = false;
