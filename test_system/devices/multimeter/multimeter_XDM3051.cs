@@ -17,28 +17,27 @@ namespace test_system
         functions functions = new functions();
         owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
 
-
-
         //=======================================================================================================================
         //=======================================================================================================================
-
-
+        //public void fun_XDM3051_set_range_dc_volt(double set_range)
+        //{
+        //    owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM3051, set_range);
+        //}
         //=======================================================================================================================
         //=======================================================================================================================
-
-
+        public void fun_XDM3051_get_range_dc_volt()
+        {
+            var (returnState, returnValue) = owon_multimeter_common.fun_owon_get_range_volt_dc(COMport_SELECT_MULTIMETER_XDM3051);
+            device_XDM3051_range_dc_volt = Convert.ToUInt16(returnValue);
+        }
         //=======================================================================================================================
         //=======================================================================================================================
-
         public void fun_XDM3051_measure()
         {
             var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM3051);
             device_XDM3051_measure_ok = returnState;
-            if (returnState == funErrorCode.OK) device_XDM3051_measure = returnValue;
-
-            //strGeneralString = returnState.ToString() + "   " + returnValue.ToString();
+            if (returnState == funReturnCodeCOMport.OK) device_XDM3051_measure = returnValue;
         }
-
         //=======================================================================================================================
         //--    OWON,XDM3051,2303195,V3.7.2,2
         //=======================================================================================================================
@@ -67,9 +66,7 @@ namespace test_system
     //device_HCS_3300_ident = Convert.ToChar(read_buffer[0]).ToString() + Convert.ToChar(read_buffer[1]).ToString() + Convert.ToChar(read_buffer[2]).ToString() + Convert.ToChar(read_buffer[3]).ToString() + Convert.ToChar(read_buffer[4]).ToString() + Convert.ToChar(read_buffer[5]).ToString();
     //device_ET3916_read_all_temperature = true;
 }
-        */
-
-        /*
+    
         public void fun_XDM3051_get_measure()
         {
 
@@ -84,19 +81,8 @@ namespace test_system
 }
 
 
+
 /*
-
-
-
-
-
-
-
-
-
-
- 
-
 
   #@property
   def measure_voltage(self):

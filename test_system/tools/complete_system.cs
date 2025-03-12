@@ -26,41 +26,46 @@ namespace test_system
 
         private void complete_system_Load(object sender, EventArgs e)
         {
+            labXDM3051_status.Text = "";
+            labXDM3051_read_result.Text = "";
+            labXDM3051_measure.Text = "";
+            labXDM2041_status.Text = "";
+            labXDM2041_read_result.Text = "";
+            labXDM2041_measure.Text = "";
+            labXDM1041_status.Text = "";
+            labXDM1041_read_result.Text = "";
+            labXDM1041_measure.Text = "";
 
         }
 
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            labXDM3051_status.Text = "DC voltage  " + device_XDM3051_range_dc_volt.ToString();
+            //txtBox_XDM3051_measure.Text = device_measure[COMport_SELECT_MULTIMETER_XDM3051].ToString();
+            //labXDM3051_measure_ok.Text = device_measure_state[COMport_SELECT_MULTIMETER_XDM3051].ToString();
 
 
-            labComplete_temperature_1.Text = "Temp 1  " + device_ET3916_temperature[1].ToString("0.00");
-            labComplete_temperature_2.Text = "Temp 2  " + device_ET3916_temperature[2].ToString("0.00");
-            labComplete_temperature_3.Text = "Temp 3  " + device_ET3916_temperature[3].ToString("0.00");
-            labComplete_temperature_4.Text = "Temp 4  " + device_ET3916_temperature[4].ToString("0.00");
-            labComplete_temperature_5.Text = "Temp 5  " + device_ET3916_temperature[5].ToString("0.00");
-            labComplete_temperature_6.Text = "Temp 6  " + device_ET3916_temperature[6].ToString("0.00");
-            labComplete_temperature_7.Text = "Temp 7  " + device_ET3916_temperature[7].ToString("0.00");
-            labComplete_temperature_8.Text = "Temp 8  " + device_ET3916_temperature[8].ToString("0.00");
-  
+            labXDM3051_read_result.Text = dev_meas_state[COMport_XDM3051].ToString();
+            labXDM3051_measure.Text = dev_meas[COMport_XDM3051].ToString("0.0000");
+            //labXDM2041_status.Text = "DC voltage  " + device_XDM2041_range_dc_volt.ToString();
+            
+            
+            //labXDM2041_read_result.Text = device_XDM2041_measure_ok.ToString();
+            //labXDM2041_measure.Text = device_XDM2041_measure.ToString("0.0000");
+            //labXDM1041_status.Text = "DC voltage  " + device_XDM2041_range_dc_volt.ToString();
+            
+            
+            
+            //labXDM1041_read_result.Text = device_XDM1041_measure_ok.ToString();
+            //labXDM1041_measure.Text = device_XDM1041_measure.ToString("0.0000");
+
+
         }
 
 
-        private void labComplete_temperature_1_Click(object sender, EventArgs e)
-        {
-
-            complete_device_ET391_read_all_temperature = true;
-            temperature_ET3916.fun_ET3916_read_all_temperature();
-
-        }
 
 
 
-        private void groupBox_temperature_ET3916_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-      
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static test_system.global_variable;
 
@@ -10,7 +11,7 @@ using static test_system.global_variable;
 namespace test_system
 {
 
-    class owon_multimeter_common
+    class owon_multimeter
     {
         functions functions = new functions();
 
@@ -26,16 +27,16 @@ namespace test_system
         public (funReturnCodeCOMport, double returnValue) fun_owon_get_range_volt_dc(int selectCOMport)
         {
             double returnValue = 0;
-            if (COMport_connected[selectCOMport])
+            if (dev_connected[selectCOMport])
             {
-                if (COMport_active[selectCOMport])
+                if (dev_active[selectCOMport])
                 {
 
-                    if (selectCOMport == COMport_SELECT_MULTIMETER_XDM3051)
+                    if (selectCOMport == COMport_XDM3051)
                     {
                         mainWindow.COMportSerial[selectCOMport].WriteLine("VOLT:DC:RANG?");
                     }
-                    if (selectCOMport == COMport_SELECT_MULTIMETER_XDM2041 || selectCOMport == COMport_SELECT_MULTIMETER_XDM1041)
+                    if (selectCOMport == COMport_XDM2041 || selectCOMport == COMport_XDM1041)
                     {
                         mainWindow.COMportSerial[selectCOMport].WriteLine("VOLT:DC:RANG?");
                     }
@@ -52,9 +53,9 @@ namespace test_system
 
         public funReturnCodeCOMport fun_owon_set_range_volt_dc(int selectCOMport, double set_range)
         {
-            if (COMport_connected[selectCOMport])
+            if (dev_connected[selectCOMport])
             {
-                if (COMport_active[selectCOMport])
+                if (dev_active[selectCOMport])
                 {
                     string send_value = set_range.ToString();
                     send_value = send_value.Replace(",", ".");
@@ -85,9 +86,9 @@ namespace test_system
 
         public funReturnCodeCOMport fun_owon_set_range_current_dc(int selectCOMport, double set_range)
         {
-            if (COMport_connected[selectCOMport])
+            if (dev_connected[selectCOMport])
             {
-                if (COMport_active[selectCOMport])
+                if (dev_active[selectCOMport])
                 {
                     string send_value = set_range.ToString();
                     send_value = send_value.Replace(",", ".");
@@ -98,14 +99,82 @@ namespace test_system
             }
             else return (funReturnCodeCOMport.NOT_CONNECTED);
         }
-                //=======================================================================================================================
         //=======================================================================================================================
-        public (funReturnCodeCOMport, double returnValue) fun_owon_measure(int selectCOMport)
+        //=======================================================================================================================
+
+        public void fun_owon_measure(int selectCOMport)
+        {
+
+            if (dev_connected[selectCOMport])
+            {
+                if (dev_active[selectCOMport])
+                {
+                    try
+                    {
+                        //mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
+                        mainWindow.COMportSerial[selectCOMport].WriteLine("MEAS?");
+                        //if (selectCOMport == COMport_SELECT_MULTIMETER_XDM1041) mainWindow.COMportSerial[selectCOMport].WriteLine("MEAS?");
+                        string measureValue = mainWindow.COMportSerial[selectCOMport].ReadLine();
+                        dev_meas[selectCOMport] = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(measureValue));
+                        dev_meas_state[selectCOMport] = funReturnCodeCOMport.OK;
+                    }
+
+
+                    
+                    catch
+                    {
+                        try
+                        {
+                            Thread.Sleep(20);
+                            //mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
+                            mainWindow.COMportSerial[selectCOMport].WriteLine("MEAS?");
+                            string measureValue = mainWindow.COMportSerial[selectCOMport].ReadLine();
+                            dev_meas[selectCOMport] = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(measureValue));
+                            dev_meas_state[selectCOMport] = funReturnCodeCOMport.OK;
+                        }
+                        catch
+                        {
+                            try
+                            {
+                                Thread.Sleep(20);
+                                //mainWindow.COMportSerial[selectCOMport].DiscardInBuffer();
+                                mainWindow.COMportSerial[selectCOMport].WriteLine("MEAS?");
+                                string measureValue = mainWindow.COMportSerial[selectCOMport].ReadLine();
+                                dev_meas[selectCOMport] = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(measureValue));
+                                dev_meas_state[selectCOMport] = funReturnCodeCOMport.OK;
+                            }
+                            catch { dev_meas_state[selectCOMport] = funReturnCodeCOMport.ERROR; }
+
+                        }
+                   
+
+                    }
+                    
+
+                }
+                else dev_meas_state[selectCOMport] = funReturnCodeCOMport.NOT_ACTIVE;
+            }
+            else dev_meas_state[selectCOMport] = funReturnCodeCOMport.NOT_CONNECTED;
+        }
+        // public static funReturnCodeCOMport[] device_measure_ok = new funReturnCodeCOMport[COMport_SELECT_MAXnumber];
+        // public static double[] device_measure = new double[COMport_SELECT_MAXnumber];
+        //public static funReturnCodeCOMport device_XDM3051_measure_ok;
+        //public static double device_XDM3051_measure;
+        //public static funReturnCodeCOMport device_XDM2041_measure_ok;
+        //public static double device_XDM2041_measure;
+        //public static funReturnCodeCOMport device_XDM1041_measure_ok;
+        //public static double device_XDM1041_measure;
+
+
+
+
+
+        public (funReturnCodeCOMport, double returnValue) fun_owon_measure_old(int selectCOMport)
         {
             double returnValue = 0;
-            if (COMport_connected[selectCOMport])
+            if (dev_connected[selectCOMport])
             {
-                if (COMport_active[selectCOMport])
+                if (dev_active[selectCOMport])
                 {
                     try
                     {
@@ -120,19 +189,21 @@ namespace test_system
             }
             else return (funReturnCodeCOMport.NOT_CONNECTED, returnValue);
         }
+
+
         //=======================================================================================================================
         //=======================================================================================================================
         public funReturnCodeCOMport fun_owon_multimeter_identification(int selectCOMport, string ident_string)
         {
-            if (COMport_connected[selectCOMport])
+            if (dev_connected[selectCOMport])
             {
                 try
                 {
                     mainWindow.COMportSerial[selectCOMport].WriteLine("*IDN?");
                     string ident_readRaw = mainWindow.COMportSerial[selectCOMport].ReadLine();
                     COMport_device_ident[selectCOMport] = functions.fun_ascii_only(ident_readRaw);
-                    if (ident_readRaw.Contains(ident_string)) { COMport_active[selectCOMport] = true; }
-                    else COMport_active[selectCOMport] = false;
+                    if (ident_readRaw.Contains(ident_string)) { dev_active[selectCOMport] = true; }
+                    else dev_active[selectCOMport] = false;
                     return (funReturnCodeCOMport.OK);
                 }
                 catch { return funReturnCodeCOMport.ERROR; }

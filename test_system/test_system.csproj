@@ -49,14 +49,11 @@
   <ItemGroup>
     <Compile Include="functions\COMports_functions.cs" />
     <Compile Include="devices\load\dc_load_KEL103.cs" />
-    <Compile Include="devices\multimeter\multimeter_XDM1041.cs" />
-    <Compile Include="devices\multimeter\multimeter_XDM2041.cs" />
-    <Compile Include="devices\multimeter\multimeter_XDM3051.cs" />
     <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />
     <Compile Include="functions\functions.cs" />
     <Compile Include="functions\modbus_functions.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
-    <Compile Include="devices\multimeter\owon_multimeter_common.cs" />
+    <Compile Include="devices\multimeter\owon_multimeter.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6024.cs" />
     <Compile Include="programs\program_1.cs">
       <SubType>Form</SubType>
@@ -71,6 +68,13 @@
       <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program_10.cs" />
+    <Compile Include="program_20.cs" />
+    <Compile Include="program_20_battery_test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="program_20_battery_test.Designer.cs">
+      <DependentUpon>program_20_battery_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="programs\program_1.resx">
       <DependentUpon>program_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="program_20_battery_test.resx">
+      <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tools\all_devices.resx">
       <DependentUpon>all_devices.cs</DependentUpon>

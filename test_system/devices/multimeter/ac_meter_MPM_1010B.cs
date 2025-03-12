@@ -45,9 +45,9 @@ namespace test_system
             device_MPM1010B_read_all_write = false;
             var dataArray = new byte[10];
             dataArray[0] = 63;
-            mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].Write(dataArray, 0, 1);
+            mainWindow.COMportSerial[COMport_MPM_1010B].Write(dataArray, 0, 1);
             device_MPM1010B_read_all_read = true;
-            mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].DiscardInBuffer();
+            mainWindow.COMportSerial[COMport_MPM_1010B].DiscardInBuffer();
 
         }
 
@@ -59,11 +59,11 @@ namespace test_system
             
             device_MPM1010B_read_all_read = false;
 
-            int number_bytes_to_read= mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].BytesToRead;
+            int number_bytes_to_read= mainWindow.COMportSerial[COMport_MPM_1010B].BytesToRead;
 
             if (number_bytes_to_read == 21)
             {
-                mainWindow.COMportSerial[COMport_SELECT_AC_METER_MPM_1010B].Read(read_buffer, 0, 21);
+                mainWindow.COMportSerial[COMport_MPM_1010B].Read(read_buffer, 0, 21);
                 device_MPM1010B_voltage = Convert.ToDouble(get_MPM_1010B_one_value(1));
                 device_MPM1010B_current = Convert.ToDouble(get_MPM_1010B_one_value(5));
                 device_MPM1010B_power = Convert.ToDouble(get_MPM_1010B_one_value(9));
@@ -72,8 +72,8 @@ namespace test_system
             }
             device_MPM1010B_show_data = true;
 
-            if (number_bytes_to_read == 21) COMport_active[COMport_SELECT_AC_METER_MPM_1010B] = true;
-            else COMport_active[COMport_SELECT_AC_METER_MPM_1010B] = false;
+            if (number_bytes_to_read == 21) dev_active[COMport_MPM_1010B] = true;
+            else dev_active[COMport_MPM_1010B] = false;
 
 
             //strGeneralString = number_bytes_to_read.ToString();

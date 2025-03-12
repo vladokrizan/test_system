@@ -16,10 +16,7 @@ namespace test_system
     public partial class program_1 : Form
     {
 
-        multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
-        multimeter_XDM2041 multimeter_XDM2041 = new multimeter_XDM2041();
-        multimeter_XDM1041 multimeter_XDM1041 = new multimeter_XDM1041();
-
+  
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
@@ -30,6 +27,7 @@ namespace test_system
 
         modbus_functions modbus_functions = new modbus_functions();
         write_log_files write_log_files = new write_log_files();
+        owon_multimeter owon_multimeter = new owon_multimeter();
 
         int program_counter;
 
@@ -76,11 +74,17 @@ namespace test_system
 
         private void fun_increase_device_counter(int select_device)
         {
-            if (COMport_device_ident[select_device].Length > 5)
+            try
             {
-                program_counter++;
+                if (COMport_device_ident[select_device] != null)
+                {
+                    if (COMport_device_ident[select_device].Length > 2)
+                    {
+                        program_counter++;
+                    }
+                }
             }
-
+            catch { }
         }
 
         private void fun_set_one_device(int select_device)
@@ -99,31 +103,44 @@ namespace test_system
             {
                 if (program_counter == 0)
                 {
-                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM3051])
+                    if (dev_connected[COMport_XDM3051])
                     {
-                        multimeter_XDM3051.fun_XDM3051_identifaction();
-                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM3051);
-                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM3051);
+                        //multimeter_XDM3051.fun_XDM3051_identifaction();
+                        owon_multimeter.fun_owon_multimeter_identification(COMport_XDM3051, "XDM3051,2303195");
+
+                        fun_set_one_device(COMport_XDM3051);
+                        fun_increase_device_counter(COMport_XDM3051);
                     }
                     else program_counter++;
                 }
                 else if (program_counter == 1)
                 {
-                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM2041])
+                    if (dev_connected[COMport_XDM2041])
                     {
-                        multimeter_XDM2041.fun_XDM2041_identifaction();
-                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM2041);
-                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM2041);
+                        //multimeter_XDM2041.fun_XDM2041_identifaction();
+                        owon_multimeter.fun_owon_multimeter_identification(COMport_XDM2041, "XDM2041,24470254");
+                        fun_set_one_device(COMport_XDM2041);
+                        fun_increase_device_counter(COMport_XDM2041);
                     }
                     else program_counter++;
                 }
                 else if (program_counter == 2)
                 {
-                    if (COMport_connected[COMport_SELECT_MULTIMETER_XDM1041])
+                    if (dev_connected[COMport_XDM1041])
                     {
-                        multimeter_XDM1041.fun_XDM1041_identifaction();
-                        fun_set_one_device(COMport_SELECT_MULTIMETER_XDM1041);
-                        fun_increase_device_counter(COMport_SELECT_MULTIMETER_XDM1041);
+                        //multimeter_XDM1041.fun_XDM1041_identifaction();
+                        if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+                        {
+                            if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+                            {
+                                owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418");
+                            }
+                        }
+
+
+
+                        fun_set_one_device(COMport_XDM1041);
+                        fun_increase_device_counter(COMport_XDM1041);
                     }
                     else program_counter++;
                 }
@@ -131,7 +148,7 @@ namespace test_system
                 //-- NE DELUJE 
                 else if (program_counter == 3)
                 {
-                    if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+                    if (dev_connected[COMport_MPM_1010B])
                     {
                         device_MPM1010B_read_all_write = true;
                         device_MPM1010B_read_all_read = true;
@@ -140,7 +157,7 @@ namespace test_system
                 }
                 else if (program_counter == 4)
                 {
-                    if (COMport_connected[COMport_SELECT_AC_METER_MPM_1010B])
+                    if (dev_connected[COMport_MPM_1010B])
                     {
                         program_counter++;
                     }
@@ -149,7 +166,7 @@ namespace test_system
                 //---------------------------------------------------------------------------------------------------------------
                 else if (program_counter == 5)
                 {
-                    if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
+                    if (dev_connected[COMport_ET3916])
                     {
                         temperature_ET3916.fun_ET3916_read_serial_number();
                     }
@@ -157,8 +174,12 @@ namespace test_system
                 }
                 else if (program_counter == 6)
                 {
-                    if (COMport_connected[COMport_SELECT_TEMPERATURE_ET3916])
+                    if (dev_connected[COMport_ET3916])
                     {
+
+
+
+                        /*
                         if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916].Length > 5)
                         {
                             fun_set_one_device(COMport_SELECT_TEMPERATURE_ET3916);
@@ -167,17 +188,20 @@ namespace test_system
                         {
                             program_counter = 5;
                         }
+                        */
+                        program_counter++;
+
                     }
                     else program_counter++;
                 }
 
                 else if (program_counter == 7)
                 {
-                    if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+                    if (dev_connected[COMport_KA3305A])
                     {
                         power_supply_KA3305P.fun_KA3305P_identifaction();
-                        fun_set_one_device(COMport_SELECT_SUPPLY_KA3305A);
-                        fun_increase_device_counter(COMport_SELECT_SUPPLY_KA3305A);
+                        fun_set_one_device(COMport_KA3305A);
+                        fun_increase_device_counter(COMport_KA3305A);
 
                     }
                     else program_counter++;
@@ -186,11 +210,11 @@ namespace test_system
                 //     public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
                 else if (program_counter == 8)
                 {
-                    if (COMport_connected[COMport_SELECT_SUPPLY_HCS_3300])
+                    if (dev_connected[COMport_HCS_3300])
                     {
                         power_supply_hcs_3300.fun_HCS_330_identifaction();
-                        fun_set_one_device(COMport_SELECT_SUPPLY_HCS_3300);
-                        fun_increase_device_counter(COMport_SELECT_SUPPLY_HCS_3300);
+                        fun_set_one_device(COMport_HCS_3300);
+                        fun_increase_device_counter(COMport_HCS_3300);
                     }
                     else program_counter++;
                 }
@@ -198,11 +222,11 @@ namespace test_system
                 //-- public const byte COMport_SELECT_LOAD_KEL103 = 12;
                 else if (program_counter == 9)
                 {
-                    if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+                    if (dev_connected[COMport_KEL103])
                     {
                         dc_load_KEL103.fun_KEL103_identifaction();
-                        fun_set_one_device(COMport_SELECT_LOAD_KEL103);
-                        fun_increase_device_counter(COMport_SELECT_LOAD_KEL103);
+                        fun_set_one_device(COMport_KEL103);
+                        fun_increase_device_counter(COMport_KEL103);
 
                     }
                     else program_counter++;

@@ -11,21 +11,14 @@ namespace test_system
     {
         functions functions = new functions();
         owon_multimeter_common owon_multimeter_common = new owon_multimeter_common();
-
-
-
         //=======================================================================================================================
         //=======================================================================================================================
-
         public void fun_XDM2041_measure()
         {
             var (returnState, returnValue) = owon_multimeter_common.fun_owon_measure(COMport_SELECT_MULTIMETER_XDM2041);
             device_XDM2041_measure_ok = returnState;
-            if (returnState == funErrorCode.OK) device_XDM2041_measure = returnValue;
-            //elsedevice_XDM2041_measure =
+            if (returnState == funReturnCodeCOMport.OK) device_XDM2041_measure = returnValue;
        }
-
-
 
 
         //--    OWON,XDM2041,24470254,V3.3.0,3
@@ -33,20 +26,6 @@ namespace test_system
         {
             owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM2041, "XDM2041,24470254");
         }
-
-
-        /*
-        //strGeneralString = "najden tukaj    "+ COMport_connected[COMport_SELECT_MULTIMETER_XDM2041].ToString();
-        if (COMport_connected[COMport_SELECT_MULTIMETER_XDM2041])
-        {
-            mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM2041].WriteLine("*IDN?");
-            string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM2041].ReadLine();
-            COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] = functions.fun_ascii_only(ident_readRaw);
-            if (ident_readRaw.Contains("XDM2041,24470254")) { COMport_active[COMport_SELECT_MULTIMETER_XDM2041] = true; }
-            else COMport_active[COMport_SELECT_MULTIMETER_XDM2041] = false;
-        }
-    }
-        */
 
 
 

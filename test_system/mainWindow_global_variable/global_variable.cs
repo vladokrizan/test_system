@@ -27,10 +27,10 @@ namespace test_system
         public static double KA3305P_out_current_1;
         public static double KA3305P_out_voltage_2;
         public static double KA3305P_out_current_2;
-        public static double KA3305P_out_voltage_serial;
-        public static double KA3305P_out_current_serial;
-        public static double KA3305P_out_voltage_parallel;
-        public static double KA3305P_out_current_parallel;
+       // public static double KA3305P_out_voltage_serial;
+       // public static double KA3305P_out_current_serial;
+       // public static double KA3305P_out_voltage_parallel;
+       // public static double KA3305P_out_current_parallel;
 
 
 
@@ -48,13 +48,13 @@ namespace test_system
         public static double HSC3300_get_set_voltage = 0;
         public static double HSC3300_get_set_current = 0;
 
-        public static string HSC3300_set_set_voltage = "";
-        public static string HSC3300_set_set_current = "";
+        //public static string HSC3300_set_set_voltage = "";
+        //public static string HSC3300_set_set_current = "";
 
         #endregion
         #region "POWER SUPPLY ---- RD6006  / RD6024  "
 
-        public static byte intModbusRTUreceiveCRC_numberBytes;
+        //public static byte intModbusRTUreceiveCRC_numberBytes;
         public static UInt16 intModbusRTUreceiveCRC_calculate;
         public static UInt16 intModbusRTUreceiveCRC_receive;
 
@@ -149,23 +149,24 @@ namespace test_system
 
         #region "OWON  --- multimeter   -----      XDM3051    "
         //public static string device_XDM3051_ident = "";
-        public static funErrorCode device_XDM3051_measure_ok;
-        public static double device_XDM3051_measure;
+        //public static funReturnCodeCOMport device_XDM3051_measure_ok;
+        //public static double device_XDM3051_measure;
 
+        public static int device_XDM3051_range_dc_volt;
 
         #endregion
         #region "OWON  --- multimeter   -----      XDM2041    "
         //public static string device_XDM1041_ident = "";
-        public static funErrorCode device_XDM2041_measure_ok;
-        public static double device_XDM2041_measure;
+        //public static funReturnCodeCOMport device_XDM2041_measure_ok;
+        //public static double device_XDM2041_measure;
 
 
 
         #endregion
         #region "OWON  --- multimeter   -----      XDM1041    "
         //public static string device_XDM1041_ident = "";
-        public static funErrorCode device_XDM1041_measure_ok;
-        public static double device_XDM1041_measure;
+        //public static funReturnCodeCOMport device_XDM1041_measure_ok;
+        //public static double device_XDM1041_measure;
 
 
         #endregion
@@ -198,15 +199,16 @@ namespace test_system
 
 
         #endregion
+        #endregion
         #region "COMport variable in konstante"
         //-----------------------------------------------------------------------------------------------------------------------
         //-- COMport variable
         //-----------------------------------------------------------------------------------------------------------------------
         //-- COM port je priključen
-        public static bool[] COMport_connected = new bool[COMport_SELECT_MAXnumber];
+        public static bool[] dev_connected = new bool[COMport_SELECT_MAXnumber];
         //-----------------------------------------------------------------------------------------------------------------------
         //-- COM port je priključen in instrument je prižgan, dobi se ident informacija 
-        public static bool[] COMport_active = new bool[COMport_SELECT_MAXnumber];
+        public static bool[] dev_active = new bool[COMport_SELECT_MAXnumber];
         //----------------------------------------------------------------------------------------
         // --- COM port - "OWON XDM 3051 - Multimeter"
         public static string[] COMport_name = new string[COMport_SELECT_MAXnumber];
@@ -219,6 +221,14 @@ namespace test_system
         //----------------------------------------------------------------------------------------
         // --- COMport - ident string 
         public static string[] COMport_device_ident = new string[COMport_SELECT_MAXnumber];
+        //----------------------------------------------------------------------------------------
+
+
+        public static funReturnCodeCOMport [] dev_meas_state = new funReturnCodeCOMport[COMport_SELECT_MAXnumber];
+        public static double[] dev_meas = new double[COMport_SELECT_MAXnumber];
+
+
+
 
         //----------------------------------------------------------------------------------------
         // --- COMport - velikost sprejetega paketa 
@@ -230,25 +240,36 @@ namespace test_system
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_MAXnumber = 20;
         //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_MULTIMETER_XDM3051 = 1;
-        public const byte COMport_SELECT_MULTIMETER_XDM2041 = 2;
-        public const byte COMport_SELECT_MULTIMETER_XDM1041 = 3;
-        public const byte COMport_SELECT_TEMPERATURE_ET3916 = 4;
-        public const byte COMport_SELECT_AC_METER_MPM_1010B = 5;
+        public const byte COMport_XDM3051 = 1;
+        public const byte COMport_XDM2041 = 2;
+        public const byte COMport_XDM1041 = 3;
+        public const byte COMport_ET3916 = 4;
+        public const byte COMport_MPM_1010B = 5;
         public const byte COMport_SELECT_METER_FREE = 6;
         //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_SUPPLY_KA3305A = 7;
-        public const byte COMport_SELECT_SUPPLY_HCS_3300 = 8;
+        public const byte COMport_KA3305A = 7;
+        public const byte COMport_HCS_3300 = 8;
         //-----------------------------------------------------------------------------------------------------------------------
         //-- NE SME SE SPREMENITI ZARADI RX INTERRUPT FUNKCIJE 
-        public const byte COMport_SELECT_SUPPLY_RD6006 = 9;
-        public const byte COMport_SELECT_SUPPLY_RD6024 = 10;
+        public const byte COMport_RD6006 = 9;
+        public const byte COMport_RD6024 = 10;
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_SELECT_SUPPLY_FREE = 11;
         //-----------------------------------------------------------------------------------------------------------------------
-        public const byte COMport_SELECT_LOAD_KEL103 = 12;
+        public const byte COMport_KEL103 = 12;
 
         //-----------------------------------------------------------------------------------------------------------------------
+        //-- izbira POWER SUPPLY
+        public const byte DEVICE_SELECT_SUPPLY_KA3305P = 1;
+        public const byte DEVICE_SELECT_SUPPLY_HCS_3300 = 2;
+        public const byte DEVICE_SELECT_SUPPLY_RD6006 = 3;
+        public const byte DEVICE_SELECT_SUPPLY_RD6024 = 4;
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- izbira POWER DC LOAD 
+        public const byte DEVICE_SELECT_LOAD_KEL103 = 1;
+
+
+
 
         //-----------------------------------------------------------------------------------------------------------------------
         //-- DC multimetrer  
@@ -357,14 +378,13 @@ namespace test_system
         //-----------------------------------------------------------------------------------------
         //--  function return code   
         //-----------------------------------------------------------------------------------------
-        public enum funErrorCode
+        public enum funReturnCodeCOMport
         {
             OK,                         //--  0: functions runs correct 
             NOK,                        //--  1: functions runs uncorect 
             ERROR,                      //--  2: in functions happen ERROR  
-            COM_PORT_NOT_SELECTED,
-            COM_PORT_NOT_CONNECTED,
-            COM_PORT_ACTIVE,
+            NOT_CONNECTED,
+            NOT_ACTIVE,
             UNKNOW                       //--   in unknow state of function   
         }
 
@@ -389,6 +409,54 @@ namespace test_system
         #endregion
 
 
+        #region "RUN program variable"
+
+        public static string strLogFiles_program = "";
+        public static Dictionary<String, String> program_result_value = new Dictionary<String, String>();
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- integer številka trenutno izvaajanega programa 
+        public static int program_select_current = 0;
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- nova sekunda, program se izvaja vsako sekundo
+        public static byte timer_new_second;
+        public static byte timer_old_second;
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- izbira napajalnika in bremena 
+        public static int program_select_supply = 0;
+        public static int program_select_load = 0;
+
+
+
+        public static bool program_bool_run = false;
+        public static bool program_bool_run_start = false;
+        public static bool program_bool_run_stop = false;
+
+        public static int program_int_counter_run = 0;
+        public static int program_int_counter_set = 0;
+
+
+        public static int program_int_step_time_run = 0;
+        public static int program_int_step_time_set = 0;
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        public static DateTime startTime_complete_program;
+        //public static DateTime endTime_complete_program;
+        //public static TimeSpan duration_complete_program;
+        //public static double floatDuration_complete_program;
+        //public static string strDuration_complete_program;
+        //-----------------------------------------------------------------------------------------------------------------------
+        public static DateTime startTime_part_program;
+        public static DateTime endTime_part_program;
+        public static TimeSpan duration_part_program;
+        public static double floatDuration_part_program_run;
+        public static double floatDuration_part_program_complete;
+        public static string strDuration_part_program;
+
+
+
+
+        #endregion
 
 
 

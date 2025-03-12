@@ -86,15 +86,15 @@ namespace test_system
 
         private void funSelect_COMport_modules()
         {
-            COMport_port[COMport_SELECT_MULTIMETER_XDM3051] = "";
-            COMport_port[COMport_SELECT_MULTIMETER_XDM1041] = "";
-            COMport_name[COMport_SELECT_MULTIMETER_XDM2041] = "";
-            COMport_port[COMport_SELECT_SUPPLY_KA3305A] = "";
-            COMport_port[COMport_SELECT_SUPPLY_RD6024] = "";
-            COMport_port[COMport_SELECT_SUPPLY_RD6006] = "";
-            COMport_port[COMport_SELECT_LOAD_KEL103] = "";
-            COMport_port[COMport_SELECT_TEMPERATURE_ET3916] = "";
-            COMport_port[COMport_SELECT_AC_METER_MPM_1010B] = "";
+            COMport_port[COMport_XDM3051] = "";
+            COMport_port[COMport_XDM1041] = "";
+            COMport_name[COMport_XDM2041] = "";
+            COMport_port[COMport_KA3305A] = "";
+            COMport_port[COMport_RD6024] = "";
+            COMport_port[COMport_RD6006] = "";
+            COMport_port[COMport_KEL103] = "";
+            COMport_port[COMport_ET3916] = "";
+            COMport_port[COMport_MPM_1010B] = "";
 
 
             using (ManagementClass i_Entity = new ManagementClass("Win32_PnPEntity"))
@@ -113,21 +113,21 @@ namespace test_system
                    // fun_search_device(COMport_SELECT_TEMPERATURE_ET3916, 115200, strCOMport_name_ET6916, strCOMport_serial_ET6916, strCOMport_VID_ET6916, strCOMport_PID_ET6916, s_DeviceID, s_PortName);
                                
                     //-----------------------------------------------------------------------------------------------------------------------
-                    fun_search_device(COMport_SELECT_SUPPLY_KA3305A, 115200, strCOMport_supply_name_KA3305A, strCOMport_supply_serial_KA3305A, strCOMport_supply_VID_KA3305A, strCOMport_supply_PID_KA3305A, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_SUPPLY_HCS_3300, 9600, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_SUPPLY_RD6006, 115200, strCOMport_supply_name_RD6006, strCOMport_supply_serial_RD6006, strCOMport_supply_VID_RD6006, strCOMport_supply_PID_RD6006, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_SUPPLY_RD6024, 115200, strCOMport_supply_name_RD6024, strCOMport_supply_serial_RD6024, strCOMport_supply_VID_RD6024, strCOMport_supply_PID_RD6024, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_KA3305A, 115200, strCOMport_supply_name_KA3305A, strCOMport_supply_serial_KA3305A, strCOMport_supply_VID_KA3305A, strCOMport_supply_PID_KA3305A, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_HCS_3300, 9600, strCOMport_supply_name_HCS_330, strCOMport_supply_serial_HCS_330, strCOMport_supply_VID_HCS_330, strCOMport_supply_PID_HCS_330, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_RD6006, 115200, strCOMport_supply_name_RD6006, strCOMport_supply_serial_RD6006, strCOMport_supply_VID_RD6006, strCOMport_supply_PID_RD6006, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_RD6024, 115200, strCOMport_supply_name_RD6024, strCOMport_supply_serial_RD6024, strCOMport_supply_VID_RD6024, strCOMport_supply_PID_RD6024, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
                     //-- DC multimetrer  
-                    fun_search_device(COMport_SELECT_MULTIMETER_XDM3051, 115200, strCOMport_multimeter_name_XDM3051, strCOMport_multimeter_serial_XDM3051, strCOMport_multimeter_VID_XDM3051, strCOMport_multimeter_PID_XDM3051, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_MULTIMETER_XDM2041, 115200, strCOMport_multimeter_name_XDM2041, strCOMport_multimeter_serial_XDM2041, strCOMport_multimeter_VID_XDM2041, strCOMport_multimeter_PID_XDM2041, s_DeviceID, s_PortName);
-                    fun_search_device(COMport_SELECT_MULTIMETER_XDM1041, 115200, strCOMport_multimeter_name_XDM1041, strCOMport_multimeter_serial_XDM1041, strCOMport_multimeter_VID_XDM1041, strCOMport_multimeter_PID_XDM1041, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_XDM3051, 115200, strCOMport_multimeter_name_XDM3051, strCOMport_multimeter_serial_XDM3051, strCOMport_multimeter_VID_XDM3051, strCOMport_multimeter_PID_XDM3051, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_XDM2041, 115200, strCOMport_multimeter_name_XDM2041, strCOMport_multimeter_serial_XDM2041, strCOMport_multimeter_VID_XDM2041, strCOMport_multimeter_PID_XDM2041, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_XDM1041, 115200, strCOMport_multimeter_name_XDM1041, strCOMport_multimeter_serial_XDM1041, strCOMport_multimeter_VID_XDM1041, strCOMport_multimeter_PID_XDM1041, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
-                    fun_search_device(COMport_SELECT_LOAD_KEL103, 115200, strCOMport_load_name_KEL103, strCOMport_load_serial_KEL103, strCOMport_load_VID_KEL103, strCOMport_load_PID_KEL103, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_KEL103, 115200, strCOMport_load_name_KEL103, strCOMport_load_serial_KEL103, strCOMport_load_VID_KEL103, strCOMport_load_PID_KEL103, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
-                    fun_search_device(COMport_SELECT_TEMPERATURE_ET3916, 115200, strCOMport_name_ET3916, strCOMport_serial_ET3916, strCOMport_VID_ET3916, strCOMport_PID_ET3916, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_ET3916, 115200, strCOMport_name_ET3916, strCOMport_serial_ET3916, strCOMport_VID_ET3916, strCOMport_PID_ET3916, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
-                    fun_search_device(COMport_SELECT_AC_METER_MPM_1010B, 9600, strCOMport_name_MPM_1010B, strCOMport_serial_MPM_1010B, strCOMport_VID_MPM_1010B, strCOMport_PID_MPM_1010B, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_MPM_1010B, 9600, strCOMport_name_MPM_1010B, strCOMport_serial_MPM_1010B, strCOMport_VID_MPM_1010B, strCOMport_PID_MPM_1010B, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
                     
 

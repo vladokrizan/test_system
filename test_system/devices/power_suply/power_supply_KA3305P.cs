@@ -25,17 +25,17 @@ namespace test_system
         /// </summary>
         //=======================================================================================================================
 
-        public funErrorCode fun_KA3305P_get_voltage_current(int select_channel)
+        public funReturnCodeCOMport fun_KA3305P_get_voltage_current(int select_channel)
         {
             string send_command;
             string read_answer;
-            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            if (dev_connected[COMport_KA3305A])
             {
-                if (COMport_active[COMport_SELECT_SUPPLY_KA3305A])
+                if (dev_active[COMport_KA3305A])
                 {
                     send_command = "VOUT" + select_channel.ToString() + "?";
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine(send_command);
-                    read_answer = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+                    mainWindow.COMportSerial[COMport_KA3305A].WriteLine(send_command);
+                    read_answer = mainWindow.COMportSerial[COMport_KA3305A].ReadLine();
 
                     switch (select_channel)
                     {
@@ -43,8 +43,8 @@ namespace test_system
                         case 2: KA3305P_out_voltage_2 = Convert.ToDouble(read_answer); break;
                     }
                     send_command = "IOUT" + select_channel.ToString() + "?";
-                    mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine(send_command);
-                    read_answer = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
+                    mainWindow.COMportSerial[COMport_KA3305A].WriteLine(send_command);
+                    read_answer = mainWindow.COMportSerial[COMport_KA3305A].ReadLine();
 
                     switch (select_channel)
                     {
@@ -53,11 +53,11 @@ namespace test_system
                     }
 
 
-                    return (funErrorCode.OK);
+                    return (funReturnCodeCOMport.OK);
                 }
-                return (funErrorCode.COM_PORT_ACTIVE);
+                return (funReturnCodeCOMport.NOT_ACTIVE);
             }
-            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+            return (funReturnCodeCOMport.NOT_CONNECTED);
         }
 
 
@@ -75,20 +75,20 @@ namespace test_system
         /// 
         /// <returns></returns>
         //=======================================================================================================================
-        public funErrorCode fun_KA3305P_set_voltage(int select_channel, double set_voltage)
+        public funReturnCodeCOMport fun_KA3305P_set_voltage(int select_channel, double set_voltage)
         {
-            string send_command;
-            string read_answer;
-            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            //string send_command;
+            //string read_answer;
+            if (dev_connected[COMport_KA3305A])
             {
-                if (COMport_active[COMport_SELECT_SUPPLY_KA3305A])
+                if (dev_active[COMport_KA3305A])
                 {
 
-                    return (funErrorCode.OK);
+                    return (funReturnCodeCOMport.OK);
                 }
-                return (funErrorCode.COM_PORT_ACTIVE);
+                return (funReturnCodeCOMport.NOT_ACTIVE);
             }
-            return (funErrorCode.COM_PORT_NOT_CONNECTED);
+            return (funReturnCodeCOMport.NOT_CONNECTED);
         }
 
 
@@ -103,14 +103,14 @@ namespace test_system
         //=======================================================================================================================
         public void fun_KA3305P_identifaction()
         {
-            if (COMport_connected[COMport_SELECT_SUPPLY_KA3305A])
+            if (dev_connected[COMport_KA3305A])
             {
-                mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].WriteLine("*IDN?");
-                string ident_readRaw = mainWindow.COMportSerial[COMport_SELECT_SUPPLY_KA3305A].ReadLine();
-                COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = functions.fun_ascii_only(ident_readRaw);
+                mainWindow.COMportSerial[COMport_KA3305A].WriteLine("*IDN?");
+                string ident_readRaw = mainWindow.COMportSerial[COMport_KA3305A].ReadLine();
+                COMport_device_ident[COMport_KA3305A] = functions.fun_ascii_only(ident_readRaw);
 
-                if (ident_readRaw.Contains("KORAD KA3305P V7.0 SN:30057214")) { COMport_active[COMport_SELECT_SUPPLY_KA3305A] = true; }
-                else COMport_active[COMport_SELECT_SUPPLY_KA3305A] = false;
+                if (ident_readRaw.Contains("KORAD KA3305P V7.0 SN:30057214")) { dev_active[COMport_KA3305A] = true; }
+                else dev_active[COMport_KA3305A] = false;
             }
         }
 

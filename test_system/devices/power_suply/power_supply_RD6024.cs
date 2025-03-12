@@ -10,7 +10,7 @@ namespace test_system
     internal class power_supply_RD6024
     {
 
-        public funErrorCode funModbusRTU_receive_mesasage_RD6024()
+        public funReturnCodeCOMport funModbusRTU_receive_mesasage_RD6024()
         {
             // UInt16 uint16Value = 0;
             UInt32 uint32Value = 0;
@@ -32,7 +32,7 @@ namespace test_system
 
 
             device_RD6024_show_all_measure = true;
-            return (funErrorCode.OK);
+            return (funReturnCodeCOMport.OK);
         }
 
 

@@ -31,8 +31,7 @@ namespace test_system
         modbus_functions modbus_functions = new modbus_functions();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
-        multimeter_XDM3051 multimeter_XDM3051 = new multimeter_XDM3051();
-
+    
         connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
         all_devices all_devices = new all_devices();
@@ -113,6 +112,9 @@ namespace test_system
             intMainWindow_x = this.Location.X;
             intMainWindow_y = this.Location.Y;
 
+            program_1 program_1 = new program_1();
+            program_1.MdiParent = this;
+            program_1.Show();
 
         }
 
@@ -128,19 +130,19 @@ namespace test_system
         #region "COMports  "
         private int fun_select_COMport_open(byte select_port)
         {
-            if (select_port == COMport_SELECT_MULTIMETER_XDM3051) COMport_name[select_port] = strCOMport_multimeter_name_XDM3051;
-            else if (select_port == COMport_SELECT_MULTIMETER_XDM2041) COMport_name[select_port] = strCOMport_multimeter_name_XDM2041;
-            else if (select_port == COMport_SELECT_MULTIMETER_XDM1041) COMport_name[select_port] = strCOMport_multimeter_name_XDM1041;
-            else if (select_port == COMport_SELECT_TEMPERATURE_ET3916) COMport_name[select_port] = strCOMport_name_ET3916;
-            else if (select_port == COMport_SELECT_AC_METER_MPM_1010B) COMport_name[select_port] = strCOMport_name_MPM_1010B;
+            if (select_port == COMport_XDM3051) COMport_name[select_port] = strCOMport_multimeter_name_XDM3051;
+            else if (select_port == COMport_XDM2041) COMport_name[select_port] = strCOMport_multimeter_name_XDM2041;
+            else if (select_port == COMport_XDM1041) COMport_name[select_port] = strCOMport_multimeter_name_XDM1041;
+            else if (select_port == COMport_ET3916) COMport_name[select_port] = strCOMport_name_ET3916;
+            else if (select_port == COMport_MPM_1010B) COMport_name[select_port] = strCOMport_name_MPM_1010B;
 
-            else if (select_port == COMport_SELECT_SUPPLY_KA3305A) COMport_name[select_port] = strCOMport_supply_name_KA3305A;
-            else if (select_port == COMport_SELECT_SUPPLY_HCS_3300) COMport_name[select_port] = strCOMport_supply_name_HCS_330;
-            else if (select_port == COMport_SELECT_SUPPLY_RD6006) COMport_name[select_port] = strCOMport_supply_name_RD6006;
-            else if (select_port == COMport_SELECT_SUPPLY_RD6024) COMport_name[select_port] = strCOMport_supply_PID_RD6024;
-            else if (select_port == COMport_SELECT_LOAD_KEL103) COMport_name[select_port] = strCOMport_load_name_KEL103;
+            else if (select_port == COMport_KA3305A) COMport_name[select_port] = strCOMport_supply_name_KA3305A;
+            else if (select_port == COMport_HCS_3300) COMport_name[select_port] = strCOMport_supply_name_HCS_330;
+            else if (select_port == COMport_RD6006) COMport_name[select_port] = strCOMport_supply_name_RD6006;
+            else if (select_port == COMport_RD6024) COMport_name[select_port] = strCOMport_supply_PID_RD6024;
+            else if (select_port == COMport_KEL103) COMport_name[select_port] = strCOMport_load_name_KEL103;
 
-            COMport_connected[select_port] = false;
+            dev_connected[select_port] = false;
 
 
 
@@ -156,7 +158,7 @@ namespace test_system
                         COMportSerial[select_port].PortName = COMport_port[select_port];
                         COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
                         COMportSerial[select_port].Open();
-                        COMport_connected[select_port] = true;
+                        dev_connected[select_port] = true;
                         return 0;
                     }
                     catch { return -3; }
@@ -170,22 +172,22 @@ namespace test_system
         {
             try
             {
-                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM1041) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM2041) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_MULTIMETER_XDM3051) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_KA3305A) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_HCS_3300) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_AC_METER_MPM_1010B) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_TEMPERATURE_ET3916) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_LOAD_KEL103) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_RD6006) == 0) { }
-                if (fun_select_COMport_open(COMport_SELECT_SUPPLY_RD6024) == 0) { }
+                if (fun_select_COMport_open(COMport_XDM1041) == 0) { }
+                if (fun_select_COMport_open(COMport_XDM2041) == 0) { }
+                if (fun_select_COMport_open(COMport_XDM3051) == 0) { }
+                if (fun_select_COMport_open(COMport_KA3305A) == 0) { }
+                if (fun_select_COMport_open(COMport_HCS_3300) == 0) { }
+                if (fun_select_COMport_open(COMport_MPM_1010B) == 0) { }
+                if (fun_select_COMport_open(COMport_ET3916) == 0) { }
+                if (fun_select_COMport_open(COMport_KEL103) == 0) { }
+                if (fun_select_COMport_open(COMport_RD6006) == 0) { }
+                if (fun_select_COMport_open(COMport_RD6024) == 0) { }
                 //---------------------------------------------------------------------------------------------------------------
                 //-- RD6006 in RD6024 -- MODBUS komunikacija
                 COM_PORT_09.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6006_DataReceived);
                 COM_PORT_10.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6024_DataReceived);
-                COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold = 100;
-                COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold = 100;
+                COMportSerial[COMport_RD6006].ReceivedBytesThreshold = 100;
+                COMportSerial[COMport_RD6024].ReceivedBytesThreshold = 100;
             }
             catch { }
         }
@@ -203,12 +205,12 @@ namespace test_system
 
             try
             {
-                receiveByte_modbus_lenght = (byte)COMportSerial[COMport_SELECT_SUPPLY_RD6006].BytesToRead;
+                receiveByte_modbus_lenght = (byte)COMportSerial[COMport_RD6006].BytesToRead;
 
                 if (receiveByte_modbus_lenght > 0)
                 {
                     //bCOMport_recLen[COMport_SELECT_SUPPLY_RD6006] = receiveByteLocal;
-                    COMportSerial[COMport_SELECT_SUPPLY_RD6006].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
+                    COMportSerial[COMport_RD6006].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
                     modbus_functions.funModbusRTU_receive_mesasage();
 
                     if (modbus_start_register == 8)
@@ -242,14 +244,14 @@ namespace test_system
             //te receiveByteLocal;
             try
             {
-                receiveByte_modbus_lenght = (byte)mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].BytesToRead;
+                receiveByte_modbus_lenght = (byte)mainWindow.COMportSerial[COMport_RD6024].BytesToRead;
 
 
                 if (receiveByte_modbus_lenght > 0)
                 {
                     //bCOMport_recLen[selectCOMporLocal] = receiveByteLocal;
                     //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_modbus, 0, receiveByteLocal);
-                    COMportSerial[COMport_SELECT_SUPPLY_RD6024].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
+                    COMportSerial[COMport_RD6024].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
                     modbus_functions.funModbusRTU_receive_mesasage();
 
                     if (modbus_start_register == 8)
@@ -292,8 +294,8 @@ namespace test_system
             try
             {
                 device[selectedCOMport].Visible = false;
-                if (COMport_connected[selectedCOMport]) { device[selectedCOMport].Visible = true; }
-                if (COMport_active[selectedCOMport]) { device[selectedCOMport].ForeColor = Color.Green; } else device[selectedCOMport].ForeColor = Color.Black;
+                if (dev_connected[selectedCOMport]) { device[selectedCOMport].Visible = true; }
+                if (dev_active[selectedCOMport]) { device[selectedCOMport].ForeColor = Color.Green; } else device[selectedCOMport].ForeColor = Color.Black;
             }
             catch { }
 
@@ -301,18 +303,18 @@ namespace test_system
 
         public void fun_show_connected_device()
         {
-            fun_show_one_device(COMport_SELECT_MULTIMETER_XDM3051);
-            fun_show_one_device(COMport_SELECT_MULTIMETER_XDM2041);
-            fun_show_one_device(COMport_SELECT_MULTIMETER_XDM1041);
-            fun_show_one_device(COMport_SELECT_TEMPERATURE_ET3916);
-            fun_show_one_device(COMport_SELECT_AC_METER_MPM_1010B);
+            fun_show_one_device(COMport_XDM3051);
+            fun_show_one_device(COMport_XDM2041);
+            fun_show_one_device(COMport_XDM1041);
+            fun_show_one_device(COMport_ET3916);
+            fun_show_one_device(COMport_MPM_1010B);
             fun_show_one_device(COMport_SELECT_METER_FREE);
-            fun_show_one_device(COMport_SELECT_SUPPLY_KA3305A);
-            fun_show_one_device(COMport_SELECT_SUPPLY_HCS_3300);
-            fun_show_one_device(COMport_SELECT_SUPPLY_RD6006);
-            fun_show_one_device(COMport_SELECT_SUPPLY_RD6024);
+            fun_show_one_device(COMport_KA3305A);
+            fun_show_one_device(COMport_HCS_3300);
+            fun_show_one_device(COMport_RD6006);
+            fun_show_one_device(COMport_RD6024);
             fun_show_one_device(COMport_SELECT_SUPPLY_FREE);
-            fun_show_one_device(COMport_SELECT_LOAD_KEL103);
+            fun_show_one_device(COMport_KEL103);
         }
 
         #endregion
@@ -325,10 +327,11 @@ namespace test_system
             //-- prikaz prikljucenih COM portov in aktivnih instrumentov 
             fun_show_connected_device();
             textBox1.Text = strGeneralString;
+            label3.Text = strGeneralString;
 
-            label1.Text = COMportSerial[COMport_SELECT_SUPPLY_RD6006].ReceivedBytesThreshold.ToString() + "   " + COMportSerial[COMport_SELECT_SUPPLY_RD6024].ReceivedBytesThreshold.ToString();
+            label1.Text = COMportSerial[COMport_RD6006].ReceivedBytesThreshold.ToString() + "   " + COMportSerial[COMport_RD6024].ReceivedBytesThreshold.ToString();
 
-            label2.Text = COMport_port[COMport_SELECT_MULTIMETER_XDM2041];
+            label2.Text = COMport_port[COMport_XDM2041];
 
             // label13.Text = strGeneralString;
             //label10.Text = COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString() + "   " + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString() + "   " + device_ET3916_serial_number;
@@ -341,7 +344,7 @@ namespace test_system
                 ac_meter_MPM_1010B.fun_read_all_MPM_1010B_read();
                 label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
             }
-            if (device_MPM1010B_read_all_write && COMport_connected[COMport_SELECT_AC_METER_MPM_1010B]) ac_meter_MPM_1010B.fun_read_all_MPM_1010B_write();
+            if (device_MPM1010B_read_all_write && dev_connected[COMport_MPM_1010B]) ac_meter_MPM_1010B.fun_read_all_MPM_1010B_write();
             //-------------------------------------------------------------------------------------------------------------------
             //-- East Tester ET3916-8   8 x Temperature 
             if (device_ET3916_bytes_command_write) { temperature_ET3916.fun_ET3916_send_bytes_command(); }
@@ -396,7 +399,7 @@ namespace test_system
 
         private void button2_Click(object sender, EventArgs e)
         {
-            multimeter_XDM3051.fun_XDM3051_measure();
+            //multimeter_XDM3051.fun_XDM3051_measure();
          
             //power_supply_RD6006.funRD6006_measure();
             //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = "OWON, XDM3051,2303195,V3.7.2,2";
@@ -467,5 +470,20 @@ namespace test_system
         {
 
         }
+
+        //-- zagon programa 20
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            program_20_battery_test program_20_battery_test = new program_20_battery_test();
+            program_20_battery_test.MdiParent = this;
+            program_20_battery_test.Show(); 
+
+
+        }
+
+
+
+
+
     }
 }

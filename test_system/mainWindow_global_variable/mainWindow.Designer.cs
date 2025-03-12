@@ -59,6 +59,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox_connected_device.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -348,11 +350,32 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 477);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "label3";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(20, 267);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(150, 35);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "Program 20";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1357, 692);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnProgram_01);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox_connected_device);
@@ -415,6 +438,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button4;
     }
 }
 
