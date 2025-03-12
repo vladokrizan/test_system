@@ -255,6 +255,17 @@ namespace test_system
             }
             return (funReturnCodeCOMport.OK);
         }
+        public funReturnCodeCOMport fun_KEL103_set_voltage(double setValue)
+        {
+            if (COMport_connected[COMport_SELECT_LOAD_KEL103])
+            {
+                if (COMport_active[COMport_SELECT_LOAD_KEL103])
+                {
+                  //  mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
+                }
+            }
+            return (funReturnCodeCOMport.OK);
+        }
 
 
         //=======================================================================================================================

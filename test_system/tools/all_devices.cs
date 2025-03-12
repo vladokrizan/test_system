@@ -413,6 +413,24 @@ namespace test_system
 
         }
 
+        private void btnXDM3051_get_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            multimeter_XDM3051.fun_XDM3051_get_range_dc_volt();
+            labXDM3051_DC_range.Text = device_XDM3051_range_dc_volt.ToString();
+        }
+
+
+        private void btnXDM3051_set_range_dc_volt_Click(object sender, EventArgs e)
+        {
+            if (radioXDM3051_dc_range_1.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(0.2);
+            if (radioXDM3051_dc_range_2.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(2);
+            if (radioXDM3051_dc_range_3.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(20);
+            if (radioXDM3051_dc_range_4.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(200);
+            if (radioXDM3051_dc_range_5.Checked) multimeter_XDM3051.fun_XDM3051_set_range_dc_volt(1000);
+        }
+
+
+
         #endregion
         #region " Multimeter --- OWON  --- XDM2041 ----  "
 
@@ -544,6 +562,11 @@ namespace test_system
 
         }
         #endregion
+
+
+
+
+
 
 
         #endregion
@@ -707,6 +730,11 @@ namespace test_system
         private void comboBox_XDM1041_voltage_range_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
 
