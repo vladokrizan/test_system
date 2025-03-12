@@ -426,21 +426,6 @@ namespace test_system
         public static int program_select_supply = 0;
         public static int program_select_load = 0;
 
-        #region "RUN program variable"
-
-        public static bool program_bool_run = false;
-        public static bool program_bool_run_start = false;
-        public static bool program_bool_run_stop = false;
-
-        public static int program_int_counter_run = 0;
-        public static int program_int_counter_set = 0;
-
-
-        public static int program_int_step_time_run = 0;
-        public static int program_int_step_time_set = 0;
-
-
-        #endregion
 
 
         public static bool program_bool_run = false;

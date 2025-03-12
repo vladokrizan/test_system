@@ -94,8 +94,7 @@ namespace test_system
 
         }
 
-        private void fun_program10_step()
-        {
+        #region "TIMER  .. izvajanje programa  "
 
         double set_voltage = 1.0;
 

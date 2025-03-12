@@ -187,7 +187,6 @@
             // 
             // tabMultimeter
             // 
-            this.tabMultimeter.Controls.Add(this.button2);
             this.tabMultimeter.Controls.Add(this.groupBox_AC_meter_MPM_1010B);
             this.tabMultimeter.Controls.Add(this.groupBox_multimeter_XDM2041);
             this.tabMultimeter.Controls.Add(this.groupBox_multimeter_XDM1041);
