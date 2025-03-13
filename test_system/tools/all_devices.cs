@@ -188,9 +188,9 @@ namespace test_system
         {
             power_supply_hcs_3300.fun_HCS_330_get_measure();
 
-            labHCS3300_voltage.Text = "Out Voltage: " + HSC3300_out_voltage.ToString("0.00") + " V";
-            labHCS3300_current.Text = "Out Current: " + HSC3300_out_current.ToString("0.00") + " A";
-            labHCS3300_status.Text = HSC3300_out_status;
+            labHCS3300_voltage.Text = "Out Voltage: " + HCS_3300_out_voltage.ToString("0.00") + " V";
+            labHCS3300_current.Text = "Out Current: " + HCS_3300_out_current.ToString("0.00") + " A";
+            labHCS3300_status.Text = HCS_3300_out_status;
             // textBox3.Text = COMport_receive_string[COMport_SELECT_SUPPLY_HCS_3300];
             //  public static double HSC3300_out_voltage = 0;
             //public static double HSC3300_out_current = 0;
@@ -200,8 +200,8 @@ namespace test_system
         private void btnHCS_3300_get_set_value_Click(object sender, EventArgs e)
         {
             power_supply_hcs_3300.fun_HCS_3300_get_limit();
-            txtCS3300_set_voltage.Text = HSC3300_get_set_voltage.ToString();
-            txtCS3300_set_current.Text = HSC3300_get_set_current.ToString();
+            txtCS3300_set_voltage.Text = HCS_3300_get_set_voltage.ToString();
+            txtCS3300_set_current.Text = HCS_3300_get_set_current.ToString();
             //strGeneralString = "receeive  " + COMport_receive_lenght[COMport_SELECT_SUPPLY_HCS_3300].ToString() + "   <" + ">   Voltage =      " + HSC3300_get_set_voltage.ToString()+ "    " + HSC3300_get_set_current.ToString();
         }
 
@@ -242,10 +242,114 @@ namespace test_system
             txtBosPowerSupply_KA3305P_ident.Text = COMport_device_ident[COMport_KA3305A];
         }
 
+        private void btnKA3305P_measure_1_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_get_voltage_current();
+            labKA3305P_volt_1.Text = "Voltage: " + KA3305P_out_voltage_1.ToString("0.00") + " V";
+            labKA3305P_current_1.Text = "Current: " + KA3305P_out_current_1.ToString("0.00") + " A";
+        }
+        private void btnKA3305P_measure_2_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_get_voltage_current(2);
+            labKA3305P_volt_2.Text = "Voltage: " + KA3305P_out_voltage_2.ToString("0.00") + " V";
+            labKA3305P_current_2.Text = "Current: " + KA3305P_out_current_2.ToString("0.00") + " A";
+        }
+
+
+        private void btnKA3305P_get_set_1_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_get_set_voltage_current();
+            txtKA3305P_set_voltage_1.Text = KA3305P_get_set_voltage_1.ToString();
+            txtKA3305P_set_current_1.Text = KA3305P_get_set_current_1.ToString();
+        }
+
+        private void btnKA3305P_get_set_2_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_get_set_voltage_current(2);
+            txtKA3305P_set_voltage_2.Text = KA3305P_get_set_voltage_2.ToString();
+            txtKA3305P_set_current_2.Text = KA3305P_get_set_current_2.ToString();
+        }
+
+        //        public static double KA3305P_get_set_voltage_1;
+        //      public static double KA3305P_get_set_current_1;
+        //    public static double KA3305P_get_set_voltage_2;
+        //  public static double KA3305P_get_set_current_2;
+
+
+        private void txtKA3305P_set_voltage_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string valueSetting = txtKA3305P_set_voltage_1.Text;
+                double set_value = Convert.ToDouble(valueSetting);
+                power_supply_KA3305P.fun_KA3305P_set_voltage(set_value, 1);
+            }
+        }
+        private void txtKA3305P_set_voltage_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string valueSetting = txtKA3305P_set_voltage_2.Text;
+                double set_value = Convert.ToDouble(valueSetting);
+                power_supply_KA3305P.fun_KA3305P_set_voltage(set_value, 2);
+            }
+        }
+
+        private void txtKA3305P_set_current_1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string valueSetting = txtKA3305P_set_current_1.Text;
+                double set_value = Convert.ToDouble(valueSetting);
+                power_supply_KA3305P.fun_KA3305P_set_current(set_value, 1);
+            }
+
+        }
+
+        private void txtKA3305P_set_current_2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string valueSetting = txtKA3305P_set_current_2.Text;
+                double set_value = Convert.ToDouble(valueSetting);
+                power_supply_KA3305P.fun_KA3305P_set_current(set_value, 2);
+            }
+
+        }
+
+
+        private void btnKA3305P_on_1_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_on();
+        }
+
+        private void btnKA3305P_off_1_Click(object sender, EventArgs e)
+        {
+            power_supply_KA3305P.fun_KA3305P_off();
+        }
+
+        private void btnKA3305P_status_Click(object sender, EventArgs e)
+        {
+            string strShowString = "";
+            power_supply_KA3305P.fun_KA3305P_status();
+            strShowString = KA3305P_status_bit0_CH1_mode + "\n\r";
+            strShowString = strShowString + KA3305P_status_bit0_CH2_mode + "\n\r";
+            strShowString = strShowString + KA3305P_status_bit23_tracking + "\n\r";
+            strShowString = strShowString + KA3305P_status_bit4_beep + "\n\r";
+            strShowString = strShowString + KA3305P_status_bit5_lock + "\n\r";
+            strShowString = strShowString + KA3305P_status_bit6_on_offk + "\n\r";
 
 
 
-        #endregion
+   
+
+        labKA3305P_status.Text = strShowString;
+            labKA3305P_status_1.Text = KA3305P_status.ToString("X");
+
+
+        }
+
+        #endregion;
 
         #region " Power supply  ---- RD6006     ------     "
 
@@ -608,7 +712,7 @@ namespace test_system
         private void btnKEL103_get_set_value_Click(object sender, EventArgs e)
         {
             dc_load_KEL103.fun_KEL103_get_set_voltage();
-            dc_load_KEL103.fun_KEL103_get_set_cureent();
+            dc_load_KEL103.fun_KEL103_get_set_curernt();
             dc_load_KEL103.fun_KEL103_get_set_power();
 
             txtKEL103_voltage.Text = KEL103_get_set_voltage.ToString();
@@ -657,14 +761,10 @@ namespace test_system
             //if ( e=System.ke)
             if (e.KeyCode == Keys.Enter)
             {
-
                 string valueSetting = txtKEL103_curr.Text;
                 //string valueSetting_pika = valueSetting.Replace(",", ".");
                 KEL103_set_set_current = Convert.ToDouble(valueSetting);
-
-                dc_load_KEL103.fun_KEL103_set_cureent(KEL103_set_set_current);
-
-
+                dc_load_KEL103.fun_KEL103_set_current(KEL103_set_set_current);
             }
 
         }
@@ -733,6 +833,6 @@ namespace test_system
 
         }
 
-     
+
     }
 }

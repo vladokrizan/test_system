@@ -22,35 +22,49 @@ namespace test_system
 
 
         #region "POWER SUPPLY ---- KORAD   ---- KA3305P  -----  0-30V 5A  "
-        // public static string device_HCS_3300_ident = "";
-        public static double KA3305P_out_voltage_1;
+       public static double KA3305P_out_voltage_1;
         public static double KA3305P_out_current_1;
         public static double KA3305P_out_voltage_2;
         public static double KA3305P_out_current_2;
-       // public static double KA3305P_out_voltage_serial;
-       // public static double KA3305P_out_current_serial;
-       // public static double KA3305P_out_voltage_parallel;
-       // public static double KA3305P_out_current_parallel;
+        // public static double KA3305P_out_voltage_serial;
+        // public static double KA3305P_out_current_serial;
+        // public static double KA3305P_out_voltage_parallel;
+        // public static double KA3305P_out_current_parallel;
 
 
+        public static double KA3305P_get_set_voltage_1;
+        public static double KA3305P_get_set_current_1;
+        public static double KA3305P_get_set_voltage_2;
+        public static double KA3305P_get_set_current_2;
+
+        public static byte KA3305P_status;
+        public static string KA3305P_status_bit0_CH1_mode;
+        public static string KA3305P_status_bit0_CH2_mode;
+        public static string KA3305P_status_bit23_tracking;
+        public static string KA3305P_status_bit4_beep;
+        public static string KA3305P_status_bit5_lock;
+        public static string KA3305P_status_bit6_on_offk;
+
+        ///         0       CH1 0=CC mode, 1=CV mode
+        ///         1       CH2 0=CC mode, 1=CV mode
+        ///         2,3,    Tracking  00=Independent, 01=Tracking series, 11=Tracking parallel
+        ///         4,      Beep      0=Off, 1=On
+        ///         5       Lock      0=Lock, 1=Unlock
+        ///         6       Output 0=Off, 1=On
+        ///         7       N/AN/A
 
 
         #endregion
 
 
-        #region "POWER SUPPLY ---- MANSON  ---- HS - 3300  -----  1-16V 30A  "
-        // public static string device_HCS_3300_ident = "";
-        //int receive_lengt
-        public static double HSC3300_out_voltage = 0;
-        public static double HSC3300_out_current = 0;
-        public static string HSC3300_out_status= "";
-
-        public static double HSC3300_get_set_voltage = 0;
-        public static double HSC3300_get_set_current = 0;
-
+        #region "POWER SUPPLY ---- MANSON  ---- HCS - 3300  -----  1-16V 30A  "
+        public static double HCS_3300_out_voltage = 0;
+        public static double HCS_3300_out_current = 0;
+        public static string HCS_3300_out_status= "";
+        public static double HCS_3300_get_set_voltage = 0;
+        public static double HCS_3300_get_set_current = 0;
         //public static string HSC3300_set_set_voltage = "";
         //public static string HSC3300_set_set_current = "";
-
         #endregion
         #region "POWER SUPPLY ---- RD6006  / RD6024  "
 
@@ -351,8 +365,6 @@ namespace test_system
 
         #endregion
 
-
-
         #region "LOG FILES "
 
         public static string strSubFolderLog = "log";
@@ -369,7 +381,6 @@ namespace test_system
 
 
         #endregion
-
 
         #region "application variable "  
 
@@ -432,11 +443,10 @@ namespace test_system
         public static bool program_bool_run_start = false;
         public static bool program_bool_run_stop = false;
 
-        public static int program_int_counter_run = 0;
-        public static int program_int_counter_set = 0;
+        //public static int program_int_counter_run = 0;
+        //public static int program_int_counter_set = 0;
 
-
-        public static int program_int_step_time_run = 0;
+                public static int program_int_step_time_run = 0;
         public static int program_int_step_time_set = 0;
 
         //-----------------------------------------------------------------------------------------------------------------------
@@ -452,8 +462,6 @@ namespace test_system
         public static double floatDuration_part_program_run;
         public static double floatDuration_part_program_complete;
         public static string strDuration_part_program;
-
-
 
 
         #endregion

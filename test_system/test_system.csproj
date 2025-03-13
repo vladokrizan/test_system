@@ -68,13 +68,14 @@
       <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program_10.cs" />
-    <Compile Include="program_20.cs" />
-    <Compile Include="program_20_battery_test.cs">
+    <Compile Include="programs\program_20.cs" />
+    <Compile Include="programs\program_20_battery_test.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="program_20_battery_test.Designer.cs">
+    <Compile Include="programs\program_20_battery_test.Designer.cs">
       <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="programs\program_common.cs" />
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,7 +121,7 @@
     <EmbeddedResource Include="programs\program_1.resx">
       <DependentUpon>program_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="program_20_battery_test.resx">
+    <EmbeddedResource Include="programs\program_20_battery_test.resx">
       <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tools\all_devices.resx">

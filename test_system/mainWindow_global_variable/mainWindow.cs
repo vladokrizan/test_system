@@ -372,8 +372,6 @@ namespace test_system
             program_1.Show();
 
         }
-
-
         #endregion
 
         #region "MENU LINE "

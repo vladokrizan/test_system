@@ -118,13 +118,13 @@ namespace test_system
                         COMport_receive_string[COMport_HCS_3300] = Encoding.UTF8.GetString(read_buffer);
                         string voltage = COMport_receive_string[COMport_HCS_3300].Substring(0, 4);
                         int voltage_value = Convert.ToInt16(voltage);
-                        HSC3300_out_voltage = ((double)voltage_value) / 100;
+                        HCS_3300_out_voltage = ((double)voltage_value) / 100;
                         string current = COMport_receive_string[COMport_HCS_3300].Substring(4, 4);
                         int current_value = Convert.ToInt16(current);
-                        HSC3300_out_current = ((double)current_value) / 100;
+                        HCS_3300_out_current = ((double)current_value) / 100;
                         string status = COMport_receive_string[COMport_HCS_3300].Substring(8, 1);
-                        if (status == "0") HSC3300_out_status = "constant Voltage";
-                        if (status == "1") HSC3300_out_status = "constant Current";
+                        if (status == "0") HCS_3300_out_status = "constant Voltage";
+                        if (status == "1") HCS_3300_out_status = "constant Current";
                         return (funReturnCodeCOMport.OK);
 
                     }
@@ -158,10 +158,10 @@ namespace test_system
                     string correct_string = functions.fun_ascii_only(COMport_receive_string[COMport_HCS_3300]);
                     string voltage = correct_string.Substring(0, 3);
                     int voltage_value = Convert.ToInt16(voltage);
-                    HSC3300_get_set_voltage = ((double)voltage_value) / 10;
+                    HCS_3300_get_set_voltage = ((double)voltage_value) / 10;
                     string current = correct_string.Substring(3, 3);
                     int current_value = Convert.ToInt16(current);
-                    HSC3300_get_set_current = ((double)current_value) / 10;
+                    HCS_3300_get_set_current = ((double)current_value) / 10;
                     return (funReturnCodeCOMport.OK);
                 }
                 else return (funReturnCodeCOMport.NOT_ACTIVE);

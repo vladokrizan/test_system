@@ -15,12 +15,26 @@ namespace test_system
     {
         functions functions = new functions();
 
+        /*
+            only 3051
+                public (funReturnCodeCOMport, double returnValue) fun_owon_get_range_volt_dc(int selectCOMport)
+            public funReturnCodeCOMport fun_owon_set_range_volt_dc(int selectCOMport, double set_range)
+            public funReturnCodeCOMport fun_owon_set_range_current_dc(int selectCOMport, double set_range)
+            public void fun_owon_measure(int selectCOMport)
+            public (funReturnCodeCOMport, double returnValue) fun_owon_measure_old(int selectCOMport)
+            public funReturnCodeCOMport fun_owon_multimeter_identification(int selectCOMport, string ident_string)
+
+
+
+
+
+
+        */
 
         //-- XDM2041
         //--    CONF:CURR:DC
         //--    CONF:VOLT:DC
         //--    CONF:VOLT:DC 500
-
 
         //-- SET RANGE                   write_string = (f'CONF:VOLT:DC {str(set_range)}')  
         //-- GET VOTAGE in RANGE         write_string = (f'VOLT:DC:RANG?')  
@@ -66,9 +80,6 @@ namespace test_system
             }
             else return (funReturnCodeCOMport.NOT_CONNECTED);
         }
-
-
-
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM2041, 0.0005);        500 uA
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM2041, 0.005);         5 mA
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM2041, 0.05);          50 mA
@@ -80,10 +91,6 @@ namespace test_system
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM1041, 5);             5 A
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM1041, 0.5);           500 mA
         //--owon_multimeter_common.fun_owon_set_range_current_dc(COMport_SELECT_MULTIMETER_XDM1041, 0.0005);        500 uA
-
-
-
-
         public funReturnCodeCOMport fun_owon_set_range_current_dc(int selectCOMport, double set_range)
         {
             if (dev_connected[selectCOMport])
@@ -101,10 +108,8 @@ namespace test_system
         }
         //=======================================================================================================================
         //=======================================================================================================================
-
         public void fun_owon_measure(int selectCOMport)
         {
-
             if (dev_connected[selectCOMport])
             {
                 if (dev_active[selectCOMport])
@@ -118,9 +123,6 @@ namespace test_system
                         dev_meas[selectCOMport] = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(measureValue));
                         dev_meas_state[selectCOMport] = funReturnCodeCOMport.OK;
                     }
-
-
-                    
                     catch
                     {
                         try
@@ -144,53 +146,13 @@ namespace test_system
                                 dev_meas_state[selectCOMport] = funReturnCodeCOMport.OK;
                             }
                             catch { dev_meas_state[selectCOMport] = funReturnCodeCOMport.ERROR; }
-
                         }
-                   
-
                     }
-                    
-
                 }
                 else dev_meas_state[selectCOMport] = funReturnCodeCOMport.NOT_ACTIVE;
             }
             else dev_meas_state[selectCOMport] = funReturnCodeCOMport.NOT_CONNECTED;
         }
-        // public static funReturnCodeCOMport[] device_measure_ok = new funReturnCodeCOMport[COMport_SELECT_MAXnumber];
-        // public static double[] device_measure = new double[COMport_SELECT_MAXnumber];
-        //public static funReturnCodeCOMport device_XDM3051_measure_ok;
-        //public static double device_XDM3051_measure;
-        //public static funReturnCodeCOMport device_XDM2041_measure_ok;
-        //public static double device_XDM2041_measure;
-        //public static funReturnCodeCOMport device_XDM1041_measure_ok;
-        //public static double device_XDM1041_measure;
-
-
-
-
-
-        public (funReturnCodeCOMport, double returnValue) fun_owon_measure_old(int selectCOMport)
-        {
-            double returnValue = 0;
-            if (dev_connected[selectCOMport])
-            {
-                if (dev_active[selectCOMport])
-                {
-                    try
-                    {
-                        mainWindow.COMportSerial[selectCOMport].WriteLine("MEAS?");
-                        string measureValue = mainWindow.COMportSerial[selectCOMport].ReadLine();
-                        returnValue = Convert.ToDouble(functions.fun_convert_string_to_current_decimal_separator(measureValue));
-                        return (funReturnCodeCOMport.OK, returnValue);
-                    }
-                    catch { return (funReturnCodeCOMport.ERROR, returnValue); }
-                }
-                else return (funReturnCodeCOMport.NOT_ACTIVE, returnValue);
-            }
-            else return (funReturnCodeCOMport.NOT_CONNECTED, returnValue);
-        }
-
-
         //=======================================================================================================================
         //=======================================================================================================================
         public funReturnCodeCOMport fun_owon_multimeter_identification(int selectCOMport, string ident_string)
@@ -210,14 +172,6 @@ namespace test_system
             }
             else return (funReturnCodeCOMport.NOT_CONNECTED);
         }
-
-
-
-
-
-
-
-
 
 
     }

@@ -99,7 +99,6 @@ namespace test_system
         double set_voltage = 1.0;
 
 
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             labCurrentProgram.Text = program10_current_selected_program;
@@ -109,6 +108,7 @@ namespace test_system
                 if (program_bool_run_start) fun_program10_start();
                 if (program_bool_run_stop) fun_program10_stop();
                 if (++program_int_step_time_run > program_int_step_time_set) { program_int_step_time_run = 0; fun_program10_step(); }
+         
             }
         }
 
@@ -139,7 +139,7 @@ namespace test_system
             //-------------------------------------------------------------------------------------------------------------------
             if (program10_load_current > 0)
             {
-                dc_load_KEL103.fun_KEL103_set_cureent(program10_LOAD_CURRENT);
+                dc_load_KEL103.fun_KEL103_set_current(program10_LOAD_CURRENT);
                 dc_load_KEL103.fun_KEL103_on();
             }
             //-------------------------------------------------------------------------------------------------------------------
@@ -181,15 +181,15 @@ namespace test_system
                     program10_set_power_supply = true;
                     program_result_value.Add("HCS-3300 SET Voltage (V) ", set_voltage.ToString("0.0"));
                     power_supply_hcs_3300.fun_HCS_330_get_measure();
-                    program_result_value.Add("HCS-3300 Voltage (V) ", HSC3300_out_voltage.ToString("0.00"));
-                    program_result_value.Add("HCS-3300 Current (A) ", HSC3300_out_current.ToString("0.00"));
+                    program_result_value.Add("HCS-3300 Voltage (V) ", HCS_3300_out_voltage.ToString("0.00"));
+                    program_result_value.Add("HCS-3300 Current (A) ", HCS_3300_out_current.ToString("0.00"));
                 }
                 else
                 {
                     program_result_value.Add("HCS-3300 SET Voltage (V) ", set_voltage.ToString("0.0"));
                     power_supply_hcs_3300.fun_HCS_330_get_measure();
-                    program_result_value.Add("HCS-3300 Voltage (V) ", HSC3300_out_voltage.ToString("0.00"));
-                    program_result_value.Add("HCS-3300 Current (A) ", HSC3300_out_current.ToString("0.00"));
+                    program_result_value.Add("HCS-3300 Voltage (V) ", HCS_3300_out_voltage.ToString("0.00"));
+                    program_result_value.Add("HCS-3300 Current (A) ", HCS_3300_out_current.ToString("0.00"));
                     program10_set_power_supply = false;
                 }
             }
