@@ -8,13 +8,13 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static test_system.global_variable;
 
 namespace test_system
 {
     public partial class all_devices : Form
     {
-
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
@@ -28,6 +28,10 @@ namespace test_system
         write_log_files write_log_files = new write_log_files();
 
         functions functions = new functions();
+
+
+        int timer_2_counter = 0;
+
 
         #region "nalaganje okna  "
         public all_devices()
@@ -93,6 +97,19 @@ namespace test_system
             labXDM2041_measure_ok.Text = "";
             labXDM1041_measure_ok.Text = "";
 
+
+            labXDM3051_status.Text = "";
+            labXDM3051_read_result.Text = "";
+            labXDM3051_measure.Text = "";
+            labXDM2041_status.Text = "";
+            labXDM2041_read_result.Text = "";
+            labXDM2041_measure.Text = "";
+            labXDM1041_status.Text = "";
+            labXDM1041_read_result.Text = "";
+            labXDM1041_measure.Text = "";
+
+
+
         }
         #endregion
 
@@ -100,6 +117,14 @@ namespace test_system
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            label18.Text = "select TAB    " + tabControl1.SelectedIndex.ToString() + "   " + tabControl1.SelectedIndex.ToString();
+
+            label19.Text = timer_2_counter.ToString();
+            //-------------------------------------------------------------------------------------------------------------------
+
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabAllDevices"]) { timer2_all_devices.Enabled = true; }
+            else timer2_all_devices.Enabled = false;
+
 
             if (device_ET3916_serial_number_show)
             {
@@ -109,10 +134,10 @@ namespace test_system
                     txtBox_ET3916_1.Text = device_ET3916_serial_number;
                 }
             }
-
+            //-------------------------------------------------------------------------------------------------------------------
+            //-- prikaaz temperature na zahtevo 
             if (complete_device_ET391_read_all_temperature)
             {
-
                 labComplete_temperature_1.Text = "Temp 1  " + device_ET3916_temperature[1].ToString("0.00");
                 labComplete_temperature_2.Text = "Temp 2  " + device_ET3916_temperature[2].ToString("0.00");
                 labComplete_temperature_3.Text = "Temp 3  " + device_ET3916_temperature[3].ToString("0.00");
@@ -122,12 +147,9 @@ namespace test_system
                 labComplete_temperature_7.Text = "Temp 7  " + device_ET3916_temperature[7].ToString("0.00");
                 labComplete_temperature_8.Text = "Temp 8  " + device_ET3916_temperature[8].ToString("0.00");
             }
-
-
             if (device_RD6006_show_all_measure)
             {
                 device_RD6006_show_all_measure = false;
-
                 labRD6006_set_volt.Text = "Set Voltage      " + rd6006_setVoltage.ToString("0.00") + " V";
                 labRD6006_set_curr.Text = "Set Current      " + rd6006_setCurrent.ToString("0.00") + " A";
                 labRD6006_inp_volt.Text = "Input Voltage    " + rd6006_InputVoltage.ToString("0.00") + " V";
@@ -145,16 +167,38 @@ namespace test_system
                 labRD6024_out_curr.Text = "Output Current   " + rd6024_OutputCurrent.ToString("0.00") + " A";
                 labRD6024_out_power.Text = "Output Power     " + rd6024_OutputPower.ToString("0.00") + " W";
             }
-
-
             if (device_MPM1010B_show_data)
             {
                 device_MPM1010B_show_data = false;
                 labMPM1010B_voltage.Text = device_MPM1010B_voltage.ToString();
             }
+        }
+
+
+
+
+        private void timer2_all_devices_Tick(object sender, EventArgs e)
+        {
+            timer_2_counter++;
+
+            //-------------------------------------------------------------------------------------------------------------------
+            labXDM3051_status.Text = dev_range[COMport_XDM3051];
+            labXDM3051_read_result.Text = dev_meas_state[COMport_XDM3051].ToString();
+            labXDM3051_measure.Text = dev_meas[COMport_XDM3051].ToString("0.0000");
+            //-------------------------------------------------------------------------------------------------------------------
+            labXDM2041_status.Text = dev_range[COMport_XDM2041];
+            labXDM2041_read_result.Text = dev_meas_state[COMport_XDM2041].ToString();
+            labXDM2041_measure.Text = dev_meas[COMport_XDM2041].ToString("0.0000");
+            //-------------------------------------------------------------------------------------------------------------------
+            labXDM1041_status.Text = dev_range[COMport_XDM1041];
+            labXDM1041_read_result.Text = dev_meas_state[COMport_XDM1041].ToString();
+            labXDM1041_measure.Text = dev_meas[COMport_XDM1041].ToString("0.0000");
+
+
 
 
         }
+
 
         #endregion
         #region " Power supply "
@@ -341,9 +385,9 @@ namespace test_system
 
 
 
-   
 
-        labKA3305P_status.Text = strShowString;
+
+            labKA3305P_status.Text = strShowString;
             labKA3305P_status_1.Text = KA3305P_status.ToString("X");
 
 
@@ -430,9 +474,6 @@ namespace test_system
         {
             temperature_ET3916.fun_ET3916_read_serial_number();
             device_ET3916_serial_number_show = true;
-
-            //txtBox_ET3916_1.Text = device_ET3916_serial_number;
-
         }
 
         private void btnET3916_measure_Click(object sender, EventArgs e)
@@ -500,14 +541,10 @@ namespace test_system
             owon_multimeter.fun_owon_measure(COMport_XDM3051);
             txtBox_XDM3051_measure.Text = dev_meas[COMport_XDM3051].ToString();
             labXDM3051_measure_ok.Text = dev_meas_state[COMport_XDM3051].ToString();
-            //multimeter_XDM3051.fun_XDM3051_measure();
-            //txtBox_XDM3051_measure.Text = device_XDM3051_measure.ToString();
-            //labXDM3051_measure_ok.Text = device_XDM3051_measure_ok.ToString();
         }
 
         private void btnXDM3051_get_range_dc_volt_Click(object sender, EventArgs e)
         {
-            //multimeter_XDM3051.fun_XDM3051_get_range_dc_volt();
             var (returnState, returnValue) = owon_multimeter.fun_owon_get_range_volt_dc(COMport_XDM3051);
             device_XDM3051_range_dc_volt = Convert.ToUInt16(returnValue);
             labXDM3051_DC_range.Text = device_XDM3051_range_dc_volt.ToString();
@@ -527,7 +564,6 @@ namespace test_system
             string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
             double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
             owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM3051, voltage_range);
-
         }
 
         #endregion
@@ -546,20 +582,14 @@ namespace test_system
             funReturnCodeCOMport returnState = owon_multimeter.fun_owon_multimeter_identification(COMport_XDM2041, "OWON,XDM2041,24470254");
             if (returnState == funReturnCodeCOMport.OK) txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_XDM2041];
             else txtBox_XDM2041_ident.Text = returnState.ToString();
-            //multimeter_XDM2041.fun_XDM2041_identifaction();
-            //txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041];
         }
         //=======================================================================================================================
         //=======================================================================================================================
         private void btnXDM2041_measure_Click(object sender, EventArgs e)
         {
-
             owon_multimeter.fun_owon_measure(COMport_XDM2041);
             txtBox_XDM2041_measure.Text = dev_meas[COMport_XDM2041].ToString();
             labXDM2041_measure_ok.Text = dev_meas_state[COMport_XDM2041].ToString();
-            //multimeter_XDM2041.fun_XDM2041_measure();
-            //txtBox_XDM2041_measure.Text = device_XDM2041_measure.ToString();
-            //labXDM2041_measure_ok.Text = device_XDM2041_measure_ok.ToString();
         }
 
         private void btnXDM2041_get_range_dc_volt_Click(object sender, EventArgs e)

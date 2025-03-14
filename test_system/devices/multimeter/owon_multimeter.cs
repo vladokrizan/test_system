@@ -24,11 +24,6 @@ namespace test_system
             public (funReturnCodeCOMport, double returnValue) fun_owon_measure_old(int selectCOMport)
             public funReturnCodeCOMport fun_owon_multimeter_identification(int selectCOMport, string ident_string)
 
-
-
-
-
-
         */
 
         //-- XDM2041
@@ -74,6 +69,9 @@ namespace test_system
                     string send_value = set_range.ToString();
                     send_value = send_value.Replace(",", ".");
                     mainWindow.COMportSerial[selectCOMport].WriteLine("CONF:VOLT:DC " + send_value);
+
+                    dev_range[selectCOMport]="VDC "+ set_range.ToString();
+
                     return (funReturnCodeCOMport.OK);
                 }
                 else return (funReturnCodeCOMport.NOT_ACTIVE);
@@ -100,6 +98,8 @@ namespace test_system
                     string send_value = set_range.ToString();
                     send_value = send_value.Replace(",", ".");
                     mainWindow.COMportSerial[selectCOMport].WriteLine("CONF:CURR:DC " + send_value);
+                    dev_range[selectCOMport] = "ADC " + set_range.ToString();
+
                     return (funReturnCodeCOMport.OK);
                 }
                 else return (funReturnCodeCOMport.NOT_ACTIVE);

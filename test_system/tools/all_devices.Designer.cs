@@ -115,6 +115,27 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox_powerSupply_KA3305P = new System.Windows.Forms.GroupBox();
+            this.labKA3305P_status_1 = new System.Windows.Forms.Label();
+            this.labKA3305P_status = new System.Windows.Forms.Label();
+            this.btnKA3305P_status = new System.Windows.Forms.Button();
+            this.btnKA3305P_off_1 = new System.Windows.Forms.Button();
+            this.btnKA3305P_on_1 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtKA3305P_set_current_2 = new System.Windows.Forms.TextBox();
+            this.txtKA3305P_set_voltage_2 = new System.Windows.Forms.TextBox();
+            this.txtKA3305P_set_current_1 = new System.Windows.Forms.TextBox();
+            this.txtKA3305P_set_voltage_1 = new System.Windows.Forms.TextBox();
+            this.btnKA3305P_get_set_2 = new System.Windows.Forms.Button();
+            this.btnKA3305P_get_set_1 = new System.Windows.Forms.Button();
+            this.labKA3305P_current_1 = new System.Windows.Forms.Label();
+            this.labKA3305P_current_2 = new System.Windows.Forms.Label();
+            this.labKA3305P_volt_2 = new System.Windows.Forms.Label();
+            this.labKA3305P_volt_1 = new System.Windows.Forms.Label();
+            this.btnKA3305P_measure_2 = new System.Windows.Forms.Button();
+            this.btnKA3305P_measure_1 = new System.Windows.Forms.Button();
             this.btnPowerSupply_KA3305P_ident1 = new System.Windows.Forms.Button();
             this.txtBosPowerSupply_KA3305P_ident = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -156,28 +177,23 @@
             this.btnKEL103_on = new System.Windows.Forms.Button();
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
+            this.tabAllDevices = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnKA3305P_measure_1 = new System.Windows.Forms.Button();
-            this.btnKA3305P_measure_2 = new System.Windows.Forms.Button();
-            this.labKA3305P_volt_1 = new System.Windows.Forms.Label();
-            this.labKA3305P_current_1 = new System.Windows.Forms.Label();
-            this.labKA3305P_volt_2 = new System.Windows.Forms.Label();
-            this.labKA3305P_current_2 = new System.Windows.Forms.Label();
-            this.btnKA3305P_get_set_1 = new System.Windows.Forms.Button();
-            this.btnKA3305P_get_set_2 = new System.Windows.Forms.Button();
-            this.txtKA3305P_set_voltage_1 = new System.Windows.Forms.TextBox();
-            this.txtKA3305P_set_current_1 = new System.Windows.Forms.TextBox();
-            this.txtKA3305P_set_voltage_2 = new System.Windows.Forms.TextBox();
-            this.txtKA3305P_set_current_2 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btnKA3305P_on_1 = new System.Windows.Forms.Button();
-            this.btnKA3305P_off_1 = new System.Windows.Forms.Button();
-            this.btnKA3305P_status = new System.Windows.Forms.Button();
-            this.labKA3305P_status = new System.Windows.Forms.Label();
-            this.labKA3305P_status_1 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.timer2_all_devices = new System.Windows.Forms.Timer(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.labXDM1041_read_result = new System.Windows.Forms.Label();
+            this.labXDM1041_measure = new System.Windows.Forms.Label();
+            this.labXDM1041_status = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labXDM2041_read_result = new System.Windows.Forms.Label();
+            this.labXDM2041_measure = new System.Windows.Forms.Label();
+            this.labXDM2041_status = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labXDM3051_read_result = new System.Windows.Forms.Label();
+            this.labXDM3051_measure = new System.Windows.Forms.Label();
+            this.labXDM3051_status = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -192,6 +208,10 @@
             this.groupBox_powerSupply_hcs_330.SuspendLayout();
             this.tabLoad.SuspendLayout();
             this.groupBox_load_KEL103.SuspendLayout();
+            this.tabAllDevices.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -199,7 +219,8 @@
             this.tabControl1.Controls.Add(this.tabMultimeter);
             this.tabControl1.Controls.Add(this.tabPowerSupply);
             this.tabControl1.Controls.Add(this.tabLoad);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Controls.Add(this.tabAllDevices);
+            this.tabControl1.Location = new System.Drawing.Point(4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1335, 610);
@@ -1095,6 +1116,199 @@
             this.groupBox_powerSupply_KA3305P.TabStop = false;
             this.groupBox_powerSupply_KA3305P.Text = "KORAD KA3305P";
             // 
+            // labKA3305P_status_1
+            // 
+            this.labKA3305P_status_1.AutoSize = true;
+            this.labKA3305P_status_1.Location = new System.Drawing.Point(120, 390);
+            this.labKA3305P_status_1.Name = "labKA3305P_status_1";
+            this.labKA3305P_status_1.Size = new System.Drawing.Size(60, 20);
+            this.labKA3305P_status_1.TabIndex = 16;
+            this.labKA3305P_status_1.Text = "label18";
+            // 
+            // labKA3305P_status
+            // 
+            this.labKA3305P_status.AutoSize = true;
+            this.labKA3305P_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labKA3305P_status.Location = new System.Drawing.Point(15, 417);
+            this.labKA3305P_status.Name = "labKA3305P_status";
+            this.labKA3305P_status.Size = new System.Drawing.Size(51, 16);
+            this.labKA3305P_status.TabIndex = 15;
+            this.labKA3305P_status.Text = "label18";
+            // 
+            // btnKA3305P_status
+            // 
+            this.btnKA3305P_status.Location = new System.Drawing.Point(10, 380);
+            this.btnKA3305P_status.Name = "btnKA3305P_status";
+            this.btnKA3305P_status.Size = new System.Drawing.Size(100, 30);
+            this.btnKA3305P_status.TabIndex = 14;
+            this.btnKA3305P_status.Text = "Status";
+            this.btnKA3305P_status.UseVisualStyleBackColor = true;
+            this.btnKA3305P_status.Click += new System.EventHandler(this.btnKA3305P_status_Click);
+            // 
+            // btnKA3305P_off_1
+            // 
+            this.btnKA3305P_off_1.Location = new System.Drawing.Point(159, 103);
+            this.btnKA3305P_off_1.Name = "btnKA3305P_off_1";
+            this.btnKA3305P_off_1.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_off_1.TabIndex = 13;
+            this.btnKA3305P_off_1.Text = "OFF";
+            this.btnKA3305P_off_1.UseVisualStyleBackColor = true;
+            this.btnKA3305P_off_1.Click += new System.EventHandler(this.btnKA3305P_off_1_Click);
+            // 
+            // btnKA3305P_on_1
+            // 
+            this.btnKA3305P_on_1.Location = new System.Drawing.Point(14, 103);
+            this.btnKA3305P_on_1.Name = "btnKA3305P_on_1";
+            this.btnKA3305P_on_1.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_on_1.TabIndex = 12;
+            this.btnKA3305P_on_1.Text = "ON";
+            this.btnKA3305P_on_1.UseVisualStyleBackColor = true;
+            this.btnKA3305P_on_1.Click += new System.EventHandler(this.btnKA3305P_on_1_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(19, 316);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(116, 20);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Set Current (A)";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(181, 316);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(116, 20);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Set Current (A)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(181, 266);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(118, 20);
+            this.label15.TabIndex = 10;
+            this.label15.Text = "Set Voltage (V)";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 268);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(118, 20);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Set Voltage (V)";
+            // 
+            // txtKA3305P_set_current_2
+            // 
+            this.txtKA3305P_set_current_2.Location = new System.Drawing.Point(201, 339);
+            this.txtKA3305P_set_current_2.Name = "txtKA3305P_set_current_2";
+            this.txtKA3305P_set_current_2.Size = new System.Drawing.Size(71, 26);
+            this.txtKA3305P_set_current_2.TabIndex = 9;
+            this.txtKA3305P_set_current_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_current_2_KeyDown);
+            // 
+            // txtKA3305P_set_voltage_2
+            // 
+            this.txtKA3305P_set_voltage_2.Location = new System.Drawing.Point(201, 287);
+            this.txtKA3305P_set_voltage_2.Name = "txtKA3305P_set_voltage_2";
+            this.txtKA3305P_set_voltage_2.Size = new System.Drawing.Size(71, 26);
+            this.txtKA3305P_set_voltage_2.TabIndex = 9;
+            this.txtKA3305P_set_voltage_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_voltage_2_KeyDown);
+            // 
+            // txtKA3305P_set_current_1
+            // 
+            this.txtKA3305P_set_current_1.Location = new System.Drawing.Point(38, 339);
+            this.txtKA3305P_set_current_1.Name = "txtKA3305P_set_current_1";
+            this.txtKA3305P_set_current_1.Size = new System.Drawing.Size(71, 26);
+            this.txtKA3305P_set_current_1.TabIndex = 9;
+            this.txtKA3305P_set_current_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_current_1_KeyDown);
+            // 
+            // txtKA3305P_set_voltage_1
+            // 
+            this.txtKA3305P_set_voltage_1.Location = new System.Drawing.Point(38, 290);
+            this.txtKA3305P_set_voltage_1.Name = "txtKA3305P_set_voltage_1";
+            this.txtKA3305P_set_voltage_1.Size = new System.Drawing.Size(71, 26);
+            this.txtKA3305P_set_voltage_1.TabIndex = 9;
+            this.txtKA3305P_set_voltage_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_voltage_1_KeyDown);
+            // 
+            // btnKA3305P_get_set_2
+            // 
+            this.btnKA3305P_get_set_2.Location = new System.Drawing.Point(166, 230);
+            this.btnKA3305P_get_set_2.Name = "btnKA3305P_get_set_2";
+            this.btnKA3305P_get_set_2.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_get_set_2.TabIndex = 8;
+            this.btnKA3305P_get_set_2.Text = "Get Set CH 2";
+            this.btnKA3305P_get_set_2.UseVisualStyleBackColor = true;
+            this.btnKA3305P_get_set_2.Click += new System.EventHandler(this.btnKA3305P_get_set_2_Click);
+            // 
+            // btnKA3305P_get_set_1
+            // 
+            this.btnKA3305P_get_set_1.Location = new System.Drawing.Point(10, 230);
+            this.btnKA3305P_get_set_1.Name = "btnKA3305P_get_set_1";
+            this.btnKA3305P_get_set_1.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_get_set_1.TabIndex = 7;
+            this.btnKA3305P_get_set_1.Text = "Get Set CH 1";
+            this.btnKA3305P_get_set_1.UseVisualStyleBackColor = true;
+            this.btnKA3305P_get_set_1.Click += new System.EventHandler(this.btnKA3305P_get_set_1_Click);
+            // 
+            // labKA3305P_current_1
+            // 
+            this.labKA3305P_current_1.AutoSize = true;
+            this.labKA3305P_current_1.Location = new System.Drawing.Point(10, 194);
+            this.labKA3305P_current_1.Name = "labKA3305P_current_1";
+            this.labKA3305P_current_1.Size = new System.Drawing.Size(60, 20);
+            this.labKA3305P_current_1.TabIndex = 6;
+            this.labKA3305P_current_1.Text = "label14";
+            // 
+            // labKA3305P_current_2
+            // 
+            this.labKA3305P_current_2.AutoSize = true;
+            this.labKA3305P_current_2.Location = new System.Drawing.Point(171, 194);
+            this.labKA3305P_current_2.Name = "labKA3305P_current_2";
+            this.labKA3305P_current_2.Size = new System.Drawing.Size(60, 20);
+            this.labKA3305P_current_2.TabIndex = 6;
+            this.labKA3305P_current_2.Text = "label14";
+            // 
+            // labKA3305P_volt_2
+            // 
+            this.labKA3305P_volt_2.AutoSize = true;
+            this.labKA3305P_volt_2.Location = new System.Drawing.Point(171, 170);
+            this.labKA3305P_volt_2.Name = "labKA3305P_volt_2";
+            this.labKA3305P_volt_2.Size = new System.Drawing.Size(60, 20);
+            this.labKA3305P_volt_2.TabIndex = 6;
+            this.labKA3305P_volt_2.Text = "label14";
+            // 
+            // labKA3305P_volt_1
+            // 
+            this.labKA3305P_volt_1.AutoSize = true;
+            this.labKA3305P_volt_1.Location = new System.Drawing.Point(10, 170);
+            this.labKA3305P_volt_1.Name = "labKA3305P_volt_1";
+            this.labKA3305P_volt_1.Size = new System.Drawing.Size(60, 20);
+            this.labKA3305P_volt_1.TabIndex = 6;
+            this.labKA3305P_volt_1.Text = "label14";
+            // 
+            // btnKA3305P_measure_2
+            // 
+            this.btnKA3305P_measure_2.Location = new System.Drawing.Point(160, 133);
+            this.btnKA3305P_measure_2.Name = "btnKA3305P_measure_2";
+            this.btnKA3305P_measure_2.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_measure_2.TabIndex = 5;
+            this.btnKA3305P_measure_2.Text = "Measure CH 2";
+            this.btnKA3305P_measure_2.UseVisualStyleBackColor = true;
+            this.btnKA3305P_measure_2.Click += new System.EventHandler(this.btnKA3305P_measure_2_Click);
+            // 
+            // btnKA3305P_measure_1
+            // 
+            this.btnKA3305P_measure_1.Location = new System.Drawing.Point(15, 133);
+            this.btnKA3305P_measure_1.Name = "btnKA3305P_measure_1";
+            this.btnKA3305P_measure_1.Size = new System.Drawing.Size(140, 30);
+            this.btnKA3305P_measure_1.TabIndex = 4;
+            this.btnKA3305P_measure_1.Text = "Measure CH 1";
+            this.btnKA3305P_measure_1.UseVisualStyleBackColor = true;
+            this.btnKA3305P_measure_1.Click += new System.EventHandler(this.btnKA3305P_measure_1_Click);
+            // 
             // btnPowerSupply_KA3305P_ident1
             // 
             this.btnPowerSupply_KA3305P_ident1.Location = new System.Drawing.Point(10, 26);
@@ -1512,209 +1726,178 @@
             this.txtBoxLoad_KEL103_ident.Size = new System.Drawing.Size(303, 26);
             this.txtBoxLoad_KEL103_ident.TabIndex = 2;
             // 
+            // tabAllDevices
+            // 
+            this.tabAllDevices.Controls.Add(this.groupBox3);
+            this.tabAllDevices.Controls.Add(this.groupBox2);
+            this.tabAllDevices.Controls.Add(this.groupBox1);
+            this.tabAllDevices.Location = new System.Drawing.Point(4, 29);
+            this.tabAllDevices.Name = "tabAllDevices";
+            this.tabAllDevices.Size = new System.Drawing.Size(1327, 577);
+            this.tabAllDevices.TabIndex = 3;
+            this.tabAllDevices.Text = "ALL DEVICES";
+            this.tabAllDevices.UseVisualStyleBackColor = true;
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnKA3305P_measure_1
+            // label18
             // 
-            this.btnKA3305P_measure_1.Location = new System.Drawing.Point(15, 133);
-            this.btnKA3305P_measure_1.Name = "btnKA3305P_measure_1";
-            this.btnKA3305P_measure_1.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_measure_1.TabIndex = 4;
-            this.btnKA3305P_measure_1.Text = "Measure CH 1";
-            this.btnKA3305P_measure_1.UseVisualStyleBackColor = true;
-            this.btnKA3305P_measure_1.Click += new System.EventHandler(this.btnKA3305P_measure_1_Click);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 621);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(60, 20);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "label18";
             // 
-            // btnKA3305P_measure_2
+            // label19
             // 
-            this.btnKA3305P_measure_2.Location = new System.Drawing.Point(160, 133);
-            this.btnKA3305P_measure_2.Name = "btnKA3305P_measure_2";
-            this.btnKA3305P_measure_2.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_measure_2.TabIndex = 5;
-            this.btnKA3305P_measure_2.Text = "Measure CH 2";
-            this.btnKA3305P_measure_2.UseVisualStyleBackColor = true;
-            this.btnKA3305P_measure_2.Click += new System.EventHandler(this.btnKA3305P_measure_2_Click);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(17, 645);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(60, 20);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "label19";
             // 
-            // labKA3305P_volt_1
+            // timer2_all_devices
             // 
-            this.labKA3305P_volt_1.AutoSize = true;
-            this.labKA3305P_volt_1.Location = new System.Drawing.Point(10, 170);
-            this.labKA3305P_volt_1.Name = "labKA3305P_volt_1";
-            this.labKA3305P_volt_1.Size = new System.Drawing.Size(60, 20);
-            this.labKA3305P_volt_1.TabIndex = 6;
-            this.labKA3305P_volt_1.Text = "label14";
+            this.timer2_all_devices.Tick += new System.EventHandler(this.timer2_all_devices_Tick);
             // 
-            // labKA3305P_current_1
+            // groupBox3
             // 
-            this.labKA3305P_current_1.AutoSize = true;
-            this.labKA3305P_current_1.Location = new System.Drawing.Point(10, 194);
-            this.labKA3305P_current_1.Name = "labKA3305P_current_1";
-            this.labKA3305P_current_1.Size = new System.Drawing.Size(60, 20);
-            this.labKA3305P_current_1.TabIndex = 6;
-            this.labKA3305P_current_1.Text = "label14";
+            this.groupBox3.Controls.Add(this.labXDM1041_read_result);
+            this.groupBox3.Controls.Add(this.labXDM1041_measure);
+            this.groupBox3.Controls.Add(this.labXDM1041_status);
+            this.groupBox3.Location = new System.Drawing.Point(24, 231);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Size = new System.Drawing.Size(244, 97);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "XDM 1041";
             // 
-            // labKA3305P_volt_2
+            // labXDM1041_read_result
             // 
-            this.labKA3305P_volt_2.AutoSize = true;
-            this.labKA3305P_volt_2.Location = new System.Drawing.Point(171, 170);
-            this.labKA3305P_volt_2.Name = "labKA3305P_volt_2";
-            this.labKA3305P_volt_2.Size = new System.Drawing.Size(60, 20);
-            this.labKA3305P_volt_2.TabIndex = 6;
-            this.labKA3305P_volt_2.Text = "label14";
+            this.labXDM1041_read_result.AutoSize = true;
+            this.labXDM1041_read_result.Location = new System.Drawing.Point(19, 44);
+            this.labXDM1041_read_result.Name = "labXDM1041_read_result";
+            this.labXDM1041_read_result.Size = new System.Drawing.Size(51, 20);
+            this.labXDM1041_read_result.TabIndex = 2;
+            this.labXDM1041_read_result.Text = "label1";
             // 
-            // labKA3305P_current_2
+            // labXDM1041_measure
             // 
-            this.labKA3305P_current_2.AutoSize = true;
-            this.labKA3305P_current_2.Location = new System.Drawing.Point(171, 194);
-            this.labKA3305P_current_2.Name = "labKA3305P_current_2";
-            this.labKA3305P_current_2.Size = new System.Drawing.Size(60, 20);
-            this.labKA3305P_current_2.TabIndex = 6;
-            this.labKA3305P_current_2.Text = "label14";
+            this.labXDM1041_measure.AutoSize = true;
+            this.labXDM1041_measure.Location = new System.Drawing.Point(19, 64);
+            this.labXDM1041_measure.Name = "labXDM1041_measure";
+            this.labXDM1041_measure.Size = new System.Drawing.Size(51, 20);
+            this.labXDM1041_measure.TabIndex = 1;
+            this.labXDM1041_measure.Text = "label2";
             // 
-            // btnKA3305P_get_set_1
+            // labXDM1041_status
             // 
-            this.btnKA3305P_get_set_1.Location = new System.Drawing.Point(10, 230);
-            this.btnKA3305P_get_set_1.Name = "btnKA3305P_get_set_1";
-            this.btnKA3305P_get_set_1.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_get_set_1.TabIndex = 7;
-            this.btnKA3305P_get_set_1.Text = "Get Set CH 1";
-            this.btnKA3305P_get_set_1.UseVisualStyleBackColor = true;
-            this.btnKA3305P_get_set_1.Click += new System.EventHandler(this.btnKA3305P_get_set_1_Click);
+            this.labXDM1041_status.AutoSize = true;
+            this.labXDM1041_status.Location = new System.Drawing.Point(19, 24);
+            this.labXDM1041_status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labXDM1041_status.Name = "labXDM1041_status";
+            this.labXDM1041_status.Size = new System.Drawing.Size(51, 20);
+            this.labXDM1041_status.TabIndex = 0;
+            this.labXDM1041_status.Text = "label1";
             // 
-            // btnKA3305P_get_set_2
+            // groupBox2
             // 
-            this.btnKA3305P_get_set_2.Location = new System.Drawing.Point(166, 230);
-            this.btnKA3305P_get_set_2.Name = "btnKA3305P_get_set_2";
-            this.btnKA3305P_get_set_2.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_get_set_2.TabIndex = 8;
-            this.btnKA3305P_get_set_2.Text = "Get Set CH 2";
-            this.btnKA3305P_get_set_2.UseVisualStyleBackColor = true;
-            this.btnKA3305P_get_set_2.Click += new System.EventHandler(this.btnKA3305P_get_set_2_Click);
+            this.groupBox2.Controls.Add(this.labXDM2041_read_result);
+            this.groupBox2.Controls.Add(this.labXDM2041_measure);
+            this.groupBox2.Controls.Add(this.labXDM2041_status);
+            this.groupBox2.Location = new System.Drawing.Point(24, 124);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(244, 97);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "XDM 2041";
             // 
-            // txtKA3305P_set_voltage_1
+            // labXDM2041_read_result
             // 
-            this.txtKA3305P_set_voltage_1.Location = new System.Drawing.Point(38, 290);
-            this.txtKA3305P_set_voltage_1.Name = "txtKA3305P_set_voltage_1";
-            this.txtKA3305P_set_voltage_1.Size = new System.Drawing.Size(71, 26);
-            this.txtKA3305P_set_voltage_1.TabIndex = 9;
-            this.txtKA3305P_set_voltage_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_voltage_1_KeyDown);
+            this.labXDM2041_read_result.AutoSize = true;
+            this.labXDM2041_read_result.Location = new System.Drawing.Point(19, 44);
+            this.labXDM2041_read_result.Name = "labXDM2041_read_result";
+            this.labXDM2041_read_result.Size = new System.Drawing.Size(51, 20);
+            this.labXDM2041_read_result.TabIndex = 2;
+            this.labXDM2041_read_result.Text = "label1";
             // 
-            // txtKA3305P_set_current_1
+            // labXDM2041_measure
             // 
-            this.txtKA3305P_set_current_1.Location = new System.Drawing.Point(38, 339);
-            this.txtKA3305P_set_current_1.Name = "txtKA3305P_set_current_1";
-            this.txtKA3305P_set_current_1.Size = new System.Drawing.Size(71, 26);
-            this.txtKA3305P_set_current_1.TabIndex = 9;
-            this.txtKA3305P_set_current_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_current_1_KeyDown);
+            this.labXDM2041_measure.AutoSize = true;
+            this.labXDM2041_measure.Location = new System.Drawing.Point(19, 64);
+            this.labXDM2041_measure.Name = "labXDM2041_measure";
+            this.labXDM2041_measure.Size = new System.Drawing.Size(51, 20);
+            this.labXDM2041_measure.TabIndex = 1;
+            this.labXDM2041_measure.Text = "label2";
             // 
-            // txtKA3305P_set_voltage_2
+            // labXDM2041_status
             // 
-            this.txtKA3305P_set_voltage_2.Location = new System.Drawing.Point(201, 287);
-            this.txtKA3305P_set_voltage_2.Name = "txtKA3305P_set_voltage_2";
-            this.txtKA3305P_set_voltage_2.Size = new System.Drawing.Size(71, 26);
-            this.txtKA3305P_set_voltage_2.TabIndex = 9;
-            this.txtKA3305P_set_voltage_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_voltage_2_KeyDown);
+            this.labXDM2041_status.AutoSize = true;
+            this.labXDM2041_status.Location = new System.Drawing.Point(19, 24);
+            this.labXDM2041_status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labXDM2041_status.Name = "labXDM2041_status";
+            this.labXDM2041_status.Size = new System.Drawing.Size(51, 20);
+            this.labXDM2041_status.TabIndex = 0;
+            this.labXDM2041_status.Text = "label1";
             // 
-            // txtKA3305P_set_current_2
+            // groupBox1
             // 
-            this.txtKA3305P_set_current_2.Location = new System.Drawing.Point(201, 339);
-            this.txtKA3305P_set_current_2.Name = "txtKA3305P_set_current_2";
-            this.txtKA3305P_set_current_2.Size = new System.Drawing.Size(71, 26);
-            this.txtKA3305P_set_current_2.TabIndex = 9;
-            this.txtKA3305P_set_current_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKA3305P_set_current_2_KeyDown);
+            this.groupBox1.Controls.Add(this.labXDM3051_read_result);
+            this.groupBox1.Controls.Add(this.labXDM3051_measure);
+            this.groupBox1.Controls.Add(this.labXDM3051_status);
+            this.groupBox1.Location = new System.Drawing.Point(24, 17);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(244, 97);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "XDM 3051";
             // 
-            // label14
+            // labXDM3051_read_result
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 268);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(118, 20);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Set Voltage (V)";
+            this.labXDM3051_read_result.AutoSize = true;
+            this.labXDM3051_read_result.Location = new System.Drawing.Point(19, 44);
+            this.labXDM3051_read_result.Name = "labXDM3051_read_result";
+            this.labXDM3051_read_result.Size = new System.Drawing.Size(51, 20);
+            this.labXDM3051_read_result.TabIndex = 2;
+            this.labXDM3051_read_result.Text = "label1";
             // 
-            // label15
+            // labXDM3051_measure
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(181, 266);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(118, 20);
-            this.label15.TabIndex = 10;
-            this.label15.Text = "Set Voltage (V)";
+            this.labXDM3051_measure.AutoSize = true;
+            this.labXDM3051_measure.Location = new System.Drawing.Point(19, 64);
+            this.labXDM3051_measure.Name = "labXDM3051_measure";
+            this.labXDM3051_measure.Size = new System.Drawing.Size(51, 20);
+            this.labXDM3051_measure.TabIndex = 1;
+            this.labXDM3051_measure.Text = "label2";
             // 
-            // label16
+            // labXDM3051_status
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(181, 316);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(116, 20);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Set Current (A)";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(19, 316);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(116, 20);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Set Current (A)";
-            // 
-            // btnKA3305P_on_1
-            // 
-            this.btnKA3305P_on_1.Location = new System.Drawing.Point(14, 103);
-            this.btnKA3305P_on_1.Name = "btnKA3305P_on_1";
-            this.btnKA3305P_on_1.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_on_1.TabIndex = 12;
-            this.btnKA3305P_on_1.Text = "ON";
-            this.btnKA3305P_on_1.UseVisualStyleBackColor = true;
-            this.btnKA3305P_on_1.Click += new System.EventHandler(this.btnKA3305P_on_1_Click);
-            // 
-            // btnKA3305P_off_1
-            // 
-            this.btnKA3305P_off_1.Location = new System.Drawing.Point(159, 103);
-            this.btnKA3305P_off_1.Name = "btnKA3305P_off_1";
-            this.btnKA3305P_off_1.Size = new System.Drawing.Size(140, 30);
-            this.btnKA3305P_off_1.TabIndex = 13;
-            this.btnKA3305P_off_1.Text = "OFF";
-            this.btnKA3305P_off_1.UseVisualStyleBackColor = true;
-            this.btnKA3305P_off_1.Click += new System.EventHandler(this.btnKA3305P_off_1_Click);
-            // 
-            // btnKA3305P_status
-            // 
-            this.btnKA3305P_status.Location = new System.Drawing.Point(10, 380);
-            this.btnKA3305P_status.Name = "btnKA3305P_status";
-            this.btnKA3305P_status.Size = new System.Drawing.Size(100, 30);
-            this.btnKA3305P_status.TabIndex = 14;
-            this.btnKA3305P_status.Text = "Status";
-            this.btnKA3305P_status.UseVisualStyleBackColor = true;
-            this.btnKA3305P_status.Click += new System.EventHandler(this.btnKA3305P_status_Click);
-            // 
-            // labKA3305P_status
-            // 
-            this.labKA3305P_status.AutoSize = true;
-            this.labKA3305P_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labKA3305P_status.Location = new System.Drawing.Point(15, 417);
-            this.labKA3305P_status.Name = "labKA3305P_status";
-            this.labKA3305P_status.Size = new System.Drawing.Size(51, 16);
-            this.labKA3305P_status.TabIndex = 15;
-            this.labKA3305P_status.Text = "label18";
-            // 
-            // labKA3305P_status_1
-            // 
-            this.labKA3305P_status_1.AutoSize = true;
-            this.labKA3305P_status_1.Location = new System.Drawing.Point(120, 390);
-            this.labKA3305P_status_1.Name = "labKA3305P_status_1";
-            this.labKA3305P_status_1.Size = new System.Drawing.Size(60, 20);
-            this.labKA3305P_status_1.TabIndex = 16;
-            this.labKA3305P_status_1.Text = "label18";
+            this.labXDM3051_status.AutoSize = true;
+            this.labXDM3051_status.Location = new System.Drawing.Point(19, 24);
+            this.labXDM3051_status.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labXDM3051_status.Name = "labXDM3051_status";
+            this.labXDM3051_status.Size = new System.Drawing.Size(51, 20);
+            this.labXDM3051_status.TabIndex = 0;
+            this.labXDM3051_status.Text = "label1";
             // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1359, 623);
+            this.ClientSize = new System.Drawing.Size(1359, 691);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -1745,7 +1928,15 @@
             this.tabLoad.ResumeLayout(false);
             this.groupBox_load_KEL103.ResumeLayout(false);
             this.groupBox_load_KEL103.PerformLayout();
+            this.tabAllDevices.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1900,5 +2091,21 @@
         private System.Windows.Forms.Button btnKA3305P_status;
         private System.Windows.Forms.Label labKA3305P_status;
         private System.Windows.Forms.Label labKA3305P_status_1;
+        private System.Windows.Forms.TabPage tabAllDevices;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Timer timer2_all_devices;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label labXDM1041_read_result;
+        private System.Windows.Forms.Label labXDM1041_measure;
+        private System.Windows.Forms.Label labXDM1041_status;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label labXDM2041_read_result;
+        private System.Windows.Forms.Label labXDM2041_measure;
+        private System.Windows.Forms.Label labXDM2041_status;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labXDM3051_read_result;
+        private System.Windows.Forms.Label labXDM3051_measure;
+        private System.Windows.Forms.Label labXDM3051_status;
     }
 }

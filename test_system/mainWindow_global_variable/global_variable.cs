@@ -22,7 +22,7 @@ namespace test_system
 
 
         #region "POWER SUPPLY ---- KORAD   ---- KA3305P  -----  0-30V 5A  "
-       public static double KA3305P_out_voltage_1;
+        public static double KA3305P_out_voltage_1;
         public static double KA3305P_out_current_1;
         public static double KA3305P_out_voltage_2;
         public static double KA3305P_out_current_2;
@@ -60,7 +60,7 @@ namespace test_system
         #region "POWER SUPPLY ---- MANSON  ---- HCS - 3300  -----  1-16V 30A  "
         public static double HCS_3300_out_voltage = 0;
         public static double HCS_3300_out_current = 0;
-        public static string HCS_3300_out_status= "";
+        public static string HCS_3300_out_status = "";
         public static double HCS_3300_get_set_voltage = 0;
         public static double HCS_3300_get_set_current = 0;
         //public static string HSC3300_set_set_voltage = "";
@@ -115,21 +115,31 @@ namespace test_system
         #endregion
 
         #region "East Tester   --- TEMPERATURE METER ET3916-8 "
-
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- število bytov, ki se bo poslalo na napravo ET3916
         public static byte device_ET3916_bytes_to_send = 0;
-
-        public static bool device_ET3916_bytes_command_write = false;
-        public static bool device_ET3916_read_model_number = false;
-        public static bool device_ET3916_read_all_temperature = false;
-
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- paket, ki pošlje na napravo ET3916 
         public static byte[] device_ET3916_dataArraySend = new byte[10];
-        public static string device_ET3916_model_number = "";
-        public static double[] device_ET3916_temperature = new double[10];
-
-
-        public static bool device_ET3916_read_serial_number = false;
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- pripravljene je paketke za pošiljanje na napravo
+        //--  timer pošlje paket na napravo 
+        //--  Čez 100ms se preveri če je prišel odgovor
+        public static bool device_ET3916_bytes_command_write = false;
+        //-----------------------------------------------------------------------------------------------------------------------
         public static string device_ET3916_serial_number = "";
+        //-- po poslanem paketu se preveri če je prišel odgovor za serial number
+        public static bool device_ET3916_read_serial_number = false;
+        //-- prikaže se serial number v ALL_DEVICE oknu
         public static bool device_ET3916_serial_number_show = false;
+        //-----------------------------------------------------------------------------------------------------------------------
+        public static bool device_ET3916_read_model_number = false;
+        public static string device_ET3916_model_number = "";
+        //-----------------------------------------------------------------------------------------------------------------------
+        public static bool device_ET3916_read_all_temperature = false;
+        public static bool device_ET3916_read_all_temperature_by_test = false;
+
+        public static double[] device_ET3916_temperature = new double[10];
 
 
 
@@ -147,7 +157,7 @@ namespace test_system
         public static double device_MPM1010B_freguency = 0;
 
 
-    
+
 
         public static bool device_MPM1010B_read_all_write = false;
         public static bool device_MPM1010B_read_all_read = false;
@@ -161,30 +171,15 @@ namespace test_system
         //      freguency = get_one_measure_value(17)
         #endregion
 
-        #region "OWON  --- multimeter   -----      XDM3051    "
-        //public static string device_XDM3051_ident = "";
-        //public static funReturnCodeCOMport device_XDM3051_measure_ok;
-        //public static double device_XDM3051_measure;
+        #region "OWON  --- multimeter   -----      owon XDM 3051, 2041, 1041    "
+        //public static string XDM3051_range;
+        //public static string XDM2041_range;
+        //public static string XDM1041_range;
 
         public static int device_XDM3051_range_dc_volt;
 
         #endregion
-        #region "OWON  --- multimeter   -----      XDM2041    "
-        //public static string device_XDM1041_ident = "";
-        //public static funReturnCodeCOMport device_XDM2041_measure_ok;
-        //public static double device_XDM2041_measure;
-
-
-
-        #endregion
-        #region "OWON  --- multimeter   -----      XDM1041    "
-        //public static string device_XDM1041_ident = "";
-        //public static funReturnCodeCOMport device_XDM1041_measure_ok;
-        //public static double device_XDM1041_measure;
-
-
-        #endregion
-
+    
         #region "DC LOAD KORAD KEL 103"
 
         //-----------------------------------------------------------------------------------------------------------------------
@@ -193,7 +188,7 @@ namespace test_system
         public const string KEL103_SET_FUN_CURRENT = "CURR";
         public const string KEL103_SET_FUN_POWER = "POW";
         public const string KEL103_SET_FUN_RESISTANCE = "RES";
- 
+
 
         public static double KEL103_voltage = 0;
         public static double KEL103_current = 0;
@@ -236,10 +231,9 @@ namespace test_system
         // --- COMport - ident string 
         public static string[] COMport_device_ident = new string[COMport_SELECT_MAXnumber];
         //----------------------------------------------------------------------------------------
-
-
-        public static funReturnCodeCOMport [] dev_meas_state = new funReturnCodeCOMport[COMport_SELECT_MAXnumber];
+        public static funReturnCodeCOMport[] dev_meas_state = new funReturnCodeCOMport[COMport_SELECT_MAXnumber];
         public static double[] dev_meas = new double[COMport_SELECT_MAXnumber];
+        public static string[] dev_range = new string[COMport_SELECT_MAXnumber];
 
 
 
@@ -306,7 +300,7 @@ namespace test_system
         //COM22 USB\VID_1A86&PID_7523\7&25495295&0&2
 
         //COM24 USB\VID_1A86&PID_7523\7&25D67E33&0&2
-        
+
         //-----------------------------------------------------------------------------------------------------------------------
         public const string strCOMport_multimeter_name_XDM1041 = "OWON XDM 1041 - Multimeter";
         public const string strCOMport_multimeter_VID_XDM1041 = "1A86";
@@ -350,7 +344,7 @@ namespace test_system
         public const string strCOMport_VID_ET3916 = "1A86";
         public const string strCOMport_PID_ET3916 = "7523";
         public const string strCOMport_serial_ET3916 = "25D67E33";
-       //-----------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------
         //-- AC POWER METER 
         //-----------------------------------------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------------------------------------
@@ -409,12 +403,12 @@ namespace test_system
 
         //-----------------------------------------------------------------------------------------
         //-- začetni točki MDI okna ( baterija, master, update ..... )
-        public const int intMainWindow_x_MDI_window = 220;
-        public const int intMainWindow_y_MDI_window = 10;
+        public const int intMainWindow_x_MDI_window = 150;
+        public const int intMainWindow_y_MDI_window = 0;
         //-----------------------------------------------------------------------------------------
         //-- velikost MDI okna 
-        public const int intMDIwindow_x_size = 1000;
-        public const int intMDIwindow_y_size = 600;
+        public const int intMDIwindow_x_size = 1085;
+        public const int intMDIwindow_y_size = 630;
 
 
         #endregion
@@ -446,7 +440,7 @@ namespace test_system
         //public static int program_int_counter_run = 0;
         //public static int program_int_counter_set = 0;
 
-                public static int program_int_step_time_run = 0;
+        public static int program_int_step_time_run = 0;
         public static int program_int_step_time_set = 0;
 
         //-----------------------------------------------------------------------------------------------------------------------

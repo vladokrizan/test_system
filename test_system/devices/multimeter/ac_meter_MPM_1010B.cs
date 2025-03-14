@@ -12,11 +12,8 @@ namespace test_system
     internal class ac_meter_MPM_1010B
     {
         byte[] read_buffer = new byte[100];
-
-
         //=======================================================================================================================            
         //=======================================================================================================================            
-
         private string get_MPM_1010B_one_value(byte start)
         {
             string Receive_value = "";
@@ -30,9 +27,7 @@ namespace test_system
             Receive_value = Receive_value + (read_buffer[start + 3] & 0x0F).ToString();
             if (read_buffer[start + 3] > 10) Receive_value = Receive_value + ",";
             //strGeneralString = Receive_value;
-
             return Receive_value;
-
         }
 
         //=======================================================================================================================            
@@ -56,9 +51,7 @@ namespace test_system
 
         public void fun_read_all_MPM_1010B_read()
         {
-            
             device_MPM1010B_read_all_read = false;
-
             int number_bytes_to_read= mainWindow.COMportSerial[COMport_MPM_1010B].BytesToRead;
 
             if (number_bytes_to_read == 21)
@@ -71,26 +64,12 @@ namespace test_system
                 device_MPM1010B_freguency = Convert.ToDouble(get_MPM_1010B_one_value(17));
             }
             device_MPM1010B_show_data = true;
-
             if (number_bytes_to_read == 21) dev_active[COMport_MPM_1010B] = true;
             else dev_active[COMport_MPM_1010B] = false;
-
-
-            //strGeneralString = number_bytes_to_read.ToString();
-
-
-
         }
 
 
-
-
-
-
-
         //mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
-
-
         /*
         self.serialPort.write([63])
         # print ("AC POWER METER   MPM1010B available send ?  ")

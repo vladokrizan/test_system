@@ -143,7 +143,7 @@ namespace test_system
                 dc_load_KEL103.fun_KEL103_on();
             }
             //-------------------------------------------------------------------------------------------------------------------
-            temperature_ET3916.fun_ET3916_read_all_temperature();
+            temperature_ET3916.fun_ET3916_read_all_temperature_by_test();
 
             button1.Visible = true;
         }
@@ -252,7 +252,7 @@ namespace test_system
             //-------------------------------------------------------------------------------------------------------------------
             program_result_value.Add("ET3916: temperature 1 (degC) ", device_ET3916_temperature[1].ToString());
             program_result_value.Add("ET3916: temperature 2 (degC) ", device_ET3916_temperature[2].ToString());
-            temperature_ET3916.fun_ET3916_read_all_temperature();
+            temperature_ET3916.fun_ET3916_read_all_temperature_by_test();
             //-------------------------------------------------------------------------------------------------------------------
             write_log_files.funWriteLogFile_program10();
             //-------------------------------------------------------------------------------------------------------------------

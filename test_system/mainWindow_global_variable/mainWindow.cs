@@ -31,7 +31,7 @@ namespace test_system
         modbus_functions modbus_functions = new modbus_functions();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
-    
+
         connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
         all_devices all_devices = new all_devices();
@@ -365,85 +365,11 @@ namespace test_system
 
         #region "buttons"
 
-        private void btnProgram_01_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            program_1 program_1 = new program_1();
-            program_1.MdiParent = this;
-            program_1.Show();
-
-        }
-        #endregion
-
-        #region "MENU LINE "
-
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
 
-        #endregion
-
-
-
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            test_system_identification test_system_identification = new test_system_identification();
-            test_system_identification.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //multimeter_XDM3051.fun_XDM3051_measure();
-         
-            //power_supply_RD6006.funRD6006_measure();
-            //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = "OWON, XDM3051,2303195,V3.7.2,2";
-            //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = "XDM1041,23120418,V4.1.0,3";
-            //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = "KORAD KA3305P V7.0 SN: 30057214";
-            //COMport_device_ident[COMport_SELECT_LOAD_KEL103] = "KORAD-KEL103 V3.30 SN: 00022116";
-            //write_log_files.funWriteLogFile_Devices_idents();
-            // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
-            //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
-            //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
-            //COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
-            //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
-            //mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
-            //textBox1.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
-            //dataArray = Encoding.ASCII.GetBytes("GMArX\r");
-            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString();
-            //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString();
-            //label2.Text = dataArray.Length.ToString();
-            //device_MPM1010B_read_all_write = true;
-            //ac_meter_MPM_1010B.fun_read_all_MPM_1010B();
-            // label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
-            // label3.Text = strGeneralString;
-            //label2.Text = buffer[0].ToString("x") + "  " + buffer[1].ToString("x") + "  " + buffer[2].ToString("x") + "  " + buffer[3].ToString("x");
-            //label3.Text = buffer[0].ToString() + "  " + buffer[1].ToString() + "  " + buffer[2].ToString() + "  " + buffer[3].ToString() + "  " + buffer[4].ToString();
-            //label4.Text = buffer[0].ToString() + "  " + (buffer[1]&0x0F) .ToString() + "  " + (buffer[2] & 0x0F).ToString() + "  " + (buffer[3] & 0x0F).ToString() + "  " + (buffer[4] & 0x0F).ToString() + "  " + (buffer[5] & 0x0F).ToString();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -456,32 +382,102 @@ namespace test_system
             all_devices.Show();
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            test_system_identification test_system_identification = new test_system_identification();
+            test_system_identification.Show();
+        }
+
+        #endregion
+
+        #region "MENU LINE "
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void program1VerifyConnectedDevicesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            program_1 program_1 = new program_1();
+            program_1.MdiParent = this;
+            program_1.Show();
+        }
+        private void program10TestPowerSupplyDigitalMultimeterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fun_close_all_programs();
             program_10_test_supply_multimeter program_10_test_supply_multimeeter = new program_10_test_supply_multimeter();
             program_10_test_supply_multimeeter.MdiParent = this;
             program_10_test_supply_multimeeter.Show();
 
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void program20MeasureCapacitiyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        //-- zagon programa 20
-        private void button4_Click_1(object sender, EventArgs e)
-        {
+            fun_close_all_programs();
             program_20_battery_test program_20_battery_test = new program_20_battery_test();
             program_20_battery_test.MdiParent = this;
-            program_20_battery_test.Show(); 
+            program_20_battery_test.Show();
 
+        }
 
+        #endregion
+        #region "PROGRAMS "
+        private void fun_close_all_programs()
+        {
+            foreach (Form childForm in MdiChildren)
+            {
+                childForm.Close();
+            }
         }
 
 
 
+        #endregion
 
 
+  
+        //multimeter_XDM3051.fun_XDM3051_measure();
+
+        //power_supply_RD6006.funRD6006_measure();
+        //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] = "OWON, XDM3051,2303195,V3.7.2,2";
+        //COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] = "XDM1041,23120418,V4.1.0,3";
+        //COMport_device_ident[COMport_SELECT_SUPPLY_KA3305A] = "KORAD KA3305P V7.0 SN: 30057214";
+        //COMport_device_ident[COMport_SELECT_LOAD_KEL103] = "KORAD-KEL103 V3.30 SN: 00022116";
+        //write_log_files.funWriteLogFile_Devices_idents();
+        // modbus_functions.funModbusRTU_send_set_single_register_function_6(1, 18, 0, COMport_SELECT_SUPPLY_RD6006);
+        //mainWindow.COMportSerial[selComPort_supply_RD6006].DiscardInBuffer();
+        //modbus_function.funModbusRTU_send_request_read_function_3(1, 0, 20, selComPort_supply_RD6006);
+        //COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
+        //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
+        //mainWindow.COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].WriteLine("*IDN?");
+        //textBox1.Text = COMportSerial[COMport_SELECT_MULTIMETER_XDM3051].ReadLine();
+        //dataArray = Encoding.ASCII.GetBytes("GMArX\r");
+        //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString() + " " + dataArray[5].ToString();
+        //label1.Text = dataArray[0].ToString() + " " + dataArray[1].ToString() + " " + dataArray[2].ToString() + " " + dataArray[3].ToString() + " " + dataArray[4].ToString();
+        //label2.Text = dataArray.Length.ToString();
+        //device_MPM1010B_read_all_write = true;
+        //ac_meter_MPM_1010B.fun_read_all_MPM_1010B();
+        // label2.Text = device_MPM1010B_voltage.ToString() + "  " + device_MPM1010B_current.ToString() + "  " + device_MPM1010B_power.ToString() + "  " + device_MPM1010B_power_factor.ToString() + "  " + device_MPM1010B_freguency.ToString();
+        // label3.Text = strGeneralString;
+        //label2.Text = buffer[0].ToString("x") + "  " + buffer[1].ToString("x") + "  " + buffer[2].ToString("x") + "  " + buffer[3].ToString("x");
+        //label3.Text = buffer[0].ToString() + "  " + buffer[1].ToString() + "  " + buffer[2].ToString() + "  " + buffer[3].ToString() + "  " + buffer[4].ToString();
+        //label4.Text = buffer[0].ToString() + "  " + (buffer[1]&0x0F) .ToString() + "  " + (buffer[2] & 0x0F).ToString() + "  " + (buffer[3] & 0x0F).ToString() + "  " + (buffer[4] & 0x0F).ToString() + "  " + (buffer[5] & 0x0F).ToString();
+
+
+    
+     
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            fun_close_all_programs();
+        }
+
+ 
     }
 }

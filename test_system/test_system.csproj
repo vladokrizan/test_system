@@ -165,6 +165,7 @@
   <ItemGroup>
     <Content Include="document\dev_history.txt" />
     <Content Include="document\test_system_informations.txt" />
+    <Content Include="document\python_device_code.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

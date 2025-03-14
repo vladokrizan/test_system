@@ -1,0 +1,1779 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+from dataclasses import dataclass
+from openhtf.util import conf
+from serial.tools.list_ports import comports
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from openhtf.core.base_plugs import DevicePlug
+from re import compile
+@dataclass
+class Identification:
+    model: str = ''
+    version: str = ''
+    serial: str = ''
+
+class DC_LOAD_KEL_103_SERIAL(VisaSerial):
+
+    def __init__(self,serial):
+        self.serial_device = None
+
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            #print ("FIND  KEL 103. AA COM port serial number =  ", serial)
+            self.serial_device = serial
+            #self.search_type_port =  True
+            super().__init__(self.serial_device, baud=115200, read_termination='\n', write_termination='\r\n', timeout=100)
+            #print ("FIND  KEL 103. BB COM port serial number =  ", serial)
+
+        else:
+            ports = comports()
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            for port in ports:
+                try:
+                    #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                    if port.serial_number == serial:
+                        self.serial_device = port.device
+                        #print ( "Correct COM port XDM3051 = ", self.serial_device )
+                        super().__init__(self.serial_device,
+                                    baud=115200,
+                                    read_termination='\n',
+                                    write_termination='\n\r',
+                                    timeout=100)
+                        break
+                except Exception:
+                    print ("ERROR  ", self.serial_device )
+                    pass
+    @property
+    #-- KORAD-KEL103 V1.10 SN:07740976
+    def is_available(self) -> bool:
+        try:
+            #print ('IDN string for KEL 103 = ',self.serial_device)  
+            idn_string = self.idn()
+            #print ('IDN string for KEL 103 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("KORAD-KEL103")
+            #print ('Search string ', x )
+            if (x>-1):
+                return True
+            else:
+                return False
+        except Exception:
+            print ("ERROR  ", self.serial_device )
+            return False
+    #============================================================================================================================            
+#============================================================================================================================            
+    def device_com_port(self) ->str:
+        try:
+            return self.serial_device
+        except Exception:
+            pass 
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_ON(self):
+        self.write(f':INP 1')
+    def set_input_on(self):
+        self.write(f':INP 1')
+  
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_OFF(self):
+        self.write(f':INP 0')
+    def set_input_off(self):
+        self.write(f':INP 0')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    def get_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    #def measure_voltage(self):
+    #return self.query(':MEAS:VOLT?')[:-1]
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+    def get_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+
+    #def measure_current(self):
+    #return self.query(':MEAS:CURR?')[:-1]
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def get_power(self) -> float:
+        return float(self.query(':MEAS:POW?')[:-1])
+        #voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        #current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        #return  float(voltage*current)
+    #============================================================================================================================            
+    #============================================================================================================================            
+    #def get_resistence(self) -> float:
+    #    print (self.query(':MEAS:RES?'))
+    #    return float(self.query(':MEAS:RES?')[:-3])
+        #voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        #current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        #return  float(voltage*current)
+    #============================================================================================================================            
+    #-- funkcija vrne NAPETOST,TOK,MOÄŚ v list formatu (float stevila)
+    #============================================================================================================================            
+    def get_measure(self) -> list:
+        voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        power:float =float(self.query(':MEAS:POW?')[:-1])
+        return(voltage,current,power)
+
+    #============================================================================================================================            
+#-- funkcija vrne NAPETOST,TOK,MOÄŚ v list formatu (float stevila)
+#============================================================================================================================            
+    def get_measure(self) -> list:
+        voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        power:float =float(self.query(':MEAS:POW?')[:-1])
+        return(voltage,current,power)
+    #============================================================================================================================            
+#============================================================================================================================            
+    def KEL103_set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+
+    def set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+  
+    def get_set_current(self):
+        return  float(self.query(f':CURR?')[:-1])
+        #write_string = (f':CURR {str(set_current)}A')  
+        #self.write(write_string)
+        #set_current_value = int (set_current * 1000)
+        #packet_crc= modbus_class.modbus_rtu_fun_6(self,1,KP184_config_value.set_address_current,set_current_value)
+        #self.serialPort.write(packet_crc)
+        #receive =  self.serialPort.read(8)
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_voltage(self, set_value:float):
+        write_string = (f':VOLT {str(set_value)}V')  
+        self.write(write_string)
+  
+    def get_set_voltage(self):
+        return  float(self.query(f':VOLT?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_power(self, set_value:float):
+        write_string = (f':POW {str(set_value)}W')  
+        self.write(write_string)
+  
+    def get_set_power(self):
+        return  float(self.query(f':POW?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_resistance(self, set_value:float):
+        write_string = (f':POW {str(set_value)}W')  
+        self.write(write_string)
+  
+    def get_set_resistance(self):
+        return  float(self.query(f':RES?')[:-3])
+    #============================================================================================================================            
+#============================================================================================================================            
+    def get_set_function(self) ->str: 
+      return  self.query(f':FUNC?')
+    #============================================================================================================================            
+#============================================================================================================================            
+#def get_RCL_LIST(self): 
+#    return  self.query(f':DYN?')
+#@property
+#def measure_voltage(self):
+#  try:
+#    return self.query('MEAS?')
+#  except Exception:
+#    pass 
+#return self.query(':MEAS?')
+#def set_voltage_dc_range(self,set_range:int):
+#write_string = (f'CONF:FUNCVOLT:DC:{str(set_range)}')  
+#print ("set range string  "+write_string )
+#self.write(write_string)
+#  write_string = (f'CONF:VOLT:DC {str(set_range)}')  
+#  print ("set range string  "+write_string )
+#  self.write(write_string)
+#return self.query(write_string)
+#def get_voltage_dc_range(self):
+#  write_string = (f'VOLT:DC:RANG?')  
+#  return self.query(write_string)
+ 
+class DC_LOAD_KEL_103_SERIAL_plug(DevicePlug):
+  def __init__(self, device_config):
+    super(DC_LOAD_KEL_103_SERIAL_plug, self).__init__(DC_LOAD_KEL_103_SERIAL, device_config)
+
+Commands    Parameter   Description                 Setup           Query
+1 ô€€ŠIDNďĽź    no          Return product information  no              *IDN?   Return product  information
+2 *SAV      <NR1>       1-100                       Store to unit   The current value is saved in   20      no
+3 *RCL      <NR1>       1-100                       Recall the storage unit *RCL 20 Recall 20 units no
+4 *TRG      no          Simulate an external trigger command, only valid in the pulse mode and the flip mode. *TRG  Simulate trigger once   no
+5   :SYSTem :SYST   BEEP|BAUD   Set system parameters such as buzzer, baud  rate setting query etc. :SYSTem:BEEP ON Beep ON :SYSTem:BEEP?   >ON Query the beep ON
+6   :STATus?    :STAT?  Baud rateďĽš 0,9600  1,19200 2,38400 3,57600 4,115200    Query the device status The first byte is the buzzer status and the second byte is the baud rate; other bytes are to be determined.
+    no  :STATus?    >0,4,0,0,0,0
+
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from serial.tools.list_ports import comports
+from openhtf.util import conf
+from dataclasses import dataclass
+from re import compile
+
+class OperatingMode:
+  constant_current = 'CURR'
+  constant_voltage = 'VOLT'
+  constant_resistance = 'RES'
+  constant_power = 'POW'
+  short = 'SHORT'
+
+
+@dataclass
+class Identification:
+  model: str = ''
+  version: str = ''
+  serial: str = ''
+
+
+class Tenma72_13210(VisaSerial):
+  __identity_regex = compile((r'^(?P<model>(TENMA \d+-\d+|KORAD-KEL\d+)) '
+                              r'(?P<version>V\d+.\w+) '
+                              r'(?P<serial>SN:\d+)'))
+  __units = {'CURR': 'A', 'VOLT': 'V', 'RES': 'OHM', 'POW': 'W'}
+
+  def __init__(self, serial):
+    serial_device = None
+    ports = comports()
+    for port in ports:
+      if port.serial_number == serial:
+        serial_device = port.device
+    super().__init__(serial_device,
+                     baud=115200,
+                     read_termination='\n',
+write_termination='\r\n',
+                     timeout=2500)
+
+  def __identify(self):
+    #Extracts Instrument information and returns its serial number
+    try:
+      if res := self.__identity_regex.search(self.idn()):
+        return Identification(model=res.group('model'),
+                              serial=res.group('serial'),
+                              version=res.group('version'))
+      else:
+        return Identification()
+    except VisaComError:
+      return Identification()
+
+  @ property
+  def model(self):
+    #Provides the model number of the instrument.
+    return self.__identify().model
+
+  @ property
+  def version(self):
+    #Provides the firmware version of the instrument.
+    return self.__identify().version
+
+  @ property
+  def serial_number(self):
+    #Provides the serial number of the instrument.
+    return self.__identify().serial
+
+  @ property
+  def is_available(self) -> bool:
+    #Returns True if device identification is successfull. 
+    return True if self.serial_number else False
+
+  def __str__(self) -> str:
+    return f'{self.model} {self.serial_number}' if self.is_available else type(self).__name__
+
+  def set_input(self, value):
+    if value in [1, True, 'On', 'ON', 'on']:
+      self.write(':INPut ON')
+    if value in [0, False, 'Off', 'OFF', 'off']:
+      self.write(':INPut OFF')
+
+  def set_operating_mode(self, mode: OperatingMode, value):
+    self.write(f':FUNC {mode}')
+    if mode != OperatingMode.short:
+      unit = self.__units.get(mode)
+      self.write(f':{mode} {value}{unit}')
+
+class Tenma72_13210Plug(DevicePlug):
+  @ conf.inject_positional_args
+  def __init__(self, tenma_config):
+    super(Tenma72_13210Plug, self).__init__(Tenma72_13210, tenma_config)
+
+from dataclasses import dataclass
+from openhtf.util import conf
+from serial.tools.list_ports import comports
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from openhtf.core.base_plugs import DevicePlug
+from re import compile
+
+
+#  __identity_regex = compile((r'^(?P<model>(TENMA \d+-\d+|KORAD-KEL\d+)) '
+#                              r'(?P<version>V\d+.\w+) '
+#                              r'(?P<serial>SN:\d+)'))
+#KORAD-KEL103 V1.10 SN:07740976
+#
+# __identity_regex = re.compile((r'^(?P<company>TENMA)[\s,](?P<model>72-\d+)'  # required parameters
+#                                 r'([\s,](?P<version>\w+.\w+))?'                   # optional
+#                                 r'([\s,]SN:(?P<serial>\d+))?'))                   # optional
+#  TENMA 72-2550 V5.8 SN:03424425
+
+@dataclass
+class Identification:
+    model: str = ''
+    version: str = ''
+    serial: str = ''
+
+class DC_LOAD_KEL_103_SERIAL(VisaSerial):
+
+#-- OWON,XDM3051,2303195,V3.7.2,2
+#__identity_regex = compile((r'^(?P<model>(XDM3051)) '
+#                            r'(?P<version>V\d+.\w+) '
+#                            r'(?P<serial>,\d+)'))
+#__units = {'CURR': 'A', 'VOLT': 'V', 'RES': 'OHM', 'POW': 'W'}
+
+    def __init__(self,serial):
+        self.serial_device = None
+
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            self.serial_device = serial
+            self.search_type_port =  True
+            super().__init__(self.serial_device, baud=115200, read_termination='\n', write_termination='\r\n', timeout=100)
+        else:
+            ports = comports()
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            for port in ports:
+                try:
+                    #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                    if port.serial_number == serial:
+                        self.serial_device = port.device
+                        #print ( "Correct COM port XDM3051 = ", self.serial_device )
+                        super().__init__(self.serial_device,
+                                    baud=115200,
+                                    read_termination='\n',
+                                    write_termination='\n\r',
+                                    timeout=100)
+                        break
+                except Exception:
+                    print ("ERROR  ", self.serial_device )
+                    pass
+    @property
+    #-- KORAD-KEL103 V1.10 SN:07740976
+    def is_available(self) -> bool:
+        try:
+            idn_string = self.idn()
+            #print ('IDN string for KEL 103 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("KORAD-KEL103")
+            #print ('Search string ', x )
+            if (x>-1):
+                return True
+            else:
+                return False
+        except Exception:
+            print ("ERROR  ", self.serial_device )
+            return False
+
+    def device_com_port(self) ->str:
+        try:
+            return self.serial_device
+        except Exception:
+            pass 
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_ON(self):
+        self.write(f':INP 1')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_OFF(self):
+        self.write(f':INP 0')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+        #set_current_value = int (set_current * 1000)
+#packet_crc= modbus_class.modbus_rtu_fun_6(self,1,KP184_config_value.set_address_current,set_current_value)
+#self.serialPort.write(packet_crc)
+#receive =  self.serialPort.read(8)
+#@property
+#def measure_voltage(self):
+#  try:
+#    return self.query('MEAS?')
+#  except Exception:
+#    pass 
+#return self.query(':MEAS?')
+#def set_voltage_dc_range(self,set_range:int):
+#write_string = (f'CONF:FUNCVOLT:DC:{str(set_range)}')  
+#print ("set range string  "+write_string )
+#self.write(write_string)
+#  write_string = (f'CONF:VOLT:DC {str(set_range)}')  
+#  print ("set range string  "+write_string )
+#  self.write(write_string)
+#return self.query(write_string)
+#def get_voltage_dc_range(self):
+#  write_string = (f'VOLT:DC:RANG?')  
+#  return self.query(write_string)
+ 
+
+class DC_LOAD_KEL_103_SERIAL_plug(DevicePlug):
+  #@ conf.inject_positional_args
+  def __init__(self, device_config):
+    super(DC_LOAD_KEL_103_SERIAL_plug, self).__init__(DC_LOAD_KEL_103_SERIAL, device_config)
+'''from dataclasses import dataclass
+from openhtf.util import conf
+from serial.tools.list_ports import comports
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from openhtf.core.base_plugs import DevicePlug
+from re import compile
+
+@dataclass
+class Identification:
+    model: str = ''
+    version: str = ''
+    serial: str = ''
+
+class DC_LOAD_KEL_103_SERIAL(VisaSerial):
+
+    def __init__(self,serial):
+        self.serial_device = None
+
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            #print ("FIND  KEL 103. AA COM port serial number =  ", serial)
+            self.serial_device = serial
+            #self.search_type_port =  True
+            super().__init__(self.serial_device, baud=115200, read_termination='\n', write_termination='\r\n', timeout=100)
+            #print ("FIND  KEL 103. BB COM port serial number =  ", serial)
+
+        else:
+            ports = comports()
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            for port in ports:
+                try:
+                    #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                    if port.serial_number == serial:
+                        self.serial_device = port.device
+                        #print ( "Correct COM port XDM3051 = ", self.serial_device )
+                        super().__init__(self.serial_device,
+                                    baud=115200,
+                                    read_termination='\n',
+                                    write_termination='\n\r',
+                                    timeout=100)
+                        break
+                except Exception:
+                    print ("ERROR  ", self.serial_device )
+                    pass
+    
+    @property
+    #-- KORAD-KEL103 V1.10 SN:07740976
+    def is_available(self) -> bool:
+        try:
+            #print ('IDN string for KEL 103 = ',self.serial_device)  
+            idn_string = self.idn()
+            #print ('IDN string for KEL 103 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("KORAD-KEL103")
+            #print ('Search string ', x )
+            if (x>-1):
+                return True
+            else:
+                return False
+        except Exception:
+            print ("ERROR  ", self.serial_device )
+            return False
+    #============================================================================================================================            
+#============================================================================================================================            
+    def device_com_port(self) ->str:
+        try:
+            return self.serial_device
+        except Exception:
+            pass 
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_ON(self):
+        self.write(f':INP 1')
+    def set_input_on(self):
+        self.write(f':INP 1')
+  
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_OFF(self):
+        self.write(f':INP 0')
+    def set_input_off(self):
+        self.write(f':INP 0')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    def get_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    #def measure_voltage(self):
+    #return self.query(':MEAS:VOLT?')[:-1]
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+    def get_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+
+    #def measure_current(self):
+    #return self.query(':MEAS:CURR?')[:-1]
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def get_power(self) -> float:
+        return float(self.query(':MEAS:POW?')[:-1])
+        #voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        #current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        #return  float(voltage*current)
+    #============================================================================================================================            
+    #============================================================================================================================            
+    #def get_resistence(self) -> float:
+    #    print (self.query(':MEAS:RES?'))
+    #    return float(self.query(':MEAS:RES?')[:-3])
+        #voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        #current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        #return  float(voltage*current)
+    #============================================================================================================================            
+    #-- funkcija vrne NAPETOST,TOK,MOÄŚ v list formatu (float stevila)
+    #============================================================================================================================            
+    def get_measure(self) -> list:
+        voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        power:float =float(self.query(':MEAS:POW?')[:-1])
+        return(voltage,current,power)
+
+    #============================================================================================================================            
+#-- funkcija vrne NAPETOST,TOK,MOÄŚ v list formatu (float stevila)
+#============================================================================================================================            
+    def get_measure(self) -> list:
+        voltage:float = float(self.query(f':MEAS:VOLT?')[:-1])
+        current:float=  float(self.query(f':MEAS:CURR?')[:-1])
+        power:float =float(self.query(':MEAS:POW?')[:-1])
+        return(voltage,current,power)
+    #============================================================================================================================            
+#============================================================================================================================            
+    def KEL103_set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+
+    def set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+  
+    def get_set_current(self):
+        return  float(self.query(f':CURR?')[:-1])
+        #write_string = (f':CURR {str(set_current)}A')  
+        #self.write(write_string)
+        #set_current_value = int (set_current * 1000)
+        #packet_crc= modbus_class.modbus_rtu_fun_6(self,1,KP184_config_value.set_address_current,set_current_value)
+        #self.serialPort.write(packet_crc)
+        #receive =  self.serialPort.read(8)
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_voltage(self, set_value:float):
+        write_string = (f':VOLT {str(set_value)}V')  
+        self.write(write_string)
+  
+    def get_set_voltage(self):
+        return  float(self.query(f':VOLT?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_power(self, set_value:float):
+        write_string = (f':POW {str(set_value)}W')  
+        self.write(write_string)
+  
+    def get_set_power(self):
+        return  float(self.query(f':POW?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def set_resistance(self, set_value:float):
+        write_string = (f':POW {str(set_value)}W')  
+        self.write(write_string)
+  
+    def get_set_resistance(self):
+        return  float(self.query(f':RES?')[:-3])
+    #============================================================================================================================            
+#============================================================================================================================            
+    def get_set_function(self) ->str: 
+        return  self.query(f':FUNC?')
+    #============================================================================================================================            
+#============================================================================================================================            
+#def get_RCL_LIST(self): 
+#    return  self.query(f':DYN?')
+#@property
+#def measure_voltage(self):
+#  try:
+#    return self.query('MEAS?')
+#  except Exception:
+#    pass 
+#return self.query(':MEAS?')
+#def set_voltage_dc_range(self,set_range:int):
+#write_string = (f'CONF:FUNCVOLT:DC:{str(set_range)}')  
+#print ("set range string  "+write_string )
+#self.write(write_string)
+#  write_string = (f'CONF:VOLT:DC {str(set_range)}')  
+#  print ("set range string  "+write_string )
+#  self.write(write_string)
+#return self.query(write_string)
+#def get_voltage_dc_range(self):
+#  write_string = (f'VOLT:DC:RANG?')  
+#  return self.query(write_string)
+ 
+class DC_LOAD_KEL_103_SERIAL_plug(DevicePlug):
+  def __init__(self, device_config):
+    super(DC_LOAD_KEL_103_SERIAL_plug, self).__init__(DC_LOAD_KEL_103_SERIAL, device_config)
+
+Commands    Parameter   Description                 Setup           Query
+1 ô€€ŠIDNďĽź    no          Return product information  no              *IDN?   Return product  information
+2 *SAV      <NR1>       1-100                       Store to unit   The current value is saved in   20      no
+3 *RCL      <NR1>       1-100                       Recall the storage unit *RCL 20 Recall 20 units no
+4 *TRG      no          Simulate an external trigger command, only valid in the pulse mode and the flip mode. *TRG  Simulate trigger once   no
+5   :SYSTem :SYST   BEEP|BAUD   Set system parameters such as buzzer, baud  rate setting query etc. :SYSTem:BEEP ON Beep ON :SYSTem:BEEP?   >ON Query the beep ON
+6   :STATus?    :STAT?  Baud rateďĽš 0,9600  1,19200 2,38400 3,57600 4,115200    Query the device status The first byte is the buzzer status and the second byte is the baud rate; other bytes are to be determined.
+    no  :STATus?    >0,4,0,0,0,0
+
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from serial.tools.list_ports import comports
+from openhtf.util import conf
+from dataclasses import dataclass
+from re import compile
+
+class OperatingMode:
+constant_current = 'CURR'
+  constant_voltage = 'VOLT'
+  constant_resistance = 'RES'
+  constant_power = 'POW'
+  short = 'SHORT'
+
+
+@dataclass
+class Identification:
+model: str = ''
+  version: str = ''
+  serial: str = ''
+
+
+class Tenma72_13210(VisaSerial):
+  __identity_regex = compile((r'^(?P<model>(TENMA \d+-\d+|KORAD-KEL\d+)) '
+                              r'(?P<version>V\d+.\w+) '
+                              r'(?P<serial>SN:\d+)'))
+  __units = {'CURR': 'A', 'VOLT': 'V', 'RES': 'OHM', 'POW': 'W'}
+
+  def __init__(self, serial):
+    serial_device = None
+    ports = comports()
+    for port in ports:
+      if port.serial_number == serial:
+        serial_device = port.device
+    super().__init__(serial_device,
+                     baud=115200,
+                     read_termination='\n',
+                     write_termination='\r\n',
+                     timeout=2500)
+
+  def __identify(self):
+    #Extracts Instrument information and returns its serial number
+    try:
+      if res := self.__identity_regex.search(self.idn()):
+        return Identification(model=res.group('model'),
+                              serial=res.group('serial'),
+                              version=res.group('version'))
+      else:
+        return Identification()
+    except VisaComError:
+      return Identification()
+
+  @ property
+  def model(self):
+    #Provides the model number of the instrument.
+    return self.__identify().model
+
+  @ property
+  def version(self):
+    #Provides the firmware version of the instrument.
+    return self.__identify().version
+
+  @ property
+  def serial_number(self):
+    #Provides the serial number of the instrument.
+    return self.__identify().serial
+
+  @ property
+  def is_available(self) -> bool:
+    #Returns True if device identification is successfull. 
+    return True if self.serial_number else False
+
+  def __str__(self) -> str:
+    return f'{self.model} {self.serial_number}' if self.is_available else type(self).__name__
+
+  def set_input(self, value):
+    if value in [1, True, 'On', 'ON', 'on']:
+      self.write(':INPut ON')
+    if value in [0, False, 'Off', 'OFF', 'off']:
+      self.write(':INPut OFF')
+
+  def set_operating_mode(self, mode: OperatingMode, value):
+    self.write(f':FUNC {mode}')
+    if mode != OperatingMode.short:
+      unit = self.__units.get(mode)
+      self.write(f':{mode} {value}{unit}')
+
+class Tenma72_13210Plug(DevicePlug):
+  @ conf.inject_positional_args
+  def __init__(self, tenma_config):
+    super(Tenma72_13210Plug, self).__init__(Tenma72_13210, tenma_config)
+
+'''
+
+'''
+from dataclasses import dataclass
+from openhtf.util import conf
+from serial.tools.list_ports import comports
+from openhtf.plugs.visa_tools import VisaSerial, VisaComError
+from openhtf.core.base_plugs import DevicePlug
+from openhtf.core.base_plugs import DevicePlug
+from re import compile
+
+
+#  __identity_regex = compile((r'^(?P<model>(TENMA \d+-\d+|KORAD-KEL\d+)) '
+#                              r'(?P<version>V\d+.\w+) '
+#                              r'(?P<serial>SN:\d+)'))
+#KORAD-KEL103 V1.10 SN:07740976
+#
+# __identity_regex = re.compile((r'^(?P<company>TENMA)[\s,](?P<model>72-\d+)'  # required parameters
+#                                 r'([\s,](?P<version>\w+.\w+))?'                   # optional
+#                                 r'([\s,]SN:(?P<serial>\d+))?'))                   # optional
+#  TENMA 72-2550 V5.8 SN:03424425
+
+
+
+@dataclass
+class Identification:
+    model: str = ''
+    version: str = ''
+    serial: str = ''
+
+class DC_LOAD_KEL_103_SERIAL(VisaSerial):
+    #-- OWON,XDM3051,2303195,V3.7.2,2
+    #__identity_regex = compile((r'^(?P<model>(XDM3051)) '
+    #                            r'(?P<version>V\d+.\w+) '
+    #                            r'(?P<serial>,\d+)'))
+    #__units = {'CURR': 'A', 'VOLT': 'V', 'RES': 'OHM', 'POW': 'W'}
+
+    def __init__(self,serial):
+        self.serial_device = None
+
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            self.serial_device = serial
+            self.search_type_port =  True
+            super().__init__(self.serial_device, baud=115200, read_termination='\n', write_termination='\r\n', timeout=100)
+        else:
+            ports = comports()
+            #print ("FIND  KEL 103. COM port serial number =  ", serial)
+            for port in ports:
+                try:
+                    #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                    if port.serial_number == serial:
+                        self.serial_device = port.device
+                        #print ( "Correct COM port XDM3051 = ", self.serial_device )
+                        super().__init__(self.serial_device,
+                                    baud=115200,
+                                    read_termination='\n',
+                                    write_termination='\n\r',
+                                    timeout=100)
+                        break
+                except Exception:
+                    print ("ERROR  ", self.serial_device )
+                    pass
+       
+
+    @property
+    #-- KORAD-KEL103 V1.10 SN:07740976
+    def is_available(self) -> bool:
+        try:
+            idn_string = self.idn()
+            #print ('IDN string for KEL 103 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("KORAD-KEL103")
+            #print ('Search string ', x )
+            if (x>-1):
+                return True
+            else:
+                return False
+        except Exception:
+            print ("ERROR  ", self.serial_device )
+            return False
+  
+ 
+    def device_com_port(self) ->str:
+        try:
+            return self.serial_device
+        except Exception:
+            pass 
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_ON(self):
+        self.write(f':INP 1')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_OFF(self):
+        self.write(f':INP 0')
+   #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_current(self) -> float:
+        return  float(self.query(f':MEAS:CURR?')[:-1])
+   #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+
+        #set_current_value = int (set_current * 1000)
+#packet_crc= modbus_class.modbus_rtu_fun_6(self,1,KP184_config_value.set_address_current,set_current_value)
+#self.serialPort.write(packet_crc)
+#receive =  self.serialPort.read(8)
+#@property
+#def measure_voltage(self):
+#  try:
+#    return self.query('MEAS?')
+#  except Exception:
+#    pass 
+#return self.query(':MEAS?')
+#def set_voltage_dc_range(self,set_range:int):
+#write_string = (f'CONF:FUNCVOLT:DC:{str(set_range)}')  
+#print ("set range string  "+write_string )
+#self.write(write_string)
+#  write_string = (f'CONF:VOLT:DC {str(set_range)}')  
+#  print ("set range string  "+write_string )
+#  self.write(write_string)
+#return self.query(write_string)
+#def get_voltage_dc_range(self):
+#  write_string = (f'VOLT:DC:RANG?')  
+#  return self.query(write_string)
+
+
+class DC_LOAD_KEL_103_SERIAL_plug(DevicePlug):
+  #@ conf.inject_positional_args
+  def __init__(self, device_config):
+    super(DC_LOAD_KEL_103_SERIAL_plug, self).__init__(DC_LOAD_KEL_103_SERIAL, device_config)
+'''
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class SUPPLY_HCS_3300(VisaSerial) :
+    def __init__(self, serial):
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            self.serial_device = serial
+            self.search_type_port = True
+            super().__init__(self.serial_device, baud = 9600, read_termination = '\r', write_termination = '\r', timeout = 500)
+        else:
+            ports = comports()
+            #print ("FIND  HCS-3300  COM port serial number =  ", serial)
+            for port in ports:
+                #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                if port.serial_number == serial:
+                    self.serial_device = port.device
+                    #print ( "Correct COM port HSC-3300 = ", self.serial_device )
+                    break
+            super().__init__(self.serial_device, baud = 9600, read_termination = '\r', write_termination = '\r', timeout = 500)
+
+        # idn_string = self.query('GMAX')
+# print ('init function IDN string for HSC-3300 = ',self.serial_device,"    " ,idn_string)  
+
+    @property
+    def is_available(self) -> bool:
+        try:
+            idn_string = self.query('GMAX')
+            #print ('IDN string for HSC-3300 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("162330")
+            #print ('Search string ', x )
+            if (x > -1):
+                return True
+            else:
+                return False
+        except Exception:
+            return False
+
+    def device_com_port(self) ->str:
+try:
+            return self.serial_device
+        except Exception:
+            pass
+#------------------------------------------------------------------------------------------------
+#-- dobi se maximalna napetost in maximalni tok   
+    def get_maximal_value(self): 
+        read_string = self.query('GMAX')
+        maximal_voltage = float(read_string[0:3]) / 10
+        maximal_current = float(read_string[3:6]) / 10
+        return [maximal_voltage, maximal_current]
+
+    #==============================================================================================
+#--Input command:   GETS[CR]      Return value: 150180[CR]  OK[CR]
+#-- Meaning:
+#--   The Voltage value set at 15V
+#--   Current value set at 18A
+#==============================================================================================
+    def get_setting_value(self): 
+        read_string = self.query('GETS')
+        #print ('HCS-3300   get Settings value  ',read_string)  
+        voltage = float(read_string[0:3]) / 10
+        current = float(read_string[3:6]) / 10
+        return [voltage, current]
+
+    #==============================================================================================
+#-- Returns the output voltage setting.
+#==============================================================================================
+    def get_set_voltage(self) -> float:
+        read_string = self.query('GETS')
+        voltage = float(read_string[0:3]) / 10
+        return voltage
+    #==============================================================================================
+    #-- Returns the output Current setting.
+    #==============================================================================================
+    def get_set_current(self) -> float:
+        read_string = self.query('GETS')
+        current = float(read_string[3:6]) / 10
+        return current
+
+
+    #==============================================================================================
+#--Input command:   GETD[CR]      Return value: 150180[CR]  OK[CR]
+#-- Get PS Display values of Voltage, Current and  Status of CC/CV
+#--   <voltage>=????    <current>=????    <status>=0/1 (0=CV, 1=CC)
+#-- Meaning:
+#-- Return value:   150016001[CR] OK[CR]
+#--   Meaning:
+#--     The PS Display value is 15V and 16A.  It is in CC mode.
+#==============================================================================================
+    def get_display_value(self): 
+        try:
+            read_string = self.query('GETD')
+            voltage = float(read_string[0:4]) / 100
+            current = float(read_string[4:8]) / 100
+            status = read_string[8:9]
+            if status == '0': 
+                status = 'CV'
+            if status == 'a': 
+                status = 'CC'
+            return [voltage, current, status]
+        except Exception:
+            print("ERROR  HCS-3300   get_display_value ")
+            pass
+
+#==============================================================================================
+#-- Returns the output voltage 
+#==============================================================================================
+    def get_voltage(self)-> float:
+        read_string = self.query('GETD')
+        voltage = float(read_string[0:4]) / 100
+        return voltage
+    #==============================================================================================
+    #-- Returns the output Current 
+    #==============================================================================================
+    def get_current(self) -> float:
+        read_string = self.query('GETD')
+        current = float(read_string[4:8]) / 100
+        return current
+
+
+    #==============================================================================================
+#-- Input Command:  SOUT<status>[CR]    Return value: OK[CR]  
+#-- Switch on/off the output of PS  <status>=0/1 (0=ON, 1=OFF)
+#-- Input command:  SOUT0[CR] Return value: OK[CR]
+#-- Meaning:
+#--   Switch on the output of PS
+#==============================================================================================
+    def set_output_on(self): 
+        return self.query('SOUT0')
+
+
+    def set_output_off(self): 
+        return self.query('SOUT1')
+
+
+
+    #==============================================================================================
+#-- Input Command:  VOLT<voltage>[CR]     Return value: OK[CR]
+#--   Preset Voltage value  <voltage>=010<???<Max-Volt
+#--   *Max-Volt value refer to product specification
+#-- Input command:  VOLT127[CR]   Return value: OK[CR]
+#-- Meaning:
+#-- Set Voltage value as 12.7V
+#==============================================================================================
+    def set_voltage(self, setValue:float): 
+        if setValue > 0.7:
+            settings_string = str((int)(setValue * 10))
+            if  len(settings_string) == 1:
+                settings_string = "00" + settings_string
+            if  len(settings_string) == 2:
+                settings_string = "0" + settings_string
+            settings_string = 'VOLT' + settings_string
+            return self.query(settings_string)
+        else:
+            return "to low voltage"
+
+    #==============================================================================================
+#-- Input Command:  CURR<current>[CR]   Return value: OK[CR]
+#-- Preset Current value    <current>=000<???<Max-Curr    *Max-Curr value refer to product specification
+#-- Input command:    CURR120[CR]   Return value:   OK[CR]
+#-- Meaning:
+#--Set Current value as 12.0A
+#==============================================================================================
+    def set_current(self, setValue:float): 
+        settings_string = str((int)(setValue * 10))
+        if  len(settings_string) == 1:
+            settings_string = "00" + settings_string
+        if  len(settings_string) == 2:
+            settings_string = "0" + settings_string
+        settings_string = 'CURR' + settings_string
+        return self.query(settings_string)
+
+class SUPPLY_HCS_3300_plug(DevicePlug) :
+#@ conf.inject_positional_args
+  def __init__(self, powerSupply_HCS3300_config_port):
+    super(SUPPLY_HCS_3300_plug, self).__init__(SUPPLY_HCS_3300, powerSupply_HCS3300_config_port)
+class SUPPLY_HCS_3300(VisaSerial) :
+    def __init__(self, serial):
+        self.serial_device = None
+        if serial[0:5] == '/dev/':
+            self.serial_device = serial
+            self.search_type_port = True
+            super().__init__(self.serial_device, baud = 9600, read_termination = '\r', write_termination = '\r', timeout = 500)
+        else:
+            ports = comports()
+            #print ("FIND  HCS-3300  COM port serial number =  ", serial)
+            for port in ports:
+                #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                if port.serial_number == serial:
+                    self.serial_device = port.device
+                    #print ( "Correct COM port HSC-3300 = ", self.serial_device )
+                    break
+            super().__init__(self.serial_device, baud = 9600, read_termination = '\r', write_termination = '\r', timeout = 500)
+
+        # idn_string = self.query('GMAX')
+# print ('init function IDN string for HSC-3300 = ',self.serial_device,"    " ,idn_string)  
+
+    @property
+    def is_available(self) -> bool:
+        try:
+            idn_string = self.query('GMAX')
+            #print ('IDN string for HSC-3300 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("162330")
+            #print ('Search string ', x )
+            if (x > -1):
+                return True
+            else:
+                return False
+        except Exception:
+            return False
+
+    def device_com_port(self) ->str:
+try:
+            return self.serial_device
+        except Exception:
+            pass
+#------------------------------------------------------------------------------------------------
+#-- dobi se maximalna napetost in maximalni tok   
+    def get_maximal_value(self): 
+        read_string = self.query('GMAX')
+        maximal_voltage = float(read_string[0:3]) / 10
+        maximal_current = float(read_string[3:6]) / 10
+        return [maximal_voltage, maximal_current]
+
+    #==============================================================================================
+#--Input command:   GETS[CR]      Return value: 150180[CR]  OK[CR]
+#-- Meaning:
+#--   The Voltage value set at 15V
+#--   Current value set at 18A
+#==============================================================================================
+    def get_setting_value(self): 
+        read_string = self.query('GETS')
+        #print ('HCS-3300   get Settings value  ',read_string)  
+        voltage = float(read_string[0:3]) / 10
+        current = float(read_string[3:6]) / 10
+        return [voltage, current]
+
+    #==============================================================================================
+#-- Returns the output voltage setting.
+#==============================================================================================
+    def get_set_voltage(self) -> float:
+        read_string = self.query('GETS')
+        voltage = float(read_string[0:3]) / 10
+        return voltage
+    #==============================================================================================
+    #-- Returns the output Current setting.
+    #==============================================================================================
+    def get_set_current(self) -> float:
+        read_string = self.query('GETS')
+        current = float(read_string[3:6]) / 10
+        return current
+    #==============================================================================================
+#--Input command:   GETD[CR]      Return value: 150180[CR]  OK[CR]
+#-- Get PS Display values of Voltage, Current and  Status of CC/CV
+#--   <voltage>=????    <current>=????    <status>=0/1 (0=CV, 1=CC)
+#-- Meaning:
+#-- Return value:   150016001[CR] OK[CR]
+#--   Meaning:
+#--     The PS Display value is 15V and 16A.  It is in CC mode.
+#==============================================================================================
+    def get_display_value(self): 
+        try:
+            read_string = self.query('GETD')
+            voltage = float(read_string[0:4]) / 100
+            current = float(read_string[4:8]) / 100
+            status = read_string[8:9]
+            if status == '0': 
+                status = 'CV'
+            if status == 'a': 
+                status = 'CC'
+            return [voltage, current, status]
+        except Exception:
+            print("ERROR  HCS-3300   get_display_value ")
+            pass
+
+#==============================================================================================
+#-- Returns the output voltage 
+#==============================================================================================
+    def get_voltage(self)-> float:
+        read_string = self.query('GETD')
+        voltage = float(read_string[0:4]) / 100
+        return voltage
+    #==============================================================================================
+    #-- Returns the output Current 
+    #==============================================================================================
+    def get_current(self) -> float:
+        read_string = self.query('GETD')
+        current = float(read_string[4:8]) / 100
+        return current
+    #==============================================================================================
+#-- Input Command:  SOUT<status>[CR]    Return value: OK[CR]  
+#-- Switch on/off the output of PS  <status>=0/1 (0=ON, 1=OFF)
+#-- Input command:  SOUT0[CR] Return value: OK[CR]
+#-- Meaning:
+#--   Switch on the output of PS
+#==============================================================================================
+    def set_output_on(self): 
+        return self.query('SOUT0')
+    def set_output_off(self): 
+        return self.query('SOUT1')
+    #==============================================================================================
+#-- Input Command:  VOLT<voltage>[CR]     Return value: OK[CR]
+#--   Preset Voltage value  <voltage>=010<???<Max-Volt
+#--   *Max-Volt value refer to product specification
+#-- Input command:  VOLT127[CR]   Return value: OK[CR]
+#-- Meaning:
+#-- Set Voltage value as 12.7V
+#==============================================================================================
+    def set_voltage(self, setValue:float): 
+        if setValue > 0.7:
+            settings_string = str((int)(setValue * 10))
+            if  len(settings_string) == 1:
+                settings_string = "00" + settings_string
+            if  len(settings_string) == 2:
+                settings_string = "0" + settings_string
+            settings_string = 'VOLT' + settings_string
+            return self.query(settings_string)
+        else:
+            return "to low voltage"
+
+    #==============================================================================================
+#-- Input Command:  CURR<current>[CR]   Return value: OK[CR]
+#-- Preset Current value    <current>=000<???<Max-Curr    *Max-Curr value refer to product specification
+#-- Input command:    CURR120[CR]   Return value:   OK[CR]
+#-- Meaning:
+#--Set Current value as 12.0A
+#==============================================================================================
+    def set_current(self, setValue:float): 
+        settings_string = str((int)(setValue * 10))
+        if  len(settings_string) == 1:
+            settings_string = "00" + settings_string
+        if  len(settings_string) == 2:
+            settings_string = "0" + settings_string
+        settings_string = 'CURR' + settings_string
+        return self.query(settings_string)
+
+
+
+class SUPPLY_HCS_3300_plug(DevicePlug) :
+#@ conf.inject_positional_args
+  def __init__(self, powerSupply_HCS3300_config_port):
+    super(SUPPLY_HCS_3300_plug, self).__init__(SUPPLY_HCS_3300, powerSupply_HCS3300_config_port)
+
+
+
+'''
+Input Command:    PROM<voltage0> < current0 >    < voltage1 >< current1 >  < voltage2 >< current2 > [CR]
+Return value:     OK[CR]
+Save Voltage and Current value into 3 PS memory locations
+<voltageX>=???
+<currentX>=???
+(X is memory location number start from 0 to 2)
+Input command:    PROM111111022122033133[CR]
+Return value:     OK[CR]
+Meaning:
+Preset Memory 0 as 11.1V and 11.1A
+Preset Memory 1 as 2.2V and 12.2A
+Preset Memory 2 as 3.3V and 13.3A
+
+Input Command:    GETM[CR]
+Return value:   < voltage0 >< current0 > [CR] < voltage1 >< current1 > [CR] < voltage2 >< current2 > [CR]  OK[CR]
+Get saved Voltage and Current value from 3 PS memory loctions
+<voltageX>=???
+<currentX>=???
+(X is memory location number start from 0 to 2)
+Input command:    GETM[CR]
+Return value:     111111[CR]    122122[CR]    133133[CR]    OK[CR]
+Meaning:
+PS return following preset value from 3 memory locations;
+Memory 0 is 11.1V and 11.1A
+Memory 1 is 12.2V and 12.2A
+Memory 2 is 13.3V and 13.3A
+
+
+Input Command:
+RUNM<memory>[CR]    Return value: OK[CR]
+Set Voltage and Current using values saved in memory locations
+<memory>=0/1/2
+Input command:    RUNM1[CR]   Return value: OK[CR]
+Meaning:
+Set Voltage and Current using values saved in memory location 1
+
+'''
+
+
+
+
+
+
+
+
+
+
+
+    #============================================================================================================================
+    #============================================================================================================================
+    def set_output_on(self): 
+        return self.write(f'OUT1')
+        #return self.query('SOUT0')
+    #============================================================================================================================
+    #============================================================================================================================
+    def set_output_off(self): 
+        return self.write(f'OUT0')
+    def set_voltage(self, voltage: float, channel: int = 1):
+        #-- Sets the output voltage.
+        return self.write(f'VSET{channel}:{round(voltage,2)}')
+    def get_output_voltage(self, channel: int = 1) -> float:
+        #Returns the output voltage setting.
+        return self.query_value(f'VSET{channel}?')
+
+class PowerSupply_KORAD_PA3305P_SERIAL_plug(DevicePlug):
+    def __init__(self, device_config):
+        super(PowerSupply_KORAD_PA3305P_SERIAL_plug, self).__init__(PowerSupply_KORAD_PA3305P_SERIAL, device_config)
+
+
+'''
+ __identity_regex = re.compile((r'^(?P<company>TENMA)[\s,](?P<model>72-\d+)'  # required parameters
+                                 r'([\s,](?P<version>\w+.\w+))?'                   # optional
+                                 r'([\s,]SN:(?P<serial>\d+))?'))                   # optional
+
+  def __init__(self, serial):
+    try:
+      super().__init__(SerailInfo(serial).device,
+                       baud=9600,
+                       read_termination='\n',
+                       write_termination='\n',
+                       timeout=2000)
+    except SerailInfoDeviceNotFound:
+      pass
+
+  def __identify(self) -> Identification:
+    'Extracts Instrument information and returns info packet in dataclass'
+    try:
+      if res := self.__identity_regex.search(self.idn()):
+        return Identification(company=res.group('company'),
+                              model=res.group('model'),
+                              version=res.group('version') if res.group(
+            'version') else Identification.version,
+            serial=res.group('serial') if res.group(
+            'serial') else Identification.serial
+        )
+      return Identification()
+    except Exception:
+      return Identification()
+
+  @ property
+  def serial_number(self):
+    # Provides the serial number of the instrument.
+    return self.__identify().serial
+
+  @ property
+  def model(self):
+    #Provides the model number of the instrument.
+    return self.__identify().model
+
+  @ property
+  def version(self):
+    #Provides the version number of the instrument.
+    return self.__identify().version
+
+  @property
+  def is_available(self):
+    #Provides the True if basic communication (reading serail num) is possible with the device.
+    return True if self.serial_number else False
+
+  def __str__(self) -> str:
+    return f'{self.model} {self.serial_number}' if self.is_available else type(self).__name__
+
+  
+  def set_voltage(self, voltage: float, channel: int = 1):
+    #Sets the output voltage.
+    return self.write(f'VSET{channel}:{round(voltage,2)}V')
+
+  def get_output_voltage(self, channel: int = 1) -> float:
+    #Returns the output voltage setting.
+    return self.query_value(f'VSET{channel}?')
+
+  def set_current(self, current: float, channel: int = 1):
+    #Sets the output current.
+    return self.write(f'ISET{channel}:{round(current,4)}V')
+
+  def get_output_current(self, channel: int = 1) -> float:
+    #Returns the output current setting.
+    return self.query_value(f'ISET{channel}?')
+
+  def measure_voltage(self, channel: int = 1) -> float:
+    #Returns the actual output voltage.
+    return self.query_value(f'VOUT{channel}?')
+
+  def measure_current(self, channel: int = 1) -> float:
+    #Returns the actual output current.
+    return self.query_value(f'IOUT{channel}?')
+
+  def set_beeper(self, enable: bool):
+    #Turns on or off the beep.
+    return self.write(f'BEEP{1 if enable else 0}')
+
+  def set_output(self, enable: bool):
+    #Turns on or off the output.
+    return self.write(f'OUT{1 if enable else 0}')
+
+  def output_on(self):
+    #Turns on the output.
+    return self.set_output(True)
+
+  def output_off(self):
+    #Turns ff the output.
+    return self.set_output(False)
+
+  def status(self) -> int:
+    #Returns the POWER SUPPLY status.
+      Contents 8 bits in the following format
+      Bit   Item  Description
+      0     CH1       0=CC mode, 1=CV mode
+      1     CH2       0=CC mode, 1=CV mode
+      2,3   Tracking  00=Independent, 01=Tracking series, 11=Tracking parallel
+      4     Beep      0=Off, 1=On
+      5     Lock      0=Lock, 1=Unlock
+      6     Output    0=Off, 1=On
+      7     N/A       N/A
+    
+    resp = self.query('STATUS?').encode('utf8')
+    return int.from_bytes(resp, byteorder='little') if resp else None
+
+    #  __identity_regex = compile((r'^(?P<model>(TENMA \d+-\d+|KORAD-KEL\d+)) '
+#                              r'(?P<version>V\d+.\w+) '
+#                              r'(?P<serial>SN:\d+)'))
+#KORAD-KEL103 V1.10 SN:07740976
+#
+# __identity_regex = re.compile((r'^(?P<company>TENMA)[\s,](?P<model>72-\d+)'  # required parameters
+#                                 r'([\s,](?P<version>\w+.\w+))?'                   # optional
+#                                 r'([\s,]SN:(?P<serial>\d+))?'))                   # optional
+#  TENMA 72-2550 V5.8 SN:03424425
+
+@dataclass
+class Identification:
+    model: str = ''
+    version: str = ''
+    serial: str = ''
+
+class DC_LOAD_KEL_103_SERIAL(VisaSerial):
+    #-- OWON,XDM3051,2303195,V3.7.2,2
+    #__identity_regex = compile((r'^(?P<model>(XDM3051)) '
+    #                            r'(?P<version>V\d+.\w+) '
+    #                            r'(?P<serial>,\d+)'))
+    #__units = {'CURR': 'A', 'VOLT': 'V', 'RES': 'OHM', 'POW': 'W'}
+
+    def __init__(self,serial):
+        self.serial_device = None
+
+        ports = comports()
+        #print ("FIND  KEL 103. COM port serial number =  ", serial)
+        for port in ports:
+            try:
+                #print ("COM port ", port, "    Serial number = ", port.serial_number, "  Description= ", port.description)
+                if port.serial_number == serial:
+                    self.serial_device = port.device
+                    #print ( "Correct COM port XDM3051 = ", self.serial_device )
+                    super().__init__(self.serial_device,
+                                    baud=115200,
+                                    read_termination='\n',
+                                    write_termination='\n\r',
+                                    timeout=100)
+                    break
+            except Exception:
+                print ("ERROR  ", self.serial_device )
+                pass
+       
+
+    @property
+    #-- KORAD-KEL103 V1.10 SN:07740976
+    def is_available(self) -> bool:
+        try:
+            idn_string = self.idn()
+            #print ('IDN string for KEL 103 = ',self.serial_device,"    " ,idn_string)  
+            #print ('COM port ',self.serial_device, "     IDN string ", idn_string)  
+            x = idn_string.find("KORAD-KEL103")
+            #print ('Search string ', x )
+            if (x>-1):
+                return True
+            else:
+                return False
+        except Exception:
+            print ("ERROR  ", self.serial_device )
+            return False
+  
+ 
+    def device_com_port(self) ->str:
+        try:
+            return self.serial_device
+        except Exception:
+            pass 
+ 
+
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_ON(self):
+        self.write(f':INP 1')
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_input_OFF(self):
+        self.write(f':INP 0')
+
+
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_measure_voltage(self) -> float:
+        return  float(self.query(f':MEAS:VOLT?')[:-1])
+    #============================================================================================================================            
+    #============================================================================================================================            
+    def KEL103_set_current(self, set_current:float):
+        write_string = (f':CURR {str(set_current)}A')  
+        self.write(write_string)
+        
+        #set_current_value = int (set_current * 1000)
+        #packet_crc= modbus_class.modbus_rtu_fun_6(self,1,KP184_config_value.set_address_current,set_current_value)
+        #self.serialPort.write(packet_crc)
+        #receive =  self.serialPort.read(8)
+
+  #@property
+  #def measure_voltage(self):
+  #  try:
+  #    return self.query('MEAS?')
+  #  except Exception:
+  #    pass 
+   
+    #return self.query(':MEAS?')
+
+  #def set_voltage_dc_range(self,set_range:int):
+    #write_string = (f'CONF:FUNCVOLT:DC:{str(set_range)}')  
+    #print ("set range string  "+write_string )
+    #self.write(write_string)
+  #  write_string = (f'CONF:VOLT:DC {str(set_range)}')  
+  #  print ("set range string  "+write_string )
+  #  self.write(write_string)
+    #return self.query(write_string)
+ 
+  #def get_voltage_dc_range(self):
+  #  write_string = (f'VOLT:DC:RANG?')  
+  #  return self.query(write_string)
+ 
+
+    class DC_LOAD_KEL_103_SERIAL_plug(DevicePlug):
+  #@ conf.inject_positional_args
+  def __init__(self, device_config):
+    super(DC_LOAD_KEL_103_SERIAL_plug, self).__init__(DC_LOAD_KEL_103_SERIAL, device_config)
+    '''
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#-- ET3916
+
+Read_product_model_number=b'\x00\x01\x20'
+
+
+#>>> import struct
+#>>> [x] = struct.unpack('f', b'\xdb\x0fI@')
+#>>> x
+# [x] = struct.unpack('f', b'\x00\x02\x13\x05@')
+#3.1415927410125732
+
+
+class TimeoutError(Exception):
+pass
+
+def timeout(seconds=1, error_message=os.strerror(errno.ETIME)):
+def decorator(func):
+def _handle_timeout(signum, frame):
+    raise TimeoutError(error_message)
+@functools.wraps(func)
+def wrapper(*args, **kwargs):
+    signal.signal(signal.SIGALRM, _handle_timeout)
+    signal.alarm(seconds)
+    try:
+        result = func(*args, **kwargs)
+    finally:
+        signal.alarm(0)
+    return result
+return wrapper
+return decorator
+
+
+class TEMPERATURE_METER_ET3916():
+
+#============================================================================================================================
+#-- [ 4214.112809] usb 3-3.4.1: Product: FT232R USB UART
+#-- [ 4214.112813] usb 3-3.4.1: Manufacturer: FTDI
+#-- [ 4214.112816] usb 3-3.4.1: SerialNumber: A10191L7
+#-- [ 4214.122023] ftdi_sio 3-3.4.1:1.0: FTDI USB Serial Device converter detected
+#-- [ 4214.122073] usb 3-3.4.1: Detected FT232R
+#============================================================================================================================
+def __init__(self,serial_number):
+self.sendBytesReguest=bytearray(b'\xFE')
+
+#print ("Temperature meter ET3916   COM port  =  ", serial_number)
+if serial_number != 'None':
+    if serial_number[0:5] == '/dev/':
+        print ("Temperature meter ET3916   COM port  =  ", serial_number)
+
+
+        self.serialPort = serial.Serial(
+            port=serial_number,
+            baudrate=115200,
+            parity=serial.PARITY_NONE, 
+            stopbits=serial.STOPBITS_ONE, 
+            bytesize=serial.EIGHTBITS,
+            #xonxoff=serial.PARITY_NONE,
+            #rtscts=False, 
+            #dsrdtr=False, 
+            timeout=500    
+        )
+        self.serialPort.close()
+        self.serialPort.open()
+        #self.serialPort.isOpen()
+
+
+
+        #self.serial_device =serial_number
+        #self.serialPort = serial.Serial(
+        #        port=self.serial_device,
+        #        #baudrate=115200,
+        #        baudrate=9600,
+        #        parity=serial.PARITY_NONE, 
+        #        #parity=serial.PARITY_SPACE , 
+        #        stopbits=serial.STOPBITS_ONE, 
+        #        bytesize=serial.EIGHTBITS, 
+        #        #xonxoff=serial.XOFF,
+        #        #rtscts=False, 
+        #3        #dsrdtr=False, 
+        #        timeout=100  )
+        #self.serialPort.close()
+        #self.serialPort.open()
+        #self.serialPort.isOpen()
+
+
+
+def calc_crc(self,data):
+crc = 0xFFFF
+for pos in data:
+    crc ^= pos 
+    #--- zanka po bitih enega byta 
+    for i in range(8):
+        if ((crc & 1) != 0):
+            crc >>= 1
+            crc ^= 0xA001
+        else:
+            crc >>= 1
+return crc
+
+
+def send_request (self, command_bytes ):
+self.sendBytesReguest=bytearray(b'\xFE')
+CRCNumberBytes = bytearray(command_bytes)
+#print (CRCNumberBytes , hex (CRCNumberBytes[0]), hex (CRCNumberBytes[1]) , hex (CRCNumberBytes[2])  )
+crc = self.calc_crc(CRCNumberBytes)
+my_bytes = crc.to_bytes(2, byteorder='little')
+self.sendBytesReguest.append(CRCNumberBytes[0])
+self.sendBytesReguest.append(CRCNumberBytes[1])
+self.sendBytesReguest.append(CRCNumberBytes[2])
+self.sendBytesReguest.append(my_bytes[0])
+self.sendBytesReguest.append(my_bytes[1])
+print (hex (self.sendBytesReguest[0]), hex (self.sendBytesReguest[1]) , hex (self.sendBytesReguest[2]) , hex (self.sendBytesReguest[3]), hex (self.sendBytesReguest[4]), hex (self.sendBytesReguest[5]) )
+self.serialPort.write(self.sendBytesReguest)
+
+
+
+#============================================================================================================================
+#============================================================================================================================
+#@timeout (1)
+#@property
+def is_available(self) -> bool:
+#print ("AC POWER METER   MPM1010B available  ")
+#self.serialPort.reset_input_buffer()
+#self.serialPort.reset_output_buffer()
+#print ("AC POWER METER   MPM1010B available clear send and receive buffer  ")
+
+
+#send_byte_array = bytearray()
+#send_byte_array[0] = 0xFE
+#send_byte_array[1] = 0x0
+#send_byte_array[2] = 0x1
+#send_byte_array[3] = 0x20
+#send_byte_array[4] = 0x71
+#send_byte_array[5] = 0x88
+print ("EXAMPLE CRC ")    
+#CRCNumberBytes = bytearray(Read_product_model_number)
+##print (CRCNumberBytes , hex (CRCNumberBytes[0]), hex (CRCNumberBytes[1]) , hex (CRCNumberBytes[2])  )
+#crc = self.calc_crc(CRCNumberBytes)
+#my_bytes = crc.to_bytes(2, byteorder='little')
+#self.sendBytesReguest.append(CRCNumberBytes[0])
+#"self.sendBytesReguest.append(CRCNumberBytes[1])
+#self.sendBytesReguest.append(CRCNumberBytes[2])
+#self.sendBytesReguest.append(my_bytes[0])
+#self.sendBytesReguest.append(my_bytes[1])
+#print (self.sendBytesReguest , hex (self.sendBytesReguest[0]), hex (self.sendBytesReguest[1]) , hex (self.sendBytesReguest[2]) , hex (self.sendBytesReguest[3]), hex (self.sendBytesReguest[4]), hex (self.sendBytesReguest[5]) )
+self.send_request(Read_product_model_number)
+
+#----  poslje se ?
+#self.serialPort.write(0xFF)
+#self.serialPort.write([63])
+
+#self.serialPort.write(send_byte_array,6)
+#print ("AC POWER METER   MPM1010B available send ?  ")
+
+
+
+#receive =  self.serialPort.read(19)       
+#print (f'Receive  by AVAIABLE   {receive} ')
+#if receive[0] == 0xFE: 
+return True
+#else:
+#return False    
+#============================================================================================================================
+
+#============================================================================================================================
+def get_all_measure(self) -> float:
+pass
+
+#================================================================================================================================
+#================================================================================================================================
+class TEMPERATURE_METER_ET3916_plug(DevicePlug):
+def __init__(self,config_port):
+super(TEMPERATURE_METER_ET3916_plug, self).__init__(TEMPERATURE_METER_ET3916,config_port)
+
+
+
+'''
+
+
+def class_run_app_float_number (self):
+print ("EXAMPLE FLOAT NUMBER")    
+#-- The return result is, 19.33707 Â°
+FloatNumberBytes = bytearray (4)
+FloatNumberBytes[0] = 0x54 
+FloatNumberBytes[1] = 0xB2 
+FloatNumberBytes[2] = 0x9A
+FloatNumberBytes[3] = 0x41
+print (FloatNumberBytes , hex (FloatNumberBytes[0]), hex (FloatNumberBytes[1]) , hex (FloatNumberBytes[2]) ,  hex (FloatNumberBytes[3]) )
+[x] = struct.unpack('f', FloatNumberBytes)
+print (x)
+
+*/
