@@ -12,6 +12,16 @@ namespace test_system
     class program_20
     {
 
+        public static bool blnChangeWindow_program_20_USB_battery_pack_labCurrentState = false;
+        public static string USB_battery_pack_labCurrentState = "";
+
+        public static bool blnChangeWindow_program_20_USB_battery_pack_measure_label = false;
+        public static string USB_battery_pack_measure_label_1 = "";
+        public static string USB_battery_pack_measure_label_2 = "";
+        public static string USB_battery_pack_measure_label_3 = "";
+
+
+
         //-----------------------------------------------------------------------------------------------------------------------
         //--  Test USB battery pack, BMS je že vgrajen in ne moremo vplivati na njegovo delovanje
         //--    pack sam izklopi charge in discharge
@@ -45,7 +55,12 @@ namespace test_system
         public static int intCharge_run_wait_time_set = 0;
         public static bool blnCharge_run_start = false;
         public static bool blnCharge_run = false;
-     
+        //-----------------------------------------------------------------------------------------------------------------------
+        public static bool blnCharge_run_stop = false;
+
+        public static bool program20_01_charge = false;
+        public static bool program20_01_discharge = false;
+
         //-----------------------------------------------------------------------------------------------------------------------
         //-- TRUE, ko je napajalnik vklopljen   
         //public static bool blnCharge_supply_on = false;

@@ -32,7 +32,6 @@ namespace test_system
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
         power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
 
-        connected_devices connected_devices = new connected_devices();
         complete_system complete_System = new complete_system();
         all_devices all_devices = new all_devices();
 
@@ -141,11 +140,10 @@ namespace test_system
             else if (select_port == COMport_RD6006) COMport_name[select_port] = strCOMport_supply_name_RD6006;
             else if (select_port == COMport_RD6024) COMport_name[select_port] = strCOMport_supply_PID_RD6024;
             else if (select_port == COMport_KEL103) COMport_name[select_port] = strCOMport_load_name_KEL103;
+            else if (select_port == COMport_SDM220) COMport_name[select_port] = strCOMport_name_SDM220;
 
             dev_connected[select_port] = false;
-
-
-
+            dev_meas_state[select_port] = funReturnCodeCOMport.NOT_MEAS;
 
             if (COMport_port[select_port] != null)
             {
@@ -157,8 +155,17 @@ namespace test_system
                         //-- COM port in baudrate iz ini datoteke 
                         COMportSerial[select_port].PortName = COMport_port[select_port];
                         COMportSerial[select_port].BaudRate = (int)COMport_baudRate[select_port];
+
+                        COMportSerial[select_port].DataBits = 8;
+
+                        COMportSerial[select_port].Parity = Parity.None;
+                        COMportSerial[select_port].StopBits = StopBits.One;
+
+                        COMportSerial[select_port].ReadTimeout = 100;
+
                         COMportSerial[select_port].Open();
                         dev_connected[select_port] = true;
+
                         return 0;
                     }
                     catch { return -3; }
@@ -182,12 +189,15 @@ namespace test_system
                 if (fun_select_COMport_open(COMport_KEL103) == 0) { }
                 if (fun_select_COMport_open(COMport_RD6006) == 0) { }
                 if (fun_select_COMport_open(COMport_RD6024) == 0) { }
+                if (fun_select_COMport_open(COMport_SDM220) == 0) { }
                 //---------------------------------------------------------------------------------------------------------------
                 //-- RD6006 in RD6024 -- MODBUS komunikacija
                 COM_PORT_09.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6006_DataReceived);
                 COM_PORT_10.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_RD6024_DataReceived);
+                COM_PORT_15.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(COM_PORT_SDM220_DataReceived);
                 COMportSerial[COMport_RD6006].ReceivedBytesThreshold = 100;
                 COMportSerial[COMport_RD6024].ReceivedBytesThreshold = 100;
+                COMportSerial[COMport_SDM220].ReceivedBytesThreshold = 100;
             }
             catch { }
         }
@@ -207,11 +217,24 @@ namespace test_system
             {
                 receiveByte_modbus_lenght = (byte)COMportSerial[COMport_RD6006].BytesToRead;
 
+                // strGeneralString = "RD6006   "+ receiveByte_modbus_lenght.ToString();
+
                 if (receiveByte_modbus_lenght > 0)
                 {
                     //bCOMport_recLen[COMport_SELECT_SUPPLY_RD6006] = receiveByteLocal;
                     COMportSerial[COMport_RD6006].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
                     modbus_functions.funModbusRTU_receive_mesasage();
+
+                    if (modbus_start_register == 0)
+                    {
+                        if (modbus_register_number == 4)
+                        {
+                            if (modbus_register_type == 3)
+                            {
+                                power_supply_RD6006.funModbusRTU_RD6006_receive_ident();
+                            }
+                        }
+                    }
 
                     if (modbus_start_register == 8)
                     {
@@ -224,6 +247,7 @@ namespace test_system
                         }
                     }
 
+                    strGeneralString = "RD602  " + receiveByte_modbus_lenght.ToString() + "   start " + modbus_start_register.ToString() + "    Reg " + modbus_register_number.ToString() + "   Type " + modbus_register_type.ToString();
 
                     // power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006(COMport_SELECT_SUPPLY_RD6006);
                     //  strGeneralString = receiveByteLocal.ToString() +"    "+ receiveByte_RD6006[0].ToString()+"   "+ receiveByte_RD6006[1].ToString() + "   " + receiveByte_RD6006[2].ToString() + "   " + receiveByte_RD6006[3].ToString() + "   " + receiveByte_RD6006[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
@@ -246,6 +270,7 @@ namespace test_system
             {
                 receiveByte_modbus_lenght = (byte)mainWindow.COMportSerial[COMport_RD6024].BytesToRead;
 
+                strGeneralString = "RD6024   " + receiveByte_modbus_lenght.ToString();
 
                 if (receiveByte_modbus_lenght > 0)
                 {
@@ -254,17 +279,43 @@ namespace test_system
                     COMportSerial[COMport_RD6024].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
                     modbus_functions.funModbusRTU_receive_mesasage();
 
-                    if (modbus_start_register == 8)
+                    if (modbus_start_register == 0)
                     {
-                        if (modbus_register_number == 10)
+                        if (modbus_register_number == 4)
                         {
                             if (modbus_register_type == 3)
                             {
-                                power_supply_RD6024.funModbusRTU_receive_mesasage_RD6024();
+                                power_supply_RD6024.funModbusRTU_RD6024_receive_ident();
                             }
                         }
                     }
 
+                    if (modbus_register_type == 3)
+                    {
+                        if (modbus_register_number == 2)
+                        {
+
+                            if (modbus_start_register == 10)
+                            {
+                                rd6024_OutputVoltag = ((float)(modbus_register[0])) / 100;
+                                modbus_functions.funModbusRTU_send_request_read_function_3(1, 12, 2, COMport_RD6024);
+                                //power_supply_RD6024.funModbusRTU_receive_mesasage_RD6024();
+                            }
+                            else if (modbus_start_register == 12)
+                            {
+                                rd6024_OutputCurrent = ((float)(modbus_register[0])) / 100;
+                                modbus_functions.funModbusRTU_send_request_read_function_3(1, 14, 2, COMport_RD6024);
+                                device_RD6024_show_all_measure = true;
+
+                                //power_supply_RD6024.funModbusRTU_receive_mesasage_RD6024();
+                            }
+
+
+
+                        }
+                    }
+
+                    strGeneralString = "RD6024   " + receiveByte_modbus_lenght.ToString() + "   start " + modbus_start_register.ToString() + "    Reg " + modbus_register_number.ToString() + "   Type " + modbus_register_type.ToString();
 
                     //strGeneralString = receiveByteLocal.ToString() + "  " + receiveByte_RD6024[0].ToString() + "  " + receiveByte_RD6024[1].ToString() + "  " + receiveByte_RD6024[2].ToString();
 
@@ -281,16 +332,85 @@ namespace test_system
         }
 
         #endregion
+                
+        #region "COM port SDM220
+        //=============================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        //=============================================================================================================
+        private void COM_PORT_SDM220_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //byte receiveByteLocal;
+
+            try
+            {
+                receiveByte_modbus_lenght = (byte)COMportSerial[COMport_SDM220].BytesToRead;
+                // strGeneralString = "RD6006   "+ receiveByte_modbus_lenght.ToString();
+                if (receiveByte_modbus_lenght > 0)
+                {
+                    //bCOMport_recLen[COMport_SDM220] = receiveByte_modbus_lenght;
+                    COMportSerial[COMport_SDM220].Read(receiveByte_modbus, 0, receiveByte_modbus_lenght);
+                    modbus_functions.funModbusRTU_receive_mesasage();
+                   
+                    strGeneralString = "SDM2200  " + receiveByte_modbus_lenght.ToString() + "   start " + modbus_start_register.ToString() + "    Reg " + modbus_register_number.ToString() + "   Type " + modbus_register_type.ToString()+ "    " + modbus_register[0].ToString("X")+" " + modbus_register[1].ToString("X");
+
+                    byte[] read_buffer = new byte[100];
+                    read_buffer[3] = receiveByte_modbus[3];
+                    read_buffer[2] = receiveByte_modbus[4];
+                    read_buffer[1] = receiveByte_modbus[5];
+                    read_buffer[0] = receiveByte_modbus[6];
+
+
+                    Double float_number = System.BitConverter.ToSingle(read_buffer, 0);
+
+                    strGeneralString = "SDM2200  " + receiveByte_modbus_lenght.ToString() + "   start " + modbus_start_register.ToString() + "    Reg " + modbus_register_number.ToString() + "   Type " + modbus_register_type.ToString() + "    " + modbus_register[0].ToString("X") + " " + modbus_register[0].ToString() + " " + modbus_register[1].ToString("X") +  "    " + float_number.ToString();
+
+                    /*
+                    if (modbus_start_register == 0)
+                    {
+                        if (modbus_register_number == 4)
+                        {
+                            if (modbus_register_type == 3)
+                            {
+                                power_supply_RD6006.funModbusRTU_RD6006_receive_ident();
+                            }
+                        }
+                    }
+
+                    if (modbus_start_register == 8)
+                    {
+                        if (modbus_register_number == 10)
+                        {
+                            if (modbus_register_type == 3)
+                            {
+                                power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006();
+                            }
+                        }
+                    }
+                    */
+
+                    // power_supply_RD6006.funModbusRTU_receive_mesasage_RD6006(COMport_SELECT_SUPPLY_RD6006);
+                    //  strGeneralString = receiveByteLocal.ToString() +"    "+ receiveByte_RD6006[0].ToString()+"   "+ receiveByte_RD6006[1].ToString() + "   " + receiveByte_RD6006[2].ToString() + "   " + receiveByte_RD6006[3].ToString() + "   " + receiveByte_RD6006[4].ToString() + "   " + receiveByte_RD6006[5].ToString();
+                    //-----------------------------------------------------------------------------
+                    //for (loc_loop = 0; loc_loop < receiveByteLocal; loc_loop++) { COMport_recByte[COMport_SELECT_SUPPLY_RD6006, loc_loop] = receiveByte_local[loc_loop]; }
+                    //-----------------------------------------------------------------------------
+                    //funCOMports_receive_parse_received_byte(selectCOMporLocal);
+                }
+            }
+            catch { }
+        }
+        #endregion
 
 
 
         #endregion
         #region "Prikaz COM portov  in priključenih instrumentov   "
 
-
         private void fun_show_one_device(int selectedCOMport)
         {
-
             try
             {
                 device[selectedCOMport].Visible = false;
@@ -298,7 +418,6 @@ namespace test_system
                 if (dev_active[selectedCOMport]) { device[selectedCOMport].ForeColor = Color.Green; } else device[selectedCOMport].ForeColor = Color.Black;
             }
             catch { }
-
         }
 
         public void fun_show_connected_device()
@@ -315,6 +434,7 @@ namespace test_system
             fun_show_one_device(COMport_RD6024);
             fun_show_one_device(COMport_SELECT_SUPPLY_FREE);
             fun_show_one_device(COMport_KEL103);
+            //fun_show_one_device(COMport_SDM220);
         }
 
         #endregion
@@ -331,7 +451,7 @@ namespace test_system
 
             label1.Text = COMportSerial[COMport_RD6006].ReceivedBytesThreshold.ToString() + "   " + COMportSerial[COMport_RD6024].ReceivedBytesThreshold.ToString();
 
-            label2.Text = COMport_port[COMport_XDM2041];
+            label2.Text = COMportSerial[COMport_SDM220].ReceivedBytesThreshold.ToString();
 
             // label13.Text = strGeneralString;
             //label10.Text = COMport_connected[COMport_SELECT_SUPPLY_HCS_330].ToString() + "   " + COMport_connected[COMport_SELECT_TEMPERATURE_ET3916].ToString() + "   " + device_ET3916_serial_number;
@@ -404,6 +524,7 @@ namespace test_system
 
         private void program1VerifyConnectedDevicesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            fun_close_all_programs();
             program_1 program_1 = new program_1();
             program_1.MdiParent = this;
             program_1.Show();
@@ -414,7 +535,6 @@ namespace test_system
             program_10_test_supply_multimeter program_10_test_supply_multimeeter = new program_10_test_supply_multimeter();
             program_10_test_supply_multimeeter.MdiParent = this;
             program_10_test_supply_multimeeter.Show();
-
         }
 
         private void program20MeasureCapacitiyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -423,7 +543,6 @@ namespace test_system
             program_20_battery_test program_20_battery_test = new program_20_battery_test();
             program_20_battery_test.MdiParent = this;
             program_20_battery_test.Show();
-
         }
 
         #endregion
@@ -441,7 +560,7 @@ namespace test_system
         #endregion
 
 
-  
+
         //multimeter_XDM3051.fun_XDM3051_measure();
 
         //power_supply_RD6006.funRD6006_measure();
@@ -470,14 +589,17 @@ namespace test_system
         //label4.Text = buffer[0].ToString() + "  " + (buffer[1]&0x0F) .ToString() + "  " + (buffer[2] & 0x0F).ToString() + "  " + (buffer[3] & 0x0F).ToString() + "  " + (buffer[4] & 0x0F).ToString() + "  " + (buffer[5] & 0x0F).ToString();
 
 
-    
-     
-
         private void button2_Click(object sender, EventArgs e)
         {
-            fun_close_all_programs();
+            mainWindow.COMportSerial[COMport_SDM220].DiscardInBuffer();
+            //modbus_functions.funModbusRTU_send_request_read_function_4(5, 344, 2, COMport_SDM220);
+            modbus_functions.funModbusRTU_send_request_read_function_3(5, 22, 2, COMport_SDM220);
+
+
+
+            //fun_close_all_programs();
         }
 
- 
+
     }
 }

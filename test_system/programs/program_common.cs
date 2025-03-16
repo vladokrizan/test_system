@@ -115,9 +115,16 @@ namespace test_system
         //=======================================================================================================================
         public int fun_program___add_log_file___owon_multimeters(string XDM3051_name, string XDM2041_name, string XDM1041_name)
         {
-            if (dev_meas_state[COMport_XDM3051] == funReturnCodeCOMport.OK) program_result_value.Add(XDM3051_name, dev_meas[COMport_XDM3051].ToString("0.000"));
-            if (dev_meas_state[COMport_XDM2041] == funReturnCodeCOMport.OK) program_result_value.Add(XDM2041_name, dev_meas[COMport_XDM2041].ToString("0.000"));
-            if (dev_meas_state[COMport_XDM1041] == funReturnCodeCOMport.OK) program_result_value.Add(XDM1041_name, dev_meas[COMport_XDM1041].ToString("0.000"));
+            if (dev_meas_state[COMport_XDM3051] == funReturnCodeCOMport.OK)
+                program_result_value.Add(XDM3051_name, dev_meas[COMport_XDM3051].ToString("0.000"));
+            else program_result_value.Add(XDM3051_name, "ERROR");
+            if (dev_meas_state[COMport_XDM2041] == funReturnCodeCOMport.OK)
+                program_result_value.Add(XDM2041_name, dev_meas[COMport_XDM2041].ToString("0.000"));
+            else program_result_value.Add(XDM2041_name, "ERROR");
+            if (dev_meas_state[COMport_XDM1041] == funReturnCodeCOMport.OK)
+                program_result_value.Add(XDM1041_name, dev_meas[COMport_XDM1041].ToString("0.000"));
+            else program_result_value.Add(XDM1041_name, "ERROR");
+
             return 0;
         }
 
@@ -143,19 +150,24 @@ namespace test_system
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
             {
                 power_supply_hcs_3300.fun_HCS_330_get_measure();
-
-                //labHCS3300_voltage.Text = "Out Voltage: " + HSC3300_out_voltage.ToString("0.00") + " V";
-                //labHCS3300_current.Text = "Out Current: " + 
-                //labHCS3300_status.Text = 
-
-                //power_supply_hcs_3300.fun_HCS_330_set_voltage(set_voltage);
-                //power_supply_hcs_3300.fun_HCS_330_set_current(set_current);
             }
             return 0;
         }
 
 
-        public int fun_program___power_supply___set_voltage_current ( double set_voltage, double set_current, int set_channel = 1)
+        public int fun_program___add_log_file___power_supply()
+        {
+            if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
+            {
+                program_result_value.Add("Supply HCS-3300 voltage (V) ", HCS_3300_out_voltage.ToString("0.00"));
+                program_result_value.Add("Supply HCS-3300 current (A) ", HCS_3300_out_current.ToString("0.00"));
+            }
+            return 0;
+        }
+
+
+
+        public int fun_program___power_supply___set_voltage_current(double set_voltage, double set_current, int set_channel = 1)
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
             {
@@ -169,7 +181,15 @@ namespace test_system
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
             {
-                 power_supply_hcs_3300.fun_HCS_3300_on();
+                power_supply_hcs_3300.fun_HCS_3300_on();
+            }
+            return 0;
+        }
+        public int fun_program___power_supply___off(int set_channel = 1)
+        {
+            if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
+            {
+                power_supply_hcs_3300.fun_HCS_3300_off();
             }
             return 0;
         }
@@ -178,6 +198,25 @@ namespace test_system
 
 
         #endregion
+        #region "PROGRAM COMMON -- TEMPERATURE  "
+
+
+        public int fun_program___add_log_file___temperature(int number_temperature = 1)
+        {
+            if (number_temperature > 0) program_result_value.Add("Temperature 1 (degC) ", device_ET3916_temperature[1].ToString("0.0"));
+            if (number_temperature > 1) program_result_value.Add("Temperature 2 (degC) ", device_ET3916_temperature[2].ToString("0.0"));
+            if (number_temperature > 2) program_result_value.Add("Temperature 3 (degC) ", device_ET3916_temperature[3].ToString("0.0"));
+            if (number_temperature > 3) program_result_value.Add("Temperature 4 (degC) ", device_ET3916_temperature[4].ToString("0.0"));
+            if (number_temperature > 4) program_result_value.Add("Temperature 5 (degC) ", device_ET3916_temperature[5].ToString("0.0"));
+            if (number_temperature > 5) program_result_value.Add("Temperature 6 (degC) ", device_ET3916_temperature[6].ToString("0.0"));
+            if (number_temperature > 6) program_result_value.Add("Temperature 7 (degC) ", device_ET3916_temperature[7].ToString("0.0"));
+            if (number_temperature > 7) program_result_value.Add("Temperature 8 (degC) ", device_ET3916_temperature[8].ToString("0.0"));
+            return 0;
+        }
+
+
+        #endregion
+
         #region "PROGRAM COMMON -- TIME  "
 
         public int fun_program___function___part_time_calulate()

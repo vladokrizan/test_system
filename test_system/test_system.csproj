@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AC_meter_SDM220.cs" />
     <Compile Include="functions\COMports_functions.cs" />
     <Compile Include="devices\load\dc_load_KEL103.cs" />
     <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />
@@ -61,21 +62,22 @@
     <Compile Include="programs\program_1.Designer.cs">
       <DependentUpon>program_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="programs\program_10_test_supply_multimeter.cs">
+    <Compile Include="programs\program 10 device_test\program_10_test_supply_multimeter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="programs\program_10_test_supply_multimeter.Designer.cs">
+    <Compile Include="programs\program 10 device_test\program_10_test_supply_multimeter.Designer.cs">
       <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
     </Compile>
-    <Compile Include="programs\program_10.cs" />
-    <Compile Include="programs\program_20.cs" />
-    <Compile Include="programs\program_20_battery_test.cs">
+    <Compile Include="programs\program 10 device_test\program_10.cs" />
+    <Compile Include="programs\program 20 measure capacitiy\program_20.cs" />
+    <Compile Include="programs\program 20 measure capacitiy\program_20_battery_test.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="programs\program_20_battery_test.Designer.cs">
+    <Compile Include="programs\program 20 measure capacitiy\program_20_battery_test.Designer.cs">
       <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program_common.cs" />
+    <Compile Include="programs\program 20 measure capacitiy\program_20_batery_pack.cs" />
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,12 +89,6 @@
     </Compile>
     <Compile Include="tools\complete_system.Designer.cs">
       <DependentUpon>complete_system.cs</DependentUpon>
-    </Compile>
-    <Compile Include="tools\connected_devices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tools\connected_devices.Designer.cs">
-      <DependentUpon>connected_devices.cs</DependentUpon>
     </Compile>
     <Compile Include="devices\multimeter\ac_meter_MPM_1010B.cs" />
     <Compile Include="functions\app_version_history.cs" />
@@ -115,13 +111,13 @@
       <DependentUpon>test_system_identification.cs</DependentUpon>
     </Compile>
     <Compile Include="functions\write_log_files.cs" />
-    <EmbeddedResource Include="programs\program_10_test_supply_multimeter.resx">
+    <EmbeddedResource Include="programs\program 10 device_test\program_10_test_supply_multimeter.resx">
       <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="programs\program_1.resx">
       <DependentUpon>program_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="programs\program_20_battery_test.resx">
+    <EmbeddedResource Include="programs\program 20 measure capacitiy\program_20_battery_test.resx">
       <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tools\all_devices.resx">
@@ -129,9 +125,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="tools\complete_system.resx">
       <DependentUpon>complete_system.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tools\connected_devices.resx">
-      <DependentUpon>connected_devices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainWindow_global_variable\mainWindow.resx">
       <DependentUpon>mainWindow.cs</DependentUpon>

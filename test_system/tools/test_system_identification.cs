@@ -95,6 +95,7 @@ namespace test_system
             COMport_port[COMport_KEL103] = "";
             COMport_port[COMport_ET3916] = "";
             COMport_port[COMport_MPM_1010B] = "";
+            COMport_port[COMport_SDM220] = "";
 
 
             using (ManagementClass i_Entity = new ManagementClass("Win32_PnPEntity"))
@@ -128,8 +129,9 @@ namespace test_system
                     fun_search_device(COMport_ET3916, 115200, strCOMport_name_ET3916, strCOMport_serial_ET3916, strCOMport_VID_ET3916, strCOMport_PID_ET3916, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
                     fun_search_device(COMport_MPM_1010B, 9600, strCOMport_name_MPM_1010B, strCOMport_serial_MPM_1010B, strCOMport_VID_MPM_1010B, strCOMport_PID_MPM_1010B, s_DeviceID, s_PortName);
+                    fun_search_device(COMport_SDM220, 9600, strCOMport_name_SDM220, strCOMport_serial_SDM220, strCOMport_VID_SDM220, strCOMport_PID_SDM220, s_DeviceID, s_PortName);
                     //-----------------------------------------------------------------------------------------------------------------------
-                    
+
 
                 }
             }
@@ -247,6 +249,11 @@ namespace test_system
         #endregion
 
         private void tabIdent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabSelectDevices_Click(object sender, EventArgs e)
         {
 
         }

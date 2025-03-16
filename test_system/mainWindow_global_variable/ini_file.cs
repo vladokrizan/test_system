@@ -81,6 +81,9 @@ namespace test_system
                 //---------------------------------------------------------------------------------------------------------------
                 MyIni.Write("COMport_name_ACmeter_MPM_1010B", COMport_port[COMport_MPM_1010B], "Device COMport");
                 MyIni.Write("COMport_baudrate_ACmeter_MPM_1010B", COMport_baudRate[COMport_MPM_1010B].ToString(), "Device COMport");
+                //---------------------------------------------------------------------------------------------------------------
+                MyIni.Write("COMport_name_ACmeter_SDM220", COMport_port[COMport_SDM220], "Device COMport");
+                MyIni.Write("COMport_baudrate_ACmeter_SDM220", COMport_baudRate[COMport_SDM220].ToString(), "Device COMport");
             }
             catch { }
         }
@@ -107,6 +110,7 @@ namespace test_system
                     COMport_port[COMport_KEL103] = "";
                     COMport_port[COMport_ET3916] = "";
                     COMport_port[COMport_MPM_1010B] = "";
+                    COMport_port[COMport_SDM220] = "";
                     MessageBox.Show(iniFileExist + "  file doesnt' exist. Make default file ");
                     write_device_COMport_identification();
                 }
@@ -147,9 +151,12 @@ namespace test_system
                 COMport_port[COMport_MPM_1010B] = ini.Read("COMport_name_ACmeter_MPM_1010B", "Device COMport");
                 COMport_baudRate[COMport_MPM_1010B] = Convert.ToUInt32(ini.Read("COMport_baudrate_ACmeter_MPM_1010B", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------
+                COMport_port[COMport_SDM220] = ini.Read("COMport_name_ACmeter_SDM220", "Device COMport");
+                COMport_baudRate[COMport_SDM220] = Convert.ToUInt32(ini.Read("COMport_baudrate_ACmeter_SDM220", "Device COMport"));
+                //---------------------------------------------------------------------------------------------------------------
 
+        
 
-       
 
             }
             catch { }

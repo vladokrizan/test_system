@@ -172,6 +172,8 @@ Reg ID   Description
 
         #region "GET measure "
 
+        //=======================================================================================================================    
+        //=======================================================================================================================    
 
         public funReturnCodeCOMport funRD6006_measure()
         {
@@ -182,6 +184,8 @@ Reg ID   Description
             }
             return (funReturnCodeCOMport.OK);
         }
+        //=======================================================================================================================    
+        //=======================================================================================================================    
 
         //--    #0008 V-SET R/W V value x 100
         //--    #0009 I-SET R/W I value x 1000
@@ -208,17 +212,48 @@ Reg ID   Description
         }
 
 
+        //=======================================================================================================================    
+        //=======================================================================================================================    
 
 
 
         public funReturnCodeCOMport funRD6006_ident()
         {
-            mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_RD6006);
+            if (dev_connected[COMport_RD6006])
+            {
 
-            return (funReturnCodeCOMport.OK);
+                mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
+                modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 4, COMport_RD6006);
+                return (funReturnCodeCOMport.OK);
+            }
+            else return (funReturnCodeCOMport.NOT_CONNECTED);
         }
 
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// 
+        ///         EA9E   677   8D
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //=======================================================================================================================    
+        public funReturnCodeCOMport funModbusRTU_RD6006_receive_ident()
+        {
+            rd6006_Signature = modbus_register[0];
+            rd6006_Serial_number = modbus_register[2];
+            rd6006_Firmware_version = modbus_register[3];
+            device_RD6006_all_device_ident = true;
+
+            strGeneralString = rd6006_Signature.ToString("X") + "   " + rd6006_Serial_number.ToString("X") + "   " + rd6006_Firmware_version.ToString("X");
+
+            if (rd6006_Signature == 0xEA9E) { dev_active[COMport_RD6006] = true; }
+            else dev_active[COMport_RD6006] = false;
+
+
+            return (funReturnCodeCOMport.OK);
+
+        }
         //--#0000 0xEA 0x9E RO Signature = 60062
         //--#0001 0 RO
         //--#0002 0x19 0x40 RO Serial number (6464)
@@ -234,44 +269,9 @@ Reg ID   Description
         //--    5	Temperature °c	
         //--    6	Temperature F sign(0=+, 1=-)
         //--    7	Temperature F
+        //=======================================================================================================================    
+        //=======================================================================================================================    
 
-        public funReturnCodeCOMport funModbusRTU_receive_ident_RD6006(byte SelectCOMport)
-        {
-            // UInt16 uint16Value = 0;
-            //UInt32 uint32Value = 0;
-            //double floatValue = 0;
-
-
-            /*
-            byte selectByte;
-            byte loc_loop;
-           // for (loc_loop = 0; loc_loop < bCOMport_recLen[SelectCOMport]; loc_loop++) { receiveByte_local[loc_loop] = receiveByte_RD6006[loc_loop]; }
-
-
-
-
-            intModbusRTUreceiveCRC_calculate = modbus_functions.ModRTU_receive_CRC(receiveByte_local, bCOMport_recLen[SelectCOMport] - 2);
-            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_local[bCOMport_recLen[SelectCOMport] - 1] * 256 + receiveByte_local[bCOMport_recLen[SelectCOMport] - 2]);
-
-
-            if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
-            {
-                if (receiveByte_local[1] == 3)
-                {
-                    intModbusRTUreceiveCRC_numberBytes = receiveByte_local[2];
-
-                    selectByte = 3;
-
-
-
-                }
-            }
-
-            */
-
-
-            return (funReturnCodeCOMport.OK);
-        }
 
 
 

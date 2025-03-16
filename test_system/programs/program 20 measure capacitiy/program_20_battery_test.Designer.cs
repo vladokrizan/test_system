@@ -167,12 +167,12 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labCurrentState;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton radioButton_charge;
         private System.Windows.Forms.RadioButton radioButton_discharge;
         private System.Windows.Forms.Label labResult_01;
         private System.Windows.Forms.Label labResult_02;
         private System.Windows.Forms.Label labResult_03;
+        public System.Windows.Forms.Label labCurrentState;
     }
 }

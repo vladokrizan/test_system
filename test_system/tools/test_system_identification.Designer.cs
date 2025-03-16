@@ -100,6 +100,7 @@
             this.tabSelectDevices.TabIndex = 0;
             this.tabSelectDevices.Text = "tabPage1";
             this.tabSelectDevices.UseVisualStyleBackColor = true;
+            this.tabSelectDevices.Click += new System.EventHandler(this.tabSelectDevices_Click);
             // 
             // btnFindAllCOMports
             // 

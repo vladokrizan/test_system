@@ -112,6 +112,24 @@ namespace test_system
         public static double rd6024_InputVoltage;
 
 
+        public static bool device_RD6006_all_device_ident = false;
+        public static UInt16 rd6006_Signature;
+        public static UInt16 rd6006_Serial_number;
+        public static UInt16 rd6006_Firmware_version;
+
+        public static bool device_RD6024_all_device_ident = false;
+        public static UInt16 rd6024_Signature;
+        public static UInt16 rd6024_Serial_number;
+        public static UInt16 rd6024_Firmware_version;
+
+
+        //--#0000 0xEA 0x9E RO Signature = 60062
+        //--#0001 0 RO
+        //--#0002 0x19 0x40 RO Serial number (6464)
+        //--#0003 0x00 0x80 RO Firmware version (1.28) x 100
+
+
+
         #endregion
 
         #region "East Tester   --- TEMPERATURE METER ET3916-8 "
@@ -147,35 +165,21 @@ namespace test_system
         #endregion
         #region "AC METER MAXRIX MPM-1010B"
         //public static bool device_MPM1010B_connected = false;
-
-
-
-        public static double device_MPM1010B_voltage = 0;
+         public static double device_MPM1010B_voltage = 0;
         public static double device_MPM1010B_current = 0;
         public static double device_MPM1010B_power = 0;
         public static double device_MPM1010B_power_factor = 0;
         public static double device_MPM1010B_freguency = 0;
-
-
-
 
         public static bool device_MPM1010B_read_all_write = false;
         public static bool device_MPM1010B_read_all_read = false;
         public static bool device_MPM1010B_show_data = false;
 
 
-        //voltage = get_one_measure_value(1)
-        //  current = get_one_measure_value(5)
-        //power = get_one_measure_value(9)
-        //power_factor = get_one_measure_value(13)
-        //      freguency = get_one_measure_value(17)
         #endregion
 
         #region "OWON  --- multimeter   -----      owon XDM 3051, 2041, 1041    "
-        //public static string XDM3051_range;
-        //public static string XDM2041_range;
-        //public static string XDM1041_range;
-
+  
         public static int device_XDM3051_range_dc_volt;
 
         #endregion
@@ -265,6 +269,11 @@ namespace test_system
         public const byte COMport_SELECT_SUPPLY_FREE = 11;
         //-----------------------------------------------------------------------------------------------------------------------
         public const byte COMport_KEL103 = 12;
+        //-----------------------------------------------------------------------------------------------------------------------
+
+        public const byte COMport_SDM220 = 15;
+
+
 
         //-----------------------------------------------------------------------------------------------------------------------
         //-- izbira POWER SUPPLY
@@ -354,6 +363,11 @@ namespace test_system
         public const string strCOMport_serial_MPM_1010B = "A10191L7";
 
 
+        //--COM27 FTDIBUS\VID_0403+PID_6001+B002DL62A\0000
+        public const string strCOMport_name_SDM220 = "EASTRON SDM220";
+        public const string strCOMport_VID_SDM220 = "0403";
+        public const string strCOMport_PID_SDM220 = "6001";
+        public const string strCOMport_serial_SDM220 = "B002DL62";
 
 
 
@@ -390,6 +404,7 @@ namespace test_system
             ERROR,                      //--  2: in functions happen ERROR  
             NOT_CONNECTED,
             NOT_ACTIVE,
+            NOT_MEAS,
             UNKNOW                       //--   in unknow state of function   
         }
 

@@ -243,13 +243,13 @@ namespace test_system
             device_ET3916_read_all_temperature_by_test = true;
         }
 
-
-
         //=======================================================================================================================
         //=======================================================================================================================
         public funReturnCodeCOMport fun_ET3916_read_command_all_temperature()
         {
             device_ET3916_read_all_temperature = false;
+            dev_meas_state[COMport_ET3916] = funReturnCodeCOMport.ERROR;
+
             if (dev_connected[COMport_ET3916])
             {
                 if (dev_active[COMport_ET3916])
@@ -265,6 +265,8 @@ namespace test_system
                         device_ET3916_temperature[6] = System.BitConverter.ToSingle(read_buffer, 25);
                         device_ET3916_temperature[7] = System.BitConverter.ToSingle(read_buffer, 29);
                         device_ET3916_temperature[8] = System.BitConverter.ToSingle(read_buffer, 33);
+
+                        dev_meas_state[COMport_ET3916] = funReturnCodeCOMport.OK;
                         return (funReturnCodeCOMport.OK);
                     }
                     catch (Exception) { return (funReturnCodeCOMport.ERROR); }

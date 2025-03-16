@@ -20,6 +20,7 @@ namespace test_system
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
+        power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
 
         owon_multimeter owon_multimeter = new owon_multimeter();
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
@@ -147,6 +148,15 @@ namespace test_system
                 labComplete_temperature_7.Text = "Temp 7  " + device_ET3916_temperature[7].ToString("0.00");
                 labComplete_temperature_8.Text = "Temp 8  " + device_ET3916_temperature[8].ToString("0.00");
             }
+
+            if (device_RD6006_all_device_ident)
+            {
+                device_RD6006_all_device_ident = false;
+                txtRD6006_ident.Text = rd6006_Signature.ToString("X") + "   " + rd6006_Serial_number.ToString("X") + "   " + rd6006_Firmware_version.ToString("X");
+            }
+       
+
+
             if (device_RD6006_show_all_measure)
             {
                 device_RD6006_show_all_measure = false;
@@ -167,6 +177,15 @@ namespace test_system
                 labRD6024_out_curr.Text = "Output Current   " + rd6024_OutputCurrent.ToString("0.00") + " A";
                 labRD6024_out_power.Text = "Output Power     " + rd6024_OutputPower.ToString("0.00") + " W";
             }
+
+            if (device_RD6024_all_device_ident)
+            {
+                device_RD6024_all_device_ident = false;
+                txtRD6024_ident.Text = rd6024_Signature.ToString("X") + "   " + rd6024_Serial_number.ToString("X") + "   " + rd6024_Firmware_version.ToString("X");
+            }
+
+
+
             if (device_MPM1010B_show_data)
             {
                 device_MPM1010B_show_data = false;
@@ -182,22 +201,39 @@ namespace test_system
             timer_2_counter++;
 
             //-------------------------------------------------------------------------------------------------------------------
+            labXDM3051_read_result.Text = dev_connected[COMport_XDM3051].ToString() +"   "+ dev_meas_state[COMport_XDM3051].ToString();
             labXDM3051_status.Text = dev_range[COMport_XDM3051];
-            labXDM3051_read_result.Text = dev_meas_state[COMport_XDM3051].ToString();
             labXDM3051_measure.Text = dev_meas[COMport_XDM3051].ToString("0.0000");
             //-------------------------------------------------------------------------------------------------------------------
             labXDM2041_status.Text = dev_range[COMport_XDM2041];
-            labXDM2041_read_result.Text = dev_meas_state[COMport_XDM2041].ToString();
+            labXDM2041_read_result.Text = dev_connected[COMport_XDM2041].ToString() + "   " + dev_meas_state[COMport_XDM2041].ToString();
             labXDM2041_measure.Text = dev_meas[COMport_XDM2041].ToString("0.0000");
             //-------------------------------------------------------------------------------------------------------------------
             labXDM1041_status.Text = dev_range[COMport_XDM1041];
-            labXDM1041_read_result.Text = dev_meas_state[COMport_XDM1041].ToString();
+            labXDM1041_read_result.Text = dev_connected[COMport_XDM1041].ToString() + "   " + dev_meas_state[COMport_XDM1041].ToString();
             labXDM1041_measure.Text = dev_meas[COMport_XDM1041].ToString("0.0000");
 
+      
+            labET3916_0.Text = dev_connected[COMport_ET3916].ToString()+ "   " + dev_meas_state[COMport_ET3916].ToString();
+            labET3916_1.Text = "Temp 1    " + device_ET3916_temperature[1].ToString("0.0") + " degC";
+            labET3916_2.Text = "Temp 2    " + device_ET3916_temperature[2].ToString("0.0") + " degC";
+            labET3916_3.Text = "Temp 3    " + device_ET3916_temperature[3].ToString("0.0") + " degC";
+            labET3916_4.Text = "Temp 4    " + device_ET3916_temperature[4].ToString("0.0") + " degC";
+            labET3916_5.Text = "Temp 5    " + device_ET3916_temperature[5].ToString("0.0") + " degC";
+            labET3916_6.Text = "Temp 6    " + device_ET3916_temperature[6].ToString("0.0") + " degC";
+            labET3916_7.Text = "Temp 7    " + device_ET3916_temperature[7].ToString("0.0") + " degC";
+            labET3916_8.Text = "Temp 8    " + device_ET3916_temperature[8].ToString("0.0") + " degC";
 
 
+            labMPM1010B_0.Text = dev_connected[COMport_ET3916].ToString() +"     " + dev_meas_state[COMport_MPM_1010B].ToString();
+            labMPM1010B_1.Text = "Voltage      " + device_MPM1010B_voltage.ToString("0.00") + " V";
+            labMPM1010B_2.Text = "Current      " + device_MPM1010B_current.ToString("0.00") + " A";
+            labMPM1010B_3.Text = "Power        " + device_MPM1010B_power.ToString("0.00") + " W";
+            labMPM1010B_4.Text = "Pow. fact.   " + device_MPM1010B_power_factor.ToString("0.00") ;
+            labMPM1010B_5.Text = "Frequency    " + device_MPM1010B_freguency.ToString("0.00") + " Hz";
 
         }
+   
 
 
         #endregion
@@ -397,6 +433,11 @@ namespace test_system
 
         #region " Power supply  ---- RD6006     ------     "
 
+        private void btnRD6006_ident_Click(object sender, EventArgs e)
+        {
+            power_supply_RD6006.funRD6006_ident();
+        }
+
 
         private void btnPowerSupply_RD6006_ON_Click(object sender, EventArgs e)
         {
@@ -413,7 +454,10 @@ namespace test_system
 
         private void btnPowerSupply_RD6006_measure_Click(object sender, EventArgs e)
         {
-            power_supply_RD6006.funRD6006_measure();
+            //power_supply_RD6006.funRD6006_measure();
+            mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_RD6006);
+
             //mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6006].DiscardInBuffer();
             //modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 20, COMport_SELECT_SUPPLY_RD6006);
         }
@@ -421,6 +465,12 @@ namespace test_system
 
         #endregion
         #region " Power supply  ---- RD6024     ------     "
+
+
+        private void btnRD6024_ident_Click(object sender, EventArgs e)
+        {
+            power_supply_RD6024.funRD6024_ident();
+        }
 
         private void btnPowerSupply_RD6024_ON_Click(object sender, EventArgs e)
         {
@@ -437,12 +487,10 @@ namespace test_system
         private void btnPowerSupply_RD6024_measure_Click(object sender, EventArgs e)
         {
             mainWindow.COMportSerial[COMport_RD6024].DiscardInBuffer();
-            modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_RD6024);
-
-
+            modbus_functions.funModbusRTU_send_request_read_function_3(1, 10, 2, COMport_RD6024);
+            //modbus_functions.funModbusRTU_send_request_read_function_3(1, 14, 6, COMport_RD6024);
             // mainWindow.COMportSerial[COMport_SELECT_SUPPLY_RD6024].DiscardInBuffer();
             // modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 10, COMport_SELECT_SUPPLY_RD6024);
-
         }
 
         #endregion
@@ -575,7 +623,6 @@ namespace test_system
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         //=======================================================================================================================
         private void btnXDM2041_ident_Click(object sender, EventArgs e)
         {
@@ -612,7 +659,6 @@ namespace test_system
             string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
             double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
             owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM2041, voltage_range);
-
         }
 
         #endregion
@@ -621,32 +667,14 @@ namespace test_system
         //=======================================================================================================================
         private void btnXDM1041_measure_Click(object sender, EventArgs e)
         {
-
             owon_multimeter.fun_owon_measure(COMport_XDM1041);
             txtBox_XDM1041_measure.Text = dev_meas[COMport_XDM1041].ToString();
             labXDM1041_measure_ok.Text = dev_meas_state[COMport_XDM1041].ToString();
-
-
-            /*
-            multimeter_XDM1041.fun_XDM1041_measure();
-            if (device_XDM1041_measure_ok == funReturnCodeCOMport.OK)
-            {
-                txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
-                labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
-            }
-            else
-            {
-                multimeter_XDM1041.fun_XDM1041_measure();
-                txtBox_XDM1041_measure.Text = device_XDM1041_measure.ToString();
-                labXDM1041_measure_ok.Text = device_XDM1041_measure_ok.ToString();
-            }
-            */
         }
         //=======================================================================================================================
         //=======================================================================================================================
         private void btnXDM1041_ident_Click(object sender, EventArgs e)
         {
-            //multimeter_XDM1041.fun_XDM1041_identifaction();
             if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
             {
                 if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
@@ -655,9 +683,6 @@ namespace test_system
                 }
             }
             txtBox_XDM1041_ident.Text = COMport_device_ident[COMport_XDM1041];
-            //funReturnCodeCOMport returnState = owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM1041, "OWON,XDM2041,24470254");
-            //if (returnState == funReturnCodeCOMport.OK) txtBox_XDM1041_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041];
-            //else txtBox_XDM1041_ident.Text = returnState.ToString();
         }
 
         private void btnXDM1041_get_range_dc_volt_Click(object sender, EventArgs e)
@@ -673,12 +698,6 @@ namespace test_system
             string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
             double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
             owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM1041, voltage_range);
-
-
-            //if (radioXDM1041_dc_range_1.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 5);
-            //if (radioXDM1041_dc_range_2.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 50);
-            //if (radioXDM1041_dc_range_3.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 500);
-            //if (radioXDM1041_dc_range_4.Checked) owon_multimeter_common.fun_owon_set_range_volt_dc(COMport_SELECT_MULTIMETER_XDM1041, 1000);
         }
 
 
@@ -706,9 +725,6 @@ namespace test_system
             }
         }
 
-
-
-
         private void btnKEL103_on_Click(object sender, EventArgs e)
         {
             dc_load_KEL103.fun_KEL103_on();
@@ -717,7 +733,6 @@ namespace test_system
         private void btnKEL103_off_Click(object sender, EventArgs e)
         {
             dc_load_KEL103.fun_KEL103_off();
-
         }
 
         private void btnKEL103_measure_Click(object sender, EventArgs e)
@@ -744,18 +759,9 @@ namespace test_system
             dc_load_KEL103.fun_KEL103_get_set_voltage();
             dc_load_KEL103.fun_KEL103_get_set_curernt();
             dc_load_KEL103.fun_KEL103_get_set_power();
-
             txtKEL103_voltage.Text = KEL103_get_set_voltage.ToString();
             txtKEL103_curr.Text = KEL103_get_set_current.ToString();
             txtKEL103_power.Text = KEL103_get_set_power.ToString();
-
-
-            /*
-                             public static double KEL103_get_set_voltage = 0;
-                    public static double KEL103_get_set_current = 0;
-                    public static double KEL103_get_set_power = 0;
-            */
-
         }
 
         private void btnKEL103_set_set_value_Click(object sender, EventArgs e)
@@ -796,7 +802,6 @@ namespace test_system
                 KEL103_set_set_current = Convert.ToDouble(valueSetting);
                 dc_load_KEL103.fun_KEL103_set_current(KEL103_set_set_current);
             }
-
         }
 
 
@@ -863,6 +868,6 @@ namespace test_system
 
         }
 
-
+      
     }
 }

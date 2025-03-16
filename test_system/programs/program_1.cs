@@ -16,12 +16,13 @@ namespace test_system
     public partial class program_1 : Form
     {
 
-  
+
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
         power_supply_RD6006 power_supply_RD6006 = new power_supply_RD6006();
+        power_supply_RD6024 power_supply_RD6024 = new power_supply_RD6024();
 
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
 
@@ -81,6 +82,8 @@ namespace test_system
                     if (COMport_device_ident[select_device].Length > 2)
                     {
                         program_counter++;
+                        //dev_meas_state[select_device] = funReturnCodeCOMport.OK;
+
                     }
                 }
             }
@@ -231,7 +234,15 @@ namespace test_system
                     }
                     else program_counter++;
                 }
-                else if (program_counter == 10)
+
+                else if (program_counter == 10) { if (dev_connected[COMport_RD6006]) { power_supply_RD6006.funRD6006_ident(); program_counter++; } else program_counter++; }
+                else if (program_counter == 11) { fun_set_one_device(COMport_RD6006); program_counter++; }
+                else if (program_counter == 12) { if (dev_connected[COMport_RD6024]) { power_supply_RD6024.funRD6024_ident(); program_counter++; } else program_counter++; }
+                else if (program_counter == 13) { fun_set_one_device(COMport_RD6024); program_counter++; }
+
+
+
+                else if (program_counter == 14)
                 {
                     this.Close();
                 }

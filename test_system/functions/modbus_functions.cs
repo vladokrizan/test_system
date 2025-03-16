@@ -88,6 +88,10 @@ namespace test_system
             //-- prikaz oddanega sporocila 
             // COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
 
+            mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = numberRegister * 2 + 5;
+
+            /*
+
             if (selectCOMport == COMport_RD6006)
             {
                 mainWindow.COMportSerial[COMport_RD6006].ReceivedBytesThreshold = numberRegister * 2 + 5;
@@ -96,6 +100,8 @@ namespace test_system
             {
                 mainWindow.COMportSerial[COMport_RD6024].ReceivedBytesThreshold = numberRegister * 2 + 5;
             }
+            */
+
             //-------------------------------------------------------------------------------------------
             return (funReturnCodeCOMport.OK);
         }
@@ -107,6 +113,10 @@ namespace test_system
 
         public funReturnCodeCOMport funModbusRTU_send_request_read_function_4(byte slaveAddress, UInt16 registerAddress, UInt16 numberRegister, UInt32 selectCOMport)
         {
+            modbus_start_register = registerAddress;
+            modbus_register_number = numberRegister;
+
+
             byteSlaveAddress = slaveAddress;
             bCOMport_sendLen[selectCOMport] = 0;
             funModbusRTU_add_byte(slaveAddress, selectCOMport);
@@ -118,7 +128,28 @@ namespace test_system
             byte[] sendByte_local = new byte[100];
             for (loc_loop = 0; loc_loop < 6; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
             //-------------------------------------------------------------------------------------
-            ModRTU_send_CRC(sendByte_local, 6, selectCOMport).ToString("X");
+            ModRTU_send_CRC(sendByte_local, 6, selectCOMport);
+            for (loc_loop = 0; loc_loop < bCOMport_sendLen[selectCOMport]; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
+            mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
+
+
+
+               //-----------------------------------------------------------------------------------------------
+            //-- byte se prensejo v enodimenzionalno polje za izracun CRC 
+            //byte loc_loop;
+            //byte[] sendByte_local = new byte[100];
+            //for (loc_loop = 0; loc_loop < 6; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
+            //-------------------------------------------------------------------------------------------
+            //for (loc_loop = 0; loc_loop < bCOMport_sendLen[selectCOMport]; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
+            //mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
+
+
+
+
+
+            mainWindow.COMportSerial[selectCOMport].ReceivedBytesThreshold = numberRegister * 2 + 5;
+
+            //ModRTU_send_CRC(sendByte_local, 6, selectCOMport).ToString("X");
             //-------------------------------------------------------------------------------------
             //-- prikaz oddanega sporocila 
             //           COMports.fun_COMport_send_message_byte_to_string(selectCOMport);
