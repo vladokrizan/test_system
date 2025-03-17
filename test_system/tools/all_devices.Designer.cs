@@ -103,6 +103,7 @@
             this.txtRD6024_ident = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox_powerSupply_RD6006 = new System.Windows.Forms.GroupBox();
+            this.btnRD6006_ident = new System.Windows.Forms.Button();
             this.labRD6006_inp_volt = new System.Windows.Forms.Label();
             this.labRD6006_out_power = new System.Windows.Forms.Label();
             this.labRD6006_out_curr = new System.Windows.Forms.Label();
@@ -183,8 +184,10 @@
             this.labMPM1010B_4 = new System.Windows.Forms.Label();
             this.labMPM1010B_3 = new System.Windows.Forms.Label();
             this.labMPM1010B_2 = new System.Windows.Forms.Label();
+            this.labMPM1010B_0 = new System.Windows.Forms.Label();
             this.labMPM1010B_1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.labET3916_0 = new System.Windows.Forms.Label();
             this.labET3916_1 = new System.Windows.Forms.Label();
             this.labET3916_4 = new System.Windows.Forms.Label();
             this.labET3916_2 = new System.Windows.Forms.Label();
@@ -209,9 +212,12 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.timer2_all_devices = new System.Windows.Forms.Timer(this.components);
-            this.labET3916_0 = new System.Windows.Forms.Label();
-            this.labMPM1010B_0 = new System.Windows.Forms.Label();
-            this.btnRD6006_ident = new System.Windows.Forms.Button();
+            this.tabPowerConsumption = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -232,6 +238,8 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPowerConsumption.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -239,6 +247,7 @@
             this.tabControl1.Controls.Add(this.tabMultimeter);
             this.tabControl1.Controls.Add(this.tabPowerSupply);
             this.tabControl1.Controls.Add(this.tabLoad);
+            this.tabControl1.Controls.Add(this.tabPowerConsumption);
             this.tabControl1.Controls.Add(this.tabAllDevices);
             this.tabControl1.Location = new System.Drawing.Point(4, 4);
             this.tabControl1.Name = "tabControl1";
@@ -998,6 +1007,16 @@
             this.groupBox_powerSupply_RD6006.TabIndex = 0;
             this.groupBox_powerSupply_RD6006.TabStop = false;
             this.groupBox_powerSupply_RD6006.Text = "RD 6006";
+            // 
+            // btnRD6006_ident
+            // 
+            this.btnRD6006_ident.Location = new System.Drawing.Point(6, 26);
+            this.btnRD6006_ident.Name = "btnRD6006_ident";
+            this.btnRD6006_ident.Size = new System.Drawing.Size(100, 30);
+            this.btnRD6006_ident.TabIndex = 10;
+            this.btnRD6006_ident.Text = "Ident";
+            this.btnRD6006_ident.UseVisualStyleBackColor = true;
+            this.btnRD6006_ident.Click += new System.EventHandler(this.btnRD6006_ident_Click);
             // 
             // labRD6006_inp_volt
             // 
@@ -1817,6 +1836,16 @@
             this.labMPM1010B_2.TabIndex = 0;
             this.labMPM1010B_2.Text = "label20";
             // 
+            // labMPM1010B_0
+            // 
+            this.labMPM1010B_0.AutoSize = true;
+            this.labMPM1010B_0.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMPM1010B_0.Location = new System.Drawing.Point(7, 29);
+            this.labMPM1010B_0.Name = "labMPM1010B_0";
+            this.labMPM1010B_0.Size = new System.Drawing.Size(72, 19);
+            this.labMPM1010B_0.TabIndex = 0;
+            this.labMPM1010B_0.Text = "label20";
+            // 
             // labMPM1010B_1
             // 
             this.labMPM1010B_1.AutoSize = true;
@@ -1844,6 +1873,16 @@
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ET3916 - 8";
+            // 
+            // labET3916_0
+            // 
+            this.labET3916_0.AutoSize = true;
+            this.labET3916_0.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labET3916_0.Location = new System.Drawing.Point(7, 24);
+            this.labET3916_0.Name = "labET3916_0";
+            this.labET3916_0.Size = new System.Drawing.Size(63, 19);
+            this.labET3916_0.TabIndex = 17;
+            this.labET3916_0.Text = "label1";
             // 
             // labET3916_1
             // 
@@ -2087,35 +2126,49 @@
             // 
             this.timer2_all_devices.Tick += new System.EventHandler(this.timer2_all_devices_Tick);
             // 
-            // labET3916_0
+            // tabPowerConsumption
             // 
-            this.labET3916_0.AutoSize = true;
-            this.labET3916_0.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labET3916_0.Location = new System.Drawing.Point(7, 24);
-            this.labET3916_0.Name = "labET3916_0";
-            this.labET3916_0.Size = new System.Drawing.Size(63, 19);
-            this.labET3916_0.TabIndex = 17;
-            this.labET3916_0.Text = "label1";
+            this.tabPowerConsumption.Controls.Add(this.dataGridView1);
+            this.tabPowerConsumption.Location = new System.Drawing.Point(4, 29);
+            this.tabPowerConsumption.Name = "tabPowerConsumption";
+            this.tabPowerConsumption.Size = new System.Drawing.Size(1327, 577);
+            this.tabPowerConsumption.TabIndex = 4;
+            this.tabPowerConsumption.Text = "  Power, Energy   ";
+            this.tabPowerConsumption.UseVisualStyleBackColor = true;
             // 
-            // labMPM1010B_0
+            // dataGridView1
             // 
-            this.labMPM1010B_0.AutoSize = true;
-            this.labMPM1010B_0.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMPM1010B_0.Location = new System.Drawing.Point(7, 29);
-            this.labMPM1010B_0.Name = "labMPM1010B_0";
-            this.labMPM1010B_0.Size = new System.Drawing.Size(72, 19);
-            this.labMPM1010B_0.TabIndex = 0;
-            this.labMPM1010B_0.Text = "label20";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridView1.Location = new System.Drawing.Point(101, 49);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(617, 150);
+            this.dataGridView1.TabIndex = 0;
             // 
-            // btnRD6006_ident
+            // Column1
             // 
-            this.btnRD6006_ident.Location = new System.Drawing.Point(6, 26);
-            this.btnRD6006_ident.Name = "btnRD6006_ident";
-            this.btnRD6006_ident.Size = new System.Drawing.Size(100, 30);
-            this.btnRD6006_ident.TabIndex = 10;
-            this.btnRD6006_ident.Text = "Ident";
-            this.btnRD6006_ident.UseVisualStyleBackColor = true;
-            this.btnRD6006_ident.Click += new System.EventHandler(this.btnRD6006_ident_Click);
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Column2";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Column3";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Column4";
+            this.Column4.Name = "Column4";
             // 
             // all_devices
             // 
@@ -2165,6 +2218,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPowerConsumption.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2355,5 +2410,11 @@
         private System.Windows.Forms.Label labMPM1010B_0;
         private System.Windows.Forms.Label labET3916_0;
         private System.Windows.Forms.Button btnRD6006_ident;
+        private System.Windows.Forms.TabPage tabPowerConsumption;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

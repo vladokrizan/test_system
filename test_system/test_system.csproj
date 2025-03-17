@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AC_meter_SDM220.cs" />
+    <Compile Include="devices\multimeter\AC_meter_SDM220.cs" />
     <Compile Include="functions\COMports_functions.cs" />
     <Compile Include="devices\load\dc_load_KEL103.cs" />
     <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />

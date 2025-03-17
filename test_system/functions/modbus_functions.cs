@@ -124,8 +124,8 @@ namespace test_system
             funModbusRTU_add_uint16(registerAddress, selectCOMport);
             funModbusRTU_add_uint16(numberRegister, selectCOMport);
             //-------------------------------------------------------------------------------------
-            byte loc_loop;
             byte[] sendByte_local = new byte[100];
+            byte loc_loop;
             for (loc_loop = 0; loc_loop < 6; loc_loop++) { sendByte_local[loc_loop] = COMport_sendByte[selectCOMport, loc_loop]; }
             //-------------------------------------------------------------------------------------
             ModRTU_send_CRC(sendByte_local, 6, selectCOMport);
@@ -293,22 +293,31 @@ namespace test_system
         /// </summary>
         /// <returns></returns>
         //=======================================================================================================================
-        public funReturnCodeCOMport funModbusRTU_receive_mesasage()
+        public funReturnCodeCOMport funModbusRTU_receive_mesasage(int selectCOMport)
         {
             byte selectByte;
             byte loc_loop;
             modbus_register_type = 0;
-            intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(receiveByte_modbus, receiveByte_modbus_lenght - 2);
-            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_modbus[receiveByte_modbus_lenght - 1] * 256 + receiveByte_modbus[receiveByte_modbus_lenght - 2]);
+            modbus_number_register = 0;
+            modbus_address = 0;
+
+            byte[] receiveByte_modbus_local = new byte[100];
+            for (loc_loop = 0; loc_loop < receiveByte_modbus_lenght[selectCOMport]; loc_loop++) { receiveByte_modbus_local[loc_loop]= receiveByte_modbus[selectCOMport, loc_loop]; }
+            intModbusRTUreceiveCRC_calculate = ModRTU_receive_CRC(receiveByte_modbus_local, receiveByte_modbus_lenght[selectCOMport] - 2);
+
+            
+                        
+            intModbusRTUreceiveCRC_receive = (UInt16)(receiveByte_modbus[selectCOMport,receiveByte_modbus_lenght[selectCOMport] - 1] * 256 + receiveByte_modbus[selectCOMport,receiveByte_modbus_lenght[selectCOMport] - 2]);
 
             if (intModbusRTUreceiveCRC_calculate == intModbusRTUreceiveCRC_receive)
             {
-                modbus_register_type = receiveByte_modbus[1];
-                modbus_number_register = receiveByte_modbus[2];
+                modbus_address = receiveByte_modbus[selectCOMport,0];
+                modbus_register_type = receiveByte_modbus[selectCOMport,1];
+                modbus_number_register = receiveByte_modbus[selectCOMport,2];
                 selectByte = 3;
                 for (loc_loop = 0; loc_loop < modbus_number_register; loc_loop++)
                 {
-                    modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectByte++] * 256 + receiveByte_modbus[selectByte++]);
+                    modbus_register[loc_loop] = (UInt16)(receiveByte_modbus[selectCOMport,selectByte++] * 256 + receiveByte_modbus[selectCOMport,selectByte++]);
                 }
             }
             return (funReturnCodeCOMport.OK);

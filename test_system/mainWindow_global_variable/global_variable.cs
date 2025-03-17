@@ -75,11 +75,17 @@ namespace test_system
         //public static UInt16 intModbusRTUreceiveCRC_calculate;
         //public static UInt16 intModbusRTUreceiveCRC_receive;
 
-        public static byte[] receiveByte_modbus = new byte[100];
-        public static byte receiveByte_modbus_lenght;
+        public static byte[,] receiveByte_modbus = new byte[COMport_SELECT_MAXnumber,100];
+        public static byte [] receiveByte_modbus_lenght =new byte[COMport_SELECT_MAXnumber];
 
-        public static byte modbus_number_register;
+
+    
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        //-- podatki po obdelavi sprejetega modbus paketa
+        public static byte modbus_address;
         public static byte modbus_register_type;
+        public static byte modbus_number_register;
 
         public static UInt16[] modbus_register = new UInt16[100];
 
@@ -177,9 +183,31 @@ namespace test_system
 
 
         #endregion
+        #region "AC meter SDM220"
+
+        public static double SDM220_voltage = 0;
+        public static double SDM220_Current = 0;
+        public static double SDM220_Active_power = 0;
+        public static double SDM220_Apparent_power = 0;
+        public static double SDM220_Reactive_power = 0;
+        public static double SDM220_Power_factor = 0;
+        public static double SDM220_Phase_angle = 0;
+        public static double SDM220_Frequency = 0;
+        public static double SDM220_Import_active_energy = 0;
+        public static double SDM220_Export_active_energy = 0;
+        public static double SDM220_Import_reactive_energy = 0;
+        public static double SDM220_Export_reactive_energy = 0;
+        public static double SDM220_Total_active_energy  = 0;
+        public static double SDM220_Total_reactive_energy = 0;
+
+
+          #endregion
+
+
+
 
         #region "OWON  --- multimeter   -----      owon XDM 3051, 2041, 1041    "
-  
+
         public static int device_XDM3051_range_dc_volt;
 
         #endregion
@@ -365,9 +393,15 @@ namespace test_system
 
         //--COM27 FTDIBUS\VID_0403+PID_6001+B002DL62A\0000
         public const string strCOMport_name_SDM220 = "EASTRON SDM220";
+        //public const string strCOMport_VID_SDM220 = "0403";
+        //public const string strCOMport_PID_SDM220 = "6001";
+        //public const string strCOMport_serial_SDM220 = "B002DL62";
+        //COM3 FTDIBUS\VID_0403+PID_6001+A50285BIA\0000
         public const string strCOMport_VID_SDM220 = "0403";
         public const string strCOMport_PID_SDM220 = "6001";
-        public const string strCOMport_serial_SDM220 = "B002DL62";
+        public const string strCOMport_serial_SDM220 = "A50285BI";
+
+
 
 
 
