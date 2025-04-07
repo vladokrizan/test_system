@@ -9,18 +9,18 @@ namespace test_system
 {
     internal class power_supply_RD6024
     {
-        modbus_functions modbus_functions = new modbus_functions();
+        modbus modbus_functions = new modbus();
 
 
-        public funReturnCodeCOMport funRD6024_ident()
+        public funReturnCode funRD6024_ident()
         {
             if (dev_connected[COMport_RD6024])
             {
                 mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
                 modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 4, COMport_RD6024);
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -34,7 +34,7 @@ namespace test_system
         /// </summary>
         /// <returns></returns>
         //=======================================================================================================================    
-        public funReturnCodeCOMport funModbusRTU_RD6024_receive_ident()
+        public funReturnCode funModbusRTU_RD6024_receive_ident()
         {
             rd6024_Signature = modbus_register[0];
             rd6024_Serial_number = modbus_register[2];
@@ -46,12 +46,12 @@ namespace test_system
             else dev_active[COMport_RD6024] = false;
 
 
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
 
         }
 
 
-        public funReturnCodeCOMport funModbusRTU_RD6024_receive_set()
+        public funReturnCode funModbusRTU_RD6024_receive_set()
         {
             // UInt16 uint16Value = 0;
             //UInt32 uint32Value = 0;
@@ -70,11 +70,11 @@ namespace test_system
 
 
             device_RD6024_show_all_measure = true;
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
         }
 
 
-        public funReturnCodeCOMport funModbusRTU_receive_mesasage_RD6024()
+        public funReturnCode funModbusRTU_receive_mesasage_RD6024()
         {
             // UInt16 uint16Value = 0;
             //  UInt32 uint32Value = 0;
@@ -91,7 +91,7 @@ namespace test_system
             //rd6006_setCurrent = ((float)(modbus_register[1])) / 100;
 
             device_RD6024_show_all_measure = true;
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
         }
 
 

@@ -15,11 +15,9 @@ namespace test_system
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
         power_supply_hcs_3300 power_supply_hcs_3300 = new power_supply_hcs_3300();
-
         owon_multimeter owon_multimeter = new owon_multimeter();
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
-        //write_log_files write_log_files = new write_log_files();
-
+  
 
         #region "PROGRAM COMMON -- LOAD "
         //=======================================================================================================================
@@ -38,7 +36,6 @@ namespace test_system
             }
             return 0;
         }
-
         //=======================================================================================================================
         /// <summary>
         /// 
@@ -52,8 +49,11 @@ namespace test_system
             program_result_value.Add("LOAD KEL103 Power (W) ", KEL103_power.ToString("0.00"));
             return 0;
         }
-
         //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         //=======================================================================================================================
         public int fun_program___load___on()
         {
@@ -64,6 +64,10 @@ namespace test_system
             return 0;
         }
         //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         //=======================================================================================================================
         public int fun_program___load___off()
         {
@@ -74,6 +78,11 @@ namespace test_system
             return 0;
         }
         //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="load_set_current"></param>
+        /// <returns></returns>
         //=======================================================================================================================
         public int fun_program___load___set_current(double load_set_current)
         {
@@ -83,13 +92,8 @@ namespace test_system
             }
             return 0;
         }
-
-
-
         #endregion
         #region "PROGRAM COMMON -- MULTIMETERS "
-
-
         //=======================================================================================================================
         /// <summary>
         ///    meritev napetosti in toka z multimetri
@@ -103,7 +107,6 @@ namespace test_system
             owon_multimeter.fun_owon_measure(COMport_XDM1041);
             return 0;
         }
-
         //=======================================================================================================================
         /// <summary>
         /// 
@@ -115,25 +118,16 @@ namespace test_system
         //=======================================================================================================================
         public int fun_program___add_log_file___owon_multimeters(string XDM3051_name, string XDM2041_name, string XDM1041_name)
         {
-            if (dev_meas_state[COMport_XDM3051] == funReturnCodeCOMport.OK)
-                program_result_value.Add(XDM3051_name, dev_meas[COMport_XDM3051].ToString("0.000"));
+            if (dev_meas_state[COMport_XDM3051] == funReturnCode.OK) program_result_value.Add(XDM3051_name, dev_meas[COMport_XDM3051].ToString("0.000"));
             else program_result_value.Add(XDM3051_name, "ERROR");
-            if (dev_meas_state[COMport_XDM2041] == funReturnCodeCOMport.OK)
-                program_result_value.Add(XDM2041_name, dev_meas[COMport_XDM2041].ToString("0.000"));
+            if (dev_meas_state[COMport_XDM2041] == funReturnCode.OK) program_result_value.Add(XDM2041_name, dev_meas[COMport_XDM2041].ToString("0.000"));
             else program_result_value.Add(XDM2041_name, "ERROR");
-            if (dev_meas_state[COMport_XDM1041] == funReturnCodeCOMport.OK)
-                program_result_value.Add(XDM1041_name, dev_meas[COMport_XDM1041].ToString("0.000"));
+            if (dev_meas_state[COMport_XDM1041] == funReturnCode.OK) program_result_value.Add(XDM1041_name, dev_meas[COMport_XDM1041].ToString("0.000"));
             else program_result_value.Add(XDM1041_name, "ERROR");
-
             return 0;
         }
-
         #endregion
-
         #region "PROGRAM COMMON -- POWER SUPPLY "
-
-
-
         //=======================================================================================================================
         /// <summary>
         /// 
@@ -153,8 +147,12 @@ namespace test_system
             }
             return 0;
         }
-
-
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //=======================================================================================================================
         public int fun_program___add_log_file___power_supply()
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
@@ -165,8 +163,15 @@ namespace test_system
             return 0;
         }
 
-
-
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="set_voltage"></param>
+        /// <param name="set_current"></param>
+        /// <param name="set_channel"></param>
+        /// <returns></returns>
+        //=======================================================================================================================
         public int fun_program___power_supply___set_voltage_current(double set_voltage, double set_current, int set_channel = 1)
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
@@ -176,7 +181,14 @@ namespace test_system
             }
             return 0;
         }
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="set_channel"></param>
+        /// <returns></returns>    
 
+        //=======================================================================================================================
         public int fun_program___power_supply___on(int set_channel = 1)
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
@@ -185,6 +197,13 @@ namespace test_system
             }
             return 0;
         }
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="set_channel"></param>
+        /// <returns></returns>
+        //=======================================================================================================================
         public int fun_program___power_supply___off(int set_channel = 1)
         {
             if (program_select_supply == DEVICE_SELECT_SUPPLY_HCS_3300)
@@ -193,14 +212,15 @@ namespace test_system
             }
             return 0;
         }
-
-
-
-
         #endregion
         #region "PROGRAM COMMON -- TEMPERATURE  "
-
-
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number_temperature"></param>
+        /// <returns></returns>
+        //=======================================================================================================================
         public int fun_program___add_log_file___temperature(int number_temperature = 1)
         {
             if (number_temperature > 0) program_result_value.Add("Temperature 1 (degC) ", device_ET3916_temperature[1].ToString("0.0"));
@@ -213,12 +233,15 @@ namespace test_system
             if (number_temperature > 7) program_result_value.Add("Temperature 8 (degC) ", device_ET3916_temperature[8].ToString("0.0"));
             return 0;
         }
-
-
         #endregion
 
         #region "PROGRAM COMMON -- TIME  "
-
+        //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //=======================================================================================================================
         public int fun_program___function___part_time_calulate()
         {
             endTime_part_program = DateTime.Now;

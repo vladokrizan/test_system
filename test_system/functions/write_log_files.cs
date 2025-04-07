@@ -16,12 +16,36 @@ namespace test_system
 
 
 
+        //=======================================================================================================================
+        //=======================================================================================================================
+        public void funWriteFile_application_info( string write_text)
+        {
+            string fileDataLine = "";
+
+            fileDataLine = "";
+            using (StreamWriter sw = File.AppendText(strLogFiles_application))
+            {
+                fileDataLine = DateTime.Now.ToString("dd.MM.yyyy") + strExcelSeparator;
+                fileDataLine = fileDataLine + DateTime.Now.ToString("HH:mm:ss") + strExcelSeparator;
+                //---------------------------------------------------------------------------------------------------
+                fileDataLine = fileDataLine + write_text + strExcelSeparator;
+                //---------------------------------------------------------------------------------------------------
+                //-- zapis velikosti datoteke 
+                long length = new System.IO.FileInfo(strLogFiles_application).Length;
+                fileDataLine = fileDataLine + length.ToString() + strExcelSeparator;
+                //---------------------------------------------------------------------------------------------------
+                sw.WriteLine(fileDataLine);
+            }
+        }
+
+
+
 
         #region "write log file"    
 
         //=======================================================================================================================
         //=======================================================================================================================
-        public void funWriteLogFile_program10()
+        public void funWriteLogFile_program()
         {
             string fileDataLine = "";
             try
@@ -52,8 +76,76 @@ namespace test_system
 
         #endregion
 
+        #region "write log file POWER CONSUMPTION "    
+
+        //=======================================================================================================================
+        //=======================================================================================================================
+        public void funWriteLogFile_power_consumption ()
+        {
+            string fileDataLine = "";
+            try
+            {
+                //------   if file exist then don't write anything 
+                if (!File.Exists(strLogFiles_power_consumption))
+                {
+                    using (StreamWriter sw = File.AppendText(strLogFiles_power_consumption))
+                    {
+                        fileDataLine = "";
+                        foreach (KeyValuePair<string, string> diagnosisNameLocal in power_consumption)
+                            fileDataLine = fileDataLine + diagnosisNameLocal.Key + strExcelSeparator;
+                        sw.WriteLine(fileDataLine);
+                    }
+                }
+                using (StreamWriter sw = File.AppendText(strLogFiles_power_consumption))
+                {
+                    fileDataLine = "";
+                    foreach (KeyValuePair<string, string> diagnosisValueLocal in power_consumption)
+                        fileDataLine = fileDataLine + diagnosisValueLocal.Value + strExcelSeparator;
+                    sw.WriteLine(fileDataLine);
+                }
+            }
+            catch (Exception ex) { string strEx = ex.ToString(); }
+        }
 
 
+        public void funWriteLogFile_SDM220()
+        {
+
+            //
+            string fileDataLine = "";
+            try
+            {
+                //------   if file exist then don't write anything 
+                if (!File.Exists(strLogFiles_power_measure_SDM220))
+                {
+                    using (StreamWriter sw = File.AppendText(strLogFiles_power_measure_SDM220))
+                    {
+                        fileDataLine = "Date" + strExcelSeparator;
+                        fileDataLine = fileDataLine + "Time" + strExcelSeparator;
+                        foreach (KeyValuePair<string, string> diagnosisNameLocal in SDM220)
+                            fileDataLine = fileDataLine + diagnosisNameLocal.Key + strExcelSeparator;
+                        sw.WriteLine(fileDataLine);
+                    }
+                }
+                using (StreamWriter sw = File.AppendText(strLogFiles_power_measure_SDM220))
+                {
+                    fileDataLine = DateTime.Now.ToString("dd.MM.yyyy") + strExcelSeparator;
+                    fileDataLine = fileDataLine + DateTime.Now.ToString("HH:mm:ss") + strExcelSeparator;
+                    foreach (KeyValuePair<string, string> diagnosisValueLocal in SDM220)
+                        fileDataLine = fileDataLine + diagnosisValueLocal.Value + strExcelSeparator;
+                    sw.WriteLine(fileDataLine);
+                }
+            }
+            catch (Exception ex) { string strEx = ex.ToString(); }
+
+
+        }
+
+
+        #endregion
+
+
+        #region "FILE FOR COM PORTS"
         private string fun_set_com_port_names()
         {
             string fun_set_com_port_name = "";
@@ -67,6 +159,7 @@ namespace test_system
             fun_set_com_port_name = fun_set_com_port_name + "SUPPLY_RD6006 " + strExcelSeparator;
             fun_set_com_port_name = fun_set_com_port_name + "SUPPLY_HCS_330 " + strExcelSeparator;
             fun_set_com_port_name = fun_set_com_port_name + "LOAD_KEL103 " + strExcelSeparator;
+            fun_set_com_port_name = fun_set_com_port_name + "SDM220 " + strExcelSeparator;
 
             return fun_set_com_port_name;
         }
@@ -93,6 +186,7 @@ namespace test_system
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_RD6006);
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_HCS_3300);
             fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_KEL103);
+            fun_set_com_port_selev_value = fun_set_com_port_selev_value + fun_select_variable(selectValue, COMport_SDM220);
             return fun_set_com_port_selev_value;
         }
 
@@ -122,26 +216,9 @@ namespace test_system
                 fileDataLine = DateTime.Now.ToString("dd.MM.yyyy") + strExcelSeparator;
                 fileDataLine = fileDataLine + DateTime.Now.ToString("HH:mm:ss") + strExcelSeparator;
                 fileDataLine = fileDataLine + fun_log_file_ComPort_value(selectCOMport_name);
-
-                /*
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_MULTIMETER_XDM3051] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_MULTIMETER_XDM2041] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_MULTIMETER_XDM1041] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_TEMPERATURE_ET3916] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_AC_METER_MPM_1010B] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_SUPPLY_KA3305A] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_SUPPLY_RD6024] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_SUPPLY_RD6006] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_SUPPLY_HCS_330] + strExcelSeparator;
-                fileDataLine = fileDataLine + COMport_name[COMport_SELECT_LOAD_KEL103] + strExcelSeparator;
-                */
-                sw.WriteLine(fileDataLine);
+               sw.WriteLine(fileDataLine);
             }
-
-
         }
-
-
 
         public void funWriteLogFile_Devices_idents()
         {
@@ -163,6 +240,8 @@ namespace test_system
                 fileDataLine = fileDataLine + "SUPPLY_RD6024              " + COMport_device_ident[COMport_RD6024] + strNewLineSeparator;
                 //-------------------------------------------------------------------------------------------------------------------
                 fileDataLine = fileDataLine + "LOAD_KEL103                " + COMport_device_ident[COMport_KEL103] + strNewLineSeparator;
+                //-------------------------------------------------------------------------------------------------------------------
+                fileDataLine = fileDataLine + "AC meter SDM220            " + COMport_device_ident[COMport_SDM220] + strNewLineSeparator;
                 //-------------------------------------------------------------------------------------------------------------------
                 fileDataLine = fileDataLine + strNewLineSeparator;
                 sw.WriteLine(fileDataLine);
@@ -194,9 +273,7 @@ namespace test_system
                 fileDataLine = DateTime.Now.ToString("dd.MM.yyyy") + strExcelSeparator;
                 fileDataLine = fileDataLine + DateTime.Now.ToString("HH:mm:ss") + strExcelSeparator;
                 fileDataLine = fileDataLine + fun_log_file_ComPort_value(selectCOMport_ident);
-        */
-        /*
-                        fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] + strExcelSeparator;
+                          fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051] + strExcelSeparator;
                         fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM2041] + strExcelSeparator;
                         fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_MULTIMETER_XDM1041] + strExcelSeparator;
                         fileDataLine = fileDataLine + COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916] + strExcelSeparator;
@@ -257,6 +334,9 @@ namespace test_system
 
 
         */
+
+        #endregion
+
 
 
 

@@ -55,16 +55,16 @@ namespace test_system
         }
         //=======================================================================================================================
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_ET3916_send_bytes_command()
+        public funReturnCode fun_ET3916_send_bytes_command()
         {
             device_ET3916_bytes_command_write = false;
             if (dev_connected[COMport_ET3916])
             {
                 mainWindow.COMportSerial[COMport_ET3916].Write(device_ET3916_dataArraySend, 0, device_ET3916_bytes_to_send);
                 mainWindow.COMportSerial[COMport_ET3916].DiscardInBuffer();
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -75,7 +75,7 @@ namespace test_system
         /// <param name="data"></param>
         /// <returns></returns>
         //=======================================================================================================================
-        private funReturnCodeCOMport fun_ET3916_send_reguest_bytes(byte[] data)
+        private funReturnCode fun_ET3916_send_reguest_bytes(byte[] data)
         {
             if (dev_connected[COMport_ET3916])
             {
@@ -97,9 +97,9 @@ namespace test_system
                 }
                 device_ET3916_dataArraySend[counter_send_message++] = bytes[0];
                 device_ET3916_dataArraySend[counter_send_message++] = bytes[1];
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
         //=======================================================================================================================
         //=======================================================================================================================
@@ -125,16 +125,16 @@ namespace test_system
         }
         //=======================================================================================================================
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_ET3916_read_command_model_number()
+        public funReturnCode fun_ET3916_read_command_model_number()
         {
             device_ET3916_read_model_number = false;
             if (dev_connected[COMport_ET3916])
             {
                 mainWindow.COMportSerial[COMport_ET3916].Read(read_buffer, 0, 10);
                 //strGeneralString = ((Char)(read_buffer[4])).ToString() + ((Char)(read_buffer[5])).ToString() + ((Char)(read_buffer[6])).ToString() + ((Char)(read_buffer[7])).ToString() + ((Char)(read_buffer[8])).ToString() + ((Char)(read_buffer[9])).ToString();
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -166,7 +166,7 @@ namespace test_system
         //=======================================================================================================================
         //--    065124120022
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_ET3916_read_command_serial_number()
+        public funReturnCode fun_ET3916_read_command_serial_number()
         {
             if (dev_connected[COMport_ET3916])
             {
@@ -194,15 +194,15 @@ namespace test_system
                     if (COMport_device_ident[COMport_ET3916].Contains("065124120022")) { dev_active[COMport_ET3916] = true; }
                     else dev_active[COMport_ET3916] = false;
                     //-----------------------------------------------------------------------------------------------------------
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
                 catch
                 {
                     fun_ET3916_read_serial_number();
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -245,10 +245,10 @@ namespace test_system
 
         //=======================================================================================================================
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_ET3916_read_command_all_temperature()
+        public funReturnCode fun_ET3916_read_command_all_temperature()
         {
             device_ET3916_read_all_temperature = false;
-            dev_meas_state[COMport_ET3916] = funReturnCodeCOMport.ERROR;
+            dev_meas_state[COMport_ET3916] = funReturnCode.ERROR;
 
             if (dev_connected[COMport_ET3916])
             {
@@ -266,14 +266,14 @@ namespace test_system
                         device_ET3916_temperature[7] = System.BitConverter.ToSingle(read_buffer, 29);
                         device_ET3916_temperature[8] = System.BitConverter.ToSingle(read_buffer, 33);
 
-                        dev_meas_state[COMport_ET3916] = funReturnCodeCOMport.OK;
-                        return (funReturnCodeCOMport.OK);
+                        dev_meas_state[COMport_ET3916] = funReturnCode.OK;
+                        return (funReturnCode.OK);
                     }
-                    catch (Exception) { return (funReturnCodeCOMport.ERROR); }
+                    catch (Exception) { return (funReturnCode.ERROR); }
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 

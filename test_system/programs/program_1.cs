@@ -26,7 +26,7 @@ namespace test_system
 
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
 
-        modbus_functions modbus_functions = new modbus_functions();
+        modbus modbus_functions = new modbus();
         write_log_files write_log_files = new write_log_files();
         owon_multimeter owon_multimeter = new owon_multimeter();
 
@@ -100,6 +100,12 @@ namespace test_system
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+
+            //mainWindow.device[COMport_RD6006].Visible = true;
+            //mainWindow.device[COMport_RD6006].Text = "RD6006";
+
+
             labProgramCounter.Text = "Current test   " + program_counter.ToString();
 
             if (program_counter < 15)
@@ -132,9 +138,9 @@ namespace test_system
                     if (dev_connected[COMport_XDM1041])
                     {
                         //multimeter_XDM1041.fun_XDM1041_identifaction();
-                        if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+                        if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCode.OK)
                         {
-                            if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+                            if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCode.OK)
                             {
                                 owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418");
                             }
@@ -179,8 +185,6 @@ namespace test_system
                 {
                     if (dev_connected[COMport_ET3916])
                     {
-
-
 
                         /*
                         if (COMport_device_ident[COMport_SELECT_TEMPERATURE_ET3916].Length > 5)

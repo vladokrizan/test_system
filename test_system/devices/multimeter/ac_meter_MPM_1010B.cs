@@ -17,7 +17,6 @@ namespace test_system
         private string get_MPM_1010B_one_value(byte start)
         {
             string Receive_value = "";
-
             Receive_value = (read_buffer[start] & 0x0F).ToString();
             if (read_buffer[start] > 10) Receive_value = Receive_value + ",";
             Receive_value = Receive_value + (read_buffer[start + 1] & 0x0F).ToString();
@@ -29,26 +28,19 @@ namespace test_system
             //strGeneralString = Receive_value;
             return Receive_value;
         }
-
         //=======================================================================================================================            
         //=======================================================================================================================            
-
         public void fun_read_all_MPM_1010B_write()
         {
-
-
             device_MPM1010B_read_all_write = false;
             var dataArray = new byte[10];
             dataArray[0] = 63;
             mainWindow.COMportSerial[COMport_MPM_1010B].Write(dataArray, 0, 1);
             device_MPM1010B_read_all_read = true;
             mainWindow.COMportSerial[COMport_MPM_1010B].DiscardInBuffer();
-
         }
-
         //=======================================================================================================================            
         //=======================================================================================================================            
-
         public void fun_read_all_MPM_1010B_read()
         {
             device_MPM1010B_read_all_read = false;
@@ -67,7 +59,6 @@ namespace test_system
             if (number_bytes_to_read == 21) dev_active[COMport_MPM_1010B] = true;
             else dev_active[COMport_MPM_1010B] = false;
         }
-
 
         //mainWindow.COMportSerial[selectCOMport].Write(sendByte_local, 0, bCOMport_sendLen[selectCOMport]);
         /*

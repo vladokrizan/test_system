@@ -27,7 +27,7 @@ namespace test_system
         //--    KORAD-KEL103 V3.30 SN:00022116
         //--#-- KORAD-KEL103 V1.10 SN:07740976
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_identifaction()
+        public funReturnCode fun_KEL103_identifaction()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -37,9 +37,9 @@ namespace test_system
                 //-------------------------------------------------------------------------------------------------------------------
                 if (ident_readRaw.Contains("KORAD-KEL103 V3.30 SN:00022116")) { dev_active[COMport_KEL103] = true; }
                 else dev_active[COMport_KEL103] = false;
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
@@ -49,19 +49,19 @@ namespace test_system
         /// def KEL103_input_ON(self):     self.write(f':INP 1')    def set_input_on(self):    self.write(f':INP 1')
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_on()
+        public funReturnCode fun_KEL103_on()
         {
             if (dev_connected[COMport_KEL103])
             {
                 if (dev_active[COMport_KEL103])
                 {
                     mainWindow.COMportSerial[COMport_KEL103].WriteLine(":INP 1");
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
 
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
         //=======================================================================================================================
         /// <summary>
@@ -74,18 +74,18 @@ namespace test_system
         /// 
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_off()
+        public funReturnCode fun_KEL103_off()
         {
             if (dev_connected[COMport_KEL103])
             {
                 if (dev_active[COMport_KEL103])
                 {
                     mainWindow.COMportSerial[COMport_KEL103].WriteLine(":INP 0");
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
@@ -96,7 +96,7 @@ namespace test_system
         /// def get_voltage(self) -> float:       return  float (self.query(f':MEAS:VOLT?')[:-1])
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_get_voltage()
+        public funReturnCode fun_KEL103_get_voltage()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -107,11 +107,11 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("V", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_voltage = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
@@ -124,7 +124,7 @@ namespace test_system
         /// 
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_get_current()
+        public funReturnCode fun_KEL103_get_current()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -135,11 +135,11 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("A", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_current = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
         //=======================================================================================================================
         /// <summary>
@@ -149,7 +149,7 @@ namespace test_system
         /// 
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_get_power()
+        public funReturnCode fun_KEL103_get_power()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -161,11 +161,11 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("W", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_power = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
         //=======================================================================================================================
         /// <summary>
@@ -174,7 +174,7 @@ namespace test_system
         ///      #    return float(self.query(':MEAS:RES?')[:-3])
         /// </summary>
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_get_resistance()
+        public funReturnCode fun_KEL103_get_resistance()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -186,18 +186,18 @@ namespace test_system
                      string read_raw_value = read_raw_value_raw.Replace("A", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_current = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
         //=======================================================================================================================
         //--    :CURRent:CURR   <NR2>MAX|MIN    Set the CC current and query it 
         //--    :CURRent 2ASet the CC voltage as 2A :CURRent?>2AThe CC current is 2A
-        public funReturnCodeCOMport fun_KEL103_get_set_curernt()
+        public funReturnCode fun_KEL103_get_set_curernt()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -208,13 +208,13 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("A", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_get_set_current = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
-        public funReturnCodeCOMport fun_KEL103_set_current(double setValue)
+        public funReturnCode fun_KEL103_set_current(double setValue)
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -223,18 +223,18 @@ namespace test_system
                     string setValueString = setValue.ToString("");
                     string setValueString_pika = setValueString.Replace(",", ".");
                     mainWindow.COMportSerial[COMport_KEL103].WriteLine(":CURR " + setValueString_pika+"A");
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
         //=======================================================================================================================
         //--    :VOLTage:VOLT   <NR2>MAX|MIN    Set CV voltage and query CV voltage
         //--    :VOLTage 20VSet the CV voltage as 20V   :VOLTage?>20VThe CV voltage is 20V
-        public funReturnCodeCOMport fun_KEL103_get_set_voltage()
+        public funReturnCode fun_KEL103_get_set_voltage()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -245,24 +245,24 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("V", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_get_set_voltage = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
-        public funReturnCodeCOMport fun_KEL103_set_voltage(double setValue)
+        public funReturnCode fun_KEL103_set_voltage(double setValue)
         {
             if (dev_connected[COMport_KEL103])
             {
                 if (dev_active[COMport_KEL103])
                 {
                     //  mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -270,18 +270,18 @@ namespace test_system
         //=======================================================================================================================
         //--    :RESistance:    RES <NR2>MAX|MIN    Set the CR resistor and query it
         //--    :RESistance 20OHMSet the CR resistor as 20Ω     :RESistance?>20OOHMThe CR resistor is 20Ω
-        public funReturnCodeCOMport fun_KEL103_set_resistance(double setValue)
+        public funReturnCode fun_KEL103_set_resistance(double setValue)
         {
             if (dev_connected[COMport_KEL103])
             {
                 if (dev_active[COMport_KEL103])
                 {
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                     // mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -289,7 +289,7 @@ namespace test_system
         //=======================================================================================================================
         //--    :POWer:POW  <NR2>MAX|MIN    Set the CW power and query it
         //--    :POWer 20WSet the CW power as 20W   :POWer?>20WThe CW power is 20W
-        public funReturnCodeCOMport fun_KEL103_get_set_power()
+        public funReturnCode fun_KEL103_get_set_power()
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -301,24 +301,24 @@ namespace test_system
                     string read_raw_value = read_raw_value_raw.Replace("W", "");
                     string read_raw_value_float = read_raw_value.Replace(".", ",");
                     KEL103_get_set_power = Convert.ToDouble(read_raw_value_float);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
-        public funReturnCodeCOMport fun_KEL103_set_power(double setValue)
+        public funReturnCode fun_KEL103_set_power(double setValue)
         {
             if (dev_connected[COMport_KEL103])
             {
                 if (dev_active[COMport_KEL103])
                 {
                     //mainWindow.COMportSerial[COMport_SELECT_LOAD_KEL103].WriteLine(":INP 0");
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
 
@@ -333,7 +333,7 @@ namespace test_system
 
         //=======================================================================================================================
         //=======================================================================================================================
-        public funReturnCodeCOMport fun_KEL103_set_function(string set_function)
+        public funReturnCode fun_KEL103_set_function(string set_function)
         {
             if (dev_connected[COMport_KEL103])
             {
@@ -341,11 +341,11 @@ namespace test_system
                 {
                     string send_string = ":FUN " + set_function; 
                     mainWindow.COMportSerial[COMport_KEL103].WriteLine(send_string);
-                    return (funReturnCodeCOMport.OK);
+                    return (funReturnCode.OK);
                 }
-                else return (funReturnCodeCOMport.NOT_ACTIVE);
+                else return (funReturnCode.NOT_ACTIVE);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
         //=======================================================================================================================
         //=======================================================================================================================

@@ -47,12 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="functions\applicatiuon_function.cs" />
     <Compile Include="devices\multimeter\AC_meter_SDM220.cs" />
     <Compile Include="functions\COMports_functions.cs" />
     <Compile Include="devices\load\dc_load_KEL103.cs" />
     <Compile Include="devices\power_suply\power_supply_KA3305P.cs" />
     <Compile Include="functions\functions.cs" />
-    <Compile Include="functions\modbus_functions.cs" />
+    <Compile Include="functions\modbus.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6006.cs" />
     <Compile Include="devices\multimeter\owon_multimeter.cs" />
     <Compile Include="devices\power_suply\power_supply_RD6024.cs" />
@@ -62,11 +63,11 @@
     <Compile Include="programs\program_1.Designer.cs">
       <DependentUpon>program_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="programs\program 10 device_test\program_10_test_supply_multimeter.cs">
+    <Compile Include="programs\program 10 device_test\program_10_test_device_test.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="programs\program 10 device_test\program_10_test_supply_multimeter.Designer.cs">
-      <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
+    <Compile Include="programs\program 10 device_test\program_10_test_device_test.Designer.cs">
+      <DependentUpon>program_10_test_device_test.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program 10 device_test\program_10.cs" />
     <Compile Include="programs\program 20 measure capacitiy\program_20.cs" />
@@ -77,7 +78,7 @@
       <DependentUpon>program_20_battery_test.cs</DependentUpon>
     </Compile>
     <Compile Include="programs\program_common.cs" />
-    <Compile Include="programs\program 20 measure capacitiy\program_20_batery_pack.cs" />
+    <Compile Include="programs\program 20 measure capacitiy\program_20_batery_USB_pack.cs" />
     <Compile Include="tools\all_devices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,8 +112,8 @@
       <DependentUpon>test_system_identification.cs</DependentUpon>
     </Compile>
     <Compile Include="functions\write_log_files.cs" />
-    <EmbeddedResource Include="programs\program 10 device_test\program_10_test_supply_multimeter.resx">
-      <DependentUpon>program_10_test_supply_multimeter.cs</DependentUpon>
+    <EmbeddedResource Include="programs\program 10 device_test\program_10_test_device_test.resx">
+      <DependentUpon>program_10_test_device_test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="programs\program_1.resx">
       <DependentUpon>program_1.cs</DependentUpon>

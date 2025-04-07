@@ -15,6 +15,8 @@ namespace test_system
 {
     public partial class all_devices : Form
     {
+
+        #region " Variablee, extern clases "
         ac_meter_MPM_1010B ac_meter_MPM_1010B = new ac_meter_MPM_1010B();
         temperature_ET3916 temperature_ET3916 = new temperature_ET3916();
         power_supply_KA3305P power_supply_KA3305P = new power_supply_KA3305P();
@@ -25,16 +27,14 @@ namespace test_system
         owon_multimeter owon_multimeter = new owon_multimeter();
         dc_load_KEL103 dc_load_KEL103 = new dc_load_KEL103();
 
-        modbus_functions modbus_functions = new modbus_functions();
+        modbus modbus_functions = new modbus();
         write_log_files write_log_files = new write_log_files();
 
         functions functions = new functions();
 
-
         int timer_2_counter = 0;
-
-
-        #region "nalaganje okna  "
+        #endregion
+               #region "nalaganje okna  "
         public all_devices()
         {
             InitializeComponent();
@@ -42,62 +42,56 @@ namespace test_system
         private void all_devices_Load(object sender, EventArgs e)
         {
 
-
-
-            comboBox_XDM1041_voltage_range.Items.Add("5");
-            comboBox_XDM1041_voltage_range.Items.Add("50");
-            comboBox_XDM1041_voltage_range.Items.Add("500");
-            comboBox_XDM1041_voltage_range.Items.Add("1000");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM1041_voltage_range.Items.Add(XDM_1041_RANGE.DCV___5V);
+            comboBox_XDM1041_voltage_range.Items.Add(XDM_1041_RANGE.DCV___50V);
+            comboBox_XDM1041_voltage_range.Items.Add(XDM_1041_RANGE.DCV___500V);
+            comboBox_XDM1041_voltage_range.Items.Add(XDM_1041_RANGE.DCV___1000V);
             comboBox_XDM1041_voltage_range.SelectedIndex = comboBox_XDM1041_voltage_range.Items.Count - 1;
-
-            comboBox_XDM2041_voltage_range.Items.Add("0.05");
-            comboBox_XDM2041_voltage_range.Items.Add("0.5");
-            comboBox_XDM2041_voltage_range.Items.Add("5");
-            comboBox_XDM2041_voltage_range.Items.Add("50");
-            comboBox_XDM2041_voltage_range.Items.Add("500");
-            comboBox_XDM2041_voltage_range.Items.Add("1000");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM2041_voltage_range.Items.Add(XDM_2041_RANGE.DCV___50mV);
+            comboBox_XDM2041_voltage_range.Items.Add(XDM_2041_RANGE.DCV___500mV);
+            comboBox_XDM2041_voltage_range.Items.Add(XDM_2041_RANGE.DCV___5V);
+            comboBox_XDM2041_voltage_range.Items.Add((XDM_2041_RANGE.DCV___50V));
+            comboBox_XDM2041_voltage_range.Items.Add((XDM_2041_RANGE.DCV___500V));
+            comboBox_XDM2041_voltage_range.Items.Add((XDM_2041_RANGE.DCV___1000V));
             comboBox_XDM2041_voltage_range.SelectedIndex = comboBox_XDM2041_voltage_range.Items.Count - 1;
-
-            comboBox_XDM3051_voltage_range.Items.Add("0.2");
-            comboBox_XDM3051_voltage_range.Items.Add("2");
-            comboBox_XDM3051_voltage_range.Items.Add("20");
-            comboBox_XDM3051_voltage_range.Items.Add("200");
-            comboBox_XDM3051_voltage_range.Items.Add("1000");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM3051_voltage_range.Items.Add(XDM_3051_RANGE.DCV___200mV);
+            comboBox_XDM3051_voltage_range.Items.Add(XDM_3051_RANGE.DCV___2V);
+            comboBox_XDM3051_voltage_range.Items.Add(XDM_3051_RANGE.DCV___20V);
+            comboBox_XDM3051_voltage_range.Items.Add(XDM_3051_RANGE.DCV___200V);
+            comboBox_XDM3051_voltage_range.Items.Add(XDM_3051_RANGE.DCV___1000V);
             comboBox_XDM3051_voltage_range.SelectedIndex = comboBox_XDM3051_voltage_range.Items.Count - 1;
-
-
-            comboBox_XDM3051_dc_current_range.Items.Add("0.0002");
-            comboBox_XDM3051_dc_current_range.Items.Add("0.002");
-            comboBox_XDM3051_dc_current_range.Items.Add("0.02");
-            comboBox_XDM3051_dc_current_range.Items.Add("0.2");
-            comboBox_XDM3051_dc_current_range.Items.Add("2");
-            comboBox_XDM3051_dc_current_range.Items.Add("10");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___200uA);
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___2mA);
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___20mA);
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___200mA);
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___2A);
+            comboBox_XDM3051_dc_current_range.Items.Add(XDM_3051_RANGE.DCA___10A);
             comboBox_XDM3051_dc_current_range.SelectedIndex = comboBox_XDM3051_dc_current_range.Items.Count - 1;
-
-
-
-            comboBox_XDM2041_dc_current_range.Items.Add("0.0005");
-            comboBox_XDM2041_dc_current_range.Items.Add("0.005");
-            comboBox_XDM2041_dc_current_range.Items.Add("0.05");
-            comboBox_XDM2041_dc_current_range.Items.Add("0.5");
-            comboBox_XDM2041_dc_current_range.Items.Add("5");
-            comboBox_XDM2041_dc_current_range.Items.Add("10");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___500uA);
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___5mA);
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___50mA);
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___500mA);
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___5A);
+            comboBox_XDM2041_dc_current_range.Items.Add(XDM_2041_RANGE.DCA___10A);
             comboBox_XDM2041_dc_current_range.SelectedIndex = comboBox_XDM2041_dc_current_range.Items.Count - 1;
-
-            comboBox_XDM1041_dc_current_range.Items.Add("0.0005");
-            comboBox_XDM1041_dc_current_range.Items.Add("0.005");
-            comboBox_XDM1041_dc_current_range.Items.Add("0.05");
-            comboBox_XDM1041_dc_current_range.Items.Add("0.5");
-            comboBox_XDM1041_dc_current_range.Items.Add("5");
-            comboBox_XDM1041_dc_current_range.Items.Add("10");
+            //-------------------------------------------------------------------------------------------------------------------
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___500uA);
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___5mA);
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___50mA);
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___500mA);
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___5A);
+            comboBox_XDM1041_dc_current_range.Items.Add(XDM_1041_RANGE.DCA___10A);
             comboBox_XDM1041_dc_current_range.SelectedIndex = comboBox_XDM1041_dc_current_range.Items.Count - 1;
-
-
-
+            //-------------------------------------------------------------------------------------------------------------------
             labXDM3051_measure_ok.Text = "";
             labXDM2041_measure_ok.Text = "";
             labXDM1041_measure_ok.Text = "";
-
+            //-------------------------------------------------------------------------------------------------------------------
 
             labXDM3051_status.Text = "";
             labXDM3051_read_result.Text = "";
@@ -108,6 +102,14 @@ namespace test_system
             labXDM1041_status.Text = "";
             labXDM1041_read_result.Text = "";
             labXDM1041_measure.Text = "";
+            //-------------------------------------------------------------------------------------------------------------------
+            tabControl1.TabPages["tabMultimeter"].Text = "    MULTIMETERS     ";
+            tabControl1.TabPages["tabPowerSupply"].Text = "    POWER SUPPLY     ";
+            tabControl1.TabPages["tabLoad"].Text = "    LOADS     ";
+            tabControl1.TabPages["tabPowerConsumption"].Text = "    POWER, ENERGY     ";
+            tabControl1.TabPages["tabAllDevices"].Text = "    ALL DEVICES     ";
+            //-------------------------------------------------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -118,15 +120,12 @@ namespace test_system
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label18.Text = "select TAB    " + tabControl1.SelectedIndex.ToString() + "   " + tabControl1.SelectedIndex.ToString();
-
-            label19.Text = timer_2_counter.ToString();
+            //label18.Text = "select TAB    " + tabControl1.SelectedIndex.ToString() + "   " + tabControl1.SelectedIndex.ToString();
+            //label19.Text = timer_2_counter.ToString();
             //-------------------------------------------------------------------------------------------------------------------
-
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabAllDevices"]) { timer2_all_devices.Enabled = true; }
             else timer2_all_devices.Enabled = false;
-
-
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_ET3916_serial_number_show)
             {
                 if (device_ET3916_serial_number.Length > 5)
@@ -148,15 +147,13 @@ namespace test_system
                 labComplete_temperature_7.Text = "Temp 7  " + device_ET3916_temperature[7].ToString("0.00");
                 labComplete_temperature_8.Text = "Temp 8  " + device_ET3916_temperature[8].ToString("0.00");
             }
-
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_RD6006_all_device_ident)
             {
                 device_RD6006_all_device_ident = false;
                 txtRD6006_ident.Text = rd6006_Signature.ToString("X") + "   " + rd6006_Serial_number.ToString("X") + "   " + rd6006_Firmware_version.ToString("X");
             }
-       
-
-
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_RD6006_show_all_measure)
             {
                 device_RD6006_show_all_measure = false;
@@ -167,6 +164,7 @@ namespace test_system
                 labRD6006_out_curr.Text = "Output Current   " + rd6006_OutputCurrent.ToString("0.00") + " A";
                 labRD6006_out_power.Text = "Output Power     " + rd6006_OutputPower.ToString("0.00") + " W";
             }
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_RD6024_show_all_measure)
             {
                 device_RD6024_show_all_measure = false;
@@ -177,23 +175,34 @@ namespace test_system
                 labRD6024_out_curr.Text = "Output Current   " + rd6024_OutputCurrent.ToString("0.00") + " A";
                 labRD6024_out_power.Text = "Output Power     " + rd6024_OutputPower.ToString("0.00") + " W";
             }
-
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_RD6024_all_device_ident)
             {
                 device_RD6024_all_device_ident = false;
                 txtRD6024_ident.Text = rd6024_Signature.ToString("X") + "   " + rd6024_Serial_number.ToString("X") + "   " + rd6024_Firmware_version.ToString("X");
             }
-
-
-
+            //-------------------------------------------------------------------------------------------------------------------    
             if (device_MPM1010B_show_data)
             {
                 device_MPM1010B_show_data = false;
                 labMPM1010B_voltage.Text = device_MPM1010B_voltage.ToString();
             }
+
+            //-------------------------------------------------------------------------------------------------------------------    
+            //-- prikaz podatkov iz SDM220 - merilnik porabe energije 
+            if (SDM220_data_show)
+            {
+                SDM220_data_show = false;
+                //-------------------------------------------------------------------------------------------------------------------
+                //-- ni vidna zadnja prazna vrstica 
+                dataGrid_power_consumption.AllowUserToAddRows = false;
+                dataGrid_power_consumption.Rows.Clear();
+                dataGrid_power_consumption.ClearSelection();
+                foreach (KeyValuePair<string, string> errorLocal in power_consumption) { dataGrid_power_consumption.Rows.Add(errorLocal.Key, errorLocal.Value); }
+                foreach (KeyValuePair<string, string> errorLocal in SDM220) { dataGrid_power_consumption.Rows.Add(errorLocal.Key, errorLocal.Value); }
+            }
+
         }
-
-
 
 
         private void timer2_all_devices_Tick(object sender, EventArgs e)
@@ -201,7 +210,7 @@ namespace test_system
             timer_2_counter++;
 
             //-------------------------------------------------------------------------------------------------------------------
-            labXDM3051_read_result.Text = dev_connected[COMport_XDM3051].ToString() +"   "+ dev_meas_state[COMport_XDM3051].ToString();
+            labXDM3051_read_result.Text = dev_connected[COMport_XDM3051].ToString() + "   " + dev_meas_state[COMport_XDM3051].ToString();
             labXDM3051_status.Text = dev_range[COMport_XDM3051];
             labXDM3051_measure.Text = dev_meas[COMport_XDM3051].ToString("0.0000");
             //-------------------------------------------------------------------------------------------------------------------
@@ -213,8 +222,8 @@ namespace test_system
             labXDM1041_read_result.Text = dev_connected[COMport_XDM1041].ToString() + "   " + dev_meas_state[COMport_XDM1041].ToString();
             labXDM1041_measure.Text = dev_meas[COMport_XDM1041].ToString("0.0000");
 
-      
-            labET3916_0.Text = dev_connected[COMport_ET3916].ToString()+ "   " + dev_meas_state[COMport_ET3916].ToString();
+
+            labET3916_0.Text = dev_connected[COMport_ET3916].ToString() + "   " + dev_meas_state[COMport_ET3916].ToString();
             labET3916_1.Text = "Temp 1    " + device_ET3916_temperature[1].ToString("0.0") + " degC";
             labET3916_2.Text = "Temp 2    " + device_ET3916_temperature[2].ToString("0.0") + " degC";
             labET3916_3.Text = "Temp 3    " + device_ET3916_temperature[3].ToString("0.0") + " degC";
@@ -225,15 +234,15 @@ namespace test_system
             labET3916_8.Text = "Temp 8    " + device_ET3916_temperature[8].ToString("0.0") + " degC";
 
 
-            labMPM1010B_0.Text = dev_connected[COMport_ET3916].ToString() +"     " + dev_meas_state[COMport_MPM_1010B].ToString();
+            labMPM1010B_0.Text = dev_connected[COMport_ET3916].ToString() + "     " + dev_meas_state[COMport_MPM_1010B].ToString();
             labMPM1010B_1.Text = "Voltage      " + device_MPM1010B_voltage.ToString("0.00") + " V";
             labMPM1010B_2.Text = "Current      " + device_MPM1010B_current.ToString("0.00") + " A";
             labMPM1010B_3.Text = "Power        " + device_MPM1010B_power.ToString("0.00") + " W";
-            labMPM1010B_4.Text = "Pow. fact.   " + device_MPM1010B_power_factor.ToString("0.00") ;
+            labMPM1010B_4.Text = "Pow. fact.   " + device_MPM1010B_power_factor.ToString("0.00");
             labMPM1010B_5.Text = "Frequency    " + device_MPM1010B_freguency.ToString("0.00") + " Hz";
 
         }
-   
+
 
 
         #endregion
@@ -566,19 +575,13 @@ namespace test_system
         #endregion
 
         #region " Multimeter --- OWON  --- XDM3051 ----  "
-
-
         //=======================================================================================================================
         //--    OWON,XDM3051,2303195,V3.7.2,2
         //=======================================================================================================================
         private void btnXDM3051_ident_Click(object sender, EventArgs e)
         {
-            //if ( fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM3051 , string ident_string)
-            //owon_multimeter_common.fun_owon_multimeter_identification(COMport_SELECT_MULTIMETER_XDM3051, "XDM3051,2303195");
-            // OK            multimeter_XDM3051.fun_XDM3051_identifaction();
-            // OKtxtBox_XDM3051_ident.Text = COMport_device_ident[COMport_SELECT_MULTIMETER_XDM3051];
-            funReturnCodeCOMport returnState = owon_multimeter.fun_owon_multimeter_identification(COMport_XDM3051, "XDM3051,2303195");
-            if (returnState == funReturnCodeCOMport.OK) txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_XDM3051];
+            funReturnCode returnState = owon_multimeter.fun_owon_multimeter_identification(COMport_XDM3051, "XDM3051,2303195");
+            if (returnState == funReturnCode.OK) txtBox_XDM3051_ident.Text = COMport_device_ident[COMport_XDM3051];
             else txtBox_XDM3051_ident.Text = returnState.ToString();
         }
 
@@ -601,17 +604,17 @@ namespace test_system
         private void btnXDM3051_set_range_dc_volt_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM3051_voltage_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM3051, voltage_range);
+            // string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM3051, str_voltage_range);
         }
 
         private void btnXDM3051_set_range_dc_current_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM3051_dc_current_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM3051, voltage_range);
+            //string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM3051, str_voltage_range);
         }
 
         #endregion
@@ -626,8 +629,8 @@ namespace test_system
         //=======================================================================================================================
         private void btnXDM2041_ident_Click(object sender, EventArgs e)
         {
-            funReturnCodeCOMport returnState = owon_multimeter.fun_owon_multimeter_identification(COMport_XDM2041, "OWON,XDM2041,24470254");
-            if (returnState == funReturnCodeCOMport.OK) txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_XDM2041];
+            funReturnCode returnState = owon_multimeter.fun_owon_multimeter_identification(COMport_XDM2041, "OWON,XDM2041,24470254");
+            if (returnState == funReturnCode.OK) txtBox_XDM2041_ident.Text = COMport_device_ident[COMport_XDM2041];
             else txtBox_XDM2041_ident.Text = returnState.ToString();
         }
         //=======================================================================================================================
@@ -648,17 +651,17 @@ namespace test_system
         private void btnXDM2041_set_range_dc_volt_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM2041_voltage_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM2041, voltage_range);
+            //string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM2041, str_voltage_range);
         }
 
         private void btnXDM2041_set_range_dc_current_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM2041_dc_current_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM2041, voltage_range);
+            //string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM2041, str_voltage_range);
         }
 
         #endregion
@@ -675,9 +678,9 @@ namespace test_system
         //=======================================================================================================================
         private void btnXDM1041_ident_Click(object sender, EventArgs e)
         {
-            if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+            if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCode.OK)
             {
-                if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCodeCOMport.OK)
+                if (owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418") != funReturnCode.OK)
                 {
                     owon_multimeter.fun_owon_multimeter_identification(COMport_XDM1041, "XDM1041,23120418");
                 }
@@ -695,18 +698,18 @@ namespace test_system
         private void btnXDM1041_set_range_dc_volt_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM1041_voltage_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM1041, voltage_range);
+            //string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_volt_dc(COMport_XDM1041, str_voltage_range);
         }
 
 
         private void btnXDM1041_set_range_dc_current_Click(object sender, EventArgs e)
         {
             string str_voltage_range = comboBox_XDM1041_dc_current_range.SelectedItem.ToString();
-            string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
-            double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
-            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM1041, voltage_range);
+            //string str_voltage_dc_range_correct = functions.fun_convert_string_to_current_decimal_separator(str_voltage_range);
+            //double voltage_range = Convert.ToDouble(str_voltage_dc_range_correct);
+            owon_multimeter.fun_owon_set_range_current_dc(COMport_XDM1041, str_voltage_range);
 
         }
         #endregion
@@ -835,39 +838,18 @@ namespace test_system
             if (COMport_device_ident[COMport_RD6006] != null) listBox1.Items.Add(COMport_device_ident[COMport_RD6006]);
             if (COMport_device_ident[COMport_RD6024] != null) listBox1.Items.Add(COMport_device_ident[COMport_RD6024]);
             if (COMport_device_ident[COMport_HCS_3300] != null) listBox1.Items.Add(COMport_device_ident[COMport_HCS_3300]);
-
             if (COMport_device_ident[COMport_KEL103] != null) listBox1.Items.Add(COMport_device_ident[COMport_KEL103]);
-
-
-
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void comboBox_XDM3051_voltage_range_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void txtKEL103_curr_TextChanged(object sender, EventArgs e)
+   
+        private void groupBox_AC_meter_MPM_1010B_Enter(object sender, EventArgs e)
         {
 
         }
-
-        private void comboBox_XDM1041_voltage_range_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void groupBox_multimeter_XDM_3051_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCS3300_set_voltage_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-      
     }
 }

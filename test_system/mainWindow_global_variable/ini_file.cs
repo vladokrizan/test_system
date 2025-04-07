@@ -15,11 +15,7 @@ namespace test_system
     internal class ini_file
     {
         #region "Variable: File Name "
-
-
-
         string file_name_device_ident = "com_port_ident.ini";
-
         #endregion
 
         #region "COMMON FUNCTION FOR READ AND WRITE SETTINGS.INI FILE "
@@ -87,9 +83,10 @@ namespace test_system
             }
             catch { }
         }
-
-
         //=======================================================================================================================
+        /// <summary>
+        /// 
+        /// </summary>
         //=======================================================================================================================
         public void read_device_COMport_identification()
         {
@@ -110,6 +107,7 @@ namespace test_system
                     COMport_port[COMport_KEL103] = "";
                     COMport_port[COMport_ET3916] = "";
                     COMport_port[COMport_MPM_1010B] = "";
+                    COMport_port[COMport_HCS_3300] = "";
                     COMport_port[COMport_SDM220] = "";
                     MessageBox.Show(iniFileExist + "  file doesnt' exist. Make default file ");
                     write_device_COMport_identification();
@@ -121,14 +119,6 @@ namespace test_system
                 COMport_baudRate[COMport_XDM1041] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM1041", "Device COMport"));
                 COMport_port[COMport_XDM2041] = ini.Read("COMport_name_MULTIMETER_XDM2041", "Device COMport");
                 COMport_baudRate[COMport_XDM2041] = Convert.ToUInt32(ini.Read("COMport_baudrate_MULTIMETER_XDM2041", "Device COMport"));
-
-              //  strGeneralString = "init file   " + COMport_port[COMport_SELECT_MULTIMETER_XDM2041] + "    " + COMport_connected[COMport_SELECT_MULTIMETER_XDM2041].ToString() + "   " + COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041].ToString();
-               // strGeneralString = "init file   " + COMport_port[COMport_SELECT_MULTIMETER_XDM1041] + "    " + COMport_connected[COMport_SELECT_MULTIMETER_XDM1041].ToString() + "   " + COMport_baudRate[COMport_SELECT_MULTIMETER_XDM1041].ToString();
-
-                //MyIni.Write("COMport_name_MULTIMETER_XDM2041", COMport_port[COMport_SELECT_MULTIMETER_XDM2041], "Device COMport");
-                //MyIni.Write("COMport_baudrate_MULTIMETER_XDM2041", COMport_baudRate[COMport_SELECT_MULTIMETER_XDM2041].ToString(), "Device COMport");
-
-
                 //---------------------------------------------------------------------------------------------------------------
                 COMport_port[COMport_KA3305A] = ini.Read("COMport_name_SUPPLY_KA3305A", "Device COMport");
                 COMport_baudRate[COMport_KA3305A] = Convert.ToUInt32(ini.Read("COMport_baudrate_SUPPLY_KA3305A", "Device COMport"));
@@ -154,13 +144,12 @@ namespace test_system
                 COMport_port[COMport_SDM220] = ini.Read("COMport_name_ACmeter_SDM220", "Device COMport");
                 COMport_baudRate[COMport_SDM220] = Convert.ToUInt32(ini.Read("COMport_baudrate_ACmeter_SDM220", "Device COMport"));
                 //---------------------------------------------------------------------------------------------------------------
-
-        
-
-
             }
             catch { }
         }
+        //=======================================================================================================================
+        //=======================================================================================================================
+
 
 
 

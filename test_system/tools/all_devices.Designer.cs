@@ -178,6 +178,10 @@
             this.btnKEL103_on = new System.Windows.Forms.Button();
             this.btnLoad_KEL103_ident = new System.Windows.Forms.Button();
             this.txtBoxLoad_KEL103_ident = new System.Windows.Forms.TextBox();
+            this.tabPowerConsumption = new System.Windows.Forms.TabPage();
+            this.dataGrid_power_consumption = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAllDevices = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labMPM1010B_5 = new System.Windows.Forms.Label();
@@ -209,15 +213,7 @@
             this.labXDM3051_measure = new System.Windows.Forms.Label();
             this.labXDM3051_status = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.timer2_all_devices = new System.Windows.Forms.Timer(this.components);
-            this.tabPowerConsumption = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabMultimeter.SuspendLayout();
             this.groupBox_AC_meter_MPM_1010B.SuspendLayout();
@@ -232,14 +228,14 @@
             this.groupBox_powerSupply_hcs_330.SuspendLayout();
             this.tabLoad.SuspendLayout();
             this.groupBox_load_KEL103.SuspendLayout();
+            this.tabPowerConsumption.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_power_consumption)).BeginInit();
             this.tabAllDevices.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPowerConsumption.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -252,7 +248,7 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1335, 610);
+            this.tabControl1.Size = new System.Drawing.Size(1335, 825);
             this.tabControl1.TabIndex = 0;
             // 
             // tabMultimeter
@@ -265,7 +261,7 @@
             this.tabMultimeter.Location = new System.Drawing.Point(4, 29);
             this.tabMultimeter.Name = "tabMultimeter";
             this.tabMultimeter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMultimeter.Size = new System.Drawing.Size(1327, 577);
+            this.tabMultimeter.Size = new System.Drawing.Size(1327, 792);
             this.tabMultimeter.TabIndex = 1;
             this.tabMultimeter.Text = "Multimeter";
             this.tabMultimeter.UseVisualStyleBackColor = true;
@@ -275,12 +271,13 @@
             // 
             this.groupBox_AC_meter_MPM_1010B.Controls.Add(this.labMPM1010B_voltage);
             this.groupBox_AC_meter_MPM_1010B.Controls.Add(this.btnMPM1010B_measure);
-            this.groupBox_AC_meter_MPM_1010B.Location = new System.Drawing.Point(885, 6);
+            this.groupBox_AC_meter_MPM_1010B.Location = new System.Drawing.Point(1087, 6);
             this.groupBox_AC_meter_MPM_1010B.Name = "groupBox_AC_meter_MPM_1010B";
             this.groupBox_AC_meter_MPM_1010B.Size = new System.Drawing.Size(216, 470);
             this.groupBox_AC_meter_MPM_1010B.TabIndex = 2;
             this.groupBox_AC_meter_MPM_1010B.TabStop = false;
             this.groupBox_AC_meter_MPM_1010B.Text = "AC Power meter MPM-1010B";
+            this.groupBox_AC_meter_MPM_1010B.Enter += new System.EventHandler(this.groupBox_AC_meter_MPM_1010B_Enter);
             // 
             // labMPM1010B_voltage
             // 
@@ -316,12 +313,12 @@
             this.groupBox_multimeter_XDM2041.Controls.Add(this.btnXDM2041_ident);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_ident);
             this.groupBox_multimeter_XDM2041.Controls.Add(this.txtBox_XDM2041_measure);
-            this.groupBox_multimeter_XDM2041.Location = new System.Drawing.Point(224, 6);
+            this.groupBox_multimeter_XDM2041.Location = new System.Drawing.Point(271, 6);
             this.groupBox_multimeter_XDM2041.Name = "groupBox_multimeter_XDM2041";
-            this.groupBox_multimeter_XDM2041.Size = new System.Drawing.Size(186, 505);
+            this.groupBox_multimeter_XDM2041.Size = new System.Drawing.Size(250, 500);
             this.groupBox_multimeter_XDM2041.TabIndex = 1;
             this.groupBox_multimeter_XDM2041.TabStop = false;
-            this.groupBox_multimeter_XDM2041.Text = "OWON XDM1041 ";
+            this.groupBox_multimeter_XDM2041.Text = "OWON XDM2041 ";
             // 
             // label12
             // 
@@ -337,12 +334,12 @@
             this.comboBox_XDM2041_dc_current_range.FormattingEnabled = true;
             this.comboBox_XDM2041_dc_current_range.Location = new System.Drawing.Point(6, 363);
             this.comboBox_XDM2041_dc_current_range.Name = "comboBox_XDM2041_dc_current_range";
-            this.comboBox_XDM2041_dc_current_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM2041_dc_current_range.Size = new System.Drawing.Size(162, 28);
             this.comboBox_XDM2041_dc_current_range.TabIndex = 27;
             // 
             // btnXDM2041_set_range_dc_current
             // 
-            this.btnXDM2041_set_range_dc_current.Location = new System.Drawing.Point(113, 362);
+            this.btnXDM2041_set_range_dc_current.Location = new System.Drawing.Point(174, 361);
             this.btnXDM2041_set_range_dc_current.Name = "btnXDM2041_set_range_dc_current";
             this.btnXDM2041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
             this.btnXDM2041_set_range_dc_current.TabIndex = 26;
@@ -364,12 +361,12 @@
             this.comboBox_XDM2041_voltage_range.FormattingEnabled = true;
             this.comboBox_XDM2041_voltage_range.Location = new System.Drawing.Point(9, 298);
             this.comboBox_XDM2041_voltage_range.Name = "comboBox_XDM2041_voltage_range";
-            this.comboBox_XDM2041_voltage_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM2041_voltage_range.Size = new System.Drawing.Size(159, 28);
             this.comboBox_XDM2041_voltage_range.TabIndex = 21;
             // 
             // btnXDM2041_set_range_dc_volt
             // 
-            this.btnXDM2041_set_range_dc_volt.Location = new System.Drawing.Point(110, 297);
+            this.btnXDM2041_set_range_dc_volt.Location = new System.Drawing.Point(174, 297);
             this.btnXDM2041_set_range_dc_volt.Name = "btnXDM2041_set_range_dc_volt";
             this.btnXDM2041_set_range_dc_volt.Size = new System.Drawing.Size(70, 30);
             this.btnXDM2041_set_range_dc_volt.TabIndex = 19;
@@ -454,9 +451,9 @@
             this.groupBox_multimeter_XDM1041.Controls.Add(this.btnXDM1041_ident);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.txtBox_XDM1041_ident);
             this.groupBox_multimeter_XDM1041.Controls.Add(this.txtBox_XDM1041_measure);
-            this.groupBox_multimeter_XDM1041.Location = new System.Drawing.Point(425, 6);
+            this.groupBox_multimeter_XDM1041.Location = new System.Drawing.Point(537, 6);
             this.groupBox_multimeter_XDM1041.Name = "groupBox_multimeter_XDM1041";
-            this.groupBox_multimeter_XDM1041.Size = new System.Drawing.Size(184, 505);
+            this.groupBox_multimeter_XDM1041.Size = new System.Drawing.Size(250, 500);
             this.groupBox_multimeter_XDM1041.TabIndex = 1;
             this.groupBox_multimeter_XDM1041.TabStop = false;
             this.groupBox_multimeter_XDM1041.Text = "OWON XDM1041 ";
@@ -484,12 +481,12 @@
             this.comboBox_XDM1041_dc_current_range.FormattingEnabled = true;
             this.comboBox_XDM1041_dc_current_range.Location = new System.Drawing.Point(7, 362);
             this.comboBox_XDM1041_dc_current_range.Name = "comboBox_XDM1041_dc_current_range";
-            this.comboBox_XDM1041_dc_current_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM1041_dc_current_range.Size = new System.Drawing.Size(157, 28);
             this.comboBox_XDM1041_dc_current_range.TabIndex = 30;
             // 
             // btnXDM1041_set_range_dc_current
             // 
-            this.btnXDM1041_set_range_dc_current.Location = new System.Drawing.Point(114, 361);
+            this.btnXDM1041_set_range_dc_current.Location = new System.Drawing.Point(170, 364);
             this.btnXDM1041_set_range_dc_current.Name = "btnXDM1041_set_range_dc_current";
             this.btnXDM1041_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
             this.btnXDM1041_set_range_dc_current.TabIndex = 29;
@@ -502,13 +499,12 @@
             this.comboBox_XDM1041_voltage_range.FormattingEnabled = true;
             this.comboBox_XDM1041_voltage_range.Location = new System.Drawing.Point(6, 298);
             this.comboBox_XDM1041_voltage_range.Name = "comboBox_XDM1041_voltage_range";
-            this.comboBox_XDM1041_voltage_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM1041_voltage_range.Size = new System.Drawing.Size(158, 28);
             this.comboBox_XDM1041_voltage_range.TabIndex = 20;
-            this.comboBox_XDM1041_voltage_range.SelectedIndexChanged += new System.EventHandler(this.comboBox_XDM1041_voltage_range_SelectedIndexChanged);
             // 
             // btnXDM1041_set_range_dc_volt
             // 
-            this.btnXDM1041_set_range_dc_volt.Location = new System.Drawing.Point(110, 296);
+            this.btnXDM1041_set_range_dc_volt.Location = new System.Drawing.Point(170, 298);
             this.btnXDM1041_set_range_dc_volt.Name = "btnXDM1041_set_range_dc_volt";
             this.btnXDM1041_set_range_dc_volt.Size = new System.Drawing.Size(70, 30);
             this.btnXDM1041_set_range_dc_volt.TabIndex = 19;
@@ -595,11 +591,10 @@
             this.groupBox_multimeter_XDM_3051.Controls.Add(this.btnXDM3051_ident);
             this.groupBox_multimeter_XDM_3051.Location = new System.Drawing.Point(6, 6);
             this.groupBox_multimeter_XDM_3051.Name = "groupBox_multimeter_XDM_3051";
-            this.groupBox_multimeter_XDM_3051.Size = new System.Drawing.Size(193, 505);
+            this.groupBox_multimeter_XDM_3051.Size = new System.Drawing.Size(250, 500);
             this.groupBox_multimeter_XDM_3051.TabIndex = 1;
             this.groupBox_multimeter_XDM_3051.TabStop = false;
             this.groupBox_multimeter_XDM_3051.Text = "OWON XDM3051 51/2";
-            this.groupBox_multimeter_XDM_3051.Enter += new System.EventHandler(this.groupBox_multimeter_XDM_3051_Enter);
             // 
             // label11
             // 
@@ -615,12 +610,12 @@
             this.comboBox_XDM3051_dc_current_range.FormattingEnabled = true;
             this.comboBox_XDM3051_dc_current_range.Location = new System.Drawing.Point(10, 364);
             this.comboBox_XDM3051_dc_current_range.Name = "comboBox_XDM3051_dc_current_range";
-            this.comboBox_XDM3051_dc_current_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM3051_dc_current_range.Size = new System.Drawing.Size(160, 28);
             this.comboBox_XDM3051_dc_current_range.TabIndex = 24;
             // 
             // btnXDM3051_set_range_dc_current
             // 
-            this.btnXDM3051_set_range_dc_current.Location = new System.Drawing.Point(117, 363);
+            this.btnXDM3051_set_range_dc_current.Location = new System.Drawing.Point(174, 362);
             this.btnXDM3051_set_range_dc_current.Name = "btnXDM3051_set_range_dc_current";
             this.btnXDM3051_set_range_dc_current.Size = new System.Drawing.Size(70, 30);
             this.btnXDM3051_set_range_dc_current.TabIndex = 23;
@@ -642,12 +637,13 @@
             this.comboBox_XDM3051_voltage_range.FormattingEnabled = true;
             this.comboBox_XDM3051_voltage_range.Location = new System.Drawing.Point(10, 298);
             this.comboBox_XDM3051_voltage_range.Name = "comboBox_XDM3051_voltage_range";
-            this.comboBox_XDM3051_voltage_range.Size = new System.Drawing.Size(98, 28);
+            this.comboBox_XDM3051_voltage_range.Size = new System.Drawing.Size(158, 28);
             this.comboBox_XDM3051_voltage_range.TabIndex = 21;
+            this.comboBox_XDM3051_voltage_range.SelectedIndexChanged += new System.EventHandler(this.comboBox_XDM3051_voltage_range_SelectedIndexChanged);
             // 
             // btnXDM3051_set_range_dc_volt
             // 
-            this.btnXDM3051_set_range_dc_volt.Location = new System.Drawing.Point(117, 297);
+            this.btnXDM3051_set_range_dc_volt.Location = new System.Drawing.Point(174, 298);
             this.btnXDM3051_set_range_dc_volt.Name = "btnXDM3051_set_range_dc_volt";
             this.btnXDM3051_set_range_dc_volt.Size = new System.Drawing.Size(70, 30);
             this.btnXDM3051_set_range_dc_volt.TabIndex = 11;
@@ -730,7 +726,7 @@
             this.groupBox_multimeter_ET3916.Controls.Add(this.labComplete_temperature_1);
             this.groupBox_multimeter_ET3916.Controls.Add(this.txtBox_ET3916_1);
             this.groupBox_multimeter_ET3916.Controls.Add(this.btnET3916_ident);
-            this.groupBox_multimeter_ET3916.Location = new System.Drawing.Point(641, 6);
+            this.groupBox_multimeter_ET3916.Location = new System.Drawing.Point(829, 6);
             this.groupBox_multimeter_ET3916.Name = "groupBox_multimeter_ET3916";
             this.groupBox_multimeter_ET3916.Size = new System.Drawing.Size(219, 470);
             this.groupBox_multimeter_ET3916.TabIndex = 0;
@@ -845,7 +841,7 @@
             this.tabPowerSupply.Location = new System.Drawing.Point(4, 29);
             this.tabPowerSupply.Name = "tabPowerSupply";
             this.tabPowerSupply.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPowerSupply.Size = new System.Drawing.Size(1327, 577);
+            this.tabPowerSupply.Size = new System.Drawing.Size(1327, 622);
             this.tabPowerSupply.TabIndex = 0;
             this.tabPowerSupply.Text = "Power Supply";
             this.tabPowerSupply.UseVisualStyleBackColor = true;
@@ -1443,7 +1439,6 @@
             this.txtCS3300_set_voltage.Name = "txtCS3300_set_voltage";
             this.txtCS3300_set_voltage.Size = new System.Drawing.Size(77, 26);
             this.txtCS3300_set_voltage.TabIndex = 9;
-            this.txtCS3300_set_voltage.TextChanged += new System.EventHandler(this.txtCS3300_set_voltage_TextChanged);
             this.txtCS3300_set_voltage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCS3300_set_voltage_KeyDown);
             // 
             // txtCS3300_set_current
@@ -1536,7 +1531,7 @@
             this.tabLoad.Controls.Add(this.groupBox_load_KEL103);
             this.tabLoad.Location = new System.Drawing.Point(4, 29);
             this.tabLoad.Name = "tabLoad";
-            this.tabLoad.Size = new System.Drawing.Size(1327, 577);
+            this.tabLoad.Size = new System.Drawing.Size(1327, 622);
             this.tabLoad.TabIndex = 2;
             this.tabLoad.Text = "  LOAD  ";
             this.tabLoad.UseVisualStyleBackColor = true;
@@ -1685,7 +1680,6 @@
             this.txtKEL103_curr.Name = "txtKEL103_curr";
             this.txtKEL103_curr.Size = new System.Drawing.Size(77, 26);
             this.txtKEL103_curr.TabIndex = 20;
-            this.txtKEL103_curr.TextChanged += new System.EventHandler(this.txtKEL103_curr_TextChanged);
             this.txtKEL103_curr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKEL103_curr_KeyDown);
             // 
             // txtKEL103_power
@@ -1767,6 +1761,42 @@
             this.txtBoxLoad_KEL103_ident.Size = new System.Drawing.Size(303, 26);
             this.txtBoxLoad_KEL103_ident.TabIndex = 2;
             // 
+            // tabPowerConsumption
+            // 
+            this.tabPowerConsumption.Controls.Add(this.dataGrid_power_consumption);
+            this.tabPowerConsumption.Location = new System.Drawing.Point(4, 29);
+            this.tabPowerConsumption.Name = "tabPowerConsumption";
+            this.tabPowerConsumption.Size = new System.Drawing.Size(1327, 792);
+            this.tabPowerConsumption.TabIndex = 4;
+            this.tabPowerConsumption.Text = "  Power, Energy   ";
+            this.tabPowerConsumption.UseVisualStyleBackColor = true;
+            // 
+            // dataGrid_power_consumption
+            // 
+            this.dataGrid_power_consumption.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGrid_power_consumption.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGrid_power_consumption.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid_power_consumption.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.volValue});
+            this.dataGrid_power_consumption.Location = new System.Drawing.Point(3, 3);
+            this.dataGrid_power_consumption.Name = "dataGrid_power_consumption";
+            this.dataGrid_power_consumption.RowHeadersVisible = false;
+            this.dataGrid_power_consumption.Size = new System.Drawing.Size(639, 759);
+            this.dataGrid_power_consumption.TabIndex = 0;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "Name + Unit";
+            this.colName.Name = "colName";
+            this.colName.Width = 300;
+            // 
+            // volValue
+            // 
+            this.volValue.HeaderText = "Value";
+            this.volValue.Name = "volValue";
+            this.volValue.Width = 200;
+            // 
             // tabAllDevices
             // 
             this.tabAllDevices.Controls.Add(this.groupBox5);
@@ -1776,7 +1806,7 @@
             this.tabAllDevices.Controls.Add(this.groupBox1);
             this.tabAllDevices.Location = new System.Drawing.Point(4, 29);
             this.tabAllDevices.Name = "tabAllDevices";
-            this.tabAllDevices.Size = new System.Drawing.Size(1327, 577);
+            this.tabAllDevices.Size = new System.Drawing.Size(1327, 622);
             this.tabAllDevices.TabIndex = 3;
             this.tabAllDevices.Text = "ALL DEVICES";
             this.tabAllDevices.UseVisualStyleBackColor = true;
@@ -2104,79 +2134,15 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(13, 621);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(60, 20);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "label18";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(17, 645);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(60, 20);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "label19";
-            // 
             // timer2_all_devices
             // 
             this.timer2_all_devices.Tick += new System.EventHandler(this.timer2_all_devices_Tick);
-            // 
-            // tabPowerConsumption
-            // 
-            this.tabPowerConsumption.Controls.Add(this.dataGridView1);
-            this.tabPowerConsumption.Location = new System.Drawing.Point(4, 29);
-            this.tabPowerConsumption.Name = "tabPowerConsumption";
-            this.tabPowerConsumption.Size = new System.Drawing.Size(1327, 577);
-            this.tabPowerConsumption.TabIndex = 4;
-            this.tabPowerConsumption.Text = "  Power, Energy   ";
-            this.tabPowerConsumption.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
-            this.dataGridView1.Location = new System.Drawing.Point(101, 49);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(617, 150);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
             // 
             // all_devices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1359, 691);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.label18);
+            this.ClientSize = new System.Drawing.Size(1359, 841);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -2207,6 +2173,8 @@
             this.tabLoad.ResumeLayout(false);
             this.groupBox_load_KEL103.ResumeLayout(false);
             this.groupBox_load_KEL103.PerformLayout();
+            this.tabPowerConsumption.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid_power_consumption)).EndInit();
             this.tabAllDevices.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -2218,10 +2186,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPowerConsumption.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -2377,8 +2342,6 @@
         private System.Windows.Forms.Label labKA3305P_status;
         private System.Windows.Forms.Label labKA3305P_status_1;
         private System.Windows.Forms.TabPage tabAllDevices;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Timer timer2_all_devices;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label labXDM1041_read_result;
@@ -2411,10 +2374,8 @@
         private System.Windows.Forms.Label labET3916_0;
         private System.Windows.Forms.Button btnRD6006_ident;
         private System.Windows.Forms.TabPage tabPowerConsumption;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridView dataGrid_power_consumption;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn volValue;
     }
 }

@@ -26,7 +26,7 @@ namespace test_system
         public const int program10_LOAD_CURRENT  = 1;
 
 
-        public static int program10_load_current = 0;
+        //public static int program10_load_current = 0;
 
        // public static int program10_select_supply = 0;
 
@@ -75,7 +75,9 @@ namespace test_system
         public void fun_select_program_log_file_name(string select_progra)
         {
 
-            program10_load_current = 0;
+            program_select_supply = 0;
+            program_select_load = 0;
+            //program10_load_current = 0;
             //program10_current_selected_program = comboBox_select_program.Text;
             program10_current_selected_program = select_progra;
 
@@ -98,7 +100,7 @@ namespace test_system
             else if (program10_current_selected_program.Equals(program10_04, StringComparison.Ordinal))
             {
                 program_select_supply = DEVICE_SELECT_SUPPLY_KA3305P;
-                program10_load_current = program10_LOAD_CURRENT;
+                program_select_load = program10_LOAD_CURRENT;
 
             }
             //--public const string program10_05 = "Supply KA3305P part 2 Load KEL 103 : Owon multimeters ";
@@ -120,7 +122,7 @@ namespace test_system
             else if (program10_current_selected_program.Equals(program10_08, StringComparison.Ordinal))
             {
                 program_select_supply = DEVICE_SELECT_SUPPLY_HCS_3300;
-                program10_load_current = program10_LOAD_CURRENT;
+                program_select_load = program10_LOAD_CURRENT;
             }
             //--public const string program10_09 = "Supply RD6006 NO load : Owon multimeters ";
             else if (program10_current_selected_program.Equals(program10_09, StringComparison.Ordinal))
@@ -145,7 +147,7 @@ namespace test_system
             //-------------------------------------------------------------------------------------------------------------------   
             //-- ime log datoteke   
             string[] comboBoxParts = program10_current_selected_program.Split(':');
-            strLogFiles_program = System.Environment.CurrentDirectory + "\\" + strSubFolderLog + ".\\" + "program_10_" + comboBoxParts[0] + "_delay_" + program10_delay_after_set_supply.ToString() + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".csv";
+            strLogFiles_program = System.Environment.CurrentDirectory + "\\" + strSubFolderLog + ".\\" + "program_10_" + program10_current_selected_program + "_delay_" + program10_delay_after_set_supply.ToString() + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".csv";
 
         }
 

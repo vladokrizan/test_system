@@ -155,7 +155,7 @@ Reg ID   Description
         // byte[] receiveByte_local = new byte[100];
 
 
-        modbus_functions modbus_functions = new modbus_functions();
+        modbus modbus_functions = new modbus();
 
         public void funRD6006_on()
         {
@@ -175,14 +175,14 @@ Reg ID   Description
         //=======================================================================================================================    
         //=======================================================================================================================    
 
-        public funReturnCodeCOMport funRD6006_measure()
+        public funReturnCode funRD6006_measure()
         {
             if (dev_connected[COMport_RD6006])
             {
                 mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
                 modbus_functions.funModbusRTU_send_request_read_function_3(1, 8, 10, COMport_RD6006);
             }
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
         }
         //=======================================================================================================================    
         //=======================================================================================================================    
@@ -197,7 +197,7 @@ Reg ID   Description
         //--    #0010 ERROR RO 0 = OK, 1 = OVP, 2 = OCP
         //--    #0012 OUTPUT ON/OFF R/W 0 = OFF, 1 = ON
 
-        public funReturnCodeCOMport funModbusRTU_receive_mesasage_RD6006()
+        public funReturnCode funModbusRTU_receive_mesasage_RD6006()
         {
             UInt32 uint32Value = 0;
             rd6006_setVoltage = ((float)(modbus_register[0])) / 100;
@@ -208,7 +208,7 @@ Reg ID   Description
             rd6006_OutputPower = ((float)uint32Value) / 100;
             rd6006_InputVoltage = ((float)(modbus_register[6])) / 100;
             device_RD6006_show_all_measure = true;
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
         }
 
 
@@ -217,16 +217,16 @@ Reg ID   Description
 
 
 
-        public funReturnCodeCOMport funRD6006_ident()
+        public funReturnCode funRD6006_ident()
         {
             if (dev_connected[COMport_RD6006])
             {
 
                 mainWindow.COMportSerial[COMport_RD6006].DiscardInBuffer();
                 modbus_functions.funModbusRTU_send_request_read_function_3(1, 0, 4, COMport_RD6006);
-                return (funReturnCodeCOMport.OK);
+                return (funReturnCode.OK);
             }
-            else return (funReturnCodeCOMport.NOT_CONNECTED);
+            else return (funReturnCode.NOT_CONNECTED);
         }
 
         //=======================================================================================================================
@@ -238,7 +238,7 @@ Reg ID   Description
         /// </summary>
         /// <returns></returns>
         //=======================================================================================================================    
-        public funReturnCodeCOMport funModbusRTU_RD6006_receive_ident()
+        public funReturnCode funModbusRTU_RD6006_receive_ident()
         {
             rd6006_Signature = modbus_register[0];
             rd6006_Serial_number = modbus_register[2];
@@ -251,7 +251,7 @@ Reg ID   Description
             else dev_active[COMport_RD6006] = false;
 
 
-            return (funReturnCodeCOMport.OK);
+            return (funReturnCode.OK);
 
         }
         //--#0000 0xEA 0x9E RO Signature = 60062
